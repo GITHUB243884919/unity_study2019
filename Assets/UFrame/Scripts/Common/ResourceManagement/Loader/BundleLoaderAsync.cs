@@ -6,7 +6,7 @@ using UnityEngine;
 namespace UFrame.ResourceManagement
 {
 
-    public partial class BundleLoader : MonoBehaviour
+    public partial class BundleLoader : ResourceLoader
     {
         #region 异步
         public class BundleAsyncRequest
@@ -26,17 +26,17 @@ namespace UFrame.ResourceManagement
 
         Queue<BundleAsyncRequest> bundleAsyncs = new Queue<BundleAsyncRequest>();
 
-        public void LoadAssetAsync(string assetName, System.Action<AssetGetter> callback)
+        public override void LoadAssetAsync(string assetName, System.Action<AssetGetter> callback)
         {
             LoadAssetAsync<AssetGetter>(assetName, E_LoadAsset.LoadSingle, callback);
         }
 
-        public void LoadGameObjectAsync(string assetName, System.Action<GameObjectGetter> callback)
+        public override void LoadGameObjectAsync(string assetName, System.Action<GameObjectGetter> callback)
         {
             LoadAssetAsync<GameObjectGetter>(assetName, E_LoadAsset.LoadSingle, callback);
         }
 
-        public void LoadAllAssetsAsync(string assetName, System.Action<AssetGetter> callback)
+        public override void LoadAllAssetsAsync(string assetName, System.Action<AssetGetter> callback)
         {
             LoadAssetAsync<AssetGetter>(assetName, E_LoadAsset.LoadAll, callback);
         }
@@ -55,7 +55,7 @@ namespace UFrame.ResourceManagement
             //BundleAsyncRequest bundleRequest = new BundleAsyncRequest(assetName, eloadAsset, callback);
             BundleAsyncRequest bundleRequest = new BundleAsyncRequest(assetName, eloadAsset);
             bundleAsyncs.Enqueue(bundleRequest);
-            StartCoroutine(CoBundleAsyncRequest<T>(bundleRequest, callback));
+            RunCoroutine.Run(CoBundleAsyncRequest<T>(bundleRequest, callback));
         }
 
         IEnumerator CoBundleAsyncRequest<T>(BundleAsyncRequest bundleRequest, System.Action<T> callback)
@@ -68,7 +68,7 @@ namespace UFrame.ResourceManagement
 
             string bundleName = GetBundleName(bundleRequest.assetName);
             Debug.LogError("[" + bundleName + "] [" + bundleRequest.assetName + "]");
-            StartCoroutine(CoLoadBundleAsync<T>(bundleRequest.assetName, bundleName, bundleRequest.eLoadAsset, callback));
+            yield return (CoLoadBundleAsync<T>(bundleRequest.assetName, bundleName, bundleRequest.eLoadAsset, callback));
         }
 
         IEnumerator CoLoadBundleAsync<T>(string assetName, string bundleName, E_LoadAsset eloadAsset, System.Action<T> callback)
@@ -130,7 +130,7 @@ namespace UFrame.ResourceManagement
                 bundleHolders.Add(dependencies[i], dependBundleHolder);
             }
 
-            StartCoroutine(CoLoadAssetAsync<T>(bundle, assetName, eloadAsset, callback));
+            yield return (CoLoadAssetAsync<T>(bundle, assetName, eloadAsset, callback));
         }
 
         IEnumerator CoLoadAssetAsync<T>(AssetBundle assetBundle, string assetName, E_LoadAsset eloadAsset, System.Action<T> callback)

@@ -15,10 +15,15 @@ namespace UFrame.ResourceManagement
     /// AssetHolder记录每个资源（包括未实例化的GameObject资源）的宿主GameObject
     /// BundleHolder记录每个bundle被引用的资源
     /// 
+    /// LoadAllAssets的限制，只能LoadAll资源类型（非GameObject类型资源），以整体的形式计数，使用公共Gameobject做为持有者
+    /// 
+    /// 同一个目录下资源不能同名，开发环境是用AseetDatabase，底层API需要扩展名。
+    /// 一个bundle下的资源不能同名
+    /// 所有的资源目录，名称只能小写，用下划线分隔，安卓和ios大小写敏感，容易在PC上没事，换到移动平台出问题
+    /// 
     /// </summary>
-    public partial class BundleLoader : MonoBehaviour
+    public partial class BundleLoader : ResourceLoader
     {
-        //ResourceLoader resLoader;
         AssetBundleManifest manifest;
 
         string innerBundleRootPath = "";
@@ -51,13 +56,20 @@ namespace UFrame.ResourceManagement
 
         List<GameObject> unUseGameObject = new List<GameObject>();
 
-        static BundleLoader instance;
-        public static BundleLoader GetInstance()
+        public enum E_LoadAsset
         {
-            return instance;
-        } 
+            LoadSingle,
+            LoadAll,
+        }
 
-        void Awake()
+        //static BundleLoader instance;
+
+        //public static BundleLoader GetInstance()
+        //{
+        //    return instance;
+        //} 
+
+        public override void Init()
         {
             //this.resLoader = resLoader;
             innerBundleRootPath = Application.streamingAssetsPath + "/Bundles/";
@@ -65,8 +77,7 @@ namespace UFrame.ResourceManagement
             Loadmanifest();
             LoadAssetMap();
 
-
-            instance = this;
+            //instance = this;
         }
 
         void Loadmanifest()
@@ -131,7 +142,7 @@ namespace UFrame.ResourceManagement
         /// 1.把引用计数为0的资源引用取出。本类的DestroyXX减少资源引用计数。
         /// 2.然后看看是否能把对应的bundle能释放 
         /// </summary>
-        public void RealseAllUnUse()
+        public override void RealseAllUnUse()
         {
             //unUseGameObject.Clear();
             //bool could = true;
@@ -202,7 +213,7 @@ namespace UFrame.ResourceManagement
             }
         }
 
-        public void DestroyGameObject(GameObject go)
+        public override void DestroyGameObject(GameObject go)
         {
             //1.去资源引用
             foreach (var item in goAssetHolders[go])
@@ -218,7 +229,7 @@ namespace UFrame.ResourceManagement
             GameObject.Destroy(go);
         }
 
-        public void RealseAsset(AssetHolder assetHolder, GameObject go)
+        public override void RealseAsset(AssetHolder assetHolder, GameObject go)
         {
             //1.去资源引用
             assetHolder.RemoveRefence(go);
@@ -226,114 +237,17 @@ namespace UFrame.ResourceManagement
         }
 #endregion
 
-#region 同步
-
-
-        //public G LoadAll<G>(string assetName)
-        //    where G : IAssetGetter, new()
-        //{
-        //    // 1 从nameAssetHolders获取资源
-        //    AssetHolder assetHolder = null;
-        //    //T t = default(T);
-        //    string bundleName = GetBundleName(assetName);
-        //    //HashSet<AssetHolder> assetHolders = null;
-        //    string[] dependencies = null;
-        //    G getter = new G();
-        //    if (nameAssetHolders.TryGetValue(assetName, out assetHolder))
-        //    {
-        //        //t = assetHolder.Get<T>();
-        //        //记录资源引用
-        //        //assetHolder.AddRefence(go);
-        //        //if (!goAssetHolders.TryGetValue(go, out assetHolders))
-        //        //{
-        //        //    assetHolders = new HashSet<AssetHolder>();
-        //        //    goAssetHolders.Add(go, assetHolders);
-        //        //}
-        //        //assetHolders.Add(assetHolder);
-
-        //        getter.SetAssetHolder(assetHolder);
-
-        //        //记录Bundle引用
-        //        //nameAssetHolders有,那么bundleHolders必有
-        //        bundleHolders[bundleName].AddRefence(assetName);
-        //        dependencies = manifest.GetAllDependencies(bundleName);
-        //        for (int i = 0, iMax = dependencies.Length; i < iMax; ++i)
-        //        {
-        //            bundleHolders[dependencies[i]].AddRefence(assetName);
-        //        }
-        //        //return assetHolder;
-        //        return getter;
-        //    }
-
-        //    //2 从bundleHolders获取资源
-        //    AssetBundle bundle = null;
-        //    BundleHolder bundleHolder = null;
-        //    // 没有加载过bundle
-        //    if (!bundleHolders.TryGetValue(bundleName, out bundleHolder))
-        //    {
-        //        bundle = AssetBundle.LoadFromFile(Path.Combine(bundleRootPath, bundleName));
-        //        //存bundleHolder
-        //        bundleHolder = new BundleHolder(bundle);
-        //        bundleHolder.AddRefence(assetName);
-        //        bundleHolders.Add(bundleName, bundleHolder);
-        //    }
-        //    else
-        //    {
-        //        bundleHolder.AddRefence(assetName);
-        //        bundle = bundleHolder.Get();
-        //    }
-
-
-        //    // 加载依赖的bundle
-        //    dependencies = manifest.GetAllDependencies(bundleName);
-        //    for (int i = 0, iMax = dependencies.Length; i < iMax; ++i)
-        //    {
-        //        BundleHolder dependBundleHolder = null;
-        //        if (bundleHolders.TryGetValue(dependencies[i], out dependBundleHolder))
-        //        {
-        //            //已经存在的bundle只增加引用
-        //            dependBundleHolder.AddRefence(assetName);
-        //            continue;
-        //        }
-        //        //没加载过的
-        //        AssetBundle dependBundle = AssetBundle.LoadFromFile(Path.Combine(bundleRootPath, dependencies[i]));
-        //        dependBundleHolder = new BundleHolder(dependBundle);
-        //        dependBundleHolder.AddRefence(assetName);
-        //        //存bundleHolder
-        //        bundleHolders.Add(dependencies[i], dependBundleHolder);
-        //    }
-
-        //    //所有bundle加载完毕
-        //    Object[] allObjs = bundle.LoadAllAssets();
-        //    //t = callback(bundle);
-        //    //新建AssetHolder
-        //    assetHolder = new AssetHolder(allObjs);
-        //    getter.SetAssetHolder(assetHolder);
-
-        //    ////记录资源引用
-        //    //assetHolder.AddRefence(go);
-        //    //if (!goAssetHolders.TryGetValue(go, out assetHolders))
-        //    //{
-        //    //    assetHolders = new HashSet<AssetHolder>();
-        //    //    goAssetHolders.Add(go, assetHolders);
-        //    //}
-        //    //assetHolders.Add(assetHolder);
-
-
-        //    nameAssetHolders.Add(assetName, assetHolder);
-
-        //    //return assetHolder;
-        //    return getter;
-        //}
-
 
         /// <summary>
         /// 维护资源和GameObject的引用关系
         /// </summary>
         /// <param name="go"></param>
         /// <param name="assetHolder"></param>
-        public void AddGameObjectAssetHolder(GameObject go, AssetHolder assetHolder)
+        public override void AddGameObjectAssetHolder(GameObject go, AssetHolder assetHolder)
         {
+            //记录资源引用
+            assetHolder.AddRefence(go);
+
             HashSet<AssetHolder> assetHolders = null;
             if (!goAssetHolders.TryGetValue(go, out assetHolders))
             {
@@ -342,452 +256,6 @@ namespace UFrame.ResourceManagement
             }
             assetHolders.Add(assetHolder);
         }
-
-        //public G LoadAsset<G, T>(string assetName, System.Func<AssetBundle, T> callback)
-        //    where G : IAssetGetter, new()
-        //    where T : Object
-        //{
-        //    // 1 从nameAssetHolders获取资源
-        //    AssetHolder assetHolder = null;
-        //    T t = default(T);
-        //    string bundleName = GetBundleName(assetName);
-        //    //HashSet<AssetHolder> assetHolders = null;
-        //    string[] dependencies = null;
-        //    G getter = new G();
-        //    if (nameAssetHolders.TryGetValue(assetName, out assetHolder))
-        //    {
-        //        //t = assetHolder.Get<T>();
-        //        //记录资源引用
-        //        //assetHolder.AddRefence(go);
-        //        //if (!goAssetHolders.TryGetValue(go, out assetHolders))
-        //        //{
-        //        //    assetHolders = new HashSet<AssetHolder>();
-        //        //    goAssetHolders.Add(go, assetHolders);
-        //        //}
-        //        //assetHolders.Add(assetHolder);
-
-        //        getter.SetAssetHolder(assetHolder);
-
-        //        //记录Bundle引用
-        //        //nameAssetHolders有,那么bundleHolders必有
-        //        bundleHolders[bundleName].AddRefence(assetName);
-        //        dependencies = manifest.GetAllDependencies(bundleName);
-        //        for (int i = 0, iMax = dependencies.Length; i < iMax; ++i)
-        //        {
-        //            bundleHolders[dependencies[i]].AddRefence(assetName);
-        //        }
-        //        //return assetHolder;
-        //        return getter;
-        //    }
-
-        //    //2 从bundleHolders获取资源
-        //    AssetBundle bundle = null;
-        //    BundleHolder bundleHolder = null;
-        //    // 没有加载过bundle
-        //    if (!bundleHolders.TryGetValue(bundleName, out bundleHolder))
-        //    {
-        //        bundle = AssetBundle.LoadFromFile(Path.Combine(bundleRootPath, bundleName));
-        //        //存bundleHolder
-        //        bundleHolder = new BundleHolder(bundle);
-        //        bundleHolder.AddRefence(assetName);
-        //        bundleHolders.Add(bundleName, bundleHolder);
-        //    }
-        //    else
-        //    {
-        //        bundleHolder.AddRefence(assetName);
-        //        bundle = bundleHolder.Get();
-        //    }
-
-
-        //    // 加载依赖的bundle
-        //    dependencies = manifest.GetAllDependencies(bundleName);
-        //    for (int i = 0, iMax = dependencies.Length; i < iMax; ++i)
-        //    {
-        //        BundleHolder dependBundleHolder = null;
-        //        if (bundleHolders.TryGetValue(dependencies[i], out dependBundleHolder))
-        //        {
-        //            //已经存在的bundle只增加引用
-        //            dependBundleHolder.AddRefence(assetName);
-        //            continue;
-        //        }
-        //        //没加载过的
-        //        AssetBundle dependBundle = AssetBundle.LoadFromFile(Path.Combine(bundleRootPath, dependencies[i]));
-        //        dependBundleHolder = new BundleHolder(dependBundle);
-        //        dependBundleHolder.AddRefence(assetName);
-        //        //存bundleHolder
-        //        bundleHolders.Add(dependencies[i], dependBundleHolder);
-        //    }
-
-        //    //所有bundle加载完毕
-        //    //t = bundle.LoadAsset<T>(assetName);
-        //    t = callback(bundle);
-        //    //新建AssetHolder
-        //    assetHolder = new AssetHolder(t);
-        //    getter.SetAssetHolder(assetHolder);
-
-        //    ////记录资源引用
-        //    //assetHolder.AddRefence(go);
-        //    //if (!goAssetHolders.TryGetValue(go, out assetHolders))
-        //    //{
-        //    //    assetHolders = new HashSet<AssetHolder>();
-        //    //    goAssetHolders.Add(go, assetHolders);
-        //    //}
-        //    //assetHolders.Add(assetHolder);
-
-
-        //    nameAssetHolders.Add(assetName, assetHolder);
-
-        //    //return assetHolder;
-        //    return getter;
-        //}
-
-
-
-        //public G LoadAsset<G, T>(string assetName)
-        //    where G : IAssetGetter, new()
-        //    where T : Object
-        //{
-        //    // 1 从nameAssetHolders获取资源
-        //    AssetHolder assetHolder = null;
-        //    T t = default(T);
-        //    string bundleName = GetBundleName(assetName);
-        //    //HashSet<AssetHolder> assetHolders = null;
-        //    string[] dependencies = null;
-        //    G getter = new G();
-        //    if (nameAssetHolders.TryGetValue(assetName, out assetHolder))
-        //    {
-        //        //t = assetHolder.Get<T>();
-        //        //记录资源引用
-        //        //assetHolder.AddRefence(go);
-        //        //if (!goAssetHolders.TryGetValue(go, out assetHolders))
-        //        //{
-        //        //    assetHolders = new HashSet<AssetHolder>();
-        //        //    goAssetHolders.Add(go, assetHolders);
-        //        //}
-        //        //assetHolders.Add(assetHolder);
-
-        //        getter.SetAssetHolder(assetHolder);
-
-        //        //记录Bundle引用
-        //        //nameAssetHolders有,那么bundleHolders必有
-        //        bundleHolders[bundleName].AddRefence(assetName);
-        //        dependencies = manifest.GetAllDependencies(bundleName);
-        //        for (int i = 0, iMax = dependencies.Length; i < iMax; ++i)
-        //        {
-        //            bundleHolders[dependencies[i]].AddRefence(assetName);
-        //        }
-        //        //return assetHolder;
-        //        return getter;
-        //    }
-
-        //    //2 从bundleHolders获取资源
-        //    AssetBundle bundle = null;
-        //    BundleHolder bundleHolder = null;
-        //    // 没有加载过bundle
-        //    if (!bundleHolders.TryGetValue(bundleName, out bundleHolder))
-        //    {
-        //        bundle = AssetBundle.LoadFromFile(Path.Combine(bundleRootPath, bundleName));
-        //        //存bundleHolder
-        //        bundleHolder = new BundleHolder(bundle);
-        //        bundleHolder.AddRefence(assetName);
-        //        bundleHolders.Add(bundleName, bundleHolder);
-        //    }
-        //    else
-        //    {
-        //        bundleHolder.AddRefence(assetName);
-        //        bundle = bundleHolder.Get();
-        //    }
-
-
-        //    // 加载依赖的bundle
-        //    dependencies = manifest.GetAllDependencies(bundleName);
-        //    for (int i = 0, iMax = dependencies.Length; i < iMax; ++i)
-        //    {
-        //        BundleHolder dependBundleHolder = null;
-        //        if (bundleHolders.TryGetValue(dependencies[i], out dependBundleHolder))
-        //        {
-        //            //已经存在的bundle只增加引用
-        //            dependBundleHolder.AddRefence(assetName);
-        //            continue;
-        //        }
-        //        //没加载过的
-        //        AssetBundle dependBundle = AssetBundle.LoadFromFile(Path.Combine(bundleRootPath, dependencies[i]));
-        //        dependBundleHolder = new BundleHolder(dependBundle);
-        //        dependBundleHolder.AddRefence(assetName);
-        //        //存bundleHolder
-        //        bundleHolders.Add(dependencies[i], dependBundleHolder);
-        //    }
-
-        //    //所有bundle加载完毕
-        //    t = bundle.LoadAsset<T>(assetName);
-
-        //    //新建AssetHolder
-        //    assetHolder = new AssetHolder(t);
-        //    getter.SetAssetHolder(assetHolder);
-
-        //    ////记录资源引用
-        //    //assetHolder.AddRefence(go);
-        //    //if (!goAssetHolders.TryGetValue(go, out assetHolders))
-        //    //{
-        //    //    assetHolders = new HashSet<AssetHolder>();
-        //    //    goAssetHolders.Add(go, assetHolders);
-        //    //}
-        //    //assetHolders.Add(assetHolder);
-
-
-        //    nameAssetHolders.Add(assetName, assetHolder);
-
-        //    //return assetHolder;
-        //    return getter;
-        //}
-        //public AssetHolder LoadAsset<T>(string assetName, GameObject go) where T : Object
-        //{
-        //    // 1 从nameAssetHolders获取资源
-        //    AssetHolder assetHolder = null;
-        //    T t = default(T);
-        //    string bundleName = GetBundleName(assetName);
-        //    HashSet<AssetHolder> assetHolders = null;
-        //    string[] dependencies = null;
-        //    if (nameAssetHolders.TryGetValue(assetName, out assetHolder))
-        //    {
-        //        t = assetHolder.Get<T>();
-        //        //记录资源引用
-        //        assetHolder.AddRefence(go);
-        //        if (!goAssetHolders.TryGetValue(go, out assetHolders))
-        //        {
-        //            assetHolders = new HashSet<AssetHolder>();
-        //            goAssetHolders.Add(go, assetHolders);
-        //        }
-        //        assetHolders.Add(assetHolder);
-
-        //        //记录Bundle引用
-        //        //nameAssetHolders有,那么bundleHolders必有
-        //        bundleHolders[bundleName].AddRefence(assetName);
-        //        dependencies = manifest.GetAllDependencies(bundleName);
-        //        for (int i = 0, iMax = dependencies.Length; i < iMax; ++i)
-        //        {
-        //            bundleHolders[dependencies[i]].AddRefence(assetName);
-        //        }
-        //        return assetHolder;
-        //    }
-
-        //    //2 从bundleHolders获取资源
-        //    AssetBundle bundle = null;
-        //    BundleHolder bundleHolder = null;
-        //    // 没有加载过bundle
-        //    if (!bundleHolders.TryGetValue(bundleName, out bundleHolder))
-        //    {
-        //        bundle = AssetBundle.LoadFromFile(Path.Combine(bundleRootPath, bundleName));
-        //        //存bundleHolder
-        //        bundleHolder = new BundleHolder(bundle);
-        //        bundleHolder.AddRefence(assetName);
-        //        bundleHolders.Add(bundleName, bundleHolder);
-        //    }
-        //    else
-        //    {
-        //        bundleHolder.AddRefence(assetName);
-        //        bundle = bundleHolder.Get();
-        //    }
-            
-
-        //    // 加载依赖的bundle
-        //    dependencies = manifest.GetAllDependencies(bundleName);
-        //    for (int i = 0, iMax = dependencies.Length; i < iMax; ++i)
-        //    {
-        //        BundleHolder dependBundleHolder = null;
-        //        if (bundleHolders.TryGetValue(dependencies[i], out dependBundleHolder))
-        //        {
-        //            //已经存在的bundle只增加引用
-        //            dependBundleHolder.AddRefence(assetName);
-        //            continue;
-        //        }
-        //        //没加载过的
-        //        AssetBundle dependBundle = AssetBundle.LoadFromFile(Path.Combine(bundleRootPath, dependencies[i]));
-        //        dependBundleHolder = new BundleHolder(dependBundle);
-        //        dependBundleHolder.AddRefence(assetName);
-        //        //存bundleHolder
-        //        bundleHolders.Add(dependencies[i], dependBundleHolder);
-        //    }
-
-        //    //所有bundle加载完毕
-        //    t = bundle.LoadAsset<T>(assetName);
-
-        //    //新建AssetHolder
-        //    assetHolder = new AssetHolder(t);
-        //    //记录资源引用
-        //    assetHolder.AddRefence(go);
-        //    if (!goAssetHolders.TryGetValue(go, out assetHolders))
-        //    {
-        //        assetHolders = new HashSet<AssetHolder>();
-        //        goAssetHolders.Add(go, assetHolders);
-        //    }
-        //    assetHolders.Add(assetHolder);
-        //    nameAssetHolders.Add(assetName, assetHolder);
-
-        //    return assetHolder;
-        //}
-
-        //public GameObject LoadGameObject(string assetName)
-        //{
-        //    GameObject go = null;
-        //    // 1 从nameAssetHolders获取资源
-        //    AssetHolder assetHolder = null;
-        //    GameObject prefab = null;
-        //    string bundleName = GetBundleName(assetName);
-        //    HashSet<AssetHolder> assetHolders = null;
-        //    string[] dependencies = null;
-        //    if (nameAssetHolders.TryGetValue(assetName, out assetHolder))
-        //    {
-        //        prefab = assetHolder.Get<GameObject>();
-        //        go = GameObject.Instantiate<GameObject>(prefab);
-        //        //记录资源引用
-        //        assetHolder.AddRefence(go);
-        //        if (!goAssetHolders.TryGetValue(go, out assetHolders))
-        //        {
-        //            assetHolders = new HashSet<AssetHolder>();
-        //            goAssetHolders.Add(go, assetHolders);
-        //        }
-        //        assetHolders.Add(assetHolder);
-
-        //        //记录Bundle引用
-        //        //nameAssetHolders有,那么bundleHolders必有
-        //        bundleHolders[bundleName].AddRefence(assetName);
-        //        dependencies = manifest.GetAllDependencies(bundleName);
-        //        for (int i = 0, iMax = dependencies.Length; i < iMax; ++i)
-        //        {
-        //            bundleHolders[dependencies[i]].AddRefence(assetName);
-        //        }
-        //        return go;
-        //    }
-
-        //    //2 从bundleHolders获取资源
-        //    AssetBundle bundle = null;
-        //    BundleHolder bundleHolder = null;
-        //    // 没有加载过bundle
-        //    if (!bundleHolders.TryGetValue(bundleName, out bundleHolder))
-        //    {
-        //        bundle = AssetBundle.LoadFromFile(Path.Combine(bundleRootPath, bundleName));
-        //        //存bundleHolder
-        //        bundleHolder = new BundleHolder(bundle);
-        //        bundleHolder.AddRefence(assetName);
-        //        bundleHolders.Add(bundleName, bundleHolder);
-        //    }
-        //    else
-        //    {
-        //        bundleHolder.AddRefence(assetName);
-        //        bundle = bundleHolder.Get();
-        //    }
-
-        //    // 加载依赖的bundle
-        //    dependencies = manifest.GetAllDependencies(bundleName);
-        //    for(int i = 0, iMax = dependencies.Length; i < iMax; ++i)
-        //    {
-        //        BundleHolder dependBundleHolder = null;
-        //        if (bundleHolders.TryGetValue(dependencies[i], out dependBundleHolder))
-        //        {
-        //            //已经存在的bundle只增加引用
-        //            dependBundleHolder.AddRefence(assetName);
-        //            continue;
-        //        }
-        //        //没加载过的
-        //        AssetBundle dependBundle = AssetBundle.LoadFromFile(Path.Combine(bundleRootPath, dependencies[i]));
-        //        dependBundleHolder = new BundleHolder(dependBundle);
-        //        dependBundleHolder.AddRefence(assetName);
-        //        //存bundleHolder
-        //        bundleHolders.Add(dependencies[i], dependBundleHolder);
-        //    }
-
-        //    //所有bundle加载完毕
-        //    prefab = bundle.LoadAsset<GameObject>(assetName);
-        //    go = GameObject.Instantiate<GameObject>(prefab);
-
-        //    //新建AssetHolder
-        //    assetHolder = new AssetHolder(prefab);
-        //    //记录资源引用
-        //    assetHolder.AddRefence(go);
-        //    if (!goAssetHolders.TryGetValue(go, out assetHolders))
-        //    {
-        //        assetHolders = new HashSet<AssetHolder>();
-        //        goAssetHolders.Add(go, assetHolders);
-        //    }
-        //    assetHolders.Add(assetHolder);
-        //    nameAssetHolders.Add(assetName, assetHolder);
-
-        //    return go;
-        //}
-
-
-
-#endregion
-
-#region 异步实验
-        //delegate void LoadBundleCallback(AssetBundleRequest request);
-
-        //void LoadAssetAsync()
-        //{
-        //    string bundleName = "MyCube-Parent";
-        //    string assetName = "MyCube-Parent";
-
-        //    string[] dependencies = manifest.GetAllDependencies(bundleName);
-
-        //    StartCoroutine(
-        //        ColoadBundle(assetName, bundleName, dependencies,
-        //            (request) =>
-        //            {
-        //                GameObject prefab = request.asset as GameObject;
-        //                GameObject go = GameObject.Instantiate<GameObject>(prefab);
-        //                GameObject.DestroyImmediate(prefab, true);
-        //            }));
-        //}
-
-
-        //IEnumerator ColoadBundle(string assetName, string currBundle, string[] dependentbundles, LoadBundleCallback callback)
-        //{
-        //    for (int i = 0; i < dependentbundles.Length; i++)
-        //    {
-        //        var dependentRequest = AssetBundle.LoadFromFileAsync(
-        //            Path.Combine(Application.streamingAssetsPath, "Bundles/" + dependentbundles[i]));
-        //        yield return dependentRequest;
-        //    }
-
-        //    var currRequest = AssetBundle.LoadFromFileAsync(
-        //        Path.Combine(Application.streamingAssetsPath, "Bundles/" + currBundle));
-
-        //    yield return currRequest;
-
-        //    StartCoroutine(CoLoadAsset(currRequest.assetBundle, assetName, callback));
-
-        //}
-
-        //IEnumerator CoLoadAsset(AssetBundle bundle, string assetName, LoadBundleCallback callback)
-        //{
-        //    var assetRequest = bundle.LoadAssetAsync<GameObject>(assetName);
-        //    yield return assetRequest;
-        //    callback(assetRequest);
-
-        //}
-
-        //IEnumerator UnityLoadAssetAsync()
-        //{
-        //    var bundleLoadRequest = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, "myassetBundle"));
-        //    yield return bundleLoadRequest;
-
-        //    var myLoadedAssetBundle = bundleLoadRequest.assetBundle;
-        //    if (myLoadedAssetBundle == null)
-        //    {
-        //        Debug.Log("Failed to load AssetBundle!");
-        //        yield break;
-        //    }
-
-        //    var assetLoadRequest = myLoadedAssetBundle.LoadAssetAsync<GameObject>("MyObject");
-        //    yield return assetLoadRequest;
-
-        //    GameObject prefab = assetLoadRequest.asset as GameObject;
-        //    Instantiate(prefab);
-
-        //    myLoadedAssetBundle.Unload(false);
-        //}
-#endregion
 
     }
 }

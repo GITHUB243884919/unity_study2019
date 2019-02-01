@@ -28,22 +28,22 @@ public class TestRes : MonoBehaviour
     #region BundleTest
     IEnumerator TestAll()
     {
-        AssetGetter ag1 = BundleLoader.GetInstance().LoadAllAssets(
+        AssetGetter ag1 = ResourceManager.GetInstance().LoadAllAssets(
             "unitylogo");
 
         Object[] objs = ag1.GetAll(gameObject) as Object[];
         Debug.LogError(objs.Length);
 
-        GameObjectGetter gg1 = BundleLoader.GetInstance().LoadGameObject(
+        GameObjectGetter gg1 = ResourceManager.GetInstance().LoadGameObject(
             "MyCube");
         GameObject go1 = gg1.Get();
 
-        AssetGetter ag2 = BundleLoader.GetInstance().LoadAsset(
+        AssetGetter ag2 = ResourceManager.GetInstance().LoadAsset(
             "MyMaterial");
 
         Material m = ag2.Get<Material>(gameObject);
 
-        GameObjectGetter gg2 = BundleLoader.GetInstance().LoadGameObject(
+        GameObjectGetter gg2 = ResourceManager.GetInstance().LoadGameObject(
             "MyCube-Parent");
         GameObject go2 = gg2.Get();
 
@@ -53,22 +53,22 @@ public class TestRes : MonoBehaviour
 
     IEnumerator TestAll2()
     {
-        AssetGetter ag1 = BundleLoader.GetInstance().LoadAllAssets(
+        AssetGetter ag1 = ResourceManager.GetInstance().LoadAllAssets(
             "textures/unitylogo/unitylogo");
 
         Object[] objs = ag1.GetAll(gameObject) as Object[];
         Debug.LogError(objs.Length);
 
-        GameObjectGetter gg1 = BundleLoader.GetInstance().LoadGameObject(
+        GameObjectGetter gg1 = ResourceManager.GetInstance().LoadGameObject(
             "prefabs/mycube");
         GameObject go1 = gg1.Get();
 
-        AssetGetter ag2 = BundleLoader.GetInstance().LoadAsset(
+        AssetGetter ag2 = ResourceManager.GetInstance().LoadAsset(
             "materials/mymaterial");
 
         Material m = ag2.Get<Material>(gameObject);
 
-        GameObjectGetter gg2 = BundleLoader.GetInstance().LoadGameObject(
+        GameObjectGetter gg2 = ResourceManager.GetInstance().LoadGameObject(
             "prefabs/mycube-parent");
         GameObject go2 = gg2.Get();
 
@@ -77,7 +77,7 @@ public class TestRes : MonoBehaviour
 
     IEnumerator TestAsync()
     {
-        BundleLoader.GetInstance().LoadGameObjectAsync(
+        ResourceManager.GetInstance().LoadGameObjectAsync(
             "MyCube-Parent",
             (getter) =>
             {
@@ -86,7 +86,7 @@ public class TestRes : MonoBehaviour
             });
 
 
-        BundleLoader.GetInstance().LoadAssetAsync(
+        ResourceManager.GetInstance().LoadAssetAsync(
             "MyMaterial",
             //BundleLoader.E_LoadAsset.LoadSingle,
             (getter) =>
@@ -96,7 +96,7 @@ public class TestRes : MonoBehaviour
             });
 
 
-        BundleLoader.GetInstance().LoadAllAssetsAsync(
+        ResourceManager.GetInstance().LoadAllAssetsAsync(
             "unitylogo",
             //BundleLoader.E_LoadAsset.LoadAll,
             (getter) =>
@@ -112,7 +112,7 @@ public class TestRes : MonoBehaviour
 
     IEnumerator TestAsync2()
     {
-        BundleLoader.GetInstance().LoadGameObjectAsync(
+        ResourceManager.GetInstance().LoadGameObjectAsync(
             "prefabs/mycube-parent",
             (getter) =>
             {
@@ -121,7 +121,7 @@ public class TestRes : MonoBehaviour
             });
 
 
-        BundleLoader.GetInstance().LoadAssetAsync(
+        ResourceManager.GetInstance().LoadAssetAsync(
             "materials/mymaterial",
             //BundleLoader.E_LoadAsset.LoadSingle,
             (getter) =>
@@ -131,7 +131,7 @@ public class TestRes : MonoBehaviour
             });
 
 
-        BundleLoader.GetInstance().LoadAllAssetsAsync(
+        ResourceManager.GetInstance().LoadAllAssetsAsync(
             "textures/unitylogo/unitylogo",
             //BundleLoader.E_LoadAsset.LoadAll,
             (getter) =>
@@ -141,7 +141,7 @@ public class TestRes : MonoBehaviour
                 Debug.LogError(objs.Length);
             });
 
-        BundleLoader.GetInstance().LoadGameObjectAsync(
+        ResourceManager.GetInstance().LoadGameObjectAsync(
             "prefabs/mycube",
             (getter) =>
             {

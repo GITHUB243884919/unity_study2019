@@ -5,42 +5,19 @@ using UnityEngine;
 
 namespace UFrame.ResourceManagement
 {
-    /// <summary>
-    /// 限制
-    /// 禁用GameObject.Instance 无法跟踪引用
-    /// 禁用GameObject.Destroy  无法移除引用
-    /// 
-    /// 没有销毁一个资源对应的bundle的接口，而是提供销毁所有没有使用的资源对应的接口
-    /// 
-    /// AssetHolder记录每个资源（包括未实例化的GameObject资源）的宿主GameObject
-    /// BundleHolder记录每个bundle被引用的资源
-    /// 
-    /// LoadAll的限制，只能LoadAll资源类型，以整体的形式计数，公共Gameobject做为持有者
-    /// 
-    /// 同一个目录下资源不能同名，开发环境是用AseetDatabase，底层API需要扩展名。
-    /// 所有的资源名称只能小写，用下划线分隔，安卓和ios大小写敏感，容易在PC上没事，换到移动平台出问题
-    /// 
-    /// GetAll仅仅用于非GameObject类型资源
-    /// </summary>
-    public partial class BundleLoader : MonoBehaviour
+    public partial class BundleLoader : ResourceLoader
     {
-        public enum E_LoadAsset
-        {
-            LoadSingle,
-            LoadAll,
-        }
-
-        public AssetGetter LoadAllAssets(string assetName)
+        public override AssetGetter LoadAllAssets(string assetName)
         {
             return LoadAsset<AssetGetter>(assetName, E_LoadAsset.LoadAll);
         }
 
-        public GameObjectGetter LoadGameObject(string assetName)
+        public override GameObjectGetter LoadGameObject(string assetName)
         {
             return LoadAsset<GameObjectGetter>(assetName, E_LoadAsset.LoadSingle);
         }
 
-        public AssetGetter LoadAsset(string assetName)
+        public override AssetGetter LoadAsset(string assetName)
         {
             return LoadAsset<AssetGetter>(assetName, E_LoadAsset.LoadSingle);
         }

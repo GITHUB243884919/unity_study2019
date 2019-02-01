@@ -17,27 +17,17 @@ namespace UFrame.ResourceManagement
         {
             GameObject prefab = assetHolder.Get<GameObject>();
             GameObject go = GameObject.Instantiate<GameObject>(prefab);
-            //记录资源引用
-            assetHolder.AddRefence(go);
-            BundleLoader.GetInstance().AddGameObjectAssetHolder(go, assetHolder);
+
+            ResourceManager.GetInstance().AddGameObjectAssetHolder(go, assetHolder);
             return go;
         }
 
         public void Release(GameObject go)
         {
-            BundleLoader.GetInstance().DestroyGameObject(go);
+            ResourceManager.GetInstance().DestroyGameObject(go);
             assetHolder = null;
         }
 
-        //public void AddRefence(GameObject refence)
-        //{
-        //    assetHolder.AddRefence(refence);
-        //}
-
-        //public void RemoveRefence(GameObject refence)
-        //{
-        //    assetHolder.AddRefence(refence);
-        //}
     }
 
 }

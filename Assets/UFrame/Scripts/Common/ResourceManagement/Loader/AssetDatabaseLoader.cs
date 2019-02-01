@@ -137,10 +137,15 @@ namespace UFrame.ResourceManagement
 
         public override void DestroyGameObject(GameObject go)
         {
-
+            GameObject.Destroy(go);
         }
 
         public override void RealseAsset(AssetHolder assetHolder, GameObject go)
+        {
+
+        }
+
+        public override void AddGameObjectAssetHolder(GameObject go, AssetHolder assetHolder)
         {
 
         }

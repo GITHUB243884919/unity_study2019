@@ -21,17 +21,17 @@ namespace UFrame.ResourceManagement
 #if UNITY_EDITOR
 #if RES_AB
             //Editor模式下希望Bundle加载
-            //resManager = new AssetManager(new BundleLoadUnloadImplementer_EditorDecorator());
+            resLoader = new BundleLoader();
 #else
-		    //Editor模式下希望Resources加载
-		    resLoader = new  AssetDatabaseLoader();
-            resLoader.Init();
+            //Editor模式下希望Resources加载
+            resLoader = new AssetDatabaseLoader();
 #endif
 #else
             //非Editor模式下
             //用Bundle加载
-            //resManager = new AssetManager(new BundleImplementer());
+            resLoader = new BundleLoader();
 #endif
+            resLoader.Init();
 
         }
 
@@ -77,6 +77,11 @@ namespace UFrame.ResourceManagement
         public void RealseAsset(AssetHolder assetHolder, GameObject go)
         {
             resLoader.RealseAsset(assetHolder, go);
+        }
+
+        public void AddGameObjectAssetHolder(GameObject go, AssetHolder assetHolder)
+        {
+            resLoader.AddGameObjectAssetHolder(go, assetHolder);
         }
 
     }
