@@ -1,0 +1,18 @@
+ManifestFileVersion: 0
+CRC: 31907836
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 1d24b6de1f2f91dea1448385a9d2509d
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 8ce7ff9c0c6ba8d2a623d30ec748ce2c
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Materials/Blue.mat
+Dependencies: []

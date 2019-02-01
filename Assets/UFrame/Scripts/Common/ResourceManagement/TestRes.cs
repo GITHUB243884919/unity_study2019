@@ -1,0 +1,186 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+using UFrame.ResourceManagement;
+public class TestRes : MonoBehaviour
+{
+
+    // Use this for initialization
+    //IEnumerator Start()
+    void Start()
+    {
+        #region BundleTest
+        //StartCoroutine(TestAll());
+        //StartCoroutine(TestAll2());
+        //StartCoroutine(TestAsync());
+        StartCoroutine(TestAsync2());
+        //StartCoroutine(TestScene());
+
+        #endregion
+
+        #region AssetDatabaseTest
+        //TestDatbase();
+        #endregion
+
+    }
+
+    #region BundleTest
+    IEnumerator TestAll()
+    {
+        AssetGetter ag1 = BundleLoader.GetInstance().LoadAllAssets(
+            "unitylogo");
+
+        Object[] objs = ag1.GetAll(gameObject) as Object[];
+        Debug.LogError(objs.Length);
+
+        GameObjectGetter gg1 = BundleLoader.GetInstance().LoadGameObject(
+            "MyCube");
+        GameObject go1 = gg1.Get();
+
+        AssetGetter ag2 = BundleLoader.GetInstance().LoadAsset(
+            "MyMaterial");
+
+        Material m = ag2.Get<Material>(gameObject);
+
+        GameObjectGetter gg2 = BundleLoader.GetInstance().LoadGameObject(
+            "MyCube-Parent");
+        GameObject go2 = gg2.Get();
+
+        yield return new WaitForSeconds(10);
+        yield return null;
+    }
+
+    IEnumerator TestAll2()
+    {
+        AssetGetter ag1 = BundleLoader.GetInstance().LoadAllAssets(
+            "textures/unitylogo/unitylogo");
+
+        Object[] objs = ag1.GetAll(gameObject) as Object[];
+        Debug.LogError(objs.Length);
+
+        GameObjectGetter gg1 = BundleLoader.GetInstance().LoadGameObject(
+            "prefabs/mycube");
+        GameObject go1 = gg1.Get();
+
+        AssetGetter ag2 = BundleLoader.GetInstance().LoadAsset(
+            "materials/mymaterial");
+
+        Material m = ag2.Get<Material>(gameObject);
+
+        GameObjectGetter gg2 = BundleLoader.GetInstance().LoadGameObject(
+            "prefabs/mycube-parent");
+        GameObject go2 = gg2.Get();
+
+        yield return new WaitForSeconds(10);
+    }
+
+    IEnumerator TestAsync()
+    {
+        BundleLoader.GetInstance().LoadGameObjectAsync(
+            "MyCube-Parent",
+            (getter) =>
+            {
+                //GameObject go1 = (getter as GameObjectGetter).Get();
+                GameObject go1 = getter.Get();
+            });
+
+
+        BundleLoader.GetInstance().LoadAssetAsync(
+            "MyMaterial",
+            //BundleLoader.E_LoadAsset.LoadSingle,
+            (getter) =>
+            {
+                //Material m = (getter as AssetGetter).Get<Material>(gameObject);
+                Material m = getter.Get<Material>(gameObject);
+            });
+
+
+        BundleLoader.GetInstance().LoadAllAssetsAsync(
+            "unitylogo",
+            //BundleLoader.E_LoadAsset.LoadAll,
+            (getter) =>
+            {
+                //Object[] objs = (getter as AssetGetter).GetAll(gameObject) as Object[];
+                Object[] objs = getter.GetAll(gameObject) as Object[];
+                Debug.LogError(objs.Length);
+            });
+
+
+        yield return null;
+    }
+
+    IEnumerator TestAsync2()
+    {
+        BundleLoader.GetInstance().LoadGameObjectAsync(
+            "prefabs/mycube-parent",
+            (getter) =>
+            {
+                //GameObject go1 = (getter as GameObjectGetter).Get();
+                GameObject go1 = getter.Get();
+            });
+
+
+        BundleLoader.GetInstance().LoadAssetAsync(
+            "materials/mymaterial",
+            //BundleLoader.E_LoadAsset.LoadSingle,
+            (getter) =>
+            {
+                //Material m = (getter as AssetGetter).Get<Material>(gameObject);
+                Material m = getter.Get<Material>(gameObject);
+            });
+
+
+        BundleLoader.GetInstance().LoadAllAssetsAsync(
+            "textures/unitylogo/unitylogo",
+            //BundleLoader.E_LoadAsset.LoadAll,
+            (getter) =>
+            {
+                //Object[] objs = (getter as AssetGetter).GetAll(gameObject) as Object[];
+                Object[] objs = getter.GetAll(gameObject) as Object[];
+                Debug.LogError(objs.Length);
+            });
+
+        BundleLoader.GetInstance().LoadGameObjectAsync(
+            "prefabs/mycube",
+            (getter) =>
+            {
+                //GameObject go1 = (getter as GameObjectGetter).Get();
+                GameObject go1 = getter.Get();
+            });
+
+        yield return null;
+    }
+
+    IEnumerator TestScene()
+    {
+
+
+        //UnityEngine.SceneManagement.SceneUtility.
+        //UnityEngine.SceneManagement.SceneManager.CreateScene()
+
+        
+
+        //BundleLoader.GetInstance().LoadAsset<Object>("TestAB_Scene", gameObject);
+        //UnityEngine.SceneManagement.SceneManager.LoadScene("TestAB_Scene");
+
+        //BundleLoader.GetInstance().RealseAllUnUse();
+        yield return null;
+    }
+    #endregion
+
+    #region AssetDatabaseTest
+    void TestDatbase()
+    {
+        GameObjectGetter gogetter = ResourceManager.GetInstance().LoadGameObject("prefabs/cube");
+        GameObject go = gogetter.Get();
+        AssetGetter assetgetter = ResourceManager.GetInstance().LoadAsset("materials/mymaterial");
+        Material m = assetgetter.Get<Material>(gameObject);
+    }
+    #endregion
+
+    // Update is called once per frame
+    void Update () {
+		
+	}
+}
