@@ -21,7 +21,8 @@ namespace UFrame.ResourceManagement
         //ResourceLoader resLoader;
         AssetBundleManifest manifest;
 
-        string bundleRootPath = "";
+        string innerBundleRootPath = "";
+        string outerBundleRootPath = "";
 
         /// <summary>
         /// asset和bundle的map关系
@@ -59,17 +60,19 @@ namespace UFrame.ResourceManagement
         void Awake()
         {
             //this.resLoader = resLoader;
-            Loadanifest();
+            innerBundleRootPath = Application.streamingAssetsPath + "/Bundles/";
+            outerBundleRootPath = Application.persistentDataPath + "/Bundles/";
+            Loadmanifest();
             LoadAssetMap();
 
-            bundleRootPath = Application.streamingAssetsPath + "/Bundles/";
+
             instance = this;
         }
 
-        void Loadanifest()
+        void Loadmanifest()
         {
-            var bundle = AssetBundle.LoadFromFile(
-                Path.Combine(Application.streamingAssetsPath, "Bundles/Bundles"));
+            string bundlePath = GetBundlePath("Bundles");
+            var bundle = AssetBundle.LoadFromFile(bundlePath);
 
             manifest = bundle.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
             bundle.Unload(false);
@@ -77,16 +80,11 @@ namespace UFrame.ResourceManagement
 
         void LoadAssetMap()
         {
-            var bundle = AssetBundle.LoadFromFile(
-                Path.Combine(Application.streamingAssetsPath, "Bundles/asset-bundle"));
-
-            //var bundle = AssetBundle.LoadFromFile(
-            //    "asset-bundle");
-
+            string bundlePath = GetBundlePath("asset-bundle");
+            var bundle = AssetBundle.LoadFromFile(bundlePath);
             var txt = bundle.LoadAsset<TextAsset>("asset-bundle");
-            
             string strTxt = txt.text;
-            //StreamReader
+
 #if UNITY_EDITOR
             string[] line = strTxt.Split(new char[] { '\r', '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
 #else
@@ -108,53 +106,24 @@ namespace UFrame.ResourceManagement
 
         string GetBundlePath(string bundleName)
         {
-            string path1 = Path.Combine(Application.persistentDataPath, "Bundles/" + bundleName);
-            string path2 = Path.Combine(Application.streamingAssetsPath, "Bundles/" + bundleName);
+            string outerPath = Path.Combine(outerBundleRootPath, bundleName);
+            string innerPath = Path.Combine(innerBundleRootPath, bundleName);
 
-            if (File.Exists(path1))
+            if (File.Exists(outerPath))
             {
-                return path1;
+                return outerPath;
             }
 
-            return path2;
+            return innerPath;
         }
 
-        string GetBundleName2(string assetName)
+        string GetBundleName(string assetName)
         {
             string result;
             assetMap.TryGetValue(assetName, out result);
             return result;
         }
-        string GetBundleName(string assetName)
-        {
-            if (assetName == "MyCube-Parent")
-            {
-                return "MyCube-Parent";
-            }
 
-            if (assetName == "MyCube")
-            {
-                return "cube-bundle";
-            }
-
-            if (assetName == "MyMaterial")
-            {
-                return "material-bundle";
-            }
-
-            if (assetName == "TestAB_Scene")
-            {
-                return "testab_scene";
-            }
-
-            if (assetName == "unitylogo")
-            {
-                return "unitylogo";
-            }
-
-            return null;
-
-        }
 
 #region 释放接口
         /// <summary>
@@ -201,7 +170,7 @@ namespace UFrame.ResourceManagement
 
             for (int i = 0, iMax = unUseAssets.Count; i < iMax; ++i)
             {
-                string bundleName = GetBundleName2(unUseAssets[i]);
+                string bundleName = GetBundleName(unUseAssets[i]);
                 BundleHolder bundleHolder = null;
                 if (bundleHolders.TryGetValue(bundleName, out bundleHolder))
                 {

@@ -46,7 +46,7 @@ namespace UFrame.ResourceManagement
         {
 
             T getter;
-            string bundleName = GetBundleName2(assetName);
+            string bundleName = GetBundleName(assetName);
             if (LoadAssetFromNameAssetHolder(assetName, bundleName, out getter))
             {
                 callback(getter);
@@ -66,7 +66,7 @@ namespace UFrame.ResourceManagement
                 yield return null;
             }
 
-            string bundleName = GetBundleName2(bundleRequest.assetName);
+            string bundleName = GetBundleName(bundleRequest.assetName);
             Debug.LogError("[" + bundleName + "] [" + bundleRequest.assetName + "]");
             StartCoroutine(CoLoadBundleAsync<T>(bundleRequest.assetName, bundleName, bundleRequest.eLoadAsset, callback));
         }
@@ -141,10 +141,10 @@ namespace UFrame.ResourceManagement
             {
                 case E_LoadAsset.LoadSingle:
                     int index = assetName.LastIndexOf("/");
-                    string assetName2 = assetName.Substring(index + 1);
-                    Debug.LogError(assetName + " " + assetName2);
+                    string assetNameInBundle = assetName.Substring(index + 1);
+                    Debug.LogError(assetName + " " + assetNameInBundle);
                     //assetRequest = assetBundle.LoadAssetAsync(assetName);
-                    assetRequest = assetBundle.LoadAssetAsync(assetName2);
+                    assetRequest = assetBundle.LoadAssetAsync(assetNameInBundle);
                     break;
                 case E_LoadAsset.LoadAll:
                     assetRequest = assetBundle.LoadAllAssetsAsync<Object>();

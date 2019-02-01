@@ -49,7 +49,7 @@ namespace UFrame.ResourceManagement
             where T : IAssetGetter, new()
         {
             T getter;
-            string bundleName = GetBundleName2(assetName);
+            string bundleName = GetBundleName(assetName);
             if (LoadAssetFromNameAssetHolder(assetName, bundleName, out getter))
             {
                 return getter;
@@ -67,11 +67,11 @@ namespace UFrame.ResourceManagement
             {
                 case E_LoadAsset.LoadSingle:
                     int index = assetName.LastIndexOf("/");
-                    string assetName2 = assetName.Substring(index + 1);
-                    Debug.LogError(assetName + " " + assetName2);
+                    string assetNameInBundle = assetName.Substring(index + 1);
+                    Debug.LogError(assetName + " " + assetNameInBundle);
 
                     //assetHolder = new AssetHolder(bundle.LoadAsset(assetName));
-                    assetHolder = new AssetHolder(bundle.LoadAsset(assetName2));
+                    assetHolder = new AssetHolder(bundle.LoadAsset(assetNameInBundle));
                     break;
                 case E_LoadAsset.LoadAll:
                     assetHolder = new AssetHolder(bundle.LoadAllAssets());
@@ -91,7 +91,7 @@ namespace UFrame.ResourceManagement
         {
             // 1 从nameAssetHolders获取资源
             AssetHolder assetHolder = null;
-            bundleName = GetBundleName2(assetName);
+            bundleName = GetBundleName(assetName);
             string[] dependencies = null;
             getter = new T();
             if (nameAssetHolders.TryGetValue(assetName, out assetHolder))
