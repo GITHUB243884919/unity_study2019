@@ -29,7 +29,7 @@ public class TestRes : MonoBehaviour
     IEnumerator TestAll()
     {
         AssetGetter ag1 = ResourceManager.GetInstance().LoadAllAssets(
-            "textures/unitylogo/unitylogo");
+            "textures/unitylogo");
         Object[] objs = ag1.GetAll(gameObject) as Object[];
         Debug.LogError(objs.Length);
 

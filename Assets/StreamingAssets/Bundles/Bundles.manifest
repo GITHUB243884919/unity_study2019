@@ -1,60 +1,60 @@
 ManifestFileVersion: 0
-CRC: 2571592140
+CRC: 3851535384
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: material-bundle
-      Dependencies:
-        Dependency_0: unitylogo
-    Info_1:
-      Name: cube-bundle
-      Dependencies:
-        Dependency_0: material-bundle
-    Info_2:
-      Name: mycube-parent
-      Dependencies:
-        Dependency_0: material-bundle
-        Dependency_1: m-red
-        Dependency_2: m_blue
-    Info_3:
-      Name: m-red
-      Dependencies: {}
-    Info_4:
-      Name: m_blue
-      Dependencies: {}
-    Info_5:
       Name: testab_scene
       Dependencies:
         Dependency_0: mycube-parent
-    Info_6:
+    Info_1:
+      Name: textures/unitylogo
+      Dependencies: {}
+    Info_2:
       Name: unitylogo
       Dependencies: {}
-    Info_7:
-      Name: prefabs/cube
-      Dependencies: {}
-    Info_8:
-      Name: materials/blue
-      Dependencies: {}
-    Info_9:
+    Info_3:
       Name: materials/red
       Dependencies: {}
-    Info_10:
+    Info_4:
+      Name: mycube-parent
+      Dependencies:
+        Dependency_0: material-bundle
+        Dependency_1: m_blue
+        Dependency_2: m-red
+    Info_5:
+      Name: cube-bundle
+      Dependencies:
+        Dependency_0: material-bundle
+    Info_6:
+      Name: material-bundle
+      Dependencies:
+        Dependency_0: unitylogo
+    Info_7:
+      Name: prefabs/mycube-parent
+      Dependencies:
+        Dependency_0: materials/red
+        Dependency_1: materials/mymaterial
+        Dependency_2: materials/blue
+    Info_8:
       Name: materials/mymaterial
       Dependencies:
         Dependency_0: textures/unitylogo
+    Info_9:
+      Name: m_blue
+      Dependencies: {}
+    Info_10:
+      Name: prefabs/cube
+      Dependencies: {}
     Info_11:
-      Name: textures/unitylogo
+      Name: m-red
       Dependencies: {}
     Info_12:
+      Name: materials/blue
+      Dependencies: {}
+    Info_13:
       Name: prefabs/mycube
       Dependencies:
         Dependency_0: materials/mymaterial
-    Info_13:
-      Name: prefabs/mycube-parent
-      Dependencies:
-        Dependency_0: materials/blue
-        Dependency_1: materials/red
-        Dependency_2: materials/mymaterial
     Info_14:
       Name: asset-bundle
       Dependencies: {}

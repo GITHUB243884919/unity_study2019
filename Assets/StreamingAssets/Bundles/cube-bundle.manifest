@@ -3,7 +3,7 @@ CRC: 2336744850
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 31ea6ce22c19aecc98086bab66c00418
+    Hash: 621ddf55f8e95b3238565c92b817f664
   TypeTreeHash:
     serializedVersion: 2
     Hash: 0615fdd8182050e228ba12bfa176028d
@@ -26,4 +26,4 @@ ClassTypes:
 Assets:
 - Assets/Resources/Prefabs/MyCube.prefab
 Dependencies:
-- D:/Fzy/Code/LuaFramework_UGUI-master/Assets/StreamingAssets/Bundles/material-bundle
+- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/material-bundle

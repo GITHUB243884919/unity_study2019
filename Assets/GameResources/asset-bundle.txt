@@ -1,5 +1,6 @@
 textures/unitylogo/unitylogo1,textures/unitylogo
 textures/unitylogo/unityLogo2,textures/unitylogo
+asset-bundle,asset-bundle
 materials/blue,materials/blue
 materials/red,materials/red
 materials/mymaterial,materials/mymaterial
@@ -7,3 +8,4 @@ prefabs/mycube,prefabs/mycube
 prefabs/mycube-parent,prefabs/mycube-parent
 textures/unitylogo/unitylogo,textures/unitylogo
 prefabs/cube,prefabs/cube
+textures/unitylogo,textures/unitylogo

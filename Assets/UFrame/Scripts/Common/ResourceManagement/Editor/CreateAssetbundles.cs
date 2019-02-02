@@ -58,6 +58,8 @@ public class CreateAssetBundles
             //UnityEngine.Debug.LogError(fileFindPath + " " + bundleName);
             sw.WriteLine(fileFindPath + "," + bundleName);
         }
+        //对于打包到一起的,单独写对应关系
+        sw.WriteLine("textures/unitylogo" + "," + "textures/unitylogo");
         sw.Flush();
         sw.Dispose();
         AssetDatabase.Refresh();

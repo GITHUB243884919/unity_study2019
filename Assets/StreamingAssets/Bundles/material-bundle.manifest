@@ -3,7 +3,7 @@ CRC: 2014858911
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 2e1ab76fbe7ec98b21b3ceba0659ef5f
+    Hash: 2f2ec18664e30157f2db07038a2e3146
   TypeTreeHash:
     serializedVersion: 2
     Hash: 8d068741ae817c9b5c92580f37de87e3
@@ -18,4 +18,4 @@ ClassTypes:
 Assets:
 - Assets/Resources/Materials/MyMaterial.mat
 Dependencies:
-- D:/Fzy/Code/LuaFramework_UGUI-master/Assets/StreamingAssets/Bundles/unitylogo
+- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/unitylogo

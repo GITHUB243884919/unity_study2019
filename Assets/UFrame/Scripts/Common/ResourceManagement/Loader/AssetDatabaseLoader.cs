@@ -54,6 +54,9 @@ namespace UFrame.ResourceManagement
                     pathMaps[fileFindPath] = unixFilePath;
                 }
             }
+            
+            pathMaps["textures/unitylogo"] = "GameResources/textures/unitylogo";
+
         }
 
         string GetAssetPathWithExtend(string assetPath)
@@ -79,8 +82,28 @@ namespace UFrame.ResourceManagement
         public override AssetGetter LoadAllAssets(string assetPath)
         {
             string loadPath = GetAssetPathWithExtend(assetPath.ToLower());
-            Object [] objs = AssetDatabase.LoadAllAssetsAtPath(loadPath);
-            AssetHolder assetHolder = new AssetHolder(objs);
+
+            //Object [] objs = AssetDatabase.LoadAllAssetsAtPath(loadPath);
+            ////System.IO.Directory.GetFiles()
+            string pullPath = System.IO.Path.Combine(Application.dataPath, loadPath.ToLower());
+            pullPath = pullPath.Replace('\\', '/');
+            string [] files = System.IO.Directory.GetFiles(pullPath);
+            List<Object> objs = new List<Object>();
+            for (int i = 0; i < files.Length; ++i)
+            {
+                if (files[i].Contains(".meta"))
+                {
+                    continue;
+                }
+                //Debug.LogError(files[i]);
+                //Debug.LogError(Application.dataPath.Replace('\\', '/'));
+                Debug.LogError(files[i].Substring(files[i].Replace('\\', '/').LastIndexOf("/")));
+
+                var o = AssetDatabase.LoadAssetAtPath<Object>("Assets/" + loadPath + files[i].Substring(files[i].Replace('\\', '/').LastIndexOf("/")));
+                objs.Add(o);
+            }
+
+            AssetHolder assetHolder = new AssetHolder(objs.ToArray());
             AssetGetter getter = new AssetGetter();
             getter.SetAssetHolder(assetHolder);
             return getter;

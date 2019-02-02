@@ -18,6 +18,8 @@ namespace UFrame.ResourceManagement
     /// BundleHolder记录每个bundle被引用的资源
     /// 
     /// LoadAllAssets的限制，只能LoadAll资源类型（非GameObject类型资源），以整体的形式计数，使用公共Gameobject做为持有者
+    /// LoadAllAssets的参数的意思是这个目录，因为打包时，把这个目录下的资源打成一个bundle
+    /// 这样对于Assetdatabase版本的Loader就是加载这个目录下的所有资源
     /// 
     /// 同一个目录下资源不能同名，开发环境是用AseetDatabase，底层API需要扩展名。
     /// 一个bundle下的资源不能同名
@@ -143,32 +145,32 @@ namespace UFrame.ResourceManagement
         /// </summary>
         public override void RealseAllUnUse()
         {
-            unUseGameObject.Clear();
-            bool could = true;
-            foreach (var kv in goAssetHolders)
-            {
-                could = true;
-                HashSet<AssetHolder> assetholders = kv.Value;
-                foreach (var item in assetholders)
-                {
-                    if (!item.CouldRealse())
-                    {
-                        could = false;
-                        break;
-                    }
-                }
-                if (could)
-                {
-                    unUseGameObject.Add(kv.Key);
-                }
-            }
+            //unUseGameObject.Clear();
+            //bool could = true;
+            //foreach (var kv in goAssetHolders)
+            //{
+            //    could = true;
+            //    HashSet<AssetHolder> assetholders = kv.Value;
+            //    foreach (var item in assetholders)
+            //    {
+            //        if (!item.CouldRealse())
+            //        {
+            //            could = false;
+            //            break;
+            //        }
+            //    }
+            //    if (could)
+            //    {
+            //        unUseGameObject.Add(kv.Key);
+            //    }
+            //}
 
-            for (int i = 0, iMax = unUseGameObject.Count; i < iMax; ++i)
-            {
-                goAssetHolders[unUseGameObject[i]].Clear();
-                Debug.LogError("remove" + unUseGameObject[i].name);
-                goAssetHolders.Remove(unUseGameObject[i]);
-            }
+            //for (int i = 0, iMax = unUseGameObject.Count; i < iMax; ++i)
+            //{
+            //    goAssetHolders[unUseGameObject[i]].Clear();
+            //    Debug.LogError("remove" + unUseGameObject[i].name);
+            //    goAssetHolders.Remove(unUseGameObject[i]);
+            //}
 
             unUseAssets.Clear();
             foreach (var kv in nameAssetHolders)
@@ -234,6 +236,23 @@ namespace UFrame.ResourceManagement
         {
             //1.去资源引用
             assetHolder.RemoveRefence(go);
+
+            bool could = true;
+            HashSet<AssetHolder> assetholders = goAssetHolders[go];
+            foreach (var item in assetholders)
+            {
+                if (!item.CouldRealse())
+                {
+                    could = false;
+                    break;
+                }
+            }
+            if (could)
+            {
+                //unUseGameObject.Add(kv.Key);
+                Debug.LogError("remove" + go.name);
+                goAssetHolders.Remove(go);
+            }
 
         }
 #endregion
