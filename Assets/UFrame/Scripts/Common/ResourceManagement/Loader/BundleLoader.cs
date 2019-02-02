@@ -9,6 +9,8 @@ namespace UFrame.ResourceManagement
     /// 限制
     /// 禁用GameObject.Instance 无法跟踪引用
     /// 禁用GameObject.Destroy  无法移除引用
+    /// 销毁GO用GameObjectGetter.Release()
+    /// 释放资源用AssetGetter.Release()
     /// 
     /// 没有销毁一个资源对应的bundle的接口，而是提供销毁所有没有使用的资源对应的接口
     /// 
@@ -62,22 +64,13 @@ namespace UFrame.ResourceManagement
             LoadAll,
         }
 
-        //static BundleLoader instance;
-
-        //public static BundleLoader GetInstance()
-        //{
-        //    return instance;
-        //} 
-
         public override void Init()
         {
-            //this.resLoader = resLoader;
             innerBundleRootPath = Application.streamingAssetsPath + "/Bundles/";
             outerBundleRootPath = Application.persistentDataPath + "/Bundles/";
             Loadmanifest();
             LoadAssetMap();
 
-            //instance = this;
         }
 
         void Loadmanifest()
@@ -132,6 +125,11 @@ namespace UFrame.ResourceManagement
         {
             string result;
             assetMap.TryGetValue(assetName, out result);
+            if (string.IsNullOrEmpty(result))
+            {
+                //Debug.LogError("资源[" + assetName + "]没有对应的assetbundle");
+                throw new System.Exception("资源[" + assetName + "]没有对应的assetbundle");
+            }
             return result;
         }
 
@@ -139,36 +137,38 @@ namespace UFrame.ResourceManagement
 #region 释放接口
         /// <summary>
         /// 释放接口，释放所有未被引用的资源。
-        /// 1.把引用计数为0的资源引用取出。本类的DestroyXX减少资源引用计数。
-        /// 2.然后看看是否能把对应的bundle能释放 
+        /// 1.把go中，所有资源Holder可以释放的情况下，移除go（销毁go时会释放，但是释放资源时不会，所以这里要统一处理）
+        /// 2.把引用计数为0的资源引用取出。本类的DestroyXX减少资源引用计数。
+        /// 3.然后看看是否能把对应的bundle能释放 
         /// </summary>
         public override void RealseAllUnUse()
         {
-            //unUseGameObject.Clear();
-            //bool could = true;
-            //foreach(var kv in goAssetHolders)
-            //{
-            //    could = true;
-            //    HashSet<AssetHolder> assetholders = kv.Value;
-            //    foreach(var item in assetholders)
-            //    {
-            //        if (!item.CouldRealse())
-            //        {
-            //            could = false;
-            //            break;
-            //        }
-            //    }
-            //    if (could)
-            //    {
-            //        unUseGameObject.Add(kv.Key);
-            //    }
-            //}
-            
-            //for(int i = 0, iMax = unUseGameObject.Count; i < iMax; ++i)
-            //{
-            //    goAssetHolders[unUseGameObject[i]].Clear();
-            //    goAssetHolders.Remove(unUseGameObject[i]);
-            //}
+            unUseGameObject.Clear();
+            bool could = true;
+            foreach (var kv in goAssetHolders)
+            {
+                could = true;
+                HashSet<AssetHolder> assetholders = kv.Value;
+                foreach (var item in assetholders)
+                {
+                    if (!item.CouldRealse())
+                    {
+                        could = false;
+                        break;
+                    }
+                }
+                if (could)
+                {
+                    unUseGameObject.Add(kv.Key);
+                }
+            }
+
+            for (int i = 0, iMax = unUseGameObject.Count; i < iMax; ++i)
+            {
+                goAssetHolders[unUseGameObject[i]].Clear();
+                Debug.LogError("remove" + unUseGameObject[i].name);
+                goAssetHolders.Remove(unUseGameObject[i]);
+            }
 
             unUseAssets.Clear();
             foreach (var kv in nameAssetHolders)
@@ -222,6 +222,7 @@ namespace UFrame.ResourceManagement
             }
             ////已经销毁的对象在维护完资源引用后不用再持有
             goAssetHolders[go].Clear();
+            Debug.LogError("remove " + go.name);
             goAssetHolders.Remove(go);
 
 
@@ -252,6 +253,7 @@ namespace UFrame.ResourceManagement
             if (!goAssetHolders.TryGetValue(go, out assetHolders))
             {
                 assetHolders = new HashSet<AssetHolder>();
+                Debug.LogError("add " + go.name);
                 goAssetHolders.Add(go, assetHolders);
             }
             assetHolders.Add(assetHolder);

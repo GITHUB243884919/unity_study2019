@@ -11,10 +11,10 @@ public class TestRes : MonoBehaviour
     void Start()
     {
         #region BundleTest
-        //StartCoroutine(TestAll());
+        StartCoroutine(TestAll());
         //StartCoroutine(TestAll2());
         //StartCoroutine(TestAsync());
-        StartCoroutine(TestAsync2());
+        //StartCoroutine(TestAsync2());
         //StartCoroutine(TestScene());
 
         #endregion
@@ -29,23 +29,28 @@ public class TestRes : MonoBehaviour
     IEnumerator TestAll()
     {
         AssetGetter ag1 = ResourceManager.GetInstance().LoadAllAssets(
-            "unitylogo");
-
+            "textures/unitylogo/unitylogo");
         Object[] objs = ag1.GetAll(gameObject) as Object[];
         Debug.LogError(objs.Length);
 
         GameObjectGetter gg1 = ResourceManager.GetInstance().LoadGameObject(
-            "MyCube");
+            "prefabs/mycube");
         GameObject go1 = gg1.Get();
 
         AssetGetter ag2 = ResourceManager.GetInstance().LoadAsset(
-            "MyMaterial");
-
+            "materials/mymaterial");
         Material m = ag2.Get<Material>(gameObject);
 
         GameObjectGetter gg2 = ResourceManager.GetInstance().LoadGameObject(
-            "MyCube-Parent");
+            "prefabs/mycube-parent");
         GameObject go2 = gg2.Get();
+
+        ag1.Release(gameObject);
+        gg1.Release(go1);
+        ag2.Release(gameObject);
+        gg2.Release(go2);
+
+        ResourceManager.GetInstance().RealseAllUnUse();
 
         yield return new WaitForSeconds(10);
         yield return null;

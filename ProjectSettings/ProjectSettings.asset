@@ -518,7 +518,7 @@ PlayerSettings:
   webGLUseWasm: 0
   webGLCompressionFormat: 1
   scriptingDefineSymbols:
-    1: ASYNC_MODE
+    1: ASYNC_MODE;RES_AB
     4: ASYNC_MODE
     7: ASYNC_MODE
   platformArchitecture:

@@ -45,17 +45,14 @@ namespace UFrame.ResourceManagement
                 case E_LoadAsset.LoadSingle:
                     int index = assetName.LastIndexOf("/");
                     string assetNameInBundle = assetName.Substring(index + 1);
-                    Debug.LogError(assetName + " " + assetNameInBundle);
+                    //Debug.LogError(assetName + " " + assetNameInBundle);
 
-                    //assetHolder = new AssetHolder(bundle.LoadAsset(assetName));
                     assetHolder = new AssetHolder(bundle.LoadAsset(assetNameInBundle));
                     break;
                 case E_LoadAsset.LoadAll:
                     assetHolder = new AssetHolder(bundle.LoadAllAssets());
                     break;
             }
-            //新建AssetHolder
-            //AssetHolder assetHolder = new AssetHolder(obj);
             getter.SetAssetHolder(assetHolder);
 
             nameAssetHolders.Add(assetName, assetHolder);
