@@ -2,3 +2,5 @@ unity_study2019.csproj
 unity_study2019.Editor.csproj
 unity_study2019.sln
 Library
+test
+__pycache__
