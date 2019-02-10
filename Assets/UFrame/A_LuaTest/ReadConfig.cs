@@ -28,6 +28,7 @@ public class ReadConfig : MonoBehaviour {
         LuaTable table2 = table[1] as LuaTable;
         //Debug.LogError(table2["id"]);
         //Debug.LogError(table2["diff_name"]);
+        
         LuaDictTable dict = table.ToDictTable();
         foreach (var kv in dict)
         {
@@ -48,10 +49,12 @@ public class ReadConfig : MonoBehaviour {
         //TestBattleConfig();
 
         LuaTable tsheet = LuaManager.Instance.luaState.GetTable("config_sheet1");
+        
         LuaDictTable dsheet = tsheet.ToDictTable();
         foreach (var kv in dsheet)
         {
             //Debug.LogError("dsheet  " + kv.Key);
+            
             LuaTable tfield3 = (kv.Value as LuaTable)["field3"] as LuaTable;
             LuaArrayTable afield3 = tfield3.ToArrayTable();
             //afield3.ForEach((obj) => { Debug.LogError("obj " + System.Convert.ToInt32(obj)); });

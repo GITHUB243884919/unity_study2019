@@ -23,8 +23,6 @@ namespace UFrame.LUA
                 Collect(i, v[i]);
             }
             v.Dispose();
-
-
         }
 
         // LuaArrayTable的索引是从1开始的，这里要对索引减1
