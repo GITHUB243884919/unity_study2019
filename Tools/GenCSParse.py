@@ -75,10 +75,10 @@ dao_int_context = """
 			data.%s = System.Convert.ToInt32(tableData["%s"]);"""
 
 dao_float_context = """
-			data.%s = tableData["%s"] as float;"""
+			data.%s = System.Convert.ToSingle(tableData["%s"]);"""
 
 dao_double_context = """
-			data.%s = tableData["%s"] as double;"""
+			data.%s = System.Convert.ToDouble(tableData["%s"]);"""
 
 dao_string_context = """
 			data.%s = tableData["%s"] as string;"""
