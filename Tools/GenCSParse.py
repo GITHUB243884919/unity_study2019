@@ -14,7 +14,7 @@ using %s;
 
 namespace %s
 {
-    public class $classname$Parse : LuaDaoBase <$classname$>
+    public class $classname$Parse : LuaConfigBase <$classname$>
     {
         public override void AddPrimaryIndex ($classname$ model)
         {
@@ -26,7 +26,7 @@ namespace %s
             return "%s";
         }
 
-        protected override $classname$ ParseLuaTableData (string key, LuaTable tableData)
+        protected override $classname$ ParseLuaTableData (LuaTable tableData)
         {
             $classname$ data = new $classname$ ();
 %s
@@ -87,7 +87,7 @@ dao_arr_context = """
 			data.%s = new ArrayData (LuaTableToArrayParam (tableData["%s"] as LuaTable));"""
 
 def Gen(dir, sheetName, name_row, type_row, col_num, charp_model_namespace, charp_dao_namespace, parseFiles):
-	lua_config_file_name = "config_" + sheetName
+	lua_config_file_name = "config_" + sheetName.lower()
 	className = sheetName + "Parse"
 
 	file_context = dao_file_context.replace("$classname$", sheetName);

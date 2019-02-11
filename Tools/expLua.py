@@ -274,7 +274,7 @@ def WriteLuaInit(filePath):
         shutil.copy(writeFilePath,copyDir+'/'+writeFileNames[index])
         fname = writeFileNames[index].split(".")[0]
 
-        ret =  "config_"+fname + ' = require "config/' + fname + '"' + "\n"
+        ret =  "config_"+fname + ' = require "' + fname + '"' + "\n"
         writeFile(fileOpen,ret)
 
         index = index + 1
