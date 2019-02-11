@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using LuaInterface;
 using UFrame.LUA;
-using GameName.Lua.Config;
 
 namespace GameName.Lua.Config
 {

@@ -10,7 +10,6 @@ dao_file_context = """using System;
 using System.Collections.Generic;
 using LuaInterface;
 using UFrame.LUA;
-using %s;
 
 namespace %s
 {
@@ -129,7 +128,8 @@ def Gen(dir, sheetName, name_row, type_row, col_num, charp_model_namespace, char
 	#if len(key_word_array) > 0:
 	#	help_param_code = cache_tmp + (dao_buildindex_context % (build_index_sub_tmp))
 
-	final_result = file_context % (charp_model_namespace, charp_dao_namespace, name_row[0], lua_config_file_name, context, help_param_code)
+	#final_result = file_context % (charp_model_namespace, charp_dao_namespace, name_row[0], lua_config_file_name, context, help_param_code)
+	final_result = file_context % (charp_dao_namespace, name_row[0], lua_config_file_name, context, help_param_code)
 	filePath = dir + "/" + className + ".cs"
     
 	fp = codecs.open(filePath, "w", "utf_8")

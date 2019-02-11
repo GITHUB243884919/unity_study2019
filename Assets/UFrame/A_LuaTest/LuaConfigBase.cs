@@ -17,7 +17,7 @@ namespace UFrame.LUA
     /// 7.c#总配置表加载代码生成
     /// *8.ParseLuaTableData的参数key可以去掉
     /// 9.tolua dispose
-    /// 10.parse代码去掉一个namespace
+    /// *10.parse代码去掉一个namespace
     /// </summary>
     /// <typeparam name="T"></typeparam>
 	public abstract class LuaConfigBase<T> where T : new()
