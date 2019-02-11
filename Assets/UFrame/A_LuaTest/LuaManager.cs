@@ -35,8 +35,11 @@ namespace UFrame.LUA
             luaState.LuaSetTop(0);
             Bind();
 
-            string fullPath = Application.dataPath + "/UFrame/A_LuaTest";
-            luaState.AddSearchPath(fullPath);
+            string testPath = Application.dataPath + "/UFrame/A_LuaTest";
+            luaState.AddSearchPath(testPath);
+
+            string configPath = Application.dataPath + "/GameResources/lua/config";
+            luaState.AddSearchPath(configPath);
 
             luaState.Start();
 

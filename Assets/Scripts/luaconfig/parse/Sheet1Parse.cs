@@ -6,7 +6,7 @@ using GameName.Lua.Config;
 
 namespace GameName.Lua.Config
 {
-    public class Sheet1Parse : LuaDaoBase <Sheet1>
+    public class Sheet1Parse : LuaConfigBase <Sheet1>
     {
         public override void AddPrimaryIndex (Sheet1 model)
         {
@@ -15,10 +15,10 @@ namespace GameName.Lua.Config
 
         protected override string GetLuaFileName ()
         {
-            return "config_Sheet1";
+            return "config_sheet1";
         }
 
-        protected override Sheet1 ParseLuaTableData (string key, LuaTable tableData)
+        protected override Sheet1 ParseLuaTableData (LuaTable tableData)
         {
             Sheet1 data = new Sheet1 ();
 

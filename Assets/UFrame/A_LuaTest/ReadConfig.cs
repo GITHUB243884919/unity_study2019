@@ -68,14 +68,19 @@ public class ReadConfig : MonoBehaviour {
 
     void TestAutoGen2()
     {
-        TEST_Sheet1Parse sheet1Parse = new TEST_Sheet1Parse();
+        TEST_Sheet1Parse testsheet1Parse = new TEST_Sheet1Parse();
+        testsheet1Parse.LoadData();
+
+        Sheet1Parse sheet1Parse = new Sheet1Parse();
         sheet1Parse.LoadData();
     }
 
     // Use this for initialization
     void Start () {
         LuaManager.Instance.Init();
-        LuaManager.Instance.luaState.DoFile("init_config");
+        //LuaManager.Instance.luaState.DoFile("init_config");
+        LuaManager.Instance.luaState.DoFile("init_lua_config");
+        
 
         //TestBattleConfig();
 
