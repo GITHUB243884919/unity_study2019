@@ -86,7 +86,7 @@ dao_string_context = """
 dao_arr_context = """
 			data.%s = new ArrayData (LuaTableToArrayParam (tableData["%s"] as LuaTable));"""
 
-def Gen(dir, sheetName, name_row, type_row, col_num, charp_model_namespace, charp_dao_namespace, cs_file_copy_abs_path):
+def Gen(dir, sheetName, name_row, type_row, col_num, charp_model_namespace, charp_dao_namespace, parseFiles):
 	lua_config_file_name = "config_" + sheetName
 	className = sheetName + "Parse"
 
@@ -130,13 +130,10 @@ def Gen(dir, sheetName, name_row, type_row, col_num, charp_model_namespace, char
 	#	help_param_code = cache_tmp + (dao_buildindex_context % (build_index_sub_tmp))
 
 	final_result = file_context % (charp_model_namespace, charp_dao_namespace, name_row[0], lua_config_file_name, context, help_param_code)
-
-	#if (os.path.exists("Dao") == False):
-	#	os.mkdir("Dao")
-	fp = codecs.open(dir + "/" + className + ".cs", "w", "utf_8")
+	filePath = dir + "/" + className + ".cs"
+    
+	fp = codecs.open(filePath, "w", "utf_8")
 	fp.write(final_result)
 	fp.close()
+	parseFiles.append(filePath)
 
-	#fp = codecs.open(cs_file_copy_abs_path + "/Dao/" + className + ".cs", "w", "utf_8")
-	#fp.write(final_result)
-	#fp.close()

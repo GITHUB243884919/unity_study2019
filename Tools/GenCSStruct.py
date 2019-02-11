@@ -34,7 +34,7 @@ tostringContext ="""
     		+"\t%s:"+%s
 """
 
-def Gen(dir, sheetName, name_row, desc_row, type_row, col_num, nameSpace, cs_file_copy_abs_path):
+def Gen(dir, sheetName, name_row, desc_row, type_row, col_num, nameSpace, structFiles):
     fieldText = ""
     className = sheetName
     toStringText = """
@@ -66,7 +66,12 @@ def Gen(dir, sheetName, name_row, desc_row, type_row, col_num, nameSpace, cs_fil
             fieldText += fieldContext % (desc_row[i], "ArrayData", var_name)
 
     writeContext = fileContext % (nameSpace, className, fieldText, toStringText)
-
-    fp = codecs.open(dir + "/" + className + ".cs", "w", "utf_8")
+    
+    filePath = dir + "/" + className + ".cs"
+    fp = codecs.open(filePath, "w", "utf_8")
     fp.write(writeContext)
     fp.close()
+    
+    #global structFiles
+    structFiles.append(filePath)
+    

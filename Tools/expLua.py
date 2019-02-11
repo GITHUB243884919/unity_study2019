@@ -14,8 +14,8 @@ import operator
 
 ##param##
 xlsDir = os.getcwd()  # xls所在目录
-outDir = "lua"  # 输出目录
-copyDir = os.getcwd()+"/../Client/Assets/GameResources/lua/config"
+outDir = "lua/config"  # 输出目录
+copyDir = "../Assets/GameResources/lua/config"
 splitStr = "&&"  # 数组分隔符
 bErrorFlag = False  # 解析有错
 
@@ -265,20 +265,22 @@ def GetData(cellValue, strType):
 def WriteLuaInit(filePath):
     global writeFileNames
     fileOpen = openFileByAdd(filePath+'/init_lua_config.lua')
-    ret = 'config = {};local m = config;local g = _G;local rawget = rawget;local rawset = rawset;_ENV = setmetatable({},{__index = function(t,k) return rawget(m,k) or rawget(g,k) end,__newindex = m});\r\n'
+    ret = 'config = {};local m = config;local g = _G;local rawget = rawget;local rawset = rawset;_ENV = setmetatable({},{__index = function(t,k) return rawget(m,k) or rawget(g,k) end,__newindex = m});\n'
     writeFile(fileOpen,ret)
     index = 0
     for writeFilePath in writeFilePaths:
         print (writeFilePath)
 
-        #shutil.copy(writeFilePath,copyDir+'/'+writeFileNames[index])
+        shutil.copy(writeFilePath,copyDir+'/'+writeFileNames[index])
         fname = writeFileNames[index].split(".")[0]
 
-        ret =  "config_"+fname + ' = require "config/' + fname + '"' + "\r\n\n"
+        ret =  "config_"+fname + ' = require "config/' + fname + '"' + "\n"
         writeFile(fileOpen,ret)
 
         index = index + 1
     closeFile(fileOpen)
+    shutil.copy(filePath+'/init_lua_config.lua',copyDir+'/'+'init_lua_config.lua')
+    
     
 def main(argv):
     print ("=======================================================")
