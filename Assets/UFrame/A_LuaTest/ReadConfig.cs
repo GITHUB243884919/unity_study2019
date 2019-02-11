@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using LuaInterface;
 using UFrame.LUA;
+using GameName.Lua.Config;
 
 public class ReadConfig : MonoBehaviour {
 
@@ -41,20 +42,16 @@ public class ReadConfig : MonoBehaviour {
             }
         }
     }
-    // Use this for initialization
-    void Start () {
-        LuaManager.Instance.Init();
-        LuaManager.Instance.luaState.DoFile("init_config");
 
-        //TestBattleConfig();
-
+    void TestAutoGen()
+    {
         LuaTable tsheet = LuaManager.Instance.luaState.GetTable("config_sheet1");
-        
+
         LuaDictTable dsheet = tsheet.ToDictTable();
         foreach (var kv in dsheet)
         {
             //Debug.LogError("dsheet  " + kv.Key);
-            
+
             LuaTable tfield3 = (kv.Value as LuaTable)["field3"] as LuaTable;
             LuaArrayTable afield3 = tfield3.ToArrayTable();
             //afield3.ForEach((obj) => { Debug.LogError("obj " + System.Convert.ToInt32(obj)); });
@@ -67,6 +64,24 @@ public class ReadConfig : MonoBehaviour {
             Debug.LogError("ad " + ad.GetString(0));
 
         }
+    }
+
+    void TestAutoGen2()
+    {
+        TEST_Sheet1Parse sheet1Parse = new TEST_Sheet1Parse();
+        sheet1Parse.LoadData();
+    }
+
+    // Use this for initialization
+    void Start () {
+        LuaManager.Instance.Init();
+        LuaManager.Instance.luaState.DoFile("init_config");
+
+        //TestBattleConfig();
+
+        //TestAutoGen();
+
+        TestAutoGen2();
 
     }
 
