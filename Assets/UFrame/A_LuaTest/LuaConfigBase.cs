@@ -11,7 +11,7 @@ namespace UFrame.LUA
     /// *1.lua 和c#代码生成后copy到项目目录
     /// *2.GetLuaFileName() 里lua名称小写
     /// *3.lua初始化表要改成元表形式涉及GetConfigLuaTable
-    /// 4.文件改名去Dao
+    /// *4.文件改名去Dao
     /// 5.增加额外索引c#代码生成
     /// 6.取数据API，原来的blo的c#代码生成
     /// 7.c#总配置表加载代码生成

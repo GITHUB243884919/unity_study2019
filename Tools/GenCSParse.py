@@ -15,9 +15,9 @@ namespace %s
 {
     public class $classname$Parse : LuaConfigBase <$classname$>
     {
-        public override void AddPrimaryIndex ($classname$ model)
+        public override void AddPrimaryIndex ($classname$ v)
         {
-            cachePrimary[model.%s.ToString ()] = model;
+            cachePrimary[v.%s.ToString ()] = v;
         }
 
         protected override string GetLuaFileName ()

@@ -7,9 +7,9 @@ namespace GameName.Lua.Config
 {
     public class TEST_Sheet1Parse : LuaConfigBase <TEST_Sheet1>
     {
-        public override void AddPrimaryIndex (TEST_Sheet1 model)
+        public override void AddPrimaryIndex (TEST_Sheet1 v)
         {
-            cachePrimary[model.id.ToString ()] = model;
+            cachePrimary[v.id.ToString ()] = v;
         }
 
         protected override string GetLuaFileName ()
