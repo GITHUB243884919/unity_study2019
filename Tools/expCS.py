@@ -10,6 +10,7 @@ import shutil
 import operator
 import GenCSStruct
 import GenCSParse
+import GenCSDataManager
 
 xlsDir = os.getcwd()
 outDir = "luaconfig"
@@ -84,6 +85,8 @@ def main(argv):
     for var in parseFiles:
         print("parse files " + var);        
         shutil.copy(var, copyDir + '/'+ var)
+    print("gen manager")
+    GenCSDataManager.Gen("luaconfig/", parseFiles, namespace, namespace)
     GenInitCode()
    
 if __name__ == '__main__':
