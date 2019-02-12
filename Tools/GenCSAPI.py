@@ -4,21 +4,18 @@ import xlrd
 import codecs
 import shutil
 
-blo_file_context = """using System;
+blo_file_context = """
+//Auto Generate
+using System;
 using System.Collections.Generic;
-using %s;
 
 namespace %s
 {
-    public partial class Dict$classname$Blo
+    public partial class $classname$API
     {
-	    /// <summary>
-	    /// Get Data By Dict ID
-		/// Auto Generate
-		/// </summary>
-        public static Dict$classname$ Get$classname$ (string dictId)
+        public static $classname$ Get$classname$ (string dictId)
 		{
-			return Dict.DictDataManager.Instance.%s.GetById (dictId);
+			return LuaConfigManager.Instance.%s.GetById (dictId);
 		}
 
 %s
@@ -51,11 +48,11 @@ blo_getlist_context = """
 		}
 """
 
-def write_sheet_blo(blo_class_name, sheet_name, name_row, type_row, col_num, charp_model_namespace, charp_blo_namespace, cs_file_copy_abs_path):
+def Gen(dir, sheet_name, name_row, type_row, col_num, charp_model_namespace, charp_blo_namespace, apiFiles):
 
-	class_blo_name = "Dict" + blo_class_name + "Blo"
+	class_api_name = sheet_name + "API"
 
-	filecontext = blo_file_context.replace("$classname$", blo_class_name);
+	filecontext = blo_file_context.replace("$classname$", sheet_name);
 
 	get_list_tmp = "";
 
@@ -69,31 +66,33 @@ def write_sheet_blo(blo_class_name, sheet_name, name_row, type_row, col_num, cha
 			continue;
 
 		if (type_row[i] == "int"):
-			get_list_tmp += blo_getlist_context.replace ("$Type$", type_row[i]).replace ("$classname$", "Dict" + blo_class_name).replace ("$paramname$", var_name)
+			get_list_tmp += blo_getlist_context.replace ("$Type$", type_row[i]).replace ("$classname$", sheet_name).replace ("$paramname$", var_name)
 		elif (type_row[i] == "float"):
-			get_list_tmp += blo_getlist_context.replace ("$Type$", type_row[i]).replace ("$classname$", "Dict" + blo_class_name).replace ("$paramname$", var_name)
+			get_list_tmp += blo_getlist_context.replace ("$Type$", type_row[i]).replace ("$classname$", sheet_name).replace ("$paramname$", var_name)
 		elif (type_row[i] == "double"):
-			get_list_tmp += blo_getlist_context.replace ("$Type$", type_row[i]).replace ("$classname$", "Dict" + blo_class_name).replace ("$paramname$", var_name)
+			get_list_tmp += blo_getlist_context.replace ("$Type$", type_row[i]).replace ("$classname$", sheet_name).replace ("$paramname$", var_name)
 		elif (type_row[i] == "string"):
-			get_list_tmp += blo_getlist_context.replace ("$Type$", type_row[i]).replace ("$classname$", "Dict" + blo_class_name).replace ("$paramname$", var_name)
+			get_list_tmp += blo_getlist_context.replace ("$Type$", type_row[i]).replace ("$classname$", sheet_name).replace ("$paramname$", var_name)
 		elif (type_row[i] == "array"):
 			continue;
 		else:
 			continue;
 
 
-	classnames = "Dict" + blo_class_name + "Dao"
+	classnames = sheet_name + "Parse"
 	valueNames = classnames[:1].lower() + classnames[1:]
 
-	final_result = filecontext % (charp_model_namespace, charp_blo_namespace, valueNames, get_list_tmp)
+	final_result = filecontext % (charp_blo_namespace, valueNames, get_list_tmp)
 
-	if (os.path.exists("Blo") == False):
-		os.mkdir("Blo")
-	fp = codecs.open("Blo/" + class_blo_name + ".cs", "w", "utf_8")
+	#if (os.path.exists("Blo") == False):
+	#	os.mkdir("Blo")
+	filePath = dir + "/" + class_api_name + ".cs"    
+	apiFiles.append(filePath)
+	fp = codecs.open(filePath, "w", "utf_8")
 	fp.write(final_result)
 	fp.close()
 
-	fp = codecs.open(cs_file_copy_abs_path + "/Blo/" + class_blo_name + ".cs", "w", "utf_8")
-	fp.write(final_result)
-	fp.close()
+	#fp = codecs.open(cs_file_copy_abs_path + "/Blo/" + class_blo_name + ".cs", "w", "utf_8")
+	#fp.write(final_result)
+	#fp.close()
 

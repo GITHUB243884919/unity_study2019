@@ -14,7 +14,7 @@ namespace UFrame.LUA
     /// *4.文件改名去Dao
     /// 5.增加额外索引c#代码生成
     /// 6.取数据API，原来的blo的c#代码生成
-    /// 7.c#总配置表加载代码生成
+    /// *7.c#总配置表加载代码生成
     /// *8.ParseLuaTableData的参数key可以去掉
     /// 9.tolua dispose
     /// *10.parse代码去掉一个namespace

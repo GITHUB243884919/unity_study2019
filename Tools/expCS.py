@@ -10,6 +10,7 @@ import shutil
 import operator
 import GenCSStruct
 import GenCSParse
+import GenCSAPI
 import GenCSDataManager
 
 xlsDir = os.getcwd()
@@ -64,11 +65,16 @@ def GenCode(fileName):
         nameRow = sheet.row_values(0)
         descRow = sheet.row_values(1)
         typeRow = sheet.row_values(2)
+        
         print("gen " + sheet.name + "'s struct file " + sheet.name + ".cs")
         GenCSStruct.Gen(structDir, sheet.name, nameRow, descRow, typeRow, ncols, namespace, structFiles)
+        
         print("gen " + sheet.name + "'s parse file " + sheet.name + "parse" + ".cs")
         GenCSParse.Gen(parseDir, sheet.name, nameRow, typeRow, ncols, namespace, namespace, parseFiles)
-    
+        
+        print("gen " + sheet.name + "'s api file " + sheet.name + "API" + ".cs")
+        print(apiDir)
+        GenCSAPI.Gen(apiDir, sheet.name, nameRow, typeRow, ncols, namespace, namespace, apiFiles)
 
     
 def main(argv):
@@ -85,8 +91,15 @@ def main(argv):
     for var in parseFiles:
         print("parse files " + var);        
         shutil.copy(var, copyDir + '/'+ var)
+    
+    for var in apiFiles:
+        print("api files " + var);        
+        shutil.copy(var, copyDir + '/'+ var)    
+        
     print("gen manager")
     GenCSDataManager.Gen("luaconfig/", parseFiles, namespace, namespace)
+    shutil.copy("luaconfig/LuaConfigManager.cs", copyDir + outDir + "/" + "LuaConfigManager.cs")
+    
     GenInitCode()
    
 if __name__ == '__main__':

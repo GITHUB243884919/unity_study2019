@@ -12,19 +12,19 @@ using System.Collections.Generic;
 
 namespace %s
 {
-    public class DictDataManager
+    public class LuaConfigManager
     {
     	public static int DictFileNum;
 
-        private static DictDataManager instance = new DictDataManager ();
+        private static LuaConfigManager instance = new LuaConfigManager ();
 
-        public static DictDataManager Instance {
+        public static LuaConfigManager Instance {
             get {
                 return instance;
             }
         }
 
-        private DictDataManager ()
+        private LuaConfigManager ()
         {
         }
 
@@ -102,7 +102,7 @@ def Gen(dir, file_name_list, charp_model_namespace, charp_dao_namespace):
 
 	final_result = manager_file_context % (charp_model_namespace, daos_init_context, daos_init_asyc_context, dao_context)
 
-	fp = codecs.open("luaconfig/DictDataManager.cs", "w", "utf_8")
+	fp = codecs.open("luaconfig/LuaConfigManager.cs", "w", "utf_8")
 	fp.write(final_result)
 	fp.close()
 
