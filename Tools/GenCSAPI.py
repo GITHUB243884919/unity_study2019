@@ -35,11 +35,34 @@ blo_getlist_context = """
 			}
 			return null;
 		}
+        
+		public static $classname$ GetDataBy_$paramname$ ($Type$ target)
+		{
+			var cacheList = LuaConfigManager.Instance.$CACHE$.CacheList;
+			foreach (var item in cacheList){
+				if (item.$paramname$ == target) {
+					return item;
+				}
+			}
+			return null;
+		}
 
 		public static List<$classname$> GetDataListBy_$paramname$ (List<$classname$> list, $Type$ target)
 		{
 			List<$classname$> res = new List<$classname$> ();
 			foreach (var item in list){
+				if (item.$paramname$ == target) {
+					res.Add (item);
+				}
+			}
+			return res;
+		}
+
+		public static List<$classname$> GetDataListBy_$paramname$ ($Type$ target)
+		{
+			var cacheList = LuaConfigManager.Instance.$CACHE$.CacheList;
+			List<$classname$> res = new List<$classname$> ();
+			foreach (var item in cacheList){
 				if (item.$paramname$ == target) {
 					res.Add (item);
 				}
@@ -81,8 +104,10 @@ def Gen(dir, sheet_name, name_row, type_row, col_num, charp_model_namespace, cha
 
 	classnames = sheet_name + "Parse"
 	valueNames = classnames[:1].lower() + classnames[1:]
-
-	final_result = filecontext % (charp_blo_namespace, valueNames, get_list_tmp)
+	#print(valueNames)
+	#print(get_list_tmp)
+	get_list_tmp2 = get_list_tmp.replace("$CACHE$", valueNames)
+	final_result = filecontext % (charp_blo_namespace, valueNames, get_list_tmp2)
 
 	#if (os.path.exists("Blo") == False):
 	#	os.mkdir("Blo")
