@@ -45,12 +45,12 @@ public class TestRes : MonoBehaviour
             "prefabs/mycube-parent");
         GameObject go2 = gg2.Get();
 
-        ag1.Release(gameObject);
-        gg1.Release(go1);
-        ag2.Release(gameObject);
-        gg2.Release(go2);
+        //ag1.Release(gameObject);
+        //gg1.Release(go1);
+        //ag2.Release(gameObject);
+        //gg2.Release(go2);
 
-        ResourceManager.GetInstance().RealseAllUnUse();
+        //ResourceManager.GetInstance().RealseAllUnUse();
 
         yield return new WaitForSeconds(10);
         yield return null;
