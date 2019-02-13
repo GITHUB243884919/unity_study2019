@@ -56,14 +56,20 @@ namespace UFrame.FSM
 
             return newState;
         }
+
+        public virtual void Realse()
+        {
+            fsmCtr = null;
+            preStateName = null;
+        }
     }
 
     public class FSMMachine
     {
         Dictionary<string, FSMState> states = new Dictionary<string, FSMState>();
-
         FSMState currState;
         string preStateName;
+
         public void AddState(FSMState state)
         {
             states.Add(state.stateName, state);
@@ -75,14 +81,16 @@ namespace UFrame.FSM
             {
                 currState = states[stateName];
             }
-            
         }
 
-        public void GoToState(string stateName)
+        public void GotoState(string stateName)
         {
-            
             if (currState != null)
             {
+                if (currState.stateName == stateName)
+                {
+                    return;
+                }
                 preStateName = currState.stateName;
                 currState.Leave();
             }
@@ -99,10 +107,29 @@ namespace UFrame.FSM
                 string newState = currState.ChangeState();
                 if (!string.IsNullOrEmpty(newState))
                 {
-                    GoToState(newState);
+                    GotoState(newState);
                 }
-                
             }
+        }
+
+        public void Stop()
+        {
+            if (currState != null)
+            {
+                currState.Leave();
+                currState = null;
+            }
+        }
+
+        public virtual void Realse()
+        {
+            Stop();
+            foreach(var v in states.Values)
+            {
+                v.Realse();
+            }
+            states.Clear();
+            preStateName = null;
         }
     }
 

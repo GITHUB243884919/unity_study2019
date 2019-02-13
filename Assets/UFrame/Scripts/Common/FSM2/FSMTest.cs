@@ -40,6 +40,7 @@ public class FSMState1 : FSMState
     {
 
     }
+
 }
 
 public class FSMState2 : FSMState
@@ -53,6 +54,7 @@ public class FSMState2 : FSMState
     {
         
     }
+
 
     public override void Tick(int deltaTimeMS)
     {
@@ -94,7 +96,7 @@ public class FSMTest : MonoBehaviour {
         state2 = new FSMState2("state2", machine);
         machine.AddState(state1);
         machine.AddState(state2);
-        machine.GoToState("state1");
+        machine.GotoState("state1");
     }
 	
 	// Update is called once per frame
