@@ -5,19 +5,19 @@ using UnityEngine;
 
 namespace UFrame.ResourceManagement
 {
-    public partial class BundleLoader : ResourceLoader
+    public partial class BundleLoader : IResourceLoader
     {
-        public override AssetGetter LoadAllAssets(string assetName)
+        public  AssetGetter LoadAllAssets(string assetName)
         {
             return LoadAsset<AssetGetter>(assetName, E_LoadAsset.LoadAll);
         }
 
-        public override GameObjectGetter LoadGameObject(string assetName)
+        public  GameObjectGetter LoadGameObject(string assetName)
         {
             return LoadAsset<GameObjectGetter>(assetName, E_LoadAsset.LoadSingle);
         }
 
-        public override AssetGetter LoadAsset(string assetName)
+        public  AssetGetter LoadAsset(string assetName)
         {
             return LoadAsset<AssetGetter>(assetName, E_LoadAsset.LoadSingle);
         }

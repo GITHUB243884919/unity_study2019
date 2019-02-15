@@ -25,7 +25,7 @@ public class BattleDisplay : IMessageExecutor
             {
 
                 tank_info ti = tank_infoAPI.GetDataBy_tank_type(initMsg.tankGroup[i].tank_type);
-                GameObjectGetter tankGetter = ResourceManager.GetInstance().LoadGameObject(ti.res_path);
+                GameObjectGetter tankGetter = ResHelper.LoadGameObject(ti.res_path);
                 GameObject tank = tankGetter.Get();
                 tanks.Add(i, tank);
             }

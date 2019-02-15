@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace UFrame.ResourceManagement
 {
-    public partial class AssetDatabaseLoader : ResourceLoader
+    public partial class AssetDatabaseLoader : IResourceLoader
     {
         /// <summary>
         /// 不带扩展名-带扩展名
@@ -19,7 +19,7 @@ namespace UFrame.ResourceManagement
         //}
 
 
-        public override void Init()
+        public void Init()
         {
             //instance = this;
             LoadFileMap();
@@ -69,7 +69,7 @@ namespace UFrame.ResourceManagement
 
         //同步
 
-        public override AssetGetter LoadAsset(string assetPath)
+        public  AssetGetter LoadAsset(string assetPath)
         {
             string loadPath = GetAssetPathWithExtend(assetPath.ToLower());
             Object obj = AssetDatabase.LoadAssetAtPath<Object>(loadPath);
@@ -79,7 +79,7 @@ namespace UFrame.ResourceManagement
             return getter;
         }
 
-        public override AssetGetter LoadAllAssets(string assetPath)
+        public  AssetGetter LoadAllAssets(string assetPath)
         {
             string loadPath = GetAssetPathWithExtend(assetPath.ToLower());
 
@@ -109,7 +109,7 @@ namespace UFrame.ResourceManagement
             return getter;
         }
 
-        public override GameObjectGetter LoadGameObject(string assetPath)
+        public  GameObjectGetter LoadGameObject(string assetPath)
         {
             string loadPath = GetAssetPathWithExtend(assetPath.ToLower());
             GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(loadPath);
@@ -122,7 +122,7 @@ namespace UFrame.ResourceManagement
 
         //异步
 
-        public override void LoadAssetAsync(string assetPath, System.Action<AssetGetter> callback)
+        public  void LoadAssetAsync(string assetPath, System.Action<AssetGetter> callback)
         {
             string loadPath = GetAssetPathWithExtend(assetPath.ToLower());
             Object obj = AssetDatabase.LoadAssetAtPath<Object>(loadPath);
@@ -132,7 +132,7 @@ namespace UFrame.ResourceManagement
             callback(getter);
         }
 
-        public override void LoadAllAssetsAsync(string assetPath, System.Action<AssetGetter> callback)
+        public  void LoadAllAssetsAsync(string assetPath, System.Action<AssetGetter> callback)
         {
             string loadPath = GetAssetPathWithExtend(assetPath.ToLower());
             Object[] objs = AssetDatabase.LoadAllAssetsAtPath(loadPath);
@@ -142,7 +142,7 @@ namespace UFrame.ResourceManagement
             callback(getter);
         }
 
-        public override void LoadGameObjectAsync(string assetPath, System.Action<GameObjectGetter> callback)
+        public  void LoadGameObjectAsync(string assetPath, System.Action<GameObjectGetter> callback)
         {
             string loadPath = GetAssetPathWithExtend(assetPath.ToLower());
             GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(loadPath);
@@ -153,27 +153,27 @@ namespace UFrame.ResourceManagement
             callback(getter);
         }
 
-        public override void RealseAllUnUse()
+        public  void RealseAllUnUse()
         {
 
         }
 
-        public override void DestroyGameObject(GameObject go)
+        public  void DestroyGameObject(GameObject go)
         {
             GameObject.Destroy(go);
         }
 
-        public override void RealseAsset(AssetHolder assetHolder, GameObject go)
+        public  void RealseAsset(AssetHolder assetHolder, GameObject go)
         {
 
         }
 
-        public override void AddGameObjectAssetHolder(GameObject go, AssetHolder assetHolder)
+        public  void AddGameObjectAssetHolder(GameObject go, AssetHolder assetHolder)
         {
 
         }
 
-        public override void RealseAsset(GameObject go)
+        public  void RealseAsset(GameObject go)
         {
         }
     }

@@ -22,11 +22,11 @@ namespace UFrame.ResourceManagement
             return go;
         }
 
-        public void Release(GameObject go)
-        {
-            ResourceManager.GetInstance().DestroyGameObject(go);
-            assetHolder = null;
-        }
+        //public void Release(GameObject go)
+        //{
+        //    ResourceManager.GetInstance().DestroyGameObject(go);
+        //    assetHolder = null;
+        //}
 
     }
 

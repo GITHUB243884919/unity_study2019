@@ -26,7 +26,7 @@ namespace UFrame.ResourceManagement
     /// 所有的资源目录，名称只能小写，用下划线分隔，安卓和ios大小写敏感，容易在PC上没事，换到移动平台出问题
     /// 
     /// </summary>
-    public partial class BundleLoader : ResourceLoader
+    public partial class BundleLoader : IResourceLoader
     {
         AssetBundleManifest manifest;
 
@@ -66,7 +66,7 @@ namespace UFrame.ResourceManagement
             LoadAll,
         }
 
-        public override void Init()
+        public  void Init()
         {
             innerBundleRootPath = Application.streamingAssetsPath + "/Bundles/";
             outerBundleRootPath = Application.persistentDataPath + "/Bundles/";
@@ -143,7 +143,7 @@ namespace UFrame.ResourceManagement
         /// 2.把引用计数为0的资源引用取出。本类的DestroyXX减少资源引用计数。
         /// 3.然后看看是否能把对应的bundle能释放 
         /// </summary>
-        public override void RealseAllUnUse()
+        public  void RealseAllUnUse()
         {
             unUseGameObject.Clear();
             bool could = true;
@@ -215,7 +215,7 @@ namespace UFrame.ResourceManagement
             }
         }
 
-        public override void DestroyGameObject(GameObject go)
+        public  void DestroyGameObject(GameObject go)
         {
             //1.去资源引用
             foreach (var item in goAssetHolders[go])
@@ -232,7 +232,7 @@ namespace UFrame.ResourceManagement
             GameObject.Destroy(go);
         }
 
-        public override void RealseAsset(AssetHolder assetHolder, GameObject go)
+        public  void RealseAsset(AssetHolder assetHolder, GameObject go)
         {
             ////1.去资源引用
             //assetHolder.RemoveRefence(go);
@@ -256,7 +256,7 @@ namespace UFrame.ResourceManagement
 
         }
 
-        public override void RealseAsset(GameObject go)
+        public  void RealseAsset(GameObject go)
         {
             //1.去资源引用
             HashSet<AssetHolder> assetHolders = null;
@@ -279,7 +279,7 @@ namespace UFrame.ResourceManagement
         /// </summary>
         /// <param name="go"></param>
         /// <param name="assetHolder"></param>
-        public override void AddGameObjectAssetHolder(GameObject go, AssetHolder assetHolder)
+        public  void AddGameObjectAssetHolder(GameObject go, AssetHolder assetHolder)
         {
             //记录资源引用
             assetHolder.AddRefence(go);

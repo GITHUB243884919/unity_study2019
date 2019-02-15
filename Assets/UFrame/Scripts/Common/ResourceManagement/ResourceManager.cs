@@ -8,7 +8,7 @@ namespace UFrame.ResourceManagement
     {
         static ResourceManager instance;
         
-        ResourceLoader resLoader;
+        IResourceLoader resLoader;
 
         public static ResourceManager GetInstance()
         {

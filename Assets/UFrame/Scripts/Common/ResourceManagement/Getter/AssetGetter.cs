@@ -27,11 +27,11 @@ namespace UFrame.ResourceManagement
             return obj;
         }
 
-        public void Release(GameObject go)
-        {
-            ResourceManager.GetInstance().RealseAsset(assetHolder, go);
-            assetHolder = null;
-        }
+        //public void Release(GameObject go)
+        //{
+        //    ResourceManager.GetInstance().RealseAsset(assetHolder, go);
+        //    assetHolder = null;
+        //}
     }
 
 }

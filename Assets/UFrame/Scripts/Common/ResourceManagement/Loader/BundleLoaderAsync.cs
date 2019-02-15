@@ -6,7 +6,7 @@ using UnityEngine;
 namespace UFrame.ResourceManagement
 {
 
-    public partial class BundleLoader : ResourceLoader
+    public partial class BundleLoader : IResourceLoader
     {
         #region 异步
         public class BundleAsyncRequest
@@ -26,17 +26,17 @@ namespace UFrame.ResourceManagement
 
         Queue<BundleAsyncRequest> bundleAsyncs = new Queue<BundleAsyncRequest>();
 
-        public override void LoadAssetAsync(string assetName, System.Action<AssetGetter> callback)
+        public  void LoadAssetAsync(string assetName, System.Action<AssetGetter> callback)
         {
             LoadAssetAsync<AssetGetter>(assetName, E_LoadAsset.LoadSingle, callback);
         }
 
-        public override void LoadGameObjectAsync(string assetName, System.Action<GameObjectGetter> callback)
+        public  void LoadGameObjectAsync(string assetName, System.Action<GameObjectGetter> callback)
         {
             LoadAssetAsync<GameObjectGetter>(assetName, E_LoadAsset.LoadSingle, callback);
         }
 
-        public override void LoadAllAssetsAsync(string assetName, System.Action<AssetGetter> callback)
+        public  void LoadAllAssetsAsync(string assetName, System.Action<AssetGetter> callback)
         {
             LoadAssetAsync<AssetGetter>(assetName, E_LoadAsset.LoadAll, callback);
         }

@@ -8,7 +8,7 @@ namespace UFrame.ResourceManagement
     {
         void SetAssetHolder(AssetHolder assetholder);
 
-        void Release(GameObject go);
+        //void Release(GameObject go);
     }
 
 }
