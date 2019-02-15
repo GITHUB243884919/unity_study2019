@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UFrame.MessageCenter;
+using UFrame.LUA;
+using GameName.Lua.Config;
 
 public class BattleManager : MonoBehaviour {
 
@@ -12,11 +14,14 @@ public class BattleManager : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        LuaManager.Instance.Init();
+        LuaManager.Instance.luaState.DoFile("init_lua_config");
+        LuaConfigManager.Instance.Init();
         battleMessageCenter = new DirectMessageCenter();
         battleLogic = new BattleLogic(this);
         battleDisplay = new BattleDisplay(this);
 
-        battleLogic.InitTank();
+        battleLogic.InitBattleStage();
     }
 
 

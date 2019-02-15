@@ -57,6 +57,19 @@ namespace UFrame.LUA
             return defaultValue;
         }
 
+        public double GetFloat(int id, float defaultValue = 0)
+        {
+            try
+            {
+                return System.Convert.ToSingle(Values[id]);
+            }
+            catch
+            {
+
+            }
+            return defaultValue;
+        }
+
         public string GetString(int id, string defaultValue = "")
         {
             try

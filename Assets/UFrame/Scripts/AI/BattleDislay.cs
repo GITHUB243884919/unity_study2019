@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UFrame.MessageCenter;
 using UFrame.ResourceManagement;
+using GameName.Lua.Config;
 
 public class BattleDisplay : IMessageExecutor
 {
@@ -20,9 +21,11 @@ public class BattleDisplay : IMessageExecutor
         if (msg.messageID == (int)BattleMessageID.L2D_BattleInit)
         {
             L2D_BattleInit initMsg = msg as L2D_BattleInit;
-            for (int i = 0; i < initMsg.tanks.Count; ++i)
+            for (int i = 0; i < initMsg.tankGroup.Count; ++i)
             {
-                GameObjectGetter tankGetter = ResourceManager.GetInstance().LoadGameObject("prefabs/tank");
+
+                tank_info ti = tank_infoAPI.GetDataBy_tank_type(initMsg.tankGroup[i].tank_type);
+                GameObjectGetter tankGetter = ResourceManager.GetInstance().LoadGameObject(ti.res_path);
                 GameObject tank = tankGetter.Get();
                 tanks.Add(i, tank);
             }
