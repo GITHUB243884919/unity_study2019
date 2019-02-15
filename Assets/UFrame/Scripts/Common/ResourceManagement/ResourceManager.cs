@@ -79,6 +79,11 @@ namespace UFrame.ResourceManagement
             resLoader.RealseAsset(assetHolder, go);
         }
 
+        public void RealseAsset(GameObject go)
+        {
+            resLoader.RealseAsset(go);
+
+        }
         public void AddGameObjectAssetHolder(GameObject go, AssetHolder assetHolder)
         {
             resLoader.AddGameObjectAssetHolder(go, assetHolder);

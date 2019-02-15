@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 3851535384
+CRC: 2230830443
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -58,3 +58,29 @@ AssetBundleManifest:
     Info_14:
       Name: asset-bundle
       Dependencies: {}
+    Info_15:
+      Name: tanks-scene-bundle
+      Dependencies:
+        Dependency_0: tanks-albedo.normal-hd
+    Info_16:
+      Name: tanks-albedo.desert-hd
+      Dependencies: {}
+    Info_17:
+      Name: tanks-albedo.normal-sd
+      Dependencies: {}
+    Info_18:
+      Name: tanks-albedo.normal-hd
+      Dependencies: {}
+    Info_19:
+      Name: tanks-albedo.desert-sd
+      Dependencies: {}
+    Info_20:
+      Name: banner.english
+      Dependencies: {}
+    Info_21:
+      Name: banner.danish
+      Dependencies: {}
+    Info_22:
+      Name: prefabs/tank
+      Dependencies:
+        Dependency_0: tanks-albedo.normal-hd

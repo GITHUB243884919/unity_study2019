@@ -173,10 +173,9 @@ namespace UFrame.ResourceManagement
 
         }
 
-
-
-
-
+        public override void RealseAsset(GameObject go)
+        {
+        }
     }
 }
 #endif

@@ -1,0 +1,31 @@
+ManifestFileVersion: 0
+CRC: 486165674
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: fb80530c239c6c97f1443c0c99b2dc22
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: d27a9ed7ed5c7a459d780b0a0a375c27
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/GameResources/prefabs/tank.prefab
+Dependencies:
+- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/tanks-albedo.normal-hd

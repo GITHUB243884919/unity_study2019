@@ -23,6 +23,8 @@ namespace UFrame.ResourceManagement
         public abstract void DestroyGameObject(GameObject go);
         public abstract void RealseAsset(AssetHolder assetHolder, GameObject go);
 
+        public abstract void RealseAsset(GameObject go);
+
         public abstract void AddGameObjectAssetHolder(GameObject go, AssetHolder assetHolder);
     }
 }

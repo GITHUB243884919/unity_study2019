@@ -49,8 +49,11 @@ public class TestRes : MonoBehaviour
         //gg1.Release(go1);
         //ag2.Release(gameObject);
         //gg2.Release(go2);
-
-        //ResourceManager.GetInstance().RealseAllUnUse();
+        yield return new WaitForSeconds(5);
+        ResourceManager.GetInstance().DestroyGameObject(go1);
+        ResourceManager.GetInstance().DestroyGameObject(go2);
+        ResourceManager.GetInstance().RealseAsset(gameObject);
+        ResourceManager.GetInstance().RealseAllUnUse();
 
         yield return new WaitForSeconds(10);
         yield return null;

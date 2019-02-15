@@ -3,9 +3,13 @@ textures/unitylogo/unityLogo2,textures/unitylogo
 asset-bundle,asset-bundle
 materials/blue,materials/blue
 materials/red,materials/red
+lua/config/init_lua_config,lua/config/init_lua_config
 materials/mymaterial,materials/mymaterial
 prefabs/mycube,prefabs/mycube
 prefabs/mycube-parent,prefabs/mycube-parent
+lua/config/test_sheet1,lua/config/test_sheet1
 textures/unitylogo/unitylogo,textures/unitylogo
 prefabs/cube,prefabs/cube
+prefabs/tank,prefabs/tank
+lua/config/sheet1,lua/config/sheet1
 textures/unitylogo,textures/unitylogo

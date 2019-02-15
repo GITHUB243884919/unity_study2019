@@ -145,32 +145,32 @@ namespace UFrame.ResourceManagement
         /// </summary>
         public override void RealseAllUnUse()
         {
-            //unUseGameObject.Clear();
-            //bool could = true;
-            //foreach (var kv in goAssetHolders)
-            //{
-            //    could = true;
-            //    HashSet<AssetHolder> assetholders = kv.Value;
-            //    foreach (var item in assetholders)
-            //    {
-            //        if (!item.CouldRealse())
-            //        {
-            //            could = false;
-            //            break;
-            //        }
-            //    }
-            //    if (could)
-            //    {
-            //        unUseGameObject.Add(kv.Key);
-            //    }
-            //}
+            unUseGameObject.Clear();
+            bool could = true;
+            foreach (var kv in goAssetHolders)
+            {
+                could = true;
+                HashSet<AssetHolder> assetholders = kv.Value;
+                foreach (var item in assetholders)
+                {
+                    if (!item.CouldRealse())
+                    {
+                        could = false;
+                        break;
+                    }
+                }
+                if (could)
+                {
+                    unUseGameObject.Add(kv.Key);
+                }
+            }
 
-            //for (int i = 0, iMax = unUseGameObject.Count; i < iMax; ++i)
-            //{
-            //    goAssetHolders[unUseGameObject[i]].Clear();
-            //    Debug.LogError("remove" + unUseGameObject[i].name);
-            //    goAssetHolders.Remove(unUseGameObject[i]);
-            //}
+            for (int i = 0, iMax = unUseGameObject.Count; i < iMax; ++i)
+            {
+                goAssetHolders[unUseGameObject[i]].Clear();
+                Debug.LogError("remove" + unUseGameObject[i].name);
+                goAssetHolders.Remove(unUseGameObject[i]);
+            }
 
             unUseAssets.Clear();
             foreach (var kv in nameAssetHolders)
@@ -222,10 +222,10 @@ namespace UFrame.ResourceManagement
             {
                 item.RemoveRefence(go);
             }
-            ////已经销毁的对象在维护完资源引用后不用再持有
-            goAssetHolders[go].Clear();
-            Debug.LogError("remove " + go.name);
-            goAssetHolders.Remove(go);
+            //////已经销毁的对象在维护完资源引用后不用再持有
+            //goAssetHolders[go].Clear();
+            //Debug.LogError("remove " + go.name);
+            //goAssetHolders.Remove(go);
 
 
             //2.销毁对象
@@ -234,24 +234,40 @@ namespace UFrame.ResourceManagement
 
         public override void RealseAsset(AssetHolder assetHolder, GameObject go)
         {
-            //1.去资源引用
-            assetHolder.RemoveRefence(go);
+            ////1.去资源引用
+            //assetHolder.RemoveRefence(go);
 
-            bool could = true;
-            HashSet<AssetHolder> assetholders = goAssetHolders[go];
-            foreach (var item in assetholders)
+            //bool could = true;
+            //HashSet<AssetHolder> assetholders = goAssetHolders[go];
+            //foreach (var item in assetholders)
+            //{
+            //    if (!item.CouldRealse())
+            //    {
+            //        could = false;
+            //        break;
+            //    }
+            //}
+            //if (could)
+            //{
+            //    //unUseGameObject.Add(kv.Key);
+            //    Debug.LogError("remove" + go.name);
+            //    goAssetHolders.Remove(go);
+            //}
+
+        }
+
+        public override void RealseAsset(GameObject go)
+        {
+            //1.去资源引用
+            HashSet<AssetHolder> assetHolders = null;
+            if (!goAssetHolders.TryGetValue(go, out assetHolders))
             {
-                if (!item.CouldRealse())
-                {
-                    could = false;
-                    break;
-                }
+                return;
             }
-            if (could)
+
+            foreach (var item in assetHolders)
             {
-                //unUseGameObject.Add(kv.Key);
-                Debug.LogError("remove" + go.name);
-                goAssetHolders.Remove(go);
+                item.RemoveRefence(go);
             }
 
         }
