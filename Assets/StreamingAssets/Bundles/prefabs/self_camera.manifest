@@ -1,0 +1,28 @@
+ManifestFileVersion: 0
+CRC: 293913177
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c904cac386039383174cdc3dbc096fbc
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ae7b2916279deb0f5590d6ee9c7fead1
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: ab24fa53157c21c4cb88b6f8b776da9b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: aebd326716889f446ac63c29a64a6dc2, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/GameResources/prefabs/self_camera.prefab
+Dependencies: []

@@ -41,6 +41,16 @@ namespace GameName.Battle.Display
                     tank.transform.position = initMsg.tankGroup[i].pos;
                     tank.transform.transform.LookAt(initMsg.tankGroup[i].dir);
                     tanks.Add(initMsg.tankGroup[i].id, tank);
+
+                    Debug.LogError(initMsg.tankGroup[i].id + " " + initMsg.tankGroup[i].isPlayer);
+                    //if (initMsg.tankGroup[i].isSelf && initMsg.tankGroup[i].isCaptain)
+                    //{
+                    //    GameObjectGetter selfCameraGetter = ResHelper.LoadGameObject("prefabs/self_camera");
+                    //    GameObject selfCamera = selfCameraGetter.Get();
+                    //    //RPGCamera rpgCamera = selfCamera.GetComponent<RPGCamera>();
+                    //    //rpgCamera.UsedCamera = Camera.main;
+                    //    selfCamera.transform.SetParent(tank.transform);
+                    //}
                 }
 
                 D2L_BattleInit initRetMsg = new D2L_BattleInit();
@@ -58,7 +68,7 @@ namespace GameName.Battle.Display
                 for (int i = 0; i < convMsg.tankGroup.Count; ++i)
                 {
                     tanks[convMsg.tankGroup[i].id].transform.position = convMsg.tankGroup[i].pos;
-
+                    tanks[convMsg.tankGroup[i].id].transform.LookAt(convMsg.tankGroup[i].dir);
                 }
 
             }

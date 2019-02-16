@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1586311692403408}
+  m_IsPrefabParent: 1
+--- !u!1 &1586311692403408
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4043659502490084}
+  - component: {fileID: 114480927165861958}
+  - component: {fileID: 114135629632013434}
+  m_Layer: 0
+  m_Name: self_camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4043659502490084
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1586311692403408}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114135629632013434
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1586311692403408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aebd326716889f446ac63c29a64a6dc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UsedCamera: {fileID: 0}
+  UsedSkybox: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  CameraPivotLocalPosition: {x: 0, y: 1.1, z: 0}
+  ActivateCameraControl: 1
+  AlwaysRotateCamera: 0
+  RotateWithCharacter: 1
+  RotationStoppingInput: Fire1
+  CursorLockMode: 2
+  HideCursorWhenPressed: 1
+  LockMouseX: 0
+  LockMouseY: 0
+  InvertMouseX: 0
+  InvertMouseY: 1
+  MouseXSensitivity: 8
+  MouseYSensitivity: 8
+  ConstrainMouseX: 0
+  MouseXMin: -90
+  MouseXMax: 90
+  MouseYMin: -89.5
+  MouseYMax: 89.5
+  MouseScrollSensitivity: 15
+  MouseSmoothTime: 0.08
+  MinDistance: 0
+  MaxDistance: 20
+  DistanceSmoothTime: 0.7
+  StartMouseX: 0
+  StartMouseY: 15
+  StartDistance: 2
+  AlignCharacter: 1
+  AlignmentInput: Fire2
+  AlignCameraWhenMoving: 1
+  SupportWalkingBackwards: 1
+  AlignCameraSmoothTime: 0.2
+--- !u!114 &114480927165861958
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1586311692403408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab24fa53157c21c4cb88b6f8b776da9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OcclusionHandling: 1
+  OccludingLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  AffectingTags:
+  - AffectCameraZoom
+  FadeOutAlpha: 0.2
+  FadeInAlpha: 1
+  FadeOutDuration: 0.2
+  FadeInDuration: 0.2
+  EnableCharacterFading: 1
+  CharacterFadeOutAlpha: 0
+  CharacterFadeStartDistance: 1.2
+  CharacterFadeEndDistance: 0.8

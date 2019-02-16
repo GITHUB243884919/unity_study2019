@@ -8,11 +8,18 @@ public enum BattleMessageID : int
     L2D_BattleInit = 1,
     D2L_BattleInit = 2,
     L2D_TankPos,
+
+    JOY_Press,
 }
 
 public class TankGroupInit
 {
     public int id;
+
+    public bool isPlayer;
+    public bool isCaptain;
+    public bool isSelf;
+
     public int tank_type;
     public Vector3 pos;
     public Vector3 dir;
@@ -51,4 +58,17 @@ public class L2D_TankPos : UFrame.MessageCenter.Message
         tankGroup = new List<TankPos>();
     }
     public List<TankPos> tankGroup;
+}
+
+public class JOY_Press : UFrame.MessageCenter.Message
+{
+    public JOY_Press()
+    {
+        messageID = (int)BattleMessageID.JOY_Press;
+    }
+
+    public Vector3 dir;
+    public int tankID;
+    public bool couldMove;
+    public bool couldTurn;
 }

@@ -57,6 +57,10 @@ namespace UFrame.AI
     {
         public MoveData moveData;
 
+        public bool couldMove;
+
+        public bool couldTurn;
+
         public MoveObject()
         {
             moveData = new MoveData();
@@ -123,15 +127,34 @@ namespace UFrame.AI
         public MoveObject moveObject { get; set; }
         
         public abstract void Tick(int deltaTimeMS);
+
+        public abstract void Turn(Vector3 dir);
     }
 
     public class SimpleMoveObjectCtr : MoveObjectCtr
     {
+        public Vector3 dir;
         public override void Tick(int deltaTimeMS)
         {
-            double delta = moveObject.GetSpeed() * deltaTimeMS / 1000;
-            Vector3  oldPos = moveObject.GetPos();
-            moveObject.SetPos(moveObject.GetPos() + (float)delta * moveObject.GetDir());
+            //if (moveObject.couldTurn)
+            //{
+            //    float turnAngle = Vector3.Angle(moveObject.GetPos(), dir);
+            //    Vector3.Lerp(moveObject.GetPos(), dir, (float)deltaTimeMS / 1000);
+
+            //}
+
+            if (moveObject.couldMove)
+            {
+                double delta = moveObject.GetSpeed() * deltaTimeMS / 1000;
+                Vector3 oldPos = moveObject.GetPos();
+                moveObject.SetPos(moveObject.GetPos() + (float)delta * moveObject.GetDir());
+
+            }
+        }
+
+        public override void Turn(Vector3 dir)
+        {
+            this.dir = dir;
         }
     }
 

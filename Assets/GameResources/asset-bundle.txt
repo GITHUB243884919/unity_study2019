@@ -1,6 +1,9 @@
 textures/unitylogo/unitylogo1,textures/unitylogo
+lua/config/stage_info,lua/config/stage_info
 textures/unitylogo/unityLogo2,textures/unitylogo
 asset-bundle,asset-bundle
+lua/config/tank_group_info,lua/config/tank_group_info
+prefabs/self_camera,prefabs/self_camera
 materials/blue,materials/blue
 materials/red,materials/red
 lua/config/init_lua_config,lua/config/init_lua_config
@@ -10,6 +13,7 @@ prefabs/mycube-parent,prefabs/mycube-parent
 lua/config/test_sheet1,lua/config/test_sheet1
 textures/unitylogo/unitylogo,textures/unitylogo
 prefabs/cube,prefabs/cube
+lua/config/tank_info,lua/config/tank_info
 prefabs/tank,prefabs/tank
 lua/config/sheet1,lua/config/sheet1
 textures/unitylogo,textures/unitylogo
