@@ -25,7 +25,7 @@ public class ReadConfig : MonoBehaviour {
 
     void TestBattleConfig()
     {
-        LuaTable table = LuaManager.Instance.luaState.GetTable("config_battle_config");
+        LuaTable table = LuaManager.GetInstance().luaState.GetTable("config_battle_config");
         LuaTable table2 = table[1] as LuaTable;
         //Debug.LogError(table2["id"]);
         //Debug.LogError(table2["diff_name"]);
@@ -45,7 +45,7 @@ public class ReadConfig : MonoBehaviour {
 
     void TestAutoGen()
     {
-        LuaTable tsheet = LuaManager.Instance.luaState.GetTable("config_sheet1");
+        LuaTable tsheet = LuaManager.GetInstance().luaState.GetTable("config_sheet1");
 
         LuaDictTable dsheet = tsheet.ToDictTable();
         foreach (var kv in dsheet)
@@ -77,9 +77,9 @@ public class ReadConfig : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        LuaManager.Instance.Init();
+        LuaManager.GetInstance().Init();
         //LuaManager.Instance.luaState.DoFile("init_config");
-        LuaManager.Instance.luaState.DoFile("init_lua_config");
+        LuaManager.GetInstance().luaState.DoFile("init_lua_config");
         
 
         //TestBattleConfig();

@@ -67,6 +67,7 @@ namespace UFrame.ResourceManagement
         public void RealseAllUnUse()
         {
             resLoader.RealseAllUnUse();
+            Resources.UnloadUnusedAssets();
         }
 
         public void DestroyGameObject(GameObject go)

@@ -30,12 +30,12 @@ namespace UFrame.AI
         /// <summary>
         /// 速度
         /// </summary>
-        public float speed;
+        public double speed;
 
         /// <summary>
         /// 转向速度
         /// </summary>
-        public float turnSpeed;
+        public double turnSpeed;
 
         /// <summary>
         /// 转向类型
@@ -45,6 +45,11 @@ namespace UFrame.AI
 
     public class LogicObject
     {
+        static int sID;
+        public LogicObject()
+        {
+            ID = sID++;
+        }
         public int ID;
     }
 
@@ -52,14 +57,13 @@ namespace UFrame.AI
     {
         public MoveData moveData;
 
+        public MoveObject()
+        {
+            moveData = new MoveData();
+        }
         public int GetID()
         {
             return ID;
-        }
-
-        public void SetID(int ID)
-        {
-            this.ID = ID;
         }
 
         public Vector3 GetPos()
@@ -82,22 +86,22 @@ namespace UFrame.AI
             moveData.dir = dir;
         }
 
-        public float GetSpeed()
+        public double GetSpeed()
         {
             return moveData.speed;
         }
 
-        public void SetSpeed(float speed)
+        public void SetSpeed(double speed)
         {
             moveData.speed = speed;
         }
 
-        public float GetTurnSpeed()
+        public double GetTurnSpeed()
         {
             return moveData.turnSpeed;
         }
 
-        public void SetTurnSpeed(float turnSpeed)
+        public void SetTurnSpeed(double turnSpeed)
         {
             moveData.turnSpeed = turnSpeed;
         }
@@ -125,8 +129,9 @@ namespace UFrame.AI
     {
         public override void Tick(int deltaTimeMS)
         {
-            float delta = moveObject.GetSpeed() * deltaTimeMS / 1000;
-            moveObject.SetPos(delta * moveObject.GetDir());
+            double delta = moveObject.GetSpeed() * deltaTimeMS / 1000;
+            Vector3  oldPos = moveObject.GetPos();
+            moveObject.SetPos(moveObject.GetPos() + (float)delta * moveObject.GetDir());
         }
     }
 

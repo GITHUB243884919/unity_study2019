@@ -13,7 +13,7 @@ namespace UFrame.LUA
     /// *3.lua初始化表要改成元表形式涉及GetConfigLuaTable
     /// *4.文件改名去Dao
     /// 5.增加额外索引c#代码生成
-    /// 6.取数据API，原来的blo的c#代码生成
+    /// *6.取数据API，原来的blo的c#代码生成
     /// *7.c#总配置表加载代码生成
     /// *8.ParseLuaTableData的参数key可以去掉
     /// 9.tolua dispose
@@ -142,7 +142,7 @@ namespace UFrame.LUA
         /// <returns></returns>
         public static LuaTable GetConfigLuaTable(string tableName)
         {
-            var config = LuaManager.Instance.luaState.GetTable(tableName);
+            var config = LuaManager.GetInstance().luaState.GetTable(tableName);
             return config;
         }
     }

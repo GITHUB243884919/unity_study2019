@@ -9,9 +9,9 @@ namespace UFrame.LUA
     {
         private void Awake()
         {
-            LuaManager.Instance.Init();
-            LuaManager.Instance.luaState.DoFile(name);
-            LuaFunction func = LuaManager.Instance.luaState.GetFunction("Awake");
+            LuaManager.GetInstance().Init();
+            LuaManager.GetInstance().luaState.DoFile(name);
+            LuaFunction func = LuaManager.GetInstance().luaState.GetFunction("Awake");
             func.BeginPCall();
             func.PushGeneric<GameObject>(gameObject);
             func.PCall();
@@ -25,7 +25,7 @@ namespace UFrame.LUA
         void Start()
         {
             //LuaFunction func = luaState.GetFunction("Start");
-            LuaFunction func = LuaManager.Instance.luaState.GetFunction("Start");
+            LuaFunction func = LuaManager.GetInstance().luaState.GetFunction("Start");
             func.Call();
             func.Dispose();
             func = null;

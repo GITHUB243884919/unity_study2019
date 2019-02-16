@@ -9,8 +9,8 @@ namespace UFrame.ResourceManagement
     /// 限制
     /// 禁用GameObject.Instance 无法跟踪引用
     /// 禁用GameObject.Destroy  无法移除引用
-    /// 销毁GO用GameObjectGetter.Release()
-    /// 释放资源用AssetGetter.Release()
+    /// 销毁GO用DestroyGameObject()
+    /// 释放资源用ReleaseAsset()
     /// 
     /// 没有销毁一个资源对应的bundle的接口，而是提供销毁所有没有使用的资源对应的接口
     /// 
@@ -288,7 +288,7 @@ namespace UFrame.ResourceManagement
             if (!goAssetHolders.TryGetValue(go, out assetHolders))
             {
                 assetHolders = new HashSet<AssetHolder>();
-                Debug.LogError("add " + go.name);
+                //Debug.LogError("add " + go.name);
                 goAssetHolders.Add(go, assetHolders);
             }
             assetHolders.Add(assetHolder);

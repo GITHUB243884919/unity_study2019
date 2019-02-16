@@ -2,24 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using LuaInterface;
-
+using UFrame.Common;
 namespace UFrame.LUA
 {
-    public class LuaManager
+    public class LuaManager : Singleton<LuaManager>
     {
-        private static LuaManager _instance;
+        //private static LuaManager _instance;
 
-        public static LuaManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new LuaManager();
-                }
-                return _instance;
-            }
-        }
+        //public static LuaManager Instance
+        //{
+        //    get
+        //    {
+        //        if (_instance == null)
+        //        {
+        //            _instance = new LuaManager();
+        //        }
+        //        return _instance;
+        //    }
+        //}
 
         public LuaState luaState { get; private set; }
         private bool bInit = false;
