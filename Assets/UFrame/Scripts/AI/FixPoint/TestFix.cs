@@ -6,9 +6,19 @@ public class TestFix : MonoBehaviour {
 
     void Start()
     {
-        //Fix64Test()
+        FixPointTest();
         FIntTest();
+        //Fix64Test();
 
+
+    }
+    void FixPointTest()
+    {
+        FixPoint fp1 = FixPoint.HalfPi / new FixPoint(3);
+        FixPoint fp2 = FixPoint.RadianPerDegree * (FixPoint)30;
+
+        FixPoint sin30 = FixPoint.Sin(fp2);
+        Debug.LogError("FixPoint sin = " + sin30);
     }
 
     void FIntTest()
@@ -17,6 +27,7 @@ public class TestFix : MonoBehaviour {
 
 
         FInt fixAngle = FInt.PIOver180F * FInt.Create(30d);
+        //FInt fixAngle = FInt.Create(30d);
         Debug.LogError("Fix sin = " + FInt.Sin(fixAngle).ToDouble());
 
     }
@@ -32,8 +43,8 @@ public class TestFix : MonoBehaviour {
 
         Fix64 angleToH = (Fix64)2 * (Fix64)3.1415927 / (Fix64)360;
         Fix64 FangleSin = (Fix64)30 * angleToH;
-        Debug.LogError("Fix64 sin = " + Fix64.Cos(FangleSin));
-        Debug.LogError("float sin = " + Mathf.Cos(30 * Mathf.Deg2Rad));
+        Debug.LogError("Fix64 sin = " + Fix64.Sin(FangleSin));
+        Debug.LogError("float sin = " + Mathf.Sin(30 * Mathf.Deg2Rad));
 
         Vector3 A = new Vector3(0f, 0f, 1f);
         Vector3 B = new Vector3(1f, 0f, 0f);

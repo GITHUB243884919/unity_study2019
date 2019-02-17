@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using NUnit.Framework;
+using UNF = NUnit.Framework;
 
 namespace FixedPoint
 {
@@ -9,7 +10,7 @@ namespace FixedPoint
 		[Test] public void CanCreateNewFixedInt()
 		{
 			var fInt = FInt.Create(3);
-			Assert.IsNotNull(fInt);
+            UNF.Assert.IsNotNull(fInt);
 		}
 
 		[Test] public void Equal()
@@ -17,7 +18,7 @@ namespace FixedPoint
 			var fInt1 = FInt.Create(1);
 			var fInt2 = FInt.Create(1);
 			var eq = fInt1.Equals(fInt2);
-			Assert.IsTrue(eq);
+            UNF.Assert.IsTrue(eq);
 		}
 
 		[Test] public void Subtraction()
@@ -28,7 +29,7 @@ namespace FixedPoint
 
 			var sub = fInt1 - fInt2;
 			var eq = fInt3.Equals(sub);
-			Assert.IsTrue(eq);
+			UNF.Assert.IsTrue(eq);
 		}
 
 		[Test] public void Multiplication()
@@ -39,7 +40,7 @@ namespace FixedPoint
 
 			var fInt4 = fInt1*fInt2;
 			var eq = fInt4.Equals(fInt3);
-			Assert.IsTrue(eq);
+			UNF.Assert.IsTrue(eq);
 		}
 
 		[Test] public void Divison()
@@ -49,7 +50,7 @@ namespace FixedPoint
 
 			var fInt3 = fInt1 / fInt2;
 			var eq = fInt3.Equals(fInt2);
-			Assert.IsTrue(eq);
+			UNF.Assert.IsTrue(eq);
 		}
 
 		[Test] public void FasterDivisionThanInteger()
@@ -71,14 +72,14 @@ namespace FixedPoint
 			stopWatch2.Stop();
 
 			var equality = stopWatch1.ElapsedMilliseconds > stopWatch2.ElapsedMilliseconds;
-			Assert.IsTrue(equality);
+			UNF.Assert.IsTrue(equality);
 
 		}
 
 		[Test] public void CanComputefIntPi()
 		{
 			var pi = FInt.PI;
-			Assert.IsNotNull(pi);
+			UNF.Assert.IsNotNull(pi);
 		}
 
 		[Test]public void CanComputePiFaster()
@@ -95,13 +96,13 @@ namespace FixedPoint
 			stopWatch2.Stop();
 
 			var equality = stopWatch1.ElapsedMilliseconds < stopWatch2.ElapsedMilliseconds;
-			Assert.IsTrue(equality);
+			UNF.Assert.IsTrue(equality);
 		}
 
 		[Test] public void CanComputeFInt180Pi()
 		{
 			var pi = FInt.PIOver180F;
-			Assert.IsNotNull(pi);
+			UNF.Assert.IsNotNull(pi);
 		}
 
 		[Test] public void CanCreateNewFixedPoint()
@@ -110,7 +111,7 @@ namespace FixedPoint
 			var fInt2 = FInt.Create(1);
 
 			var point = FPoint.Create(fInt1, fInt2);
-			Assert.IsNotNull(point);
+			UNF.Assert.IsNotNull(point);
 		}
 
 		[Test] public void CanSubtractPoints()
@@ -121,7 +122,7 @@ namespace FixedPoint
 			var point1 = FPoint.Create(fInt1, fInt2);
 			var point2 = FPoint.Create(fInt2, fInt1);
 			var point3 = FPoint.VectorSubtract(point1, point2);
-			Assert.IsNotNull(point3);
+			UNF.Assert.IsNotNull(point3);
 		}
 	}
 }
