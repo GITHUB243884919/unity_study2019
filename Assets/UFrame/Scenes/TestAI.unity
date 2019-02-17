@@ -264,7 +264,6 @@ GameObject:
   m_Component:
   - component: {fileID: 345329770}
   - component: {fileID: 345329769}
-  - component: {fileID: 345329768}
   m_Layer: 0
   m_Name: Battle
   m_TagString: Untagged
@@ -272,17 +271,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &345329768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 345329767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eb365b06ffc85e4fb7541aa4383a665, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &345329769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,72 +498,72 @@ MonoBehaviour:
   onMoveStart:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: ETCJoystick+OnMoveStartHandler, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: ETCJoystick+OnMoveStartHandler, Assembly-CSharp, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   onMove:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: ETCJoystick+OnMoveHandler, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: ETCJoystick+OnMoveHandler, Assembly-CSharp, Version=1.0.0.0, Culture=neutral,
       PublicKeyToken=null
   onMoveSpeed:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: ETCJoystick+OnMoveSpeedHandler, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: ETCJoystick+OnMoveSpeedHandler, Assembly-CSharp, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   onMoveEnd:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: ETCJoystick+OnMoveEndHandler, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: ETCJoystick+OnMoveEndHandler, Assembly-CSharp, Version=1.0.0.0, Culture=neutral,
       PublicKeyToken=null
   onTouchStart:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: ETCJoystick+OnTouchStartHandler, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: ETCJoystick+OnTouchStartHandler, Assembly-CSharp, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   onTouchUp:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: ETCJoystick+OnTouchUpHandler, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: ETCJoystick+OnTouchUpHandler, Assembly-CSharp, Version=1.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnDownUp:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: ETCJoystick+OnDownUpHandler, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: ETCJoystick+OnDownUpHandler, Assembly-CSharp, Version=1.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnDownDown:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: ETCJoystick+OnDownDownHandler, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: ETCJoystick+OnDownDownHandler, Assembly-CSharp, Version=1.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnDownLeft:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: ETCJoystick+OnDownLeftHandler, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: ETCJoystick+OnDownLeftHandler, Assembly-CSharp, Version=1.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnDownRight:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: ETCJoystick+OnDownRightHandler, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: ETCJoystick+OnDownRightHandler, Assembly-CSharp, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   OnPressUp:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: ETCJoystick+OnDownUpHandler, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: ETCJoystick+OnDownUpHandler, Assembly-CSharp, Version=1.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnPressDown:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: ETCJoystick+OnDownDownHandler, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: ETCJoystick+OnDownDownHandler, Assembly-CSharp, Version=1.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnPressLeft:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: ETCJoystick+OnDownLeftHandler, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: ETCJoystick+OnDownLeftHandler, Assembly-CSharp, Version=1.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnPressRight:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: ETCJoystick+OnDownRightHandler, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: ETCJoystick+OnDownRightHandler, Assembly-CSharp, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   joystickType: 1
   allowJoystickOverTouchPad: 0

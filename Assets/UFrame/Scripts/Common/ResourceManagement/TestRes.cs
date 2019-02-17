@@ -10,6 +10,7 @@ public class TestRes : MonoBehaviour
     //IEnumerator Start()
     void Start()
     {
+        ResourceManager.GetInstance().Init();
         #region BundleTest
         StartCoroutine(TestAll());
         //StartCoroutine(TestAll2());

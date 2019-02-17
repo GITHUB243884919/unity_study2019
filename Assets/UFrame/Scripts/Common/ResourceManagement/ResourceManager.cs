@@ -4,20 +4,20 @@ using UnityEngine;
 
 namespace UFrame.ResourceManagement
 {
-    public class ResourceManager : MonoBehaviour
+    public class ResourceManager : Common.Singleton<ResourceManager>
     {
-        static ResourceManager instance;
+        //static ResourceManager instance;
         
         IResourceLoader resLoader;
 
-        public static ResourceManager GetInstance()
-        {
-            return instance;
-        }
+        //public static ResourceManager GetInstance()
+        //{
+        //    return instance;
+        //}
 
-        void Awake()
+        public void Init()
         {
-            instance = this;
+            //instance = this;
 #if UNITY_EDITOR
 #if RES_AB
             //Editor模式下希望Bundle加载

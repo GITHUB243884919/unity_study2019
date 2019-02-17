@@ -18,6 +18,7 @@ namespace GameName.Battle
         void Start()
         {
             Application.targetFrameRate = 30;
+            UFrame.ResourceManagement.ResourceManager.GetInstance().Init();
             LuaManager.GetInstance().Init();
             LuaManager.GetInstance().luaState.DoFile("init_lua_config");
             LuaConfigManager.Instance.Init();
