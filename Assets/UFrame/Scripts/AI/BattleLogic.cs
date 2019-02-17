@@ -11,59 +11,29 @@ namespace GameName.Battle.Logic
         BattleManager battleManager;
         bool displayOK = false;
         Dictionary<int, UFrame.AI.SimpleMoveObjectCtr> tankCtrs = new Dictionary<int, UFrame.AI.SimpleMoveObjectCtr>();
+        Dictionary<int, System.Action<UFrame.MessageCenter.Message>> battleMessageCallbacks =
+            new Dictionary<int, System.Action<UFrame.MessageCenter.Message>>();
+
 
         public BattleLogic(BattleManager battleManager)
         {
             this.battleManager = battleManager;
+
             battleManager.battleMessageCenter.Regist((int)BattleMessageID.D2L_BattleInit, this);
+            battleMessageCallbacks[(int)BattleMessageID.D2L_BattleInit] = OnD2L_BattleInit;
+
             battleManager.battleMessageCenter.Regist((int)BattleMessageID.JOY_Press, this);
+            battleMessageCallbacks[(int)BattleMessageID.JOY_Press] = OnJOY_Press;
         }
 
         public void Execute(UFrame.MessageCenter.Message msg)
         {
-            if (msg.messageID == (int)BattleMessageID.D2L_BattleInit)
-            {
-                D2L_BattleInit initMsg = msg as D2L_BattleInit;
-                if (initMsg.result)
-                {
-                    displayOK = true;
-                    Debug.LogError("display init ok");
-                }
-            }
-
-            if (msg.messageID == (int)BattleMessageID.JOY_Press)
-            {
-                JOY_Press converMsg = msg as JOY_Press;
-                tankCtrs[converMsg.tankID].moveObject.couldMove = converMsg.couldMove;
-                tankCtrs[converMsg.tankID].moveObject.couldTurn = converMsg.couldTurn;
-
-                if (converMsg.couldMove && converMsg.couldTurn)
-                {
-                    Vector3 newDir = tankCtrs[converMsg.tankID].moveObject.GetDir();
-                    newDir += converMsg.dir;
-                    newDir.Normalize();
-
-                    tankCtrs[converMsg.tankID].moveObject.SetDir(newDir);
-                    Debug.LogError("JOY_Press");
-                }
-
-
-
-                //if (converMsg.dir.x > 0)
-                //{
-                //    tankCtrs[converMsg.tankID].moveObject.SetTurnType(UFrame.AI.TurnType.Right);
-                //}
-                //else
-                //{
-                //    tankCtrs[converMsg.tankID].moveObject.SetTurnType(UFrame.AI.TurnType.Left);
-                //}
-            }
+            battleMessageCallbacks[msg.messageID](msg);
         }
 
         
         public void InitBattleStage()
         {
-
             L2D_BattleInit initMsg = new L2D_BattleInit();
             initMsg.tankGroup = new List<TankGroupInit>();
 
@@ -80,10 +50,10 @@ namespace GameName.Battle.Logic
             tank.isPlayer = true;
             tank.isCaption = true;
             tank.tankType = 1000;
-            tank.SetPos(Vector3.zero);
+            tank.SetPos(new Vector3(2, 0, 5));
             tank.SetDir(new Vector3(0, 0, 1));
             tank.SetSpeed(3);
-            tank.SetTurnSpeed(5);
+            tank.SetTurnSpeed(10);
             tank.SetTurnType(UFrame.AI.TurnType.None);
             player.tanks.Add(tank);
 
@@ -91,7 +61,6 @@ namespace GameName.Battle.Logic
             UFrame.AI.SimpleMoveObjectCtr tankCtr = new UFrame.AI.SimpleMoveObjectCtr();
             tankCtr.moveObject = tank;
             tankCtrs.Add(tankCtr.moveObject.ID, tankCtr);
-
 
             Data.BattleLogicDataManager.GetInstance().AddPlayer(player);
 
@@ -105,7 +74,6 @@ namespace GameName.Battle.Logic
             tgi.pos = tank.GetPos();
             tgi.dir = tank.GetDir();
             initMsg.tankGroup.Add(tgi);
-
         }
 
         void InitNpc(L2D_BattleInit initMsg)
@@ -151,6 +119,68 @@ namespace GameName.Battle.Logic
 
             TankPos(deltaTimeMS);
         }
+
+
+        void OnD2L_BattleInit(UFrame.MessageCenter.Message msg)
+        {
+            D2L_BattleInit convMsg = msg as D2L_BattleInit;
+            if (convMsg.result)
+            {
+                displayOK = true;
+                Debug.LogError("display init ok");
+            }
+
+        }
+
+        void OnJOY_Press(UFrame.MessageCenter.Message msg)
+        {
+            JOY_Press convMsg = msg as JOY_Press;
+            var tankCtr = tankCtrs[convMsg.tankID];
+            tankCtr.moveObject.couldMove = convMsg.couldMove;
+            tankCtr.moveObject.couldTurn = convMsg.couldTurn;
+
+            if (convMsg.couldMove && convMsg.couldTurn)
+            {
+                //得到新方向和旧方向的夹角
+                Vector3 oldDir = tankCtr.moveObject.GetDir();
+                float angle = Vector3.Angle(oldDir, convMsg.dir);
+
+                //得到新方向和旧方向的左边还是右边
+                UFrame.AI.TurnType turnType;
+                if (Vector3.Cross(oldDir, convMsg.dir).y > 0)
+                {
+                    turnType = UFrame.AI.TurnType.Right;
+                }
+                else if (Vector3.Cross(oldDir, convMsg.dir).y < 0)
+                {
+                    turnType = UFrame.AI.TurnType.Left;
+                }
+                else
+                {
+                    //if (angle > 0)
+                    //{
+                    //    turnType = UFrame.AI.TurnType.Right;
+                    //}
+                    //else
+                    //{
+                    //    turnType = UFrame.AI.TurnType.None;
+                    //}
+                    turnType = UFrame.AI.TurnType.None;
+                }
+                Debug.LogError(turnType + " " + angle);
+
+                tankCtr.moveObject.SetTurnType(turnType);
+                //Vector3 newVec = Quaternion.AngleAxis(angle, Vector3.up) * oldDir;
+
+                //Vector3 newDir = tankCtrs[converMsg.tankID].moveObject.GetDir();
+                //newDir += converMsg.dir;
+                //newDir.Normalize();
+
+                //tankCtrs[converMsg.tankID].moveObject.SetDir(newDir);
+                //Debug.LogError("JOY_Press");
+            }
+        }
+
 
         void TankPos(int deltaTimeMS)
         {

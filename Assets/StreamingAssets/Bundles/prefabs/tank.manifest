@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 486165674
+CRC: 2284843073
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: fb80530c239c6c97f1443c0c99b2dc22
+    Hash: 3a1b1d0962a3f6fd6bd11fa7fcc00cd1
   TypeTreeHash:
     serializedVersion: 2
-    Hash: d27a9ed7ed5c7a459d780b0a0a375c27
+    Hash: f451c2fa900e9178a57db1d033fd31a7
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -24,6 +24,8 @@ ClassTypes:
 - Class: 43
   Script: {instanceID: 0}
 - Class: 48
+  Script: {instanceID: 0}
+- Class: 65
   Script: {instanceID: 0}
 Assets:
 - Assets/GameResources/prefabs/tank.prefab

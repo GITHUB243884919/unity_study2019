@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 3192778565
+CRC: 2713639826
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -86,4 +86,7 @@ AssetBundleManifest:
         Dependency_0: tanks-albedo.normal-hd
     Info_23:
       Name: prefabs/self_camera
+      Dependencies: {}
+    Info_24:
+      Name: prefabs/test_easy_touch
       Dependencies: {}

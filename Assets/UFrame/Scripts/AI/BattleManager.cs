@@ -46,10 +46,10 @@ namespace GameName.Battle
             joy.OnPressDown.AddListener(OnPress);
             joy.OnPressLeft.AddListener(OnPress);
             joy.OnPressRight.AddListener(OnPress);
-            joy.OnDownUp.AddListener(OnPress);
-            joy.OnDownDown.AddListener(OnPress);
-            joy.OnDownLeft.AddListener(OnPress);
-            joy.OnDownRight.AddListener(OnPress);
+            //joy.OnDownUp.AddListener(OnPress);
+            //joy.OnDownDown.AddListener(OnPress);
+            //joy.OnDownLeft.AddListener(OnPress);
+            //joy.OnDownRight.AddListener(OnPress);
             //joy.onTouchStart.AddListener(OnTouchStart);
             joy.onTouchUp.AddListener(OnTouchUp);
 
@@ -58,7 +58,7 @@ namespace GameName.Battle
 
         public void OnPress()
         {
-            Debug.LogError("OnPress");
+            //Debug.LogError("OnPress");
             float h = joy.axisX.axisValue;
             float v = joy.axisY.axisValue;
 
@@ -77,34 +77,32 @@ namespace GameName.Battle
             }
         }
 
-        //public void OnTouchStart()
-        //{
-            
-        //    float h = joy.axisX.axisValue;
-        //    float v = joy.axisY.axisValue;
-        //    Debug.LogError("OnTouchStart" + h + " " + v);
-        //    //if (h != 0 || v != 0)
-        //    //{
-        //    //    Debug.LogError(h + " " + v);
-        //    //}
-        //}
-
         public void OnTouchUp()
         {
             
             float h = joy.axisX.axisValue;
             float v = joy.axisY.axisValue;
             Debug.LogError("OnTouchUp" + h + " " + v);
-            //if (h != 0 || v != 0)
-            //{
-            //    Debug.LogError(h + " " + v);
-            //}
             JOY_Press joyPress = new JOY_Press();
             joyPress.tankID = 0;
             joyPress.couldMove = false;
             joyPress.couldTurn = false;
 
             battleMessageCenter.Send(joyPress);
+
+
+            //Vector3 A = new Vector3(0, 0, 1);
+            //Vector3 B = new Vector3(-1, 0, 0);
+            //float dot = Vector3.Dot(A, B);
+            //Debug.LogError("Dot = " + dot);
+            //float acos = Mathf.Acos(dot);
+            //Debug.LogError("acos = " + acos);
+            //float Rad2Deg = Mathf.Rad2Deg * acos;
+            //Debug.LogError("Rad2Deg = " + Rad2Deg);
+            //Vector3 cross = Vector3.Cross(A, B);
+            //Debug.LogError("angle = " + Vector3.Angle(A, B));
+            //Debug.LogError("cross = " + cross);
+
         }
 
     }

@@ -136,19 +136,25 @@ namespace UFrame.AI
         public Vector3 dir;
         public override void Tick(int deltaTimeMS)
         {
-            //if (moveObject.couldTurn)
-            //{
-            //    float turnAngle = Vector3.Angle(moveObject.GetPos(), dir);
-            //    Vector3.Lerp(moveObject.GetPos(), dir, (float)deltaTimeMS / 1000);
+            if (moveObject.couldTurn)
+            {
+                double angle = moveObject.GetTurnSpeed() * (float)deltaTimeMS / 1000;
+                if (moveObject.GetTurnType() == UFrame.AI.TurnType.Left)
+                {
+                    angle = -angle;
+                }
 
-            //}
+                Vector3 newDir = Quaternion.AngleAxis((float)angle, Vector3.up) * (moveObject.GetDir());
+                newDir.Normalize();
+                moveObject.SetDir(newDir);
+
+            }
 
             if (moveObject.couldMove)
             {
                 double delta = moveObject.GetSpeed() * deltaTimeMS / 1000;
                 Vector3 oldPos = moveObject.GetPos();
                 moveObject.SetPos(moveObject.GetPos() + (float)delta * moveObject.GetDir());
-
             }
         }
 

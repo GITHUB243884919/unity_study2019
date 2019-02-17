@@ -15,5 +15,6 @@ textures/unitylogo/unitylogo,textures/unitylogo
 prefabs/cube,prefabs/cube
 lua/config/tank_info,lua/config/tank_info
 prefabs/tank,prefabs/tank
+prefabs/test_easy_touch,prefabs/test_easy_touch
 lua/config/sheet1,lua/config/sheet1
 textures/unitylogo,textures/unitylogo
