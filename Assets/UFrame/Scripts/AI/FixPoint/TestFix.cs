@@ -6,18 +6,37 @@ public class TestFix : MonoBehaviour {
 
     void Start()
     {
+        FixPointCSTest();
         FixPointTest();
         FIntTest();
         //Fix64Test();
+        
 
 
     }
+
+    void FixPointCSTest()
+    {
+        FixMath.F64 angle  = new FixMath.F64(30);
+        FixMath.F64 angle2 = new FixMath.F64(180);
+        
+        FixMath.F64 angle3 = angle * FixMath.F64.Pi / angle2;
+
+        //public static F64 DegToRad(F64 a) { return FromRaw(Fixed64.Mul(a.Raw, 74961320)); }     // F64.Pi / 180
+        FixMath.F64 angle4 = FixMath.F64.DegToRad(angle);
+        FixMath.F64 angle5 = FixMath.F64.DegToRad2(angle);
+        Debug.LogError(FixMath.F64.Sin(angle3));
+        Debug.LogError(FixMath.F64.Sin(angle4));
+        Debug.LogError(FixMath.F64.Sin(angle5));
+
+    }
+
     void FixPointTest()
     {
         FixPoint fp1 = FixPoint.HalfPi / new FixPoint(3);
         FixPoint fp2 = FixPoint.RadianPerDegree * (FixPoint)30;
-
-        FixPoint sin30 = FixPoint.Sin(fp2);
+        FixPoint fp3 =  (FixPoint)30 * FixPoint.Pi / (FixPoint)180;
+        FixPoint sin30 = FixPoint.Sin(fp3);
         Debug.LogError("FixPoint sin = " + sin30);
     }
 
@@ -27,8 +46,10 @@ public class TestFix : MonoBehaviour {
 
 
         FInt fixAngle = FInt.PIOver180F * FInt.Create(30d);
+
+        FInt fixAngle2 = FInt.PI * FInt.Create(30d) / FInt.Create(180);
         //FInt fixAngle = FInt.Create(30d);
-        Debug.LogError("Fix sin = " + FInt.Sin(fixAngle).ToDouble());
+        Debug.LogError("Fix sin = " + FInt.Sin(fixAngle2).ToDouble());
 
     }
 	void Fix64Test()
