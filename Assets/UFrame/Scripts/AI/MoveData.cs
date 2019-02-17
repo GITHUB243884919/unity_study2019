@@ -160,7 +160,70 @@ namespace UFrame.AI
 
         public override void Turn(Vector3 dir)
         {
-            this.dir = dir;
+            DirByJoyDir(dir);
+        }
+
+        /// <summary>
+        /// 朝向跟JoyDir一致
+        /// </summary>
+        /// <param name="tankCtr"></param>
+        /// <param name="JoyDir"></param>
+        void DirByJoyDir(Vector3 JoyDir)
+        {
+            //得到新方向和旧方向的夹角
+            Vector3 oldDir = moveObject.GetDir();
+            float angle = Vector3.Angle(oldDir, JoyDir);
+
+            //得到新方向和旧方向的左边还是右边
+            UFrame.AI.TurnType turnType;
+            if (Vector3.Cross(oldDir, JoyDir).y > 0)
+            {
+                turnType = UFrame.AI.TurnType.Right;
+            }
+            else if (Vector3.Cross(oldDir, JoyDir).y < 0)
+            {
+                turnType = UFrame.AI.TurnType.Left;
+            }
+            else
+            {
+                //if (angle > 0)
+                //{
+                //    turnType = UFrame.AI.TurnType.Right;
+                //}
+                //else
+                //{
+                //    turnType = UFrame.AI.TurnType.None;
+                //}
+                turnType = UFrame.AI.TurnType.None;
+            }
+
+            moveObject.SetTurnType(turnType);
+        }
+
+        /// <summary>
+        /// 根据JoyDir的x的正负确定转向
+        /// </summary>
+        /// <param name="tankCtr"></param>
+        /// <param name="JoyDir"></param>
+        void DirByJoyDirX(Vector3 JoyDir)
+        {
+            //得到新方向和旧方向的左边还是右边
+            UFrame.AI.TurnType turnType;
+            if (JoyDir.x > 0)
+            {
+                turnType = UFrame.AI.TurnType.Right;
+            }
+            else if (JoyDir.x < 0)
+            {
+                turnType = UFrame.AI.TurnType.Left;
+            }
+            else
+            {
+                turnType = UFrame.AI.TurnType.None;
+            }
+
+
+            moveObject.SetTurnType(turnType);
         }
     }
 
