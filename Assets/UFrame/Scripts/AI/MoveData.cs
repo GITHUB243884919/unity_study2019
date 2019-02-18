@@ -10,16 +10,12 @@ namespace UFrame.AI
         /// <summary>
         /// 位置
         /// </summary>
-        public Vector3 pos;
+        public F64Vec3 fPos;
 
         /// <summary>
         /// 朝向
         /// </summary>
-        public Vector3 dir;
-
-        public F64Vec3 fPos;
         public F64Vec3 fDir;
-        
     }
 
     public enum TurnType
@@ -34,16 +30,11 @@ namespace UFrame.AI
         /// <summary>
         /// 速度
         /// </summary>
-        public double speed;
-
-        
+        public F64 fSpeed;
 
         /// <summary>
         /// 转向速度
         /// </summary>
-        public double turnSpeed;
-
-        public F64 fSpeed;
         public F64 fTurnSpeed;
 
         /// <summary>
@@ -79,48 +70,7 @@ namespace UFrame.AI
             return ID;
         }
 
-        public Vector3 GetPos()
-        {
-            return moveData.pos;
-        }
-
-        public void SetPos(Vector3 pos)
-        {
-            moveData.pos = pos;
-        }
-
-        public Vector3 GetDir()
-        {
-            return moveData.dir;
-        }
-
-        public void SetDir(Vector3 dir)
-        {
-            moveData.dir = dir;
-        }
-
-        public double GetSpeed()
-        {
-            return moveData.speed;
-        }
-
-        public void SetSpeed(double speed)
-        {
-            moveData.speed = speed;
-        }
-
-        public double GetTurnSpeed()
-        {
-            return moveData.turnSpeed;
-        }
-
-        public void SetTurnSpeed(double turnSpeed)
-        {
-            moveData.turnSpeed = turnSpeed;
-        }
-
-        #region
-        public F64Vec3 GetPos(int A = 0)
+        public F64Vec3 GetPos()
         {
             return moveData.fPos;
         }
@@ -130,7 +80,7 @@ namespace UFrame.AI
             moveData.fPos = pos;
         }
 
-        public F64Vec3 GetDir(int A = 0)
+        public F64Vec3 GetDir()
         {
             return moveData.fDir;
         }
@@ -140,7 +90,7 @@ namespace UFrame.AI
             moveData.fDir = dir;
         }
 
-        public F64 GetSpeed(int A = 0)
+        public F64 GetSpeed()
         {
             return moveData.fSpeed;
         }
@@ -150,7 +100,7 @@ namespace UFrame.AI
             moveData.fSpeed = speed;
         }
 
-        public F64 GetTurnSpeed(int A = 0)
+        public F64 GetTurnSpeed()
         {
             return moveData.fTurnSpeed;
         }
@@ -159,7 +109,6 @@ namespace UFrame.AI
         {
             moveData.fTurnSpeed = turnSpeed;
         }
-        #endregion
 
         public TurnType GetTurnType()
         {
@@ -170,9 +119,6 @@ namespace UFrame.AI
         {
             moveData.turnType = turnType;
         }
-
     }
-
-
 }
 
