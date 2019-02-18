@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UFrame.MessageCenter;
 using GameName.Lua.Config;
-
+using FixMath;
 namespace GameName.Battle.Logic
 {
     public class BattleLogic : IMessageExecutor
@@ -80,10 +80,17 @@ namespace GameName.Battle.Logic
             tank.isPlayer = true;
             tank.isCaption = true;
             tank.tankType = 1000;
-            tank.SetPos(new Vector3(0, 0, 0));
-            tank.SetDir(new Vector3(0, 0, 1));
-            tank.SetSpeed(3);
-            tank.SetTurnSpeed(10);
+            //tank.SetPos(new Vector3(0, 0, 0));
+            tank.SetPos(new F64Vec3(0, 0, 0));
+
+            //tank.SetDir(new Vector3(0, 0, 1));
+            tank.SetDir(new F64Vec3(0, 0, 1));
+
+            //tank.SetSpeed(3);
+            //tank.SetTurnSpeed(10);
+            tank.SetSpeed(new F64(3));
+            tank.SetTurnSpeed(new F64(10));
+
             tank.SetTurnType(UFrame.AI.TurnType.None);
             player.tanks.Add(tank);
 
@@ -101,8 +108,10 @@ namespace GameName.Battle.Logic
             tgi.isCaptain = tank.isCaption;
 
             tgi.tank_type = tank.tankType;
-            tgi.pos = tank.GetPos();
-            tgi.dir = tank.GetDir();
+            //tgi.pos = tank.GetPos();
+            //tgi.dir = tank.GetDir();
+            tgi.pos = tank.GetPos(1).ToUnityVector3();
+            tgi.dir = tank.GetDir(1).ToUnityVector3();
             initMsg.tankGroup.Add(tgi);
         }
 
@@ -160,7 +169,7 @@ namespace GameName.Battle.Logic
 
             if (convMsg.couldMove && convMsg.couldTurn)
             {
-                tankCtr.Turn(convMsg.dir);
+                tankCtr.Turn(F64Vec3.FromUnityVector3(convMsg.dir));
             }
         }
 

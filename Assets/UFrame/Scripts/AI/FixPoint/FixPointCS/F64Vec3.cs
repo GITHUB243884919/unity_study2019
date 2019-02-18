@@ -31,7 +31,7 @@ namespace FixMath
     /// Vector3 struct with signed 32.32 fixed point components.
     /// </summary>
     [Serializable]
-    public struct F64Vec3 : IEquatable<F64Vec3>
+    public partial struct F64Vec3 : IEquatable<F64Vec3>
     {
         public static F64Vec3 Zero      { [MethodImpl(FixedUtil.AggressiveInlining)] get { return new F64Vec3(Fixed64.Zero, Fixed64.Zero, Fixed64.Zero); } }
         public static F64Vec3 One       { [MethodImpl(FixedUtil.AggressiveInlining)] get { return new F64Vec3(Fixed64.One, Fixed64.One, Fixed64.One); } }

@@ -31,7 +31,7 @@ namespace FixMath
     /// Signed 32.32 fixed point value struct.
     /// </summary>
     [Serializable]
-    public struct F64 : IComparable<F64>, IEquatable<F64>
+    public partial struct F64 : IComparable<F64>, IEquatable<F64>
     {
         // Constants
         public static F64 Neg1      { [MethodImpl(FixedUtil.AggressiveInlining)] get { return FromRaw(Fixed64.Neg1); } }
@@ -141,12 +141,6 @@ namespace FixMath
 
         public static F64 RadToDeg(F64 a) { return FromRaw(Fixed64.Mul(a.Raw, 246083499198)); } // 180 / F64.Pi
         public static F64 DegToRad(F64 a) { return FromRaw(Fixed64.Mul(a.Raw, 74961320)); }     // F64.Pi / 180
-        public static F64 DegToRad2(F64 a)
-        {
-            FixMath.F64 angle2 = new FixMath.F64(180);
-            FixMath.F64 angle3 = a * FixMath.F64.Pi / angle2;
-            return angle3;
-        }     
 
         public static F64 Div2(F64 a) { return FromRaw(a.Raw >> 1); }
         public static F64 Abs(F64 a) { return FromRaw(Fixed64.Abs(a.Raw)); }

@@ -46,8 +46,8 @@ namespace GameName.Battle.Logic
                 v.Tick(deltaTimeMS);
                 TankPos tankPos = new TankPos();
                 tankPos.id = v.moveObject.GetID();
-                tankPos.pos = v.moveObject.GetPos();
-                tankPos.dir = v.moveObject.GetDir();
+                tankPos.pos = v.moveObject.GetPos(1).ToUnityVector3();
+                tankPos.dir = v.moveObject.GetDir(1).ToUnityVector3();
 
                 msg.tankGroup.Add(tankPos);
             }

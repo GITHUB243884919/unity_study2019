@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using FixMath;
 namespace UFrame.AI
 {
     public class PostionData
@@ -16,6 +16,10 @@ namespace UFrame.AI
         /// 朝向
         /// </summary>
         public Vector3 dir;
+
+        public F64Vec3 fPos;
+        public F64Vec3 fDir;
+        
     }
 
     public enum TurnType
@@ -32,10 +36,15 @@ namespace UFrame.AI
         /// </summary>
         public double speed;
 
+        
+
         /// <summary>
         /// 转向速度
         /// </summary>
         public double turnSpeed;
+
+        public F64 fSpeed;
+        public F64 fTurnSpeed;
 
         /// <summary>
         /// 转向类型
@@ -110,6 +119,48 @@ namespace UFrame.AI
             moveData.turnSpeed = turnSpeed;
         }
 
+        #region
+        public F64Vec3 GetPos(int A = 0)
+        {
+            return moveData.fPos;
+        }
+
+        public void SetPos(F64Vec3 pos)
+        {
+            moveData.fPos = pos;
+        }
+
+        public F64Vec3 GetDir(int A = 0)
+        {
+            return moveData.fDir;
+        }
+
+        public void SetDir(F64Vec3 dir)
+        {
+            moveData.fDir = dir;
+        }
+
+        public F64 GetSpeed(int A = 0)
+        {
+            return moveData.fSpeed;
+        }
+
+        public void SetSpeed(F64 speed)
+        {
+            moveData.fSpeed = speed;
+        }
+
+        public F64 GetTurnSpeed(int A = 0)
+        {
+            return moveData.fTurnSpeed;
+        }
+
+        public void SetTurnSpeed(F64 turnSpeed)
+        {
+            moveData.fTurnSpeed = turnSpeed;
+        }
+        #endregion
+
         public TurnType GetTurnType()
         {
             return moveData.turnType;
@@ -120,111 +171,6 @@ namespace UFrame.AI
             moveData.turnType = turnType;
         }
 
-    }
-
-    public abstract class MoveObjectCtr
-    {
-        public MoveObject moveObject { get; set; }
-        
-        public abstract void Tick(int deltaTimeMS);
-
-        public abstract void Turn(Vector3 dir);
-    }
-
-    public class SimpleMoveObjectCtr : MoveObjectCtr
-    {
-        public Vector3 dir;
-        public override void Tick(int deltaTimeMS)
-        {
-            if (moveObject.couldTurn)
-            {
-                double angle = moveObject.GetTurnSpeed() * (float)deltaTimeMS / 1000;
-                if (moveObject.GetTurnType() == UFrame.AI.TurnType.Left)
-                {
-                    angle = -angle;
-                }
-
-                Vector3 newDir = Quaternion.AngleAxis((float)angle, Vector3.up) * (moveObject.GetDir());
-                newDir.Normalize();
-                moveObject.SetDir(newDir);
-
-            }
-
-            if (moveObject.couldMove)
-            {
-                double delta = moveObject.GetSpeed() * deltaTimeMS / 1000;
-                Vector3 oldPos = moveObject.GetPos();
-                moveObject.SetPos(moveObject.GetPos() + (float)delta * moveObject.GetDir());
-            }
-        }
-
-        public override void Turn(Vector3 dir)
-        {
-            DirByJoyDir(dir);
-        }
-
-        /// <summary>
-        /// 朝向跟JoyDir一致
-        /// </summary>
-        /// <param name="tankCtr"></param>
-        /// <param name="JoyDir"></param>
-        void DirByJoyDir(Vector3 JoyDir)
-        {
-            //得到新方向和旧方向的夹角
-            Vector3 oldDir = moveObject.GetDir();
-            float angle = Vector3.Angle(oldDir, JoyDir);
-
-            //得到新方向和旧方向的左边还是右边
-            UFrame.AI.TurnType turnType;
-            if (Vector3.Cross(oldDir, JoyDir).y > 0)
-            {
-                turnType = UFrame.AI.TurnType.Right;
-            }
-            else if (Vector3.Cross(oldDir, JoyDir).y < 0)
-            {
-                turnType = UFrame.AI.TurnType.Left;
-            }
-            else
-            {
-                //if (angle > 0)
-                //{
-                //    turnType = UFrame.AI.TurnType.Right;
-                //}
-                //else
-                //{
-                //    turnType = UFrame.AI.TurnType.None;
-                //}
-                turnType = UFrame.AI.TurnType.None;
-            }
-
-            moveObject.SetTurnType(turnType);
-        }
-
-        /// <summary>
-        /// 根据JoyDir的x的正负确定转向
-        /// </summary>
-        /// <param name="tankCtr"></param>
-        /// <param name="JoyDir"></param>
-        void DirByJoyDirX(Vector3 JoyDir)
-        {
-            //得到新方向和旧方向的左边还是右边
-            UFrame.AI.TurnType turnType;
-            if (JoyDir.x > 0)
-            {
-                turnType = UFrame.AI.TurnType.Right;
-            }
-            else if (JoyDir.x < 0)
-            {
-                turnType = UFrame.AI.TurnType.Left;
-            }
-            else
-            {
-                turnType = UFrame.AI.TurnType.None;
-            }
-
-
-            moveObject.SetTurnType(turnType);
-        }
     }
 
 
