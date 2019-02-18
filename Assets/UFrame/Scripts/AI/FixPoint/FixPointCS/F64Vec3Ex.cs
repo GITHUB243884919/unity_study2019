@@ -39,11 +39,12 @@ namespace FixMath
         public static F64Vec3 RotateY(F64Vec3 lhs, F64 angle)
         {
             //x1＝xcosθ + ysinθ, y1＝-xsinθ + ycosθ
-            F64 angle1 = F64.DegToRad2(angle);
-            F64 x = lhs.X * F64.Cos(angle1) + lhs.Z * F64.Sin(angle1);
+            F64 rad = F64.DegToRad2(angle);
+            F64 cos = F64.Cos(rad);
+            F64 sin = F64.Sin(rad);
+            F64 x = lhs.X * cos + lhs.Z * sin;
             F64 y = F64.Zero;
-            F64 z = -lhs.X * F64.Sin(angle1) + lhs.Z * F64.Cos(angle1);
-            
+            F64 z = -lhs.X * sin + lhs.Z * cos;
 
             return new F64Vec3(x, y, z);
         }

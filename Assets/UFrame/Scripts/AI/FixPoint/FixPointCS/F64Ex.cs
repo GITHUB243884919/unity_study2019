@@ -23,9 +23,6 @@ namespace FixMath
         /// <returns></returns>
         public static F64 RadToDeg2(F64 a) { return a * F180 / Pi; }
 
-        
-
-
     }
 
 }

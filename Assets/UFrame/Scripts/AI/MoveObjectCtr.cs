@@ -29,17 +29,11 @@ namespace UFrame.AI
                     fAngle = -fAngle;
                     
                 }
-                Debug.LogError(fAngle.Float);
                 ////原来的朝向在XZ平面饶Y旋转angle, angle是欧拉角
                 //Vector3 newDir = Quaternion.AngleAxis((float)angle, Vector3.up) * moveObject.GetDir();
                 //newDir.Normalize();
                 //moveObject.SetDir(newDir);
 
-
-
-                //F64Quat rot = F64Quat.FromAxisAngle(F64Vec3.Up, fAngle);
-                //F64Vec3 newFdir = F64Quat.RotateVector(rot, moveObject.GetDir(1));
-                //F64Vec3 newNfdir = F64Vec3.Normalize(newFdir);
                 F64Vec3 newFdir = F64Vec3.RotateY(moveObject.GetDir(), fAngle);
                 F64Vec3 newNfdir = F64Vec3.Normalize(newFdir);
                 moveObject.SetDir(newNfdir);
@@ -102,15 +96,15 @@ namespace UFrame.AI
         /// </summary>
         /// <param name="tankCtr"></param>
         /// <param name="JoyDir"></param>
-        void DirByJoyDirX(Vector3 JoyDir)
+        void DirByJoyDirX(F64Vec3 JoyDir)
         {
             //得到新方向和旧方向的左边还是右边
-            UFrame.AI.TurnType turnType;
-            if (JoyDir.x > 0)
+            TurnType turnType;
+            if (JoyDir.X.Float > 0)
             {
                 turnType = UFrame.AI.TurnType.Right;
             }
-            else if (JoyDir.x < 0)
+            else if (JoyDir.X.Float < 0)
             {
                 turnType = UFrame.AI.TurnType.Left;
             }

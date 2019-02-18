@@ -15,6 +15,9 @@ namespace GameName.Battle.Display
         Dictionary<int, System.Action<UFrame.MessageCenter.Message>> battleMessageCallbacks =
             new Dictionary<int, System.Action<UFrame.MessageCenter.Message>>();
 
+        Vector3 wallBegin = new Vector3(10, 0, 5);
+        Vector3 wallEnd = new Vector3(10, 0, 10);
+        Vector3 wallDir;
         public BattleDisplay(BattleManager battleManager)
         {
             this.battleManager = battleManager;
@@ -23,6 +26,9 @@ namespace GameName.Battle.Display
 
             battleManager.battleMessageCenter.Regist((int)BattleMessageID.L2D_TankPos, this);
             battleMessageCallbacks[(int)BattleMessageID.L2D_TankPos] = OnL2D_TankPos;
+
+            wallDir = (wallEnd - wallBegin).normalized;
+            Debug.LogError("wallDir = " + wallDir);
         }
 
         public void Execute(UFrame.MessageCenter.Message msg)
@@ -79,9 +85,17 @@ namespace GameName.Battle.Display
             }
         }
 
+
         public void Tick(int deltaTimeMS)
         {
+            Debug.DrawLine(wallBegin, wallEnd, Color.red);
 
+            foreach(var kv in tanks)
+            {
+                Debug.DrawLine(kv.Value.transform.position,
+                    kv.Value.transform.position + kv.Value.transform.forward * 10 , Color.blue);
+                
+            }
         }
     }
 }
