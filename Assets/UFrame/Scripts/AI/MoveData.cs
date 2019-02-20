@@ -61,6 +61,7 @@ namespace UFrame.AI
 
         public bool couldTurn;
 
+
         public MoveObject()
         {
             moveData = new MoveData();

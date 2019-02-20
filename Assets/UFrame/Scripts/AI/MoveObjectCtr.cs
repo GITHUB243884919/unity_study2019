@@ -59,12 +59,14 @@ namespace UFrame.AI
         /// <param name="JoyDir"></param>
         void DirByJoyDir(F64Vec3 JoyDir)
         {
+
             //得到新方向和旧方向的夹角
             F64Vec3 oldDir = moveObject.GetDir();
             F64 angle = F64Vec3.Angle(oldDir, JoyDir);
 
             //得到新方向和旧方向的左边还是右边
             TurnType turnType;
+            //todo 可以优化，只取y就只计算叉乘的y部分
             F64Vec3 cross = F64Vec3.Cross(oldDir, JoyDir);
             float crossY = cross.Y.Float;
             if (crossY > 0)
@@ -86,6 +88,22 @@ namespace UFrame.AI
                 //    turnType = UFrame.AI.TurnType.None;
                 //}
                 turnType = UFrame.AI.TurnType.None;
+            }
+            //当相机旋转的时候，考虑朝向是否的相反，即是眼睛看到的向左就向左
+            //如果不考虑，那么当相机面朝角色时，摇杆的左右操作和视觉上是相反的。
+            Vector3 cf3 = Camera.main.transform.forward;
+            Vector2 cf2 = new Vector2(cf3.x, cf3.z);
+            float dot = Vector2.Dot(cf2, Vector2.up);
+            if (dot < 0)
+            {
+                if (turnType == TurnType.Right)
+                {
+                    turnType = TurnType.Left;
+                }
+                else if (turnType == TurnType.Left)
+                {
+                    turnType = TurnType.Right;
+                }
             }
             Debug.LogError("DirByJoyDir " + turnType);
             moveObject.SetTurnType(turnType);

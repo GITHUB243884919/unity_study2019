@@ -32,18 +32,20 @@ namespace FixMath
         /// <summary>
         /// lhs 是单位向量
         /// angle 是旋转的欧拉角
+        /// 乘以旋转矩阵
+        /// Y 轴旋转 x1 = xcosθ + zsinθ, y1=y, z1＝-xsinθ + zcosθ
+        /// X 轴旋转 x1 = x, y1=ycos - zsin, z1 = ysin + zcos 
         /// </summary>
         /// <param name="lhs"></param>
         /// <param name="angle"></param>
         /// <returns></returns>
         public static F64Vec3 RotateY(F64Vec3 lhs, F64 angle)
         {
-            //x1＝xcosθ + ysinθ, y1＝-xsinθ + ycosθ
             F64 rad = F64.DegToRad2(angle);
             F64 cos = F64.Cos(rad);
             F64 sin = F64.Sin(rad);
             F64 x = lhs.X * cos + lhs.Z * sin;
-            F64 y = F64.Zero;
+            F64 y = lhs.Y;
             F64 z = -lhs.X * sin + lhs.Z * cos;
 
             return new F64Vec3(x, y, z);

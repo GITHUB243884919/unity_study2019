@@ -3,19 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 using FixedPoint;
 using FixMath;
-public class TestFix : MonoBehaviour {
+using UFrame.AI;
 
+public class TestFix : MonoBehaviour {
+    public struct T
+    {
+        public int x;
+    }
     void Start()
     {
-        FixedPointCSTest_Move();
+        T t;
+        t.x = 1;
+
+
+        FixedPointCSTest_Matrix();
+        //FixedPointCSTest_Move();
         //FixPointCSTest();
         //FixPointTest();
         //FIntTest();
         //Fix64Test();
-        
+
 
 
     }
+
+    void FixedPointCSTest_Matrix()
+    {
+        //MoveObject obj = new MoveObject();
+        F64Vec2 pos = F64Vec2.Zero;
+        F64Vec2 heading = F64Vec2.Left;
+        F64Vec2 side = F64Vec2.Up;
+
+        F64Matrix3x3 m = new F64Matrix3x3();
+        F64Vec2 point = F64Vec2.FromFloat(2, 3);
+        F64Vec2 point2 = m.PointToLocalSpace(point,
+                                heading,
+                                side,
+                                pos);
+        Debug.LogError(point2.X.Float + " " +  point2.Y.Float);
+
+    }
+
     void FixedPointCSTest_Move()
     {
 
