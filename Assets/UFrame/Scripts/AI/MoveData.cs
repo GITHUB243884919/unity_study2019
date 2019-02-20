@@ -71,23 +71,6 @@ namespace UFrame.AI
 
         public F64Vec3 up { get { return F64Vec3.Cross(forward, left); } }
 
-        public F64Vec3 PointToLocalSpace2D(F64Vec3 p)
-        {
-            F64Vec2 p2 = new F64Vec2(p.X, p.Z);
-            F64Matrix3x3 m = new F64Matrix3x3();
-            F64Vec3 f3 = forward;
-            var f2 = new F64Vec2(f3.X, f3.Z);
-            var l3 = left;
-            var r2 = new F64Vec2(l3.X, l3.Z);
-            F64Vec2 point2 = m.PointToLocalSpace(p2,
-                f2,
-                r2,
-                new F64Vec2(moveData.pos.X, moveData.pos.Z));
-            //Debug.LogError(point2.X.Float + " " + point2.Y.Float);
-            return new F64Vec3(point2.X, p.Y, point2.Y);
-        }
-
-
         public MoveObject()
         {
             moveData = new MoveData();

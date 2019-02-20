@@ -47,7 +47,8 @@ namespace UFrame.AI
             }
 
             F64Vec3 check = new F64Vec3(0, 0, 100);
-            Debug.LogError("to local " + moveObject.PointToLocalSpace2D(check));
+            var r3 = F64Vec3.PointToLocalSpace2D(check, moveObject.forward, moveObject.left, moveObject.GetPos());
+            Debug.LogError("to local " + r3);
 
         }
 

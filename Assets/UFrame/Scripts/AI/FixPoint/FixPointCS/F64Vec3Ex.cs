@@ -65,6 +65,25 @@ namespace FixMath
             return new F64Vec3(x, y, z);
         }
 
+        /// <summary>
+        /// XZ平面下把p转到局部坐标，后三个参数是2d坐标轴定义参数
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="forward"></param>
+        /// <param name="left"></param>
+        /// <param name="o"></param>
+        /// <returns></returns>
+        public static F64Vec3 PointToLocalSpace2D(F64Vec3 p, F64Vec3 forward, F64Vec3 left, F64Vec3 o)
+        {
+            var p2 = new F64Vec2(p.X, p.Z);
+            var f2 = new F64Vec2(forward.X, forward.Z);
+            var l2 = new F64Vec2(left.X, left.Z);
+            var o2 = new F64Vec2(o.X, o.Z);
+            var X = F64Vec2.Dot(f2, p2) - F64Vec2.Dot(o2, f2);
+            var Y = F64Vec2.Dot(l2, p2) - F64Vec2.Dot(o2, l2);
+            return new F64Vec3(X, p.Y, Y);
+        }
+
         public Vector3 ToUnityVector3()
         {
             return new Vector3(X.Float, Y.Float, Z.Float);

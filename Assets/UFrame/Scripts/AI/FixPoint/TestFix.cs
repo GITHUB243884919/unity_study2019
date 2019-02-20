@@ -88,11 +88,10 @@ public class TestFix : MonoBehaviour {
         //Debug.LogError(obj.forward + " " + F64Vec3.Normalize(f).ToUnityVector3());
 
         F64Vec3 check = new F64Vec3(2, 0, 3);
-        var r = obj.PointToLocalSpace2D(check);
-
+        var r3 = F64Vec3.PointToLocalSpace2D(check, obj.forward, obj.left, obj.GetPos());
 
         //Debug.LogError(check2.X.Float + " " + check2.Y.Float);
-        Debug.LogError(r);
+        Debug.LogError(r3);
 
     }
 
