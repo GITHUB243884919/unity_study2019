@@ -32,6 +32,11 @@ namespace GameName.Lua.Config
 		/// </summary>
 		public double turn_speed;
 
+		/// <summary>
+		/// 探测距离
+		/// </summary>
+		public double detection_len;
+
         #endregion
         
         public override string ToString ()
@@ -48,6 +53,8 @@ namespace GameName.Lua.Config
     		+"	speed:"+speed
 
     		+"	turn_speed:"+turn_speed
+
+    		+"	detection_len:"+detection_len
 ;
 		}
     }

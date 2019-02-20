@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1882488055
+CRC: 696424297
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 774f95dccecea9d2afd19ec30d318309
+    Hash: 76a7fb99471a68710846c208339a7746
   TypeTreeHash:
     serializedVersion: 2
-    Hash: d27a9ed7ed5c7a459d780b0a0a375c27
+    Hash: 1ed27ead17339e59cb9cfcbd1dbec7f0
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -17,15 +17,14 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 23
   Script: {instanceID: 0}
-- Class: 28
-  Script: {instanceID: 0}
 - Class: 33
   Script: {instanceID: 0}
 - Class: 43
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
+- Class: 135
+  Script: {instanceID: 0}
 Assets:
-- Assets/GameResources/prefabs/tank.prefab
-Dependencies:
-- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/tanks-albedo.normal-hd
+- Assets/GameResources/prefabs/avoidance.prefab
+Dependencies: []

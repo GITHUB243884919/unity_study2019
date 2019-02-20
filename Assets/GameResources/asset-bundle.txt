@@ -11,6 +11,7 @@ materials/mymaterial,materials/mymaterial
 prefabs/mycube,prefabs/mycube
 prefabs/mycube-parent,prefabs/mycube-parent
 lua/config/test_sheet1,lua/config/test_sheet1
+prefabs/avoidance,prefabs/avoidance
 textures/unitylogo/unitylogo,textures/unitylogo
 prefabs/cube,prefabs/cube
 lua/config/tank_info,lua/config/tank_info

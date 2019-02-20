@@ -23,6 +23,7 @@ public class TankGroupInit
     public int tank_type;
     public Vector3 pos;
     public Vector3 dir;
+    public float detectionLen;
 }
 
 public class TankPos
@@ -32,6 +33,14 @@ public class TankPos
     public Vector3 dir;
 }
 
+public class Avoidance
+{
+    //public int id;
+    public Vector3 pos;
+    public float rad;
+    
+}
+
 public class L2D_BattleInit : UFrame.MessageCenter.Message
 {
     public L2D_BattleInit()
@@ -39,6 +48,7 @@ public class L2D_BattleInit : UFrame.MessageCenter.Message
         messageID = (int)BattleMessageID.L2D_BattleInit;
     }
     public List<TankGroupInit> tankGroup;
+    public List<Avoidance> avoidances;
 }
 
 public class D2L_BattleInit : UFrame.MessageCenter.Message

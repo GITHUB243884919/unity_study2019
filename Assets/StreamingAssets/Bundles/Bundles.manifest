@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2713639826
+CRC: 3074214913
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -89,4 +89,7 @@ AssetBundleManifest:
       Dependencies: {}
     Info_24:
       Name: prefabs/test_easy_touch
+      Dependencies: {}
+    Info_25:
+      Name: prefabs/avoidance
       Dependencies: {}

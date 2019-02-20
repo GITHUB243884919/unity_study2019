@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UFrame.AI;
+using FixMath;
 namespace GameName.Battle.Logic.Data
 {
     public class Tank : MoveObject
@@ -24,6 +25,13 @@ namespace GameName.Battle.Logic.Data
             ID = sID++;
         }
     }
+
+    public class Avoidance: LogicObject
+    {
+        public F64Vec3 pos;
+        public F64 radius;
+    }
+
 
 }
 

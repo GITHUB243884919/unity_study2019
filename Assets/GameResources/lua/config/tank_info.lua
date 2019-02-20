@@ -5,6 +5,7 @@ return {
     res_path = "prefabs/tank",
     speed = 3.0,
     turn_speed = 5.0,
+    detection_len = 5.0,
   },
 
 }

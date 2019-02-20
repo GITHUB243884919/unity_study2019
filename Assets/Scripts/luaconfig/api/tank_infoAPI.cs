@@ -233,6 +233,50 @@ namespace GameName.Lua.Config
 			return res;
 		}
 
+		public static tank_info GetDataBy_detection_len (List<tank_info> list, double target)
+		{
+			foreach (var item in list){
+				if (item.detection_len == target) {
+					return item;
+				}
+			}
+			return null;
+		}
+        
+		public static tank_info GetDataBy_detection_len (double target)
+		{
+			var cacheList = LuaConfigManager.Instance.tank_infoParse.CacheList;
+			foreach (var item in cacheList){
+				if (item.detection_len == target) {
+					return item;
+				}
+			}
+			return null;
+		}
+
+		public static List<tank_info> GetDataListBy_detection_len (List<tank_info> list, double target)
+		{
+			List<tank_info> res = new List<tank_info> ();
+			foreach (var item in list){
+				if (item.detection_len == target) {
+					res.Add (item);
+				}
+			}
+			return res;
+		}
+
+		public static List<tank_info> GetDataListBy_detection_len (double target)
+		{
+			var cacheList = LuaConfigManager.Instance.tank_infoParse.CacheList;
+			List<tank_info> res = new List<tank_info> ();
+			foreach (var item in cacheList){
+				if (item.detection_len == target) {
+					res.Add (item);
+				}
+			}
+			return res;
+		}
+
 
     }
 

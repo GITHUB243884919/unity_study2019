@@ -7,11 +7,17 @@ using GameName.Lua.Config;
 
 namespace GameName.Battle.Display
 {
+    public class Tank
+    {
+        public int ID;
+        public float dectLen;
+        public GameObject go;
+    }
     public class BattleDisplay : IMessageExecutor
     {
         BattleManager battleManager;
 
-        Dictionary<int, GameObject> tanks = new Dictionary<int, GameObject>();
+        Dictionary<int, Tank> tanks = new Dictionary<int, Tank>();
         Dictionary<int, System.Action<UFrame.MessageCenter.Message>> battleMessageCallbacks =
             new Dictionary<int, System.Action<UFrame.MessageCenter.Message>>();
 
@@ -45,11 +51,14 @@ namespace GameName.Battle.Display
 
                 tank_info ti = tank_infoAPI.GetDataBy_tank_type(initMsg.tankGroup[i].tank_type);
                 GameObjectGetter tankGetter = ResHelper.LoadGameObject(ti.res_path);
-                GameObject tank = tankGetter.Get();
-                tank.transform.position = initMsg.tankGroup[i].pos;
+                GameObject tankGo = tankGetter.Get();
+                tankGo.transform.position = initMsg.tankGroup[i].pos;
                 Debug.LogError(initMsg.tankGroup[i].dir);
-                tank.transform.transform.LookAt(initMsg.tankGroup[i].dir);
-
+                tankGo.transform.transform.LookAt(initMsg.tankGroup[i].dir);
+                var tank = new Tank();
+                tank.go = tankGo;
+                tank.ID = initMsg.tankGroup[i].id;
+                tank.dectLen = initMsg.tankGroup[i].detectionLen;
                 tanks.Add(initMsg.tankGroup[i].id, tank);
 
                 Debug.LogError(initMsg.tankGroup[i].id + " " + initMsg.tankGroup[i].isPlayer);
@@ -62,6 +71,16 @@ namespace GameName.Battle.Display
                 //    //rpgCamera.UsedCamera = Camera.main;
                 //    selfCamera.transform.SetParent(tank.transform);
                 //}
+            }
+
+            for (int i = 0; i < initMsg.avoidances.Count; ++i)
+            {
+
+                //tank_info ti = tank_infoAPI.GetDataBy_tank_type(initMsg.tankGroup[i].tank_type);
+                GameObjectGetter getter = ResHelper.LoadGameObject("prefabs/avoidance");
+                GameObject av = getter.Get();
+                av.transform.position = initMsg.avoidances[i].pos;
+                av.transform.localScale *= initMsg.avoidances[i].rad;
             }
 
             D2L_BattleInit initRetMsg = new D2L_BattleInit();
@@ -80,8 +99,8 @@ namespace GameName.Battle.Display
                 int tankID = tankPos.id;
                 var tank = tanks[tankID];
 
-                tank.transform.position = tankPos.pos;
-                tank.transform.LookAt(tankPos.dir + tankPos.pos);
+                tank.go.transform.position = tankPos.pos;
+                tank.go.transform.LookAt(tankPos.dir + tankPos.pos);
             }
         }
 
@@ -92,8 +111,8 @@ namespace GameName.Battle.Display
 
             foreach(var kv in tanks)
             {
-                Debug.DrawLine(kv.Value.transform.position,
-                    kv.Value.transform.position + kv.Value.transform.forward * 10 , Color.blue);
+                Debug.DrawLine(kv.Value.go.transform.position,
+                    kv.Value.go.transform.position + kv.Value.go.transform.forward * kv.Value.dectLen, Color.blue);
                 
             }
         }

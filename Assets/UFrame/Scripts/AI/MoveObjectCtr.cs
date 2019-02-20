@@ -15,10 +15,20 @@ namespace UFrame.AI
         public abstract void Turn(F64Vec3 dir);
     }
 
+
     public class SimpleMoveObjectCtr : MoveObjectCtr
     {
+        GameName.Battle.Logic.BattleLogic logic;
+
+        public SimpleMoveObjectCtr(GameName.Battle.Logic.BattleLogic logic)
+        {
+            this.logic = logic;
+        }
+
         public override void Tick(int deltaTimeMS)
         {
+            CheckAvoidance();
+
             F64 fdeltaTime = new F64(deltaTimeMS);
             F64 f1000 = F64.F1000;
             if (moveObject.couldTurn)
@@ -45,11 +55,34 @@ namespace UFrame.AI
                 F64Vec3 fOldPos = moveObject.GetPos();
                 moveObject.SetPos(fOldPos + fdelta * moveObject.GetDir());
             }
+        }
 
-            F64Vec3 check = new F64Vec3(0, 0, 100);
-            var r3 = F64Vec3.PointToLocalSpace2D(check, moveObject.forward, moveObject.left, moveObject.GetPos());
-            Debug.LogError("to local " + r3);
+        void CheckAvoidance()
+        {
+            foreach(var v in logic.avoidances)
+            {
+                //在检查范围外
+                F64 sqrDis = F64Vec3.LengthSqr(moveObject.GetPos() - v.pos);
+                F64 sqrDis2 = moveObject.moveData.detectionLen + v.radius;
+                sqrDis2 *= sqrDis2;
+                if (sqrDis > (sqrDis2))
+                {
+                    continue;
+                }
 
+                //在后面
+                var local = F64Vec3.PointToLocalSpace2D(v.pos, moveObject.forward, moveObject.left, moveObject.GetPos());
+                if (local.X < F64.Zero)
+                {
+                    continue;
+                }
+
+
+                Debug.LogError("to local " + local);
+
+
+
+            }
         }
 
         public override void Turn(F64Vec3 dir)
@@ -73,44 +106,36 @@ namespace UFrame.AI
             TurnType turnType;
             //todo 可以优化，只取y就只计算叉乘的y部分
             F64Vec3 cross = F64Vec3.Cross(oldDir, JoyDir);
-            float crossY = cross.Y.Float;
-            if (crossY > 0)
+            //顺时针
+            if (cross.Y > F64.Zero)
             {
                 turnType = TurnType.Right;
             }
-            else if (crossY < 0)
+            else if (cross.Y < F64.Zero)
             {
                 turnType = TurnType.Left;
             }
             else
             {
-                //if (angle > 0)
-                //{
-                //    turnType = UFrame.AI.TurnType.Right;
-                //}
-                //else
-                //{
-                //    turnType = UFrame.AI.TurnType.None;
-                //}
                 turnType = UFrame.AI.TurnType.None;
             }
             //当相机旋转的时候，考虑朝向是否的相反，即是眼睛看到的向左就向左
             //如果不考虑，那么当相机面朝角色时，摇杆的左右操作和视觉上是相反的。
-            Vector3 cf3 = Camera.main.transform.forward;
-            Vector2 cf2 = new Vector2(cf3.x, cf3.z);
-            float dot = Vector2.Dot(cf2, Vector2.up);
-            if (dot < 0)
-            {
-                if (turnType == TurnType.Right)
-                {
-                    turnType = TurnType.Left;
-                }
-                else if (turnType == TurnType.Left)
-                {
-                    turnType = TurnType.Right;
-                }
-            }
-            Debug.LogError("DirByJoyDir " + turnType);
+            //Vector3 cf3 = Camera.main.transform.forward;
+            //Vector2 cf2 = new Vector2(cf3.x, cf3.z);
+            //float dot = Vector2.Dot(cf2, Vector2.up);
+            //if (dot < 0)
+            //{
+            //    if (turnType == TurnType.Right)
+            //    {
+            //        turnType = TurnType.Left;
+            //    }
+            //    else if (turnType == TurnType.Left)
+            //    {
+            //        turnType = TurnType.Right;
+            //    }
+            //}
+            ////Debug.LogError("DirByJoyDir " + turnType);
             moveObject.SetTurnType(turnType);
         }
 
@@ -123,11 +148,11 @@ namespace UFrame.AI
         {
             //得到新方向和旧方向的左边还是右边
             TurnType turnType;
-            if (JoyDir.X.Float > 0)
+            if (JoyDir.X > F64.Zero)
             {
                 turnType = UFrame.AI.TurnType.Right;
             }
-            else if (JoyDir.X.Float < 0)
+            else if (JoyDir.X < F64.Zero)
             {
                 turnType = UFrame.AI.TurnType.Left;
             }
@@ -135,7 +160,6 @@ namespace UFrame.AI
             {
                 turnType = UFrame.AI.TurnType.None;
             }
-
 
             moveObject.SetTurnType(turnType);
         }

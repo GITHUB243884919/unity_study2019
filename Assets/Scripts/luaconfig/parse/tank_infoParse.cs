@@ -26,6 +26,7 @@ namespace GameName.Lua.Config
 			data.res_path = tableData["res_path"] as string;
 			data.speed = System.Convert.ToDouble(tableData["speed"]);
 			data.turn_speed = System.Convert.ToDouble(tableData["turn_speed"]);
+			data.detection_len = System.Convert.ToDouble(tableData["detection_len"]);
 
             return data;
         }

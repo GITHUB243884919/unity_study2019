@@ -41,6 +41,11 @@ namespace UFrame.AI
         /// 转向类型
         /// </summary>
         public TurnType turnType;
+
+        /// <summary>
+        /// 探测距离
+        /// </summary>
+        public F64 detectionLen;
     }
 
     public class LogicObject
