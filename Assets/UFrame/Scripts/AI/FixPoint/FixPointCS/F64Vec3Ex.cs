@@ -35,6 +35,7 @@ namespace FixMath
         /// 乘以旋转矩阵
         /// Y 轴旋转 x1 = xcosθ + zsinθ, y1=y, z1＝-xsinθ + zcosθ
         /// X 轴旋转 x1 = x, y1=ycos - zsin, z1 = ysin + zcos 
+        /// Z 轴旋转 x1 = xcos - ysin, y1=xsin+ycos, z1=z
         /// </summary>
         /// <param name="lhs"></param>
         /// <param name="angle"></param>
@@ -47,6 +48,19 @@ namespace FixMath
             F64 x = lhs.X * cos + lhs.Z * sin;
             F64 y = lhs.Y;
             F64 z = -lhs.X * sin + lhs.Z * cos;
+
+            return new F64Vec3(x, y, z);
+        }
+
+        public static F64Vec3 RotateZ(F64Vec3 lhs, F64 angle)
+        {
+            //Z 轴旋转 x1 = xcos - ysin, y1=xsin+ycos, z1=z
+            F64 rad = F64.DegToRad2(angle);
+            F64 cos = F64.Cos(rad);
+            F64 sin = F64.Sin(rad);
+            F64 x = lhs.X * cos - lhs.Y * sin;
+            F64 y = lhs.X * sin + lhs.Y * cos;
+            F64 z = lhs.Z;
 
             return new F64Vec3(x, y, z);
         }

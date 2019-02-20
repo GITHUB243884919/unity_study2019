@@ -45,6 +45,10 @@ namespace UFrame.AI
                 F64Vec3 fOldPos = moveObject.GetPos();
                 moveObject.SetPos(fOldPos + fdelta * moveObject.GetDir());
             }
+
+            F64Vec3 check = new F64Vec3(0, 0, 100);
+            Debug.LogError("to local " + moveObject.PointToLocalSpace2D(check));
+
         }
 
         public override void Turn(F64Vec3 dir)

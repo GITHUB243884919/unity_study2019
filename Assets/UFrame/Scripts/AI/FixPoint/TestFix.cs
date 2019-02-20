@@ -16,7 +16,8 @@ public class TestFix : MonoBehaviour {
         t.x = 1;
 
 
-        FixedPointCSTest_Matrix();
+        FixedPointCSTest_Matrix2();
+        //FixedPointCSTest_Matrix();
         //FixedPointCSTest_Move();
         //FixPointCSTest();
         //FixPointTest();
@@ -31,8 +32,8 @@ public class TestFix : MonoBehaviour {
     {
         //MoveObject obj = new MoveObject();
         F64Vec2 pos = F64Vec2.Zero;
-        F64Vec2 heading = F64Vec2.Left;
-        F64Vec2 side = F64Vec2.Up;
+        F64Vec2 heading = F64Vec2.Right; //1,0
+        F64Vec2 side = F64Vec2.Up; //0,1
 
         F64Matrix3x3 m = new F64Matrix3x3();
         F64Vec2 point = F64Vec2.FromFloat(2, 3);
@@ -41,6 +42,57 @@ public class TestFix : MonoBehaviour {
                                 side,
                                 pos);
         Debug.LogError(point2.X.Float + " " +  point2.Y.Float);
+
+        F64Vec3 forward = new F64Vec3(1, 0, 0);
+        F64Vec3 right = F64Vec3.RotateY(forward, new FixMath.F64(90));
+        Debug.LogError(forward.ToUnityVector3() + " " + F64Vec3.Normalize(right).ToUnityVector3());
+        Debug.LogError(F64Vec3.Normalize(F64Vec3.Cross(forward, right)).ToUnityVector3());
+
+        MoveObject obj = new MoveObject();
+        obj.SetPos(F64Vec3.Zero);
+        obj.SetDir(new F64Vec3(1, 0, 0));
+        var f = F64Vec3.RotateY(obj.forward, new FixMath.F64(90));
+        Debug.LogError(obj.forward + " " + F64Vec3.Normalize(f).ToUnityVector3());
+
+        F64Vec3 check = F64Vec3.FromFloat(2, 0, 3);
+        //var r = obj.PointToLocalSpace2D(check);
+        F64Vec2 check2 = m.PointToLocalSpace(new F64Vec2(check.X, check.Z) ,
+                        new F64Vec2(obj.forward.X, obj.forward.Z),
+                        new F64Vec2(f.X, f.Z),
+                        new F64Vec2(obj.GetPos().X, obj.GetPos().Y) );
+        Debug.LogError(check2.X.Float + " " + check2.Y.Float);
+
+        //Debug.LogError(check2.X.Float + " " + check2.Y.Float);
+
+    }
+
+    void FixedPointCSTest_Matrix2()
+    {
+        //MoveObject obj = new MoveObject();
+        //F64Vec2 pos = F64Vec2.Zero;
+        //F64Vec2 heading = F64Vec2.Right; //1,0
+        //F64Vec2 side = F64Vec2.Up; //0,1
+
+        F64Matrix3x3 m = new F64Matrix3x3();
+        //F64Vec2 point = F64Vec2.FromFloat(2, 3);
+        //F64Vec2 point2 = m.PointToLocalSpace(point,
+        //                        heading,
+        //                        side,
+        //                        pos);
+        //Debug.LogError(point2.X.Float + " " + point2.Y.Float);
+
+        MoveObject obj = new MoveObject();
+        obj.SetPos(F64Vec3.Zero);
+        obj.SetDir(new F64Vec3(1, 0, 0));
+        //var f = F64Vec3.RotateY(obj.forward, new FixMath.F64(-90));
+        //Debug.LogError(obj.forward + " " + F64Vec3.Normalize(f).ToUnityVector3());
+
+        F64Vec3 check = new F64Vec3(2, 0, 3);
+        var r = obj.PointToLocalSpace2D(check);
+
+
+        //Debug.LogError(check2.X.Float + " " + check2.Y.Float);
+        Debug.LogError(r);
 
     }
 
