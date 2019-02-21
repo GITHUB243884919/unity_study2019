@@ -7,20 +7,6 @@ namespace UFrame.LUA
 {
     public class LuaManager : Singleton<LuaManager>
     {
-        //private static LuaManager _instance;
-
-        //public static LuaManager Instance
-        //{
-        //    get
-        //    {
-        //        if (_instance == null)
-        //        {
-        //            _instance = new LuaManager();
-        //        }
-        //        return _instance;
-        //    }
-        //}
-
         public LuaState luaState { get; private set; }
         private bool bInit = false;
         public void Init()

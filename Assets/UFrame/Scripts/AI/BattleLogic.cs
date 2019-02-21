@@ -36,6 +36,12 @@ namespace GameName.Battle.Logic
             logicMoudle.Tick(deltaTimeMS);
         }
 
+        public void RegistBattleMessage(BattleMessageID messageID, System.Action<UFrame.MessageCenter.Message> callback)
+        {
+            battleManager.battleMessageCenter.Regist((int)messageID, this);
+            battleMessageCallbacks[(int)messageID] = callback;
+        }
+
         public void SendBattleMessage(UFrame.MessageCenter.Message msg)
         {
             battleManager.battleMessageCenter.Send(msg);
@@ -59,39 +65,8 @@ namespace GameName.Battle.Logic
 
         void InitBattleMessage()
         {
-            battleManager.battleMessageCenter.Regist((int)BattleMessageID.D2L_BattleInit, this);
-            battleMessageCallbacks[(int)BattleMessageID.D2L_BattleInit] = OnD2L_BattleInit;
-
-            battleManager.battleMessageCenter.Regist((int)BattleMessageID.JOY_Press, this);
-            battleMessageCallbacks[(int)BattleMessageID.JOY_Press] = OnJOY_Press;
-
-        }
-
-
-
-        void OnD2L_BattleInit(UFrame.MessageCenter.Message msg)
-        {
-            D2L_BattleInit convMsg = msg as D2L_BattleInit;
-            if (convMsg.result)
-            {
-                displayOK = true;
-                Debug.LogError("display init ok");
-            }
-
-        }
-
-        void OnJOY_Press(UFrame.MessageCenter.Message msg)
-        {
-            JOY_Press convMsg = msg as JOY_Press;
-            var tankCtrs = logicDataManager.GetTankCtrs();
-            var tankCtr = tankCtrs[convMsg.tankID];
-            tankCtr.moveObject.couldMove = convMsg.couldMove;
-            tankCtr.moveObject.couldTurn = convMsg.couldTurn;
-
-            if (convMsg.couldMove && convMsg.couldTurn)
-            {
-                tankCtr.Turn(F64Vec3.FromUnityVector3(convMsg.dir));
-            }
+            RegistBattleMessage(BattleMessageID.D2L_BattleInit, OnD2L_BattleInit);
+            RegistBattleMessage(BattleMessageID.JOY_Press, OnJOY_Press);
         }
 
     }

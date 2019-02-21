@@ -13,11 +13,15 @@ namespace GameName.Battle
         public DirectMessageCenter battleMessageCenter;
         public Logic.BattleLogic battleLogic;
         public Display.BattleDisplay battleDisplay;
+        [SerializeField]
+        public ETCJoystick joy;
 
-        // Use this for initialization
-        void Start()
+        void Awake()
         {
             Application.targetFrameRate = 30;
+            GameObject easytouchGo = GameObject.Find("easytouch");
+            joy = easytouchGo.GetComponentInChildren<ETCJoystick>();
+
             UFrame.ResourceManagement.ResourceManager.GetInstance().Init();
             LuaManager.GetInstance().Init();
             LuaManager.GetInstance().luaState.DoFile("init_lua_config");
@@ -27,6 +31,8 @@ namespace GameName.Battle
             battleDisplay = new Display.BattleDisplay(this);
 
             battleLogic.InitBattleStage();
+
+
         }
 
 
@@ -38,8 +44,7 @@ namespace GameName.Battle
             battleLogic.Tick((int)(Time.deltaTime * 1000));
             battleDisplay.Tick((int)(Time.deltaTime * 1000));
         }
-        [SerializeField]
-        public ETCJoystick joy;
+
         void OnEnable()
         {
             

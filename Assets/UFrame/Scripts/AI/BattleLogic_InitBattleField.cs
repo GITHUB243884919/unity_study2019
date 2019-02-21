@@ -9,7 +9,6 @@ namespace GameName.Battle.Logic
 {
     public partial class BattleLogic : IMessageExecutor
     {
-
         void InitBattleField()
         {
             L2D_BattleInit initMsg = new L2D_BattleInit();

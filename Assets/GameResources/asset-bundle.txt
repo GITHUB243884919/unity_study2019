@@ -8,6 +8,7 @@ materials/blue,materials/blue
 materials/red,materials/red
 lua/config/init_lua_config,lua/config/init_lua_config
 materials/mymaterial,materials/mymaterial
+prefabs/battle_root,prefabs/battle_root
 prefabs/mycube,prefabs/mycube
 prefabs/mycube-parent,prefabs/mycube-parent
 lua/config/test_sheet1,lua/config/test_sheet1
@@ -16,6 +17,6 @@ textures/unitylogo/unitylogo,textures/unitylogo
 prefabs/cube,prefabs/cube
 lua/config/tank_info,lua/config/tank_info
 prefabs/tank,prefabs/tank
-prefabs/test_easy_touch,prefabs/test_easy_touch
+prefabs/easytouch,prefabs/easytouch
 lua/config/sheet1,lua/config/sheet1
 textures/unitylogo,textures/unitylogo
