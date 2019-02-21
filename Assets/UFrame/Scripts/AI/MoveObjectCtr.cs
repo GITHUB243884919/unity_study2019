@@ -27,39 +27,16 @@ namespace UFrame.AI
 
         public override void Tick(int deltaTimeMS)
         {
-            CheckAvoidance();
-
             F64 fdeltaTime = new F64(deltaTimeMS);
-            F64 f1000 = F64.F1000;
-            if (moveObject.couldTurn)
-            {
-                F64 fAngle = moveObject.GetTurnSpeed() * fdeltaTime / f1000;
-                if (moveObject.GetTurnType() == TurnType.Left)
-                {
-                    fAngle = -fAngle;
-                    
-                }
-                ////原来的朝向在XZ平面饶Y旋转angle, angle是欧拉角
-                //Vector3 newDir = Quaternion.AngleAxis((float)angle, Vector3.up) * moveObject.GetDir();
-                //newDir.Normalize();
-                //moveObject.SetDir(newDir);
 
-                F64Vec3 newFdir = F64Vec3.RotateY(moveObject.GetDir(), fAngle);
-                F64Vec3 newNfdir = F64Vec3.Normalize(newFdir);
-                moveObject.SetDir(newNfdir);
-            }
-
-            if (moveObject.couldMove)
-            {
-                F64 fdelta = moveObject.GetSpeed() * fdeltaTime / f1000;
-                F64Vec3 fOldPos = moveObject.GetPos();
-                moveObject.SetPos(fOldPos + fdelta * moveObject.GetDir());
-            }
+            TickCheckAvoidance(fdeltaTime);
+            TickTurn(fdeltaTime);
+            TickMove(fdeltaTime);
         }
 
-        void CheckAvoidance()
+        void TickCheckAvoidance(F64 fdeltaTime)
         {
-            foreach(var v in logic.avoidances)
+            foreach(var v in logic.logicDataManager.GetAvoidances())
             {
                 //在检查范围外
                 F64 sqrDis = F64Vec3.LengthSqr(moveObject.GetPos() - v.pos);
@@ -77,11 +54,34 @@ namespace UFrame.AI
                     continue;
                 }
 
-
                 Debug.LogError("to local " + local);
+            }
+        }
 
+        public void TickTurn(F64 deltaTimeMS)
+        {
+            if (moveObject.couldTurn)
+            {
+                F64 fAngle = moveObject.GetTurnSpeed() * deltaTimeMS / F64.F1000;
+                if (moveObject.GetTurnType() == TurnType.Left)
+                {
+                    fAngle = -fAngle;
 
+                }
 
+                F64Vec3 newFdir = F64Vec3.RotateY(moveObject.GetDir(), fAngle);
+                F64Vec3 newNfdir = F64Vec3.Normalize(newFdir);
+                moveObject.SetDir(newNfdir);
+            }
+        }
+
+        public void TickMove(F64 fdeltaTime)
+        {
+            if (moveObject.couldMove)
+            {
+                F64 fdelta = moveObject.GetSpeed() * fdeltaTime / F64.F1000;
+                F64Vec3 fOldPos = moveObject.GetPos();
+                moveObject.SetPos(fOldPos + fdelta * moveObject.GetDir());
             }
         }
 

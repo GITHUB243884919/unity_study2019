@@ -39,13 +39,13 @@ namespace GameName.Battle.Logic
             tank.SetTurnSpeed(new F64(30));
             tank.SetTurnType(UFrame.AI.TurnType.None);
             player.tanks.Add(tank);
+            logicDataManager.AddTank(tank);
 
-            Data.BattleLogicDataManager.GetInstance().AddTank(tank);
             UFrame.AI.SimpleMoveObjectCtr tankCtr = new UFrame.AI.SimpleMoveObjectCtr(this);
             tankCtr.moveObject = tank;
-            tankCtrs.Add(tankCtr.moveObject.ID, tankCtr);
+            logicDataManager.AddTankCtr(tankCtr);
 
-            Data.BattleLogicDataManager.GetInstance().AddPlayer(player);
+            logicDataManager.AddPlayer(player);
 
             TankGroupInit tgi = new TankGroupInit();
             tgi.id = tank.GetID();
@@ -99,7 +99,7 @@ namespace GameName.Battle.Logic
             Data.Avoidance adv = new Data.Avoidance();
             adv.pos = new F64Vec3(0, 0, 30);
             adv.radius = new F64(3);
-            avoidances.Add(adv);
+            logicDataManager.AddAvoidance(adv);
 
             initMsg.avoidances = new List<Avoidance>();
             Avoidance av = new Avoidance();

@@ -8,17 +8,13 @@ namespace GameName.Battle.Logic
 {
     public partial class BattleLogic : IMessageExecutor
     {
+        public Data.BattleLogicDataManager logicDataManager = new Data.BattleLogicDataManager();
+
         BattleManager battleManager;
         bool displayOK = false;
 
         Dictionary<int, System.Action<UFrame.MessageCenter.Message>> battleMessageCallbacks =
             new Dictionary<int, System.Action<UFrame.MessageCenter.Message>>();
-
-        //坦克控制
-        public Dictionary<int, UFrame.AI.SimpleMoveObjectCtr> tankCtrs = new Dictionary<int, UFrame.AI.SimpleMoveObjectCtr>();
-
-        //障碍物
-        public List<Data.Avoidance> avoidances = new List<Data.Avoidance>();
 
         LogicModule logicMoudle = new LogicModule();
 
@@ -52,11 +48,7 @@ namespace GameName.Battle.Logic
 
         public void InitBattleStage()
         {
-
-
             InitBattleField();
-
-
         }
 
         void InitMoudle()
@@ -91,6 +83,7 @@ namespace GameName.Battle.Logic
         void OnJOY_Press(UFrame.MessageCenter.Message msg)
         {
             JOY_Press convMsg = msg as JOY_Press;
+            var tankCtrs = logicDataManager.GetTankCtrs();
             var tankCtr = tankCtrs[convMsg.tankID];
             tankCtr.moveObject.couldMove = convMsg.couldMove;
             tankCtr.moveObject.couldTurn = convMsg.couldTurn;

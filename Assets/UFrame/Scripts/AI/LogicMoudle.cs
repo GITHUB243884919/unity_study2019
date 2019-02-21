@@ -40,8 +40,8 @@ namespace GameName.Battle.Logic
         public override void Tick(int deltaTimeMS)
         {
             L2D_TankPos msg = new L2D_TankPos();
-
-            foreach (var v in battleLogic.tankCtrs.Values)
+            var tankCtrs = battleLogic.logicDataManager.GetTankCtrs();
+            foreach (var v in tankCtrs.Values)
             {
                 v.Tick(deltaTimeMS);
                 TankPos tankPos = new TankPos();
