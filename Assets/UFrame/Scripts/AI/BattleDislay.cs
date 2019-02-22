@@ -120,13 +120,13 @@ namespace GameName.Battle.Display
                 Vector3 e = o + kv.Value.go.transform.forward * kv.Value.dectLen;
                 Debug.DrawLine(o, e, Color.blue);
 
-                Vector3 o1 = o + new Vector3(kv.Value.dectWidth, 0, 0);
-                Vector3 e1 = e + new Vector3(kv.Value.dectWidth, 0, 0);
-                Debug.DrawLine(o1, e1, Color.red);
+                //Vector3 o1 = o + new Vector3(kv.Value.dectWidth, 0, 0);
+                //Vector3 e1 = e + new Vector3(kv.Value.dectWidth, 0, 0);
+                //Debug.DrawLine(o1, e1, Color.red);
 
-                Vector3 o2 = o + new Vector3(-kv.Value.dectWidth, 0, 0);
-                Vector3 e2 = e + new Vector3(-kv.Value.dectWidth, 0, 0);
-                Debug.DrawLine(o2, e2, Color.green);
+                //Vector3 o2 = o + new Vector3(-kv.Value.dectWidth, 0, 0);
+                //Vector3 e2 = e + new Vector3(-kv.Value.dectWidth, 0, 0);
+                //Debug.DrawLine(o2, e2, Color.green);
 
             }
         }

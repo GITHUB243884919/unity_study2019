@@ -33,5 +33,6 @@ namespace GameName.Battle.Logic
                 tankCtr.Turn(F64Vec3.FromUnityVector3(convMsg.dir));
             }
         }
+
     }
 }

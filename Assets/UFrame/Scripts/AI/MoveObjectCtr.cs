@@ -42,22 +42,45 @@ namespace UFrame.AI
                 F64 sqrDis = F64Vec3.LengthSqr(moveObject.GetPos() - v.pos);
                 F64 sqrDis2 = moveObject.moveData.detectionLen + v.radius;
                 sqrDis2 *= sqrDis2;
-                if (sqrDis <= (sqrDis2))
+                if (sqrDis > (sqrDis2))
                 {
-                    //在后面
-                    var local = F64Vec3.PointToLocalSpace2D(v.pos, moveObject.forward, moveObject.left, moveObject.GetPos());
-                    if (local.X >= F64.Zero)
-                    {
-                        F64 absZ = F64.Abs(local.Z);
-
-                        if (absZ <= (v.radius + this.moveObject.moveData.detectionWidth))
-                        {
-                            Debug.LogError("碰到 " + local + " " + v.radius + " " + this.moveObject.moveData.detectionWidth) ;
-                        }
-                    }
+                    continue;
                 }
 
-                
+                //在后面
+                var local = F64Vec3.PointToLocalSpace2D(v.pos, moveObject.forward, moveObject.left, moveObject.GetPos());
+                if (local.X < F64.Zero)
+                {
+                    continue;
+                }
+
+                F64 absZ = F64.Abs(local.Z);
+
+                if (absZ > (v.radius + this.moveObject.moveData.detectionWidth))
+                {
+                    continue;                    
+                }
+
+                Debug.LogError("碰到 " + local + " " + v.radius + " " + this.moveObject.moveData.detectionWidth);
+
+                ////计算侧向力
+                //F64Vec3 force = new F64Vec3(F64.Zero, F64.Zero, absZ);
+                ////计算合力
+                //force += moveObject.forward;
+                //force = F64Vec3.Normalize(force);
+                ////转到合力
+                //moveObject.couldMove = false;
+                //moveObject.couldTurn = false;
+                //moveObject.SetDir(force);
+                //if (moveObject.couldMove)
+                //{
+                //    F64 fdelta = moveObject.GetSpeed() * fdeltaTime / F64.F1000;
+                //    F64Vec3 pos = moveObject.GetPos();
+                //    F64Vec3 force2 = fdelta * moveObject.GetDir();
+                //    pos += force;
+                //    moveObject.SetPos(pos);
+                //}
+
             }
         }
 
@@ -122,7 +145,7 @@ namespace UFrame.AI
             }
             else
             {
-                turnType = UFrame.AI.TurnType.None;
+                turnType = TurnType.None;
             }
             //当相机旋转的时候，考虑朝向是否的相反，即是眼睛看到的向左就向左
             //如果不考虑，那么当相机面朝角色时，摇杆的左右操作和视觉上是相反的。
@@ -155,15 +178,15 @@ namespace UFrame.AI
             TurnType turnType;
             if (JoyDir.X > F64.Zero)
             {
-                turnType = UFrame.AI.TurnType.Right;
+                turnType = TurnType.Right;
             }
             else if (JoyDir.X < F64.Zero)
             {
-                turnType = UFrame.AI.TurnType.Left;
+                turnType = TurnType.Left;
             }
             else
             {
-                turnType = UFrame.AI.TurnType.None;
+                turnType = TurnType.None;
             }
 
             moveObject.SetTurnType(turnType);
