@@ -4,6 +4,7 @@ using UnityEngine;
 using FixedPoint;
 using FixMath;
 using UFrame.AI;
+using UFrame.ResourceManagement;
 
 public class TestFix : MonoBehaviour {
     public struct T
@@ -15,8 +16,8 @@ public class TestFix : MonoBehaviour {
         T t;
         t.x = 1;
 
-
-        FixedPointCSTest_Matrix2();
+        TestTurn();
+        //FixedPointCSTest_Matrix2();
         //FixedPointCSTest_Matrix();
         //FixedPointCSTest_Move();
         //FixPointCSTest();
@@ -28,6 +29,87 @@ public class TestFix : MonoBehaviour {
 
     }
 
+    void TestTurn()
+    {
+        Debug.LogError(new F64(1.3d) + new F64(0.1d));
+        Debug.LogError(new F64(0d));
+
+        MoveObject obj = new MoveObject();
+        obj.SetPos(F64Vec3.Zero);
+        obj.SetDir(new F64Vec3(0, 0, 1));
+        obj.moveData.detectionLen = new F64(5);
+        obj.moveData.detectionWidth = new F64(0.8);
+
+        GameObjectGetter tankGetter = ResHelper.LoadGameObject("prefabs/tank");
+        GameObject tankGo = tankGetter.Get();
+        tankGo.transform.position = obj.GetPos().ToUnityVector3();
+        tankGo.transform.forward = obj.GetDir().ToUnityVector3();
+        GameObject.Instantiate<GameObject>(tankGo);
+
+        for(int i = 0; i < 3; i++)
+        {
+            F64Vec3 newDir = F64Vec3.RotateY(obj.GetDir(), new F64(30));
+            obj.SetDir(F64Vec3.Normalize(newDir));
+            obj.SetPos(obj.GetPos() + (newDir * new F64(5)));
+            tankGo.transform.position = obj.GetPos().ToUnityVector3();
+            tankGo.transform.forward = obj.GetDir().ToUnityVector3();
+            GameObject.Instantiate<GameObject>(tankGo);
+        }
+
+        Vector3 av = new Vector3(100, 0, 20);
+        F64Vec3 localAv = F64Vec3.PointToLocalSpace2D(F64Vec3.FromUnityVector3(av),
+            obj.forward, obj.left, obj.GetPos());
+        Debug.LogError("world obj=" + obj.GetPos().ToUnityVector3() + "world av=" + av + "loc av " + localAv.ToUnityVector3());
+
+        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        //Vector3 cubePos = obj.GetPos().ToUnityVector3();
+        //float offsetX = 1;
+        //float offsetZ = obj.moveData.detectionWidth.Float + 0.1f;
+        //cubePos = new Vector3(cubePos.x + offsetX, 0, cubePos.z + offsetZ);
+        //cube.transform.position = cubePos;
+        //F64Vec3 localCube = F64Vec3.PointToLocalSpace2D(F64Vec3.FromUnityVector3(cubePos),
+        //    obj.forward, obj.left, obj.GetPos());
+        //Debug.LogError("world obj=" + obj.GetPos().ToUnityVector3() + "world cube=" + cubePos + "loc cubePos " + localCube.ToUnityVector3());
+        //fff(obj, F64Vec3.FromUnityVector3(cubePos), F64.One);
+
+        F64 radius = F64.Half;
+        F64 foffsetX = F64.One;
+        F64 foffsetZ = obj.moveData.detectionWidth + radius + new F64(-0.1);
+        F64Vec3 fcubePos = new F64Vec3(obj.GetPos().X + foffsetX, obj.GetPos().Y, obj.GetPos().Z + foffsetZ);
+        cube.transform.position = fcubePos.ToUnityVector3();
+        F64Vec3 flocalCube = F64Vec3.PointToLocalSpace2D(fcubePos,
+            obj.forward, obj.left, obj.GetPos());
+        Debug.LogError("world obj=" + obj.GetPos().ToUnityVector3() + "world cube=" + fcubePos + "loc cubePos " + flocalCube.ToUnityVector3());
+        Debug.LogError("world obj=" + obj.GetPos().ToUnityVector3() + "world cube=" + fcubePos + "loc cubePos " + flocalCube);
+        fff(obj, fcubePos, F64.Half);
+
+    }
+
+    void fff(MoveObject obj, F64Vec3 pos, F64 radius)
+    {
+        F64 sqrDis = F64Vec3.LengthSqr(obj.GetPos() - pos);
+        F64 sqrDis2 = obj.moveData.detectionLen + radius;
+        sqrDis2 *= sqrDis2;
+        if (sqrDis <= (sqrDis2))
+        {
+            //在后面
+            var local = F64Vec3.PointToLocalSpace2D(pos, obj.forward, obj.left, obj.GetPos());
+            Debug.LogError("范围内 WORLD " + pos.ToUnityVector3() + "LOCAL " + local.ToUnityVector3());
+            Debug.LogError(local);
+            if (local.X >= F64.Zero)
+            {
+                Debug.LogError("在前面 WORLD " + pos + "LOCAL " + local);
+                F64 absZ = F64.Abs(local.Z);
+                Debug.LogError("碰到q abs=" + absZ + " " + (radius + obj.moveData.detectionWidth) +
+    " radius=" + radius + " w=" + obj.moveData.detectionWidth);
+                if (absZ <= (radius + obj.moveData.detectionWidth))
+                {
+                    Debug.LogError("碰到 abs=" + absZ + " " + (radius + obj.moveData.detectionWidth) +
+                        " radius=" + radius + " w=" + obj.moveData.detectionWidth);
+                }
+            }
+        }
+    }
     void FixedPointCSTest_Matrix()
     {
         //MoveObject obj = new MoveObject();

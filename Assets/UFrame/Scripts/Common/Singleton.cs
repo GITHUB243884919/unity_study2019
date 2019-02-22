@@ -1,6 +1,6 @@
 ﻿namespace UFrame.Common
 {
-    public class Singleton<T> where T : new()
+    public class Singleton<T> where T : new() 
     {
         static public T GetInstance()
         {

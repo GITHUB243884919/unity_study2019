@@ -11,6 +11,7 @@ namespace GameName.Battle.Display
     {
         public int ID;
         public float dectLen;
+        public float dectWidth;
         public GameObject go;
     }
     public class BattleDisplay : IMessageExecutor
@@ -59,6 +60,7 @@ namespace GameName.Battle.Display
                 tank.go = tankGo;
                 tank.ID = initMsg.tankGroup[i].id;
                 tank.dectLen = initMsg.tankGroup[i].detectionLen;
+                tank.dectWidth = initMsg.tankGroup[i].detectionWidth;
                 tanks.Add(initMsg.tankGroup[i].id, tank);
 
                 Debug.LogError(initMsg.tankGroup[i].id + " " + initMsg.tankGroup[i].isPlayer);
@@ -80,7 +82,7 @@ namespace GameName.Battle.Display
                 GameObjectGetter getter = ResHelper.LoadGameObject("prefabs/avoidance");
                 GameObject av = getter.Get();
                 av.transform.position = initMsg.avoidances[i].pos;
-                av.transform.localScale *= initMsg.avoidances[i].rad;
+                //av.transform.localScale *= (initMsg.avoidances[i].rad);
             }
 
             D2L_BattleInit initRetMsg = new D2L_BattleInit();
@@ -100,7 +102,10 @@ namespace GameName.Battle.Display
                 var tank = tanks[tankID];
 
                 tank.go.transform.position = tankPos.pos;
-                tank.go.transform.LookAt(tankPos.dir + tankPos.pos);
+                //tank.go.transform.LookAt(tankPos.dir + tankPos.pos);
+                //tank.go.transform.LookAt(tankPos.dir);
+                //tank.go.transform.LookAt(tankPos.pos);
+                tank.go.transform.forward = tankPos.dir;
             }
         }
 
@@ -111,9 +116,18 @@ namespace GameName.Battle.Display
 
             foreach(var kv in tanks)
             {
-                Debug.DrawLine(kv.Value.go.transform.position,
-                    kv.Value.go.transform.position + kv.Value.go.transform.forward * kv.Value.dectLen, Color.blue);
-                
+                Vector3 o = kv.Value.go.transform.position;
+                Vector3 e = o + kv.Value.go.transform.forward * kv.Value.dectLen;
+                Debug.DrawLine(o, e, Color.blue);
+
+                Vector3 o1 = o + new Vector3(kv.Value.dectWidth, 0, 0);
+                Vector3 e1 = e + new Vector3(kv.Value.dectWidth, 0, 0);
+                Debug.DrawLine(o1, e1, Color.red);
+
+                Vector3 o2 = o + new Vector3(-kv.Value.dectWidth, 0, 0);
+                Vector3 e2 = e + new Vector3(-kv.Value.dectWidth, 0, 0);
+                Debug.DrawLine(o2, e2, Color.green);
+
             }
         }
     }

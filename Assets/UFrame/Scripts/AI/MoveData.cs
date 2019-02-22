@@ -46,6 +46,11 @@ namespace UFrame.AI
         /// 探测距离
         /// </summary>
         public F64 detectionLen;
+
+        /// <summary>
+        /// 探测宽度
+        /// </summary>
+        public F64 detectionWidth;
     }
 
     public class LogicObject

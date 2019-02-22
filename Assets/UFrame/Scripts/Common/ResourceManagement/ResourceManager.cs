@@ -6,18 +6,18 @@ namespace UFrame.ResourceManagement
 {
     public class ResourceManager : Common.Singleton<ResourceManager>
     {
-        //static ResourceManager instance;
-        
+
         IResourceLoader resLoader;
 
-        //public static ResourceManager GetInstance()
-        //{
-        //    return instance;
-        //}
+        bool isInit = false;
 
         public void Init()
         {
-            //instance = this;
+            if (isInit)
+            {
+                return;
+            }
+            isInit = true;
 #if UNITY_EDITOR
 #if RES_AB
             //Editor模式下希望Bundle加载

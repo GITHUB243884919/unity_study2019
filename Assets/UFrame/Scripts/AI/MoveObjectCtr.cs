@@ -29,12 +29,12 @@ namespace UFrame.AI
         {
             F64 fdeltaTime = new F64(deltaTimeMS);
 
-            TickCheckAvoidance(fdeltaTime);
+            TickAvoidance(fdeltaTime);
             TickTurn(fdeltaTime);
             TickMove(fdeltaTime);
         }
 
-        void TickCheckAvoidance(F64 fdeltaTime)
+        void TickAvoidance(F64 fdeltaTime)
         {
             foreach(var v in logic.logicDataManager.GetAvoidances())
             {
@@ -42,19 +42,22 @@ namespace UFrame.AI
                 F64 sqrDis = F64Vec3.LengthSqr(moveObject.GetPos() - v.pos);
                 F64 sqrDis2 = moveObject.moveData.detectionLen + v.radius;
                 sqrDis2 *= sqrDis2;
-                if (sqrDis > (sqrDis2))
+                if (sqrDis <= (sqrDis2))
                 {
-                    continue;
+                    //在后面
+                    var local = F64Vec3.PointToLocalSpace2D(v.pos, moveObject.forward, moveObject.left, moveObject.GetPos());
+                    if (local.X >= F64.Zero)
+                    {
+                        F64 absZ = F64.Abs(local.Z);
+
+                        if (absZ <= (v.radius + this.moveObject.moveData.detectionWidth))
+                        {
+                            Debug.LogError("碰到 " + local + " " + v.radius + " " + this.moveObject.moveData.detectionWidth) ;
+                        }
+                    }
                 }
 
-                //在后面
-                var local = F64Vec3.PointToLocalSpace2D(v.pos, moveObject.forward, moveObject.left, moveObject.GetPos());
-                if (local.X < F64.Zero)
-                {
-                    continue;
-                }
-
-                Debug.LogError("to local " + local);
+                
             }
         }
 
@@ -69,9 +72,9 @@ namespace UFrame.AI
 
                 }
 
-                F64Vec3 newFdir = F64Vec3.RotateY(moveObject.GetDir(), fAngle);
-                F64Vec3 newNfdir = F64Vec3.Normalize(newFdir);
-                moveObject.SetDir(newNfdir);
+                F64Vec3 dir = F64Vec3.RotateY(moveObject.GetDir(), fAngle);
+                dir = F64Vec3.Normalize(dir);
+                moveObject.SetDir(dir);
             }
         }
 
@@ -80,8 +83,10 @@ namespace UFrame.AI
             if (moveObject.couldMove)
             {
                 F64 fdelta = moveObject.GetSpeed() * fdeltaTime / F64.F1000;
-                F64Vec3 fOldPos = moveObject.GetPos();
-                moveObject.SetPos(fOldPos + fdelta * moveObject.GetDir());
+                F64Vec3 pos = moveObject.GetPos();
+                F64Vec3 force = fdelta * moveObject.GetDir();
+                pos += force;
+                moveObject.SetPos(pos);
             }
         }
 

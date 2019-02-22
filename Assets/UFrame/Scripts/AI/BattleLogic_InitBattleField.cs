@@ -32,10 +32,12 @@ namespace GameName.Battle.Logic
             tank.isCaption = true;
             tank.tankType = 1000;
             tank.moveData.detectionLen = new F64(5);
+            tank.moveData.detectionWidth = new F64(0.8);
+
             tank.SetPos(new F64Vec3(0, 0, 0));
             tank.SetDir(new F64Vec3(0, 0, 1));
             tank.SetSpeed(new F64(3));
-            tank.SetTurnSpeed(new F64(30));
+            tank.SetTurnSpeed(new F64(15));
             tank.SetTurnType(UFrame.AI.TurnType.None);
             player.tanks.Add(tank);
             logicDataManager.AddTank(tank);
@@ -56,6 +58,7 @@ namespace GameName.Battle.Logic
             tgi.pos = tank.GetPos().ToUnityVector3();
             tgi.dir = tank.GetDir().ToUnityVector3();
             tgi.detectionLen = tank.moveData.detectionLen.Float;
+            tgi.detectionWidth = tank.moveData.detectionWidth.Float;
             initMsg.tankGroup.Add(tgi);
         }
 
@@ -96,8 +99,9 @@ namespace GameName.Battle.Logic
         void InitAvoidance(L2D_BattleInit initMsg)
         {
             Data.Avoidance adv = new Data.Avoidance();
-            adv.pos = new F64Vec3(0, 0, 30);
-            adv.radius = new F64(3);
+            adv.pos = new F64Vec3(0, 0, 10);
+            adv.radius = F64.Half;
+            //adv.radius = new F64(1.5);
             logicDataManager.AddAvoidance(adv);
 
             initMsg.avoidances = new List<Avoidance>();

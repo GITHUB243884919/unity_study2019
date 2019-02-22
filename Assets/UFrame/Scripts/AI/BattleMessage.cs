@@ -24,6 +24,7 @@ public class TankGroupInit
     public Vector3 pos;
     public Vector3 dir;
     public float detectionLen;
+    public float detectionWidth;
 }
 
 public class TankPos

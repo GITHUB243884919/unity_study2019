@@ -22,7 +22,6 @@ namespace GameName.Battle
             GameObject easytouchGo = GameObject.Find("easytouch");
             joy = easytouchGo.GetComponentInChildren<ETCJoystick>();
 
-            UFrame.ResourceManagement.ResourceManager.GetInstance().Init();
             LuaManager.GetInstance().Init();
             LuaManager.GetInstance().luaState.DoFile("init_lua_config");
             LuaConfigManager.Instance.Init();
