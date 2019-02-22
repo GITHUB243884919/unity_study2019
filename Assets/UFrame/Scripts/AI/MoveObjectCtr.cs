@@ -40,9 +40,9 @@ namespace UFrame.AI
             {
                 //在检查范围外
                 F64 sqrDis = F64Vec3.LengthSqr(moveObject.GetPos() - v.pos);
-                F64 sqrDis2 = moveObject.moveData.detectionLen + v.radius;
-                sqrDis2 *= sqrDis2;
-                if (sqrDis > (sqrDis2))
+                F64 sqrDetectionLenEx = moveObject.moveData.detectionLen + v.radius;
+                sqrDetectionLenEx *= sqrDetectionLenEx;
+                if (sqrDis > (sqrDetectionLenEx))
                 {
                     continue;
                 }
@@ -54,41 +54,46 @@ namespace UFrame.AI
                     continue;
                 }
 
+                //没碰到
                 F64 absZ = F64.Abs(local.Z);
-
-                if (absZ > (v.radius + this.moveObject.moveData.detectionWidth))
+                F64 sqrDetectionWidthEx = moveObject.moveData.detectionWidth + v.radius;
+                if (absZ > (sqrDetectionWidthEx))
                 {
                     continue;                    
                 }
 
                 Debug.LogError("碰到 " + local + " " + v.radius + " " + this.moveObject.moveData.detectionWidth);
 
-                ////计算侧向力
-                //F64Vec3 force = new F64Vec3(F64.Zero, F64.Zero, absZ);
-                ////计算合力
-                //force += moveObject.forward;
-                //force = F64Vec3.Normalize(force);
-                ////转到合力
-                //moveObject.couldMove = false;
-                //moveObject.couldTurn = false;
-                //moveObject.SetDir(force);
-                //if (moveObject.couldMove)
-                //{
-                //    F64 fdelta = moveObject.GetSpeed() * fdeltaTime / F64.F1000;
-                //    F64Vec3 pos = moveObject.GetPos();
-                //    F64Vec3 force2 = fdelta * moveObject.GetDir();
-                //    pos += force;
-                //    moveObject.SetPos(pos);
-                //}
+                //关闭超控
+                moveObject.couldMove = false;
+                moveObject.couldTurn = false;
 
+                //计算侧向力
+                F64 fAngle = moveObject.GetTurnSpeed() * fdeltaTime / F64.F1000;
+                if (local.Z < F64.Zero)
+                {
+                    fAngle = -fAngle;
+                }
+                //fAngle *= (moveObject.GetSpeed() / absZ);
+                //转向
+                F64Vec3 dir = F64Vec3.RotateY(moveObject.GetDir(), fAngle);
+                dir = F64Vec3.Normalize(dir);
+                moveObject.SetDir(dir);
+
+                //向避开的方向走
+                F64 fdelta = moveObject.GetSpeed() * fdeltaTime / F64.F1000;
+                F64Vec3 pos = moveObject.GetPos();
+                F64Vec3 force = fdelta * moveObject.GetDir();
+                pos += force;
+                moveObject.SetPos(pos);
             }
         }
 
-        public void TickTurn(F64 deltaTimeMS)
+        public void TickTurn(F64 fdeltaTime)
         {
             if (moveObject.couldTurn)
             {
-                F64 fAngle = moveObject.GetTurnSpeed() * deltaTimeMS / F64.F1000;
+                F64 fAngle = moveObject.GetTurnSpeed() * fdeltaTime / F64.F1000;
                 if (moveObject.GetTurnType() == TurnType.Left)
                 {
                     fAngle = -fAngle;

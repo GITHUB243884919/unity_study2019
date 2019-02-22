@@ -34,9 +34,9 @@ namespace GameName.Battle.Logic
             tank.moveData.detectionLen = new F64(5);
             tank.moveData.detectionWidth = new F64(0.8);
 
-            tank.SetPos(new F64Vec3(0, 0, 0));
-            tank.SetDir(new F64Vec3(0, 0, 1));
-            tank.SetSpeed(new F64(3));
+            tank.SetPos(new F64Vec3(0, 0, 30));
+            tank.SetDir(new F64Vec3(0, 0, -1));
+            tank.SetSpeed(new F64(5));
             tank.SetTurnSpeed(new F64(15));
             tank.SetTurnType(UFrame.AI.TurnType.None);
             player.tanks.Add(tank);
