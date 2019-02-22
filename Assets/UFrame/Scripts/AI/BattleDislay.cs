@@ -79,7 +79,7 @@ namespace GameName.Battle.Display
             {
 
                 //tank_info ti = tank_infoAPI.GetDataBy_tank_type(initMsg.tankGroup[i].tank_type);
-                GameObjectGetter getter = ResHelper.LoadGameObject("prefabs/avoidance");
+                GameObjectGetter getter = ResHelper.LoadGameObject("prefabs/avoidance3");
                 GameObject av = getter.Get();
                 av.transform.position = initMsg.avoidances[i].pos;
                 //av.transform.localScale *= (initMsg.avoidances[i].rad);

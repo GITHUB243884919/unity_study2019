@@ -3,6 +3,7 @@ lua/config/stage_info,lua/config/stage_info
 textures/unitylogo/unityLogo2,textures/unitylogo
 asset-bundle,asset-bundle
 lua/config/tank_group_info,lua/config/tank_group_info
+prefabs/avoidance3,prefabs/avoidance3
 prefabs/self_camera,prefabs/self_camera
 materials/blue,materials/blue
 materials/red,materials/red
@@ -12,6 +13,7 @@ prefabs/battle_root,prefabs/battle_root
 prefabs/mycube,prefabs/mycube
 prefabs/mycube-parent,prefabs/mycube-parent
 lua/config/test_sheet1,lua/config/test_sheet1
+prefabs/avoidance2,prefabs/avoidance2
 prefabs/avoidance,prefabs/avoidance
 textures/unitylogo/unitylogo,textures/unitylogo
 prefabs/cube,prefabs/cube

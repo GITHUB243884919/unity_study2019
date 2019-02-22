@@ -100,8 +100,8 @@ namespace GameName.Battle.Logic
         {
             Data.Avoidance adv = new Data.Avoidance();
             adv.pos = new F64Vec3(0, 0, 10);
-            adv.radius = F64.Half;
-            //adv.radius = new F64(1.5);
+            //adv.radius = F64.Half;
+            adv.radius = new F64(1.6);
             logicDataManager.AddAvoidance(adv);
 
             initMsg.avoidances = new List<Avoidance>();
