@@ -116,7 +116,12 @@ namespace UFrame.AI
                 pos += force;
                 moveObject.SetPos(pos);
             }
+
+
+
         }
+
+
 
         public override void Turn(F64Vec3 dir)
         {

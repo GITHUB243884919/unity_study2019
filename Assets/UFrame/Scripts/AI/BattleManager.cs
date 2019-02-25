@@ -37,11 +37,13 @@ namespace GameName.Battle
 
 
         // Update is called once per frame
+
         void Update()
         {
             battleMessageCenter.Tick();
             battleLogic.Tick((int)(Time.deltaTime * 1000));
             battleDisplay.Tick((int)(Time.deltaTime * 1000));
+
         }
 
         void OnEnable()
@@ -95,18 +97,6 @@ namespace GameName.Battle
 
             battleMessageCenter.Send(joyPress);
 
-
-            //Vector3 A = new Vector3(0, 0, 1);
-            //Vector3 B = new Vector3(-1, 0, 0);
-            //float dot = Vector3.Dot(A, B);
-            //Debug.LogError("Dot = " + dot);
-            //float acos = Mathf.Acos(dot);
-            //Debug.LogError("acos = " + acos);
-            //float Rad2Deg = Mathf.Rad2Deg * acos;
-            //Debug.LogError("Rad2Deg = " + Rad2Deg);
-            //Vector3 cross = Vector3.Cross(A, B);
-            //Debug.LogError("angle = " + Vector3.Angle(A, B));
-            //Debug.LogError("cross = " + cross);
 
         }
 

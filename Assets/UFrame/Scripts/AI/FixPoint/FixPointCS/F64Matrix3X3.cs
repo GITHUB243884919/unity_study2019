@@ -71,14 +71,86 @@ namespace FixMath
             //create the transformation matrix
             matTransform._11(AgentHeading.X); matTransform._12(AgentSide.X);
             matTransform._21(AgentHeading.Y); matTransform._22(AgentSide.Y);
-            matTransform._31(Tx);           matTransform._32(Ty);
-	
+            matTransform._31(Tx); matTransform._32(Ty);
+
             //now transform the vertices
             matTransform.TransformVector2Ds(ref TransPoint);
 
             return TransPoint;
         }
 
-    }
 
+        public F64Vec2 VectorToWorldSpace(F64Vec2 vec,
+                                   F64Vec2 AgentHeading,
+                                   F64Vec2 AgentSide)
+        {
+            //make a copy of the point
+            F64Vec2 TransVec = vec;
+            //F64Vec2 TransVec = new F64Vec2(vec.X, vec.Y);
+
+            //create a transformation matrix
+            F64Matrix3x3 matTransform = new F64Matrix3x3();
+
+            //rotate
+            matTransform.Rotate(AgentHeading, AgentSide);
+
+            //now transform the vertices
+
+            matTransform.TransformVector2Ds(ref TransVec);
+
+            return TransVec;
+        }
+
+        void Rotate(F64Vec2 fwd, F64Vec2 side)
+        {
+            Matrix mat = new Matrix();
+
+            mat._11 = fwd.X; mat._12 = fwd.Y; mat._13 = F64.Zero;
+
+            mat._21 = side.X; mat._22 = side.Y; mat._23 = F64.Zero;
+
+            mat._31 = F64.Zero; mat._32 = F64.Zero; mat._33 = F64.One;
+            //and multiply
+            //MatrixMultiply(mat);
+
+
+            //m_Matrix._11 = fwd.X; m_Matrix._12 = fwd.Y; m_Matrix._13 = F64.Zero;
+
+            //m_Matrix._21 = side.X; m_Matrix._22 = side.Y; m_Matrix._23 = F64.Zero;
+
+            //m_Matrix._31 = F64.Zero; m_Matrix._32 = F64.Zero; m_Matrix._33 = F64.One;
+
+            m_Matrix._11 = F64.One; m_Matrix._12 = F64.Zero; m_Matrix._13 = F64.Zero;
+
+            m_Matrix._21 = F64.Zero; m_Matrix._22 = F64.One;  m_Matrix._23 = F64.Zero;
+
+            m_Matrix._31 = F64.Zero; m_Matrix._32 = F64.Zero; m_Matrix._33 = F64.One;
+
+            MatrixMultiply(mat);
+        }
+
+        void MatrixMultiply(Matrix mIn)
+        {
+            Matrix mat_temp = new Matrix();
+
+            //first row
+            mat_temp._11 = (m_Matrix._11 * mIn._11) + (m_Matrix._12 * mIn._21) + (m_Matrix._13 * mIn._31);
+            mat_temp._12 = (m_Matrix._11 * mIn._12) + (m_Matrix._12 * mIn._22) + (m_Matrix._13 * mIn._32);
+            mat_temp._13 = (m_Matrix._11 * mIn._13) + (m_Matrix._12 * mIn._23) + (m_Matrix._13 * mIn._33);
+
+            //second
+            mat_temp._21 = (m_Matrix._21 * mIn._11) + (m_Matrix._22 * mIn._21) + (m_Matrix._23 * mIn._31);
+            mat_temp._22 = (m_Matrix._21 * mIn._12) + (m_Matrix._22 * mIn._22) + (m_Matrix._23 * mIn._32);
+            mat_temp._23 = (m_Matrix._21 * mIn._13) + (m_Matrix._22 * mIn._23) + (m_Matrix._23 * mIn._33);
+
+            //third
+            mat_temp._31 = (m_Matrix._31 * mIn._11) + (m_Matrix._32 * mIn._21) + (m_Matrix._33 * mIn._31);
+            mat_temp._32 = (m_Matrix._31 * mIn._12) + (m_Matrix._32 * mIn._22) + (m_Matrix._33 * mIn._32);
+            mat_temp._33 = (m_Matrix._31 * mIn._13) + (m_Matrix._32 * mIn._23) + (m_Matrix._33 * mIn._33);
+
+            m_Matrix = mat_temp;
+        }
+
+
+    }
 }

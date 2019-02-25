@@ -93,6 +93,16 @@ namespace FixMath
         {
             return new F64Vec3(v.x, v.y, v.z);
         }
+
+        public F64Vec2 ToF64Vec2()
+        {
+            return new F64Vec2(X, Z);
+        }
+
+        public static F64Vec3 FromF64Vec2(F64Vec2 v)
+        {
+            return new F64Vec3(v.X, F64.Zero, v.Y);
+        }
     }
 
 }

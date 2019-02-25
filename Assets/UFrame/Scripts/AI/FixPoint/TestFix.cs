@@ -61,17 +61,18 @@ public class TestFix : MonoBehaviour {
             obj.forward, obj.left, obj.GetPos());
         Debug.LogError("world obj=" + obj.GetPos().ToUnityVector3() + "world av=" + av + "loc av " + localAv.ToUnityVector3());
 
-        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        //Vector3 cubePos = obj.GetPos().ToUnityVector3();
-        //float offsetX = 1;
-        //float offsetZ = obj.moveData.detectionWidth.Float + 0.1f;
-        //cubePos = new Vector3(cubePos.x + offsetX, 0, cubePos.z + offsetZ);
-        //cube.transform.position = cubePos;
-        //F64Vec3 localCube = F64Vec3.PointToLocalSpace2D(F64Vec3.FromUnityVector3(cubePos),
-        //    obj.forward, obj.left, obj.GetPos());
-        //Debug.LogError("world obj=" + obj.GetPos().ToUnityVector3() + "world cube=" + cubePos + "loc cubePos " + localCube.ToUnityVector3());
-        //fff(obj, F64Vec3.FromUnityVector3(cubePos), F64.One);
+        F64Matrix3x3 m = new F64Matrix3x3();
+        //F64Vec2 localAv2 = localAv.ToF64Vec2();
+        //F64Vec2 forward2 = obj.forward.ToF64Vec2();
+        //F64Vec2 left2 = obj.left.ToF64Vec2();
+        F64Vec2 localAv2 = F64Vec2.FromFloat(88.2f, 13.2f);
+        F64Vec2 forward2 = F64Vec2.FromFloat(1f, 0f);
+        F64Vec2 left2 = F64Vec2.FromFloat(0f, 1f);
+        F64Vec2 worldAv2 = m.VectorToWorldSpace(localAv2, forward2, left2);
+        F64Vec3 worldAv3 = F64Vec3.FromF64Vec2(worldAv2);
+        Debug.LogError("m convt to world " + worldAv3.ToUnityVector3() + " " + worldAv3);
 
+        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         F64 radius = F64.Half;
         F64 foffsetX = F64.One;
         F64 foffsetZ = obj.moveData.detectionWidth + radius + new F64(-0.1);
