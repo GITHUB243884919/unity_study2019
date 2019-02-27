@@ -10,7 +10,8 @@ public class TestFix : MonoBehaviour {
 
     void Start()
     {
-        TestFCS_P();
+        TestFCS_P2();
+        //TestFCS_P();
         //TestTurn();
         //FixedPointCSTest_Matrix2();
         //FixedPointCSTest_Matrix();
@@ -22,6 +23,48 @@ public class TestFix : MonoBehaviour {
 
 
 
+    }
+
+    void TestFCS_P2()
+    {
+        Vector3 av = new Vector3(100, 0, 20);
+
+        MoveObject obj = new MoveObject();
+        obj.SetPos(F64Vec3.Zero);
+        obj.SetDir(new F64Vec3(0, 0, 1));
+        obj.moveData.detectionLen = new F64(5);
+        obj.moveData.detectionWidth = new F64(0.8);
+
+        GameObjectGetter tankGetter = ResHelper.LoadGameObject("prefabs/tank");
+        GameObject tankGo = tankGetter.Get();
+        tankGo.transform.position = obj.GetPos().ToUnityVector3();
+        tankGo.transform.forward = obj.GetDir().ToUnityVector3();
+        GameObject.Instantiate<GameObject>(tankGo);
+
+        for (int i = 0; i < 3; i++)
+        {
+            F64Vec3 newDir = F64Vec3.RotateY(obj.GetDir(), new F64(30));
+            obj.SetDir(F64Vec3.Normalize(newDir));
+            obj.SetPos(obj.GetPos() + (newDir * new F64(5)));
+            tankGo.transform.position = obj.GetPos().ToUnityVector3();
+            tankGo.transform.forward = obj.GetDir().ToUnityVector3();
+            GameObject.Instantiate<GameObject>(tankGo);
+        }
+        Debug.LogError("Tank " + obj.GetPos() + " " + obj.GetPos().ToUnityVector3());
+
+        F64Vec3 localAv = F64Vec3.PointToLocalSpace2D(F64Vec3.FromUnityVector3(av),
+            obj.forward, obj.left, obj.GetPos());
+        F64Matrix3x3 m = new F64Matrix3x3();
+
+        F64Vec2 worldAv = m.PointToWorldSpace(new F64Vec2(localAv.X, localAv.Z),
+            new F64Vec2(obj.forward.X, obj.forward.Z),
+            new F64Vec2(obj.left.X, obj.left.Z),
+            new F64Vec2(obj.GetPos().X, obj.GetPos().Z));
+        F64Vec3 worldAv3 = new F64Vec3(worldAv.X, F64.Zero, worldAv.Y);
+        Debug.LogError("worldAv " + worldAv + " " + worldAv3.ToUnityVector3());
+
+        F64Vec3 nworldAv3 =  F64Vec3.PointToWorldSpace2D(localAv, obj.forward, obj.left, obj.GetPos());
+        Debug.LogError("nworldAv3 " + nworldAv3 + " " + nworldAv3.ToUnityVector3());
     }
 
     void TestFCS_P()
@@ -62,7 +105,6 @@ public class TestFix : MonoBehaviour {
 
         Debug.LogError("Sphere pos in tank's local space " + flocalCube + " " + flocalCube.ToUnityVector3());
         Debug.LogError(F64.CeilToInt(flocalCube.X) + " " + F64.CeilToInt(flocalCube.Z));
-
     }
 
     void TestTurn()

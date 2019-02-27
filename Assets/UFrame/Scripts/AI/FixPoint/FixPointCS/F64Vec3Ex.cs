@@ -84,6 +84,35 @@ namespace FixMath
             return new F64Vec3(X, p.Y, Y);
         }
 
+        /// <summary>
+        /// XZ平面下把p从局部坐标转到世界坐标，后三个参数是2d坐标轴定义参数
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="forward"></param>
+        /// <param name="left"></param>
+        /// <param name="o"></param>
+        /// <returns></returns>
+        public static F64Vec3 PointToWorldSpace2D(F64Vec3 p, F64Vec3 forward, F64Vec3 left, F64Vec3 o)
+        {
+            var X = forward.X * p.X + left.X * p.Z + o.X;
+            var Z = forward.Z * p.X + left.Z * p.Z + o.Z;
+            return new F64Vec3(X, p.Y, Z);
+        }
+
+        /// <summary>
+        /// XZ平面下把向量p从局部坐标转到世界坐标，后三个参数是2d坐标轴x，z
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="forward"></param>
+        /// <param name="left"></param>
+        /// <returns></returns>
+        public static F64Vec3 VectorToWorldSpace2D(F64Vec3 p, F64Vec3 forward, F64Vec3 left)
+        {
+            var X = forward.X * p.X + left.X * p.Z;
+            var Z = forward.Z * p.X + left.Z * p.Z;
+            return new F64Vec3(X, p.Y, Z);
+        }
+
         public Vector3 ToUnityVector3()
         {
             return new Vector3(X.Float, Y.Float, Z.Float);
