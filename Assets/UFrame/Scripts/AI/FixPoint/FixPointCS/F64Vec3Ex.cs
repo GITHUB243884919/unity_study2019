@@ -80,8 +80,8 @@ namespace FixMath
             var l2 = new F64Vec2(left.X, left.Z);
             var o2 = new F64Vec2(o.X, o.Z);
             var X = F64Vec2.Dot(f2, p2) - F64Vec2.Dot(o2, f2);
-            var Y = F64Vec2.Dot(l2, p2) - F64Vec2.Dot(o2, l2);
-            return new F64Vec3(X, p.Y, Y);
+            var Z = F64Vec2.Dot(l2, p2) - F64Vec2.Dot(o2, l2);
+            return new F64Vec3(X, p.Y, Z);
         }
 
         /// <summary>
