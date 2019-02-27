@@ -34,8 +34,8 @@ namespace GameName.Battle.Logic
             tank.moveData.detectionLen = new F64(5);
             tank.moveData.detectionWidth = new F64(0.8);
 
-            tank.SetPos(new F64Vec3(0, 0, 30));
-            tank.SetDir(new F64Vec3(0, 0, -1));
+            tank.SetPos(new F64Vec3(0, 0, -10));
+            tank.SetDir(new F64Vec3(0, 0, 1));
             tank.SetSpeed(new F64(5));
             tank.SetTurnSpeed(new F64(15));
             tank.SetTurnType(UFrame.AI.TurnType.None);
@@ -99,7 +99,7 @@ namespace GameName.Battle.Logic
         void InitAvoidance(L2D_BattleInit initMsg)
         {
             Data.Avoidance adv = new Data.Avoidance();
-            adv.pos = new F64Vec3(0, 0, 10);
+            adv.pos = new F64Vec3(5, 0, 10);
             //adv.radius = F64.Half;
             adv.radius = new F64(1.6);
             logicDataManager.AddAvoidance(adv);

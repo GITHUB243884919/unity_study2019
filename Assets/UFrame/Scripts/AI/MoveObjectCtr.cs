@@ -29,7 +29,7 @@ namespace UFrame.AI
         {
             F64 fdeltaTime = new F64(deltaTimeMS);
 
-            TickAvoidance(fdeltaTime);
+            TickAvoidance2(fdeltaTime);
             TickTurn(fdeltaTime);
             TickMove(fdeltaTime);
         }
@@ -56,8 +56,8 @@ namespace UFrame.AI
 
                 //没碰到
                 F64 absZ = F64.Abs(local.Z);
-                F64 sqrDetectionWidthEx = moveObject.moveData.detectionWidth + v.radius;
-                if (absZ > (sqrDetectionWidthEx))
+                F64 detectionWidthEx = moveObject.moveData.detectionWidth + v.radius;
+                if (absZ > (detectionWidthEx))
                 {
                     continue;                    
                 }
@@ -91,6 +91,65 @@ namespace UFrame.AI
                 }
             }
         }
+
+        void TickAvoidance2(F64 fdeltaTime, bool isMove = false)
+        {
+            foreach (var v in logic.logicDataManager.GetAvoidances())
+            {
+                //在检查范围外
+                F64 sqrDis = F64Vec3.LengthSqr(moveObject.GetPos() - v.pos);
+                F64 sqrDetectionLenEx = moveObject.moveData.detectionLen + v.radius;
+                sqrDetectionLenEx *= sqrDetectionLenEx;
+                if (sqrDis > (sqrDetectionLenEx))
+                {
+                    continue;
+                }
+
+                //在后面
+                var local = F64Vec3.PointToLocalSpace2D(v.pos, moveObject.forward, moveObject.left, moveObject.GetPos());
+                if (local.X < F64.Zero)
+                {
+                    continue;
+                }
+
+                //没碰到
+                F64 absZ = F64.Abs(local.Z);
+                F64 detectionWidthEx = moveObject.moveData.detectionWidth + v.radius;
+                if (absZ > (detectionWidthEx))
+                {
+                    continue;
+                }
+
+                Debug.LogError("碰到 " + local + " " + v.radius + " " + this.moveObject.moveData.detectionWidth);
+
+                //关闭超控
+                moveObject.couldMove = false;
+                moveObject.couldTurn = false;
+
+                F64 newZ = F64.Zero;
+                if (F64.Approximately(local.Z, F64.Zero))
+                {
+                    newZ = local.Z - v.radius - moveObject.moveData.detectionWidth;
+                }
+                else if (local.Z < F64.Zero)
+                {
+                    newZ = local.Z - v.radius - moveObject.moveData.detectionWidth;
+                }
+                else
+                {
+                    newZ = local.Z + v.radius + moveObject.moveData.detectionWidth;
+                }
+
+                
+
+                F64Vec3 wantDir = new F64Vec3(local.X, local.Y, newZ);
+                wantDir = F64Vec3.PointToWorldSpace2D(wantDir, moveObject.forward, moveObject.left, moveObject.GetPos());
+                Debug.DrawLine(moveObject.GetPos().ToUnityVector3(), wantDir.ToUnityVector3(), Color.red);
+
+
+            }
+        }
+
 
         public void TickTurn(F64 fdeltaTime)
         {

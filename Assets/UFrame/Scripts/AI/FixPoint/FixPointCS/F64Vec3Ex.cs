@@ -113,6 +113,30 @@ namespace FixMath
             return new F64Vec3(X, p.Y, Z);
         }
 
+        public static F64Vec3 LineIntersectionCircle()
+        {
+
+            ////now to do a line/circle intersection test. The center of the 
+            ////circle is represented by (cX, cY). The intersection points are 
+            ////given by the formula x = cX +/-sqrt(r^2-cY^2) for y=0. 
+            ////We only need to look at the smallest positive value of x because
+            ////that will be the closest point of intersection.
+            //double cX = LocalPos.x;
+            //double cY = LocalPos.y;
+
+            ////we only need to calculate the sqrt part of the above equation once
+            //double SqrtPart = sqrt(ExpandedRadius * ExpandedRadius - cY * cY);
+
+            //double ip = cX - SqrtPart;
+
+            //if (ip <= 0.0)
+            //{
+            //    ip = cX + SqrtPart;
+            //}
+
+            return F64Vec3.Zero;
+        }
+
         public Vector3 ToUnityVector3()
         {
             return new Vector3(X.Float, Y.Float, Z.Float);
