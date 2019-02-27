@@ -61,6 +61,7 @@ public class TestFix : MonoBehaviour {
             obj.forward, obj.left, obj.GetPos());
 
         Debug.LogError("Sphere pos in tank's local space " + flocalCube + " " + flocalCube.ToUnityVector3());
+        Debug.LogError(F64.CeilToInt(flocalCube.X) + " " + F64.CeilToInt(flocalCube.Z));
 
     }
 

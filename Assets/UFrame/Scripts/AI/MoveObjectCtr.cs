@@ -34,7 +34,7 @@ namespace UFrame.AI
             TickMove(fdeltaTime);
         }
 
-        void TickAvoidance(F64 fdeltaTime)
+        void TickAvoidance(F64 fdeltaTime, bool isMove = false)
         {
             foreach(var v in logic.logicDataManager.GetAvoidances())
             {
@@ -80,12 +80,15 @@ namespace UFrame.AI
                 dir = F64Vec3.Normalize(dir);
                 moveObject.SetDir(dir);
 
-                //向避开的方向走
-                F64 fdelta = moveObject.GetSpeed() * fdeltaTime / F64.F1000;
-                F64Vec3 pos = moveObject.GetPos();
-                F64Vec3 force = fdelta * moveObject.GetDir();
-                pos += force;
-                moveObject.SetPos(pos);
+                //向避开的方向走， 不精确
+                if (isMove)
+                {
+                    F64 fdelta = moveObject.GetSpeed() * fdeltaTime / F64.F1000;
+                    F64Vec3 pos = moveObject.GetPos();
+                    F64Vec3 force = fdelta * moveObject.GetDir();
+                    pos += force;
+                    moveObject.SetPos(pos);
+                }
             }
         }
 
