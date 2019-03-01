@@ -5,10 +5,8 @@ using UnityEngine;
 public class StringUtil
 {
     /// <summary>
-    /// 数字字符串分割成单个数字
-    /// 考虑通用性，实现的是把字符串分割成规定字符串数组， 
+    /// 字符串按规定长度切割
     /// 比如输入 12345，规定长度2，那么输出 [1,2] [3,4] [5]
-    /// 在这里是分割成单个数字，调用时，规定长度都是1
     /// </summary>
     /// <param name="str"></param>
     /// <param name="splitLen"></param>
