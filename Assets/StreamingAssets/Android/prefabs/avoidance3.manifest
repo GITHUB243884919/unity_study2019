@@ -1,0 +1,28 @@
+ManifestFileVersion: 0
+CRC: 1870408573
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 06b2e6a3b9789c708a7b7b909d1ba3a9
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5d7d1239758d796b9a2a3935654593f1
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/GameResources/prefabs/avoidance3.prefab
+Dependencies: []

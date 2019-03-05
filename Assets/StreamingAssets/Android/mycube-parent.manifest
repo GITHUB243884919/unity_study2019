@@ -1,0 +1,31 @@
+ManifestFileVersion: 0
+CRC: 1009180183
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 508c89468fa6b31f81d67012ea297f89
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 0615fdd8182050e228ba12bfa176028d
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Prefabs/MyCube-Parent.prefab
+Dependencies:
+- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Android/material-bundle
+- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Android/m_blue
+- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Android/m-red
