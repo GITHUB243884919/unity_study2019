@@ -6,4 +6,5 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/LuaFramework/Scenes/main.unity
+    path: Assets/GameResources/Scenes/actor_view.unity
+    guid: 08148f887cb62bb4ca227c8122826540

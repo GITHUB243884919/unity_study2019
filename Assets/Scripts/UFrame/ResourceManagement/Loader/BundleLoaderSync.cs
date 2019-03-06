@@ -65,7 +65,6 @@ namespace UFrame.ResourceManagement
             string bundleName = GetBundleName(assetName);
             AssetBundle bundle = LoadBundle(assetName, bundleName);
             string[] scenes = bundle.GetAllScenePaths();
-            //Debug.LogError(scenes[0]);
             UnityEngine.SceneManagement.SceneManager.LoadScene(scenes[0]);
         }
 

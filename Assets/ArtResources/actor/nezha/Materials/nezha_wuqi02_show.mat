@@ -1,0 +1,193 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: nezha_wuqi02_show
+  m_Shader: {fileID: 4800000, guid: 86373ca556389664fa3f107203c968ad, type: 3}
+  m_ShaderKeywords: _EMISSION
+  m_LightmapFlags: 1
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _BumpMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _DetailAlbedoMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _DetailMask
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _DetailNormalMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _EmissionMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _LightTex
+      second:
+        m_Texture: {fileID: 2800000, guid: 709aff72126def34ba76ba9df7cc5c6d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _MainTex
+      second:
+        m_Texture: {fileID: 2800000, guid: 9b6ab31da786cef459a8a86474f86498, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _MaskTex
+      second:
+        m_Texture: {fileID: 2800000, guid: fd02db556f184cd4f88973137c9d6145, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _MetallicGlossMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _NoiseTex
+      second:
+        m_Texture: {fileID: 2800000, guid: 69b7b206ac5f83c46bbf348cf62f2b12, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _OcclusionMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _ParallaxMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _RampMap
+      second:
+        m_Texture: {fileID: 2800000, guid: d51c1241424ed7e43869de9071f694fd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _ReflectTex
+      second:
+        m_Texture: {fileID: 2800000, guid: f5e41b0d51b3d174b9b65cfd0479c494, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: _BumpScale
+      second: 1
+    - first:
+        name: _Cutoff
+      second: 0.5
+    - first:
+        name: _DetailNormalMapScale
+      second: 1
+    - first:
+        name: _DstBlend
+      second: 0
+    - first:
+        name: _GlossMapScale
+      second: 1
+    - first:
+        name: _Glossiness
+      second: 0.5
+    - first:
+        name: _GlossyReflections
+      second: 1
+    - first:
+        name: _LightPower
+      second: 0.5
+    - first:
+        name: _MMultiplier
+      second: 5
+    - first:
+        name: _Metallic
+      second: 0
+    - first:
+        name: _Mode
+      second: 0
+    - first:
+        name: _OcclusionStrength
+      second: 1
+    - first:
+        name: _Parallax
+      second: 0.02
+    - first:
+        name: _ReflectPower
+      second: -0.6
+    - first:
+        name: _ReflectionMultiplier
+      second: 0.8
+    - first:
+        name: _Scroll2X
+      second: 0
+    - first:
+        name: _Scroll2Y
+      second: -12
+    - first:
+        name: _SmoothnessTextureChannel
+      second: 0
+    - first:
+        name: _SpecMultiplier
+      second: 1
+    - first:
+        name: _SpecPower
+      second: 100
+    - first:
+        name: _SpecularHighlights
+      second: 1
+    - first:
+        name: _SrcBlend
+      second: 1
+    - first:
+        name: _UVSec
+      second: 0
+    - first:
+        name: _ZWrite
+      second: 1
+    m_Colors:
+    - first:
+        name: _Color
+      second: {r: 1, g: 1, b: 1, a: 1}
+    - first:
+        name: _EmissionColor
+      second: {r: 0, g: 0, b: 0, a: 1}
+    - first:
+        name: _NoiseColor
+      second: {r: 1, g: 1, b: 0.7647059, a: 0}
+    - first:
+        name: _ReflectColor
+      second: {r: 0.9558824, g: 0.9473512, b: 0.9418253, a: 1}
+    - first:
+        name: _ShadowColor
+      second: {r: 0, g: 0, b: 0, a: 0}
+    - first:
+        name: _SpecColor
+      second: {r: 0.6672794, g: 0.7332404, b: 0.8897059, a: 1}
