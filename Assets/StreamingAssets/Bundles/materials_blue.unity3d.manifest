@@ -1,0 +1,18 @@
+ManifestFileVersion: 0
+CRC: 3624858854
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 96cfee949cf1f043a27635fb73312f01
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c2bdabd68c118aabc18c59eaf5951821
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/GameResources/materials/blue.mat
+Dependencies: []

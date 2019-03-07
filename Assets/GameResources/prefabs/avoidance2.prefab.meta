@@ -1,9 +1,8 @@
 fileFormatVersion: 2
 guid: c689694bc197ac149920650b43274d36
-timeCreated: 1550828035
-licenseType: Free
 NativeFormatImporter:
+  externalObjects: {}
   mainObjectFileID: 100100000
   userData: 
-  assetBundleName: prefabs/avoidance2
+  assetBundleName: prefabs_avoidance2.unity3d
   assetBundleVariant: 

@@ -12,6 +12,7 @@ namespace Game
         public Button btnReturn;
         public Button btnActorView;
         public Button btnExeLuaFile;
+        public Button btnNav2D;
 
         // Use this for initialization
         void Start()
@@ -19,6 +20,7 @@ namespace Game
             btnReturn.onClick.AddListener(OnClickReturn);
             btnActorView.onClick.AddListener(OnClickActorView);
             btnExeLuaFile.onClick.AddListener(OnClickExeLuaFile);
+            btnNav2D.onClick.AddListener(OnClickNav2D);
         }
 
         // Update is called once per frame
@@ -48,6 +50,11 @@ namespace Game
         void OnClickExeLuaFile()
         {
             ResHelper.LoadScene("scenes/exe_lua_file");
+        }
+
+        void OnClickNav2D()
+        {
+            ResHelper.LoadScene("scenes/scene_nav2d");
         }
     }
 }

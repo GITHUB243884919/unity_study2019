@@ -32,15 +32,11 @@ public class ExeLuaFile : MonoBehaviour
         if (GUI.Button(new Rect(50, 50, 120, 45), "DoFile"))
         {
             strLog = "";
-            Debug.LogError("MyLoader");
-            LuaManager.GetInstance().luaState.DoFile("Game/ScriptsFromFile.lua");
-            //lua.DoFile("ScriptsFromFile.lua");                        
+            LuaManager.GetInstance().luaState.DoFile("Game/ScriptsFromFile.lua");                      
         }
         else if (GUI.Button(new Rect(50, 150, 120, 45), "Require"))
         {
-            Debug.LogError("MyLoader");
             strLog = "";
-            //lua.Require("ScriptsFromFile");   
             LuaManager.GetInstance().luaState.Require("Game/ScriptsFromFile");
         }
     }

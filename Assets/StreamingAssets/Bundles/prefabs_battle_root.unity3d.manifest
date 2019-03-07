@@ -1,0 +1,22 @@
+ManifestFileVersion: 0
+CRC: 2559209066
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 7b6e9e9a5b8042e8a1df4fbce63d24ed
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 7a9b39eeab26cdc5a225eda98c63859b
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 46dc99c5e6bf8d643bd03b4c9bd186b6, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/GameResources/prefabs/battle_root.prefab
+Dependencies: []

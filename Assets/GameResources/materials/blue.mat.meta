@@ -1,9 +1,8 @@
 fileFormatVersion: 2
 guid: cb8a47e6d5c910648a66f548d284e79b
-timeCreated: 1548224275
-licenseType: Free
 NativeFormatImporter:
+  externalObjects: {}
   mainObjectFileID: 2100000
   userData: 
-  assetBundleName: materials/blue
+  assetBundleName: materials_blue.unity3d
   assetBundleVariant: 

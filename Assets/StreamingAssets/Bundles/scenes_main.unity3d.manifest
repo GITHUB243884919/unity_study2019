@@ -1,0 +1,36 @@
+ManifestFileVersion: 0
+CRC: 946653269
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 58750b869474db6498fc5745eb360392
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c3f6d0a2121a285b28fb54d9366325e8
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 20
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 81
+  Script: {instanceID: 0}
+- Class: 104
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2682815ece37ec54b8d62f8e5e7e61f4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6b98f9eed31f96e4d81560b1b5471348, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 124
+  Script: {instanceID: 0}
+- Class: 157
+  Script: {instanceID: 0}
+Assets:
+- Assets/GameResources/scenes/main.unity
+Dependencies: []

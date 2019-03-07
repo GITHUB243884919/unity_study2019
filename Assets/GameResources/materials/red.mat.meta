@@ -1,9 +1,8 @@
 fileFormatVersion: 2
 guid: 035bc4078bbaf9047b2578dca69d39ff
-timeCreated: 1548224275
-licenseType: Free
 NativeFormatImporter:
+  externalObjects: {}
   mainObjectFileID: 2100000
   userData: 
-  assetBundleName: materials/red
+  assetBundleName: materials_red.unity3d
   assetBundleVariant: 

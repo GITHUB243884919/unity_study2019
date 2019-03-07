@@ -1,8 +1,7 @@
 fileFormatVersion: 2
 guid: 9578fffdefea06347827236c18933ef4
-timeCreated: 1550193964
-licenseType: Free
 DefaultImporter:
+  externalObjects: {}
   userData: 
-  assetBundleName: lua/config/tank_info
+  assetBundleName: lua_config_tank_info.unity3d
   assetBundleVariant: 

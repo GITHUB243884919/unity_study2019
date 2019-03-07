@@ -1,9 +1,8 @@
 fileFormatVersion: 2
 guid: 4617c458ceb7af04b89985cc945dd8c3
-timeCreated: 1550715328
-licenseType: Free
 NativeFormatImporter:
+  externalObjects: {}
   mainObjectFileID: 100100000
   userData: 
-  assetBundleName: prefabs/battle_root
+  assetBundleName: prefabs_battle_root.unity3d
   assetBundleVariant: 

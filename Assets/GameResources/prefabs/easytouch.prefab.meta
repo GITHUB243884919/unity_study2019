@@ -1,9 +1,8 @@
 fileFormatVersion: 2
 guid: 9574712f278669a44b3c42b87b5c354e
-timeCreated: 1550715215
-licenseType: Free
 NativeFormatImporter:
+  externalObjects: {}
   mainObjectFileID: 100100000
   userData: 
-  assetBundleName: prefabs/easytouch
+  assetBundleName: prefabs_easytouch.unity3d
   assetBundleVariant: 

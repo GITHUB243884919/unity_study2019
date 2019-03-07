@@ -1,9 +1,8 @@
 fileFormatVersion: 2
 guid: a7cfafec104ec144496ffabc6a0cb164
-timeCreated: 1548897417
-licenseType: Free
 NativeFormatImporter:
+  externalObjects: {}
   mainObjectFileID: 100100000
   userData: 
-  assetBundleName: prefabs/cube
+  assetBundleName: prefabs_cube.unity3d
   assetBundleVariant: 

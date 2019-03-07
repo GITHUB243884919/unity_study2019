@@ -1,0 +1,40 @@
+ManifestFileVersion: 0
+CRC: 2666446569
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: af24d8c1421db288221fbecb6aeceb28
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 8e1012dfac3459bd9d7c0eccc8dbff78
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 20
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 81
+  Script: {instanceID: 0}
+- Class: 92
+  Script: {instanceID: 0}
+- Class: 104
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2eb365b06ffc85e4fb7541aa4383a665, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5e0cba6281f0c864081892ea51b51495, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: bad2db78dc89a5a4f82418ba8aaf20f8, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 124
+  Script: {instanceID: 0}
+- Class: 157
+  Script: {instanceID: 0}
+Assets:
+- Assets/GameResources/Scenes/TestAB.unity
+Dependencies: []

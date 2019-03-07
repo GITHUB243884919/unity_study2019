@@ -1,0 +1,88 @@
+ManifestFileVersion: 0
+CRC: 1395704027
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 9a3c26f8a209a0925271f11729febafc
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 17a5220857a1e965cfa9ffb7c8449aec
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 20
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 60
+  Script: {instanceID: 0}
+- Class: 61
+  Script: {instanceID: 0}
+- Class: 68
+  Script: {instanceID: 0}
+- Class: 81
+  Script: {instanceID: 0}
+- Class: 92
+  Script: {instanceID: 0}
+- Class: 104
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 031a2185e48bdd84ba593dd6f6669a3e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 49a5c9d7b83e17d45b4e8dca6dcf94c4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ad705bba33f3642f4bc26cd844e12c6c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7a99d2eab88b747a9bd011e3d849162f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: bb631cb184a834142adf1ac90eb79ce4, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 124
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 157
+  Script: {instanceID: 0}
+- Class: 196
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+- Class: 238
+  Script: {instanceID: 0}
+Assets:
+- Assets/GameResources/scenes/scene_nav2d.unity
+Dependencies:
+- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/textures_border_vertical.unity3d
+- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/textures_border_horizontal.unity3d
+- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/textures_player.unity3d
+- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/textures_wall.unity3d

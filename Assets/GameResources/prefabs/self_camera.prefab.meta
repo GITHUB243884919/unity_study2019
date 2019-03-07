@@ -1,9 +1,8 @@
 fileFormatVersion: 2
 guid: 47d08a2617a676f4e874aaa6932ef88a
-timeCreated: 1550298134
-licenseType: Free
 NativeFormatImporter:
+  externalObjects: {}
   mainObjectFileID: 100100000
   userData: 
-  assetBundleName: prefabs/self_camera
+  assetBundleName: prefabs_self_camera.unity3d
   assetBundleVariant: 

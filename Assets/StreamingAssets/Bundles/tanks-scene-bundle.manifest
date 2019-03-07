@@ -1,14 +1,52 @@
 ManifestFileVersion: 0
-CRC: 3512721595
+CRC: 1388385532
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 2fe270c417cc0bae94684354e0054bae
+    Hash: bb38ac5c5c5b5d337915021134b3587d
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 31d6cfe0d16ae931b73c59d7e0c089c0
+    Hash: ddc6621c62dd3627d46ff47cb7426bf7
 HashAppended: 0
-ClassTypes: []
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 20
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 81
+  Script: {instanceID: 0}
+- Class: 89
+  Script: {instanceID: 0}
+- Class: 90
+  Script: {instanceID: 0}
+- Class: 92
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 104
+  Script: {instanceID: 0}
+- Class: 108
+  Script: {instanceID: 0}
+- Class: 124
+  Script: {instanceID: 0}
+- Class: 157
+  Script: {instanceID: 0}
+- Class: 258
+  Script: {instanceID: 0}
 Assets:
 - Assets/ArtResources/Tanks/Scenes/TanksExample.unity
 Dependencies:

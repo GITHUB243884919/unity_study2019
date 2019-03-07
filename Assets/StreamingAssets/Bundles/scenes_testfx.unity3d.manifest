@@ -1,0 +1,58 @@
+ManifestFileVersion: 0
+CRC: 1718899954
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d762eab826222f97b44948f2eb3e22a2
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: d1d0693c4022f01c3297816424186504
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 20
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 64
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 81
+  Script: {instanceID: 0}
+- Class: 92
+  Script: {instanceID: 0}
+- Class: 104
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: a8b8c7e02626c3b428b66dea5f533c9e, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 124
+  Script: {instanceID: 0}
+- Class: 135
+  Script: {instanceID: 0}
+- Class: 157
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/GameResources/Scenes/TestFx.unity
+Dependencies:
+- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/prefabs_avoidance.unity3d
+- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/prefabs_tank.unity3d

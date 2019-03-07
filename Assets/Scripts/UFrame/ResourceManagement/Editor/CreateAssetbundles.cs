@@ -254,8 +254,13 @@ public class CreateAssetBundles
     static void ModifyManifestFileName()
     {
         string path = "Assets/StreamingAssets/" + UFrameConst.Bundle_Root_Dir + "/" + UFrameConst.Bundle_Root_Dir;
+        string destPath = path + UFrameConst.Bundle_Extension;
+        if (File.Exists(destPath))
+        {
+            File.Delete(destPath);
+        }
         FileInfo fi = new FileInfo(path);
-        fi.MoveTo(path + UFrameConst.Bundle_Extension);
+        fi.MoveTo(destPath);
     }
 
     //[MenuItem("资源管理/bundle命名")]

@@ -1,0 +1,29 @@
+ManifestFileVersion: 0
+CRC: 278920526
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 7fa2e66457af3b5b2f112161534ae249
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: f49f05f36a566d50434f7d9f3fb347da
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+Assets:
+- Assets/GameResources/prefabs/mycube.prefab
+Dependencies:
+- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/materials_mymaterial.unity3d

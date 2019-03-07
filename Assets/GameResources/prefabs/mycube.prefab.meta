@@ -1,7 +1,8 @@
 fileFormatVersion: 2
 guid: eeb4a5e855facc745bac423723ca5eff
 NativeFormatImporter:
+  externalObjects: {}
   mainObjectFileID: 0
   userData: 
-  assetBundleName: prefabs/mycube
+  assetBundleName: prefabs_mycube.unity3d
   assetBundleVariant: 

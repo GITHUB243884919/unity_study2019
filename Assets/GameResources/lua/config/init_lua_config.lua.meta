@@ -1,8 +1,7 @@
 fileFormatVersion: 2
 guid: 76ab5f17cb67eb3499662b91882811df
-timeCreated: 1549870335
-licenseType: Free
 DefaultImporter:
+  externalObjects: {}
   userData: 
-  assetBundleName: lua/config/init_lua_config
+  assetBundleName: lua_config_init_lua_config.unity3d
   assetBundleVariant: 
