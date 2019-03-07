@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using LuaInterface;
-using UFrame.LUA;
+using UFrame.ToLua;
 using GameName.Lua.Config;
 
 public class ReadConfig : MonoBehaviour {

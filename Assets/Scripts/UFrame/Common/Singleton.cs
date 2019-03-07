@@ -1,12 +1,18 @@
 ﻿namespace UFrame.Common
 {
-    public class Singleton<T> where T : new() 
+    public interface ISingleton
+    {
+        void Init();
+    }
+
+    public class Singleton<T> where T : ISingleton, new()
     {
         static public T GetInstance()
         {
             if (null == s_Instance)
             {
                 s_Instance = new T();
+                s_Instance.Init();
             }
             return s_Instance;
 

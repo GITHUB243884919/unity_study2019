@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using LuaInterface;
 
-namespace UFrame.LUA
+namespace UFrame.ToLua
 {
     public class ArrayData
     {

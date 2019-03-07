@@ -6,7 +6,7 @@ import shutil
 
 fileContext = """
 //auto gen code
-using UFrame.LUA;
+using UFrame.ToLua;
 namespace %s
 {
     public class %s

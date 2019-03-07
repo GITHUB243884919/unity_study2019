@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UFrame.MessageCenter;
-using UFrame.LUA;
+using UFrame.ToLua;
 using GameName.Lua.Config;
 
 namespace GameName.Battle

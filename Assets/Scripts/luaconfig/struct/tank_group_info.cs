@@ -1,6 +1,6 @@
 
 //auto gen code
-using UFrame.LUA;
+using UFrame.ToLua;
 namespace GameName.Lua.Config
 {
     public class tank_group_info

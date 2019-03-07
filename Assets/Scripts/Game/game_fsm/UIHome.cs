@@ -5,17 +5,20 @@ using UnityEngine.UI;
 namespace Game
 {
     /// <summary>
-    /// 发送登录消息
-    /// 等待服务器返回后进入主城场景
+    /// 主城
     /// </summary>
     public class UIHome : MonoBehaviour
     {
         public Button btnReturn;
+        public Button btnActorView;
+        public Button btnExeLuaFile;
 
         // Use this for initialization
         void Start()
         {
             btnReturn.onClick.AddListener(OnClickReturn);
+            btnActorView.onClick.AddListener(OnClickActorView);
+            btnExeLuaFile.onClick.AddListener(OnClickExeLuaFile);
         }
 
         // Update is called once per frame
@@ -37,6 +40,15 @@ namespace Game
             MessageManager.GetInstance().gameMessageCenter.Send(msg);
         }
 
+        void OnClickActorView()
+        {
+            ResHelper.LoadScene("scenes/actor_view");
+        }
+
+        void OnClickExeLuaFile()
+        {
+            ResHelper.LoadScene("scenes/exe_lua_file");
+        }
     }
 }
 

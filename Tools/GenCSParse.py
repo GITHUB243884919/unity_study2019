@@ -9,7 +9,7 @@ import shutil
 dao_file_context = """using System;
 using System.Collections.Generic;
 using LuaInterface;
-using UFrame.LUA;
+using UFrame.ToLua;
 
 namespace %s
 {

@@ -4,7 +4,7 @@ using UnityEngine;
 using LuaInterface;
 using System;
 
-namespace UFrame.LUA
+namespace UFrame.ToLua
 {
     /// <summary>
     /// todo

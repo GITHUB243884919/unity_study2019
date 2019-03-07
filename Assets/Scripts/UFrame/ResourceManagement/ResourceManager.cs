@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UFrame.Common;
 
 namespace UFrame.ResourceManagement
 {
-    public class ResourceManager : Common.Singleton<ResourceManager>
+    public class ResourceManager : Singleton<ResourceManager>, ISingleton
     {
 
         IResourceLoader resLoader;

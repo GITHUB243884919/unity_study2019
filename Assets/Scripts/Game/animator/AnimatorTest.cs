@@ -64,7 +64,7 @@ public class AnimatorTest : MonoBehaviour
         }
         preState = currState;
         currState = tmp;
-        Debug.LogError(preState + " " + currState);
+        //Debug.LogError(preState + " " + currState);
     }
 
     /// <summary>

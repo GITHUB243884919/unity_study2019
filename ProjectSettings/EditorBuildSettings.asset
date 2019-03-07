@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/GameResources/scenes/CountingNumber.unity
     guid: 099ade6e9d3052640b58f639ca5b133d
   - enabled: 1
+    path: Assets/GameResources/scenes/exe_lua_file.unity
+    guid: bceb3c781e4ad1d4183abe31a88650ab
+  - enabled: 1
     path: Assets/GameResources/scenes/home.unity
     guid: 5b505dc70bae0a44f902ef529f7d3274
   - enabled: 1

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using LuaInterface;
 using UFrame.Common;
-namespace UFrame.LUA
+
+namespace UFrame.ToLua
 {
-    public class LuaManager : Singleton<LuaManager>
+    public class LuaManager : Singleton<LuaManager>, ISingleton
     {
         public LuaState luaState { get; private set; }
         private bool bInit = false;
@@ -15,6 +16,8 @@ namespace UFrame.LUA
             {
                 return;
             }
+            LuaLoader luaLoader = new LuaLoader();
+
             //InitLoader();
             luaState = new LuaState();
             OpenLibs();
@@ -59,8 +62,6 @@ namespace UFrame.LUA
                 //OpenZbsDebugger();
             }
         }
-
-
 
         private void Bind()
         {
