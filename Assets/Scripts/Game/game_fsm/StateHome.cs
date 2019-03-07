@@ -8,56 +8,76 @@ using UFrame.MessageCenter;
 using Game.MessageDefine;
 namespace Game
 {
-    public class StateHome : FSMState, IMessageExecutor
+    public class StateHomeMessageExecutor : BroadcastMessageExecutor
     {
-        //bool loginSuccess = false;
+        StateHome stateHome;
+        public StateHomeMessageExecutor(StateHome stateHome) : base()
+        {
+            this.stateHome = stateHome;
+        }
+        public override void Execute(UFrame.MessageCenter.Message msg)
+        {
+            if (msg.messageID == (int)GameMsg.Return_Login)
+            {
+                stateHome.returnLogin = true;
+            }
+        }
+    }
+
+
+    public class StateHome : FSMState
+    {
+        public bool returnLogin = false;
+        string sceneHome;
+        StateHomeMessageExecutor msgExe;
         public StateHome(string stateName, FSMMachine fsmCtr) : base(stateName, fsmCtr)
         {
+            msgExe = new StateHomeMessageExecutor(this);
         }
 
         public override void Enter(string preStateName)
         {
             base.Enter(preStateName);
-            //加载Login场景
-            ResHelper.LoadScene("scenes/home");
-            //GetMessageCenter().Regist((int)GameMessage.Login, this);
-            //AddConvertCond("home", CouldHome);
 
+            returnLogin = false;
+            MessageManager.GetInstance().gameMessageCenter.Regist((int)GameMsg.Return_Login, msgExe);
 
+            //加载Home场景
+            ResHelper.LoadScene(sceneHome);
         }
 
         public override void AddAllConvertCond()
         {
-            //throw new NotImplementedException();
+            AddConvertCond("Login", CouldReturnLogin);
         }
 
         public override void Tick(int deltaTimeMS)
         {
-            //throw new NotImplementedException();
         }
 
         protected override void GetEnterParam()
         {
-            //throw new NotImplementedException();
+            sceneHome = "scenes/home";
         }
 
         protected override void GetLeaveParam()
         {
-            //throw new NotImplementedException();
         }
 
-        public void Execute(UFrame.MessageCenter.Message msg)
+        public override void Leave()
         {
-            //if (msg.messageID == (int)GameMessage.Login)
-            //{
-
-            //}
+            MessageManager.GetInstance().gameMessageCenter.UnRegist((int)GameMsg.Return_Login, msgExe);
+            returnLogin = false;
+            base.Leave();
         }
 
-        //bool CouldHome()
-        //{
-        //    return loginSuccess;
-        //}
+        bool CouldReturnLogin()
+        {
+            return this.returnLogin;
+        }
+
+
+
     }
 }
 

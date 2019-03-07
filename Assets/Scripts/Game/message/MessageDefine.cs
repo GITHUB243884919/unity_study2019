@@ -8,6 +8,9 @@ namespace Game.MessageDefine
     {
         C2S_Login = 1,
         S2C_Login,
+
+        Return_Login,
+
     }
 
     public class GameMsg_C2S_Login : UFrame.MessageCenter.Message

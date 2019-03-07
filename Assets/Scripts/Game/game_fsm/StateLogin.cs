@@ -37,12 +37,15 @@ namespace Game
 
         public override void Enter(string preStateName)
         {
+            
             base.Enter(preStateName);
-            //加载Login场景
-            ResHelper.LoadScene(loginScene);
+            loginSuccess = false;
+
             MessageManager.GetInstance().gameMessageCenter.Regist((int)GameMsg.C2S_Login, msgExe);
             MessageManager.GetInstance().gameMessageCenter.Regist((int)GameMsg.S2C_Login, msgExe);
 
+            //加载Login场景
+            ResHelper.LoadScene(loginScene);
         }
 
         public override void AddAllConvertCond()
@@ -66,6 +69,8 @@ namespace Game
         public override void Leave()
         {
             MessageManager.GetInstance().gameMessageCenter.UnRegist((int)GameMsg.C2S_Login, msgExe);
+            MessageManager.GetInstance().gameMessageCenter.UnRegist((int)GameMsg.S2C_Login, msgExe);
+            loginSuccess = false;
             base.Leave();
         }
 
