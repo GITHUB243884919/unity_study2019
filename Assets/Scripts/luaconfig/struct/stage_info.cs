@@ -1,7 +1,7 @@
 
 //auto gen code
 using UFrame.ToLua;
-namespace GameName.Lua.Config
+namespace Game.ToLua.Config
 {
     public class stage_info
     {

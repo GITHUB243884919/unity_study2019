@@ -15,7 +15,7 @@ import operator
 ##param##
 xlsDir = os.getcwd()  # xls所在目录
 outDir = "lua/config"  # 输出目录
-copyDir = "../Assets/GameResources/lua/config"
+copyDir = "../Assets/LuaFramework/Lua/Game/config"
 splitStr = "&&"  # 数组分隔符
 bErrorFlag = False  # 解析有错
 

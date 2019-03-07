@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using LuaInterface;
 using UFrame.ToLua;
 
-namespace GameName.Lua.Config
+namespace Game.ToLua.Config
 {
     public class tank_group_infoParse : LuaConfigBase <tank_group_info>
     {

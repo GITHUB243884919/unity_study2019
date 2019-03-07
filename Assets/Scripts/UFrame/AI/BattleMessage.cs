@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UFrame.MessageCenter;
-using GameName.Lua.Config;
+using Game.ToLua.Config;
 public enum BattleMessageID : int
 {
     L2D_BattleInit = 1,

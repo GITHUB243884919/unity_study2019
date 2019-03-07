@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UFrame.MessageCenter;
 using UFrame.ResourceManagement;
-using GameName.Lua.Config;
+using Game.ToLua.Config;
 
 namespace GameName.Battle.Display
 {

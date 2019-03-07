@@ -23,7 +23,7 @@ outDir = "luaconfig"
 structDir = outDir + "/struct"
 apiDir = outDir + "/api"
 parseDir = outDir + "/parse"
-namespace = "GameName.Lua.Config"
+namespace = "Game.ToLua.Config"
 
 structFiles = []
 apiFiles = []

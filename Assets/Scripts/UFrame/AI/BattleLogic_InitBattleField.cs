@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UFrame.MessageCenter;
-using GameName.Lua.Config;
+using Game.ToLua.Config;
 using FixMath;
 
 namespace GameName.Battle.Logic

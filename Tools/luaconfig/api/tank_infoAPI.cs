@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace GameName.Lua.Config
+namespace Game.ToLua.Config
 {
     public partial class tank_infoAPI
     {

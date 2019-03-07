@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-namespace GameName.Lua.Config
+namespace Game.ToLua.Config
 {
     public class LuaConfigManager
     {
