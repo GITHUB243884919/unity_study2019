@@ -67,8 +67,8 @@ public class Test : MonoBehaviour
         directMessageCenter = new DirectMessageCenter();
         directMessageCenter.Regist(1000, new MessagetExecutorTest());
 
-        broadcastMessageCenter = new BroadcastMessageCenter();
-        broadcastMessageCenter.Regist(new BroadcastMessageExecutorTest());
+        //broadcastMessageCenter = new BroadcastMessageCenter();
+        //broadcastMessageCenter.Regist(new BroadcastMessageExecutorTest());
 
         MessageTest msgTest1 = MessageTest.pool.New();
         msgTest1.messageID = 1000;
@@ -79,14 +79,14 @@ public class Test : MonoBehaviour
         msgTest2.Init(300, 400);
 
         directMessageCenter.Send(msgTest1);
-        broadcastMessageCenter.Send(msgTest2);
+        //broadcastMessageCenter.Send(msgTest2);
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
         directMessageCenter.Tick();
-        broadcastMessageCenter.Tick();
+        //broadcastMessageCenter.Tick();
 	}
 
 }

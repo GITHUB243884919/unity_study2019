@@ -5,10 +5,11 @@ using UnityEngine;
 
 namespace UFrame.ResourceManagement
 {
-
+    /// <summary>
+    /// 异步接口
+    /// </summary>
     public partial class BundleLoader : IResourceLoader
     {
-        #region 异步
         public class BundleAsyncRequest
         {
             static int requestID;
@@ -52,7 +53,6 @@ namespace UFrame.ResourceManagement
                 callback(getter);
             }
 
-            //BundleAsyncRequest bundleRequest = new BundleAsyncRequest(assetName, eloadAsset, callback);
             BundleAsyncRequest bundleRequest = new BundleAsyncRequest(assetName, eloadAsset);
             bundleAsyncs.Enqueue(bundleRequest);
             RunCoroutine.Run(CoBundleAsyncRequest<T>(bundleRequest, callback));
@@ -143,7 +143,6 @@ namespace UFrame.ResourceManagement
                     int index = assetName.LastIndexOf("/");
                     string assetNameInBundle = assetName.Substring(index + 1);
                     Debug.LogError(assetName + " " + assetNameInBundle);
-                    //assetRequest = assetBundle.LoadAssetAsync(assetName);
                     assetRequest = assetBundle.LoadAssetAsync(assetNameInBundle);
                     break;
                 case E_LoadAsset.LoadAll:
@@ -171,11 +170,10 @@ namespace UFrame.ResourceManagement
             getter.SetAssetHolder(assetHolder);
             nameAssetHolders.Add(assetName, assetHolder);
 
-            callback(getter);
             bundleAsyncs.Dequeue();
+            callback(getter);
+            
         }
-
-        #endregion
 
     }
 }

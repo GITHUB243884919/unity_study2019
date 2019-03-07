@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-namespace UFramework
+namespace UFrame
 {
     public interface IGameApp
     {
@@ -17,7 +17,7 @@ namespace UFramework
         void Shutdown();
     }
 
-	public abstract class Main : MonoBehaviour
+	public abstract class AMain : MonoBehaviour
 	{
 		private IGameApp app = null;
 
@@ -28,6 +28,7 @@ namespace UFramework
 
             app = CreateGameApp();
             app.Awake ();
+            DontDestroyOnLoad(this);
 		}
 
         private void OnMemoryWarnning()

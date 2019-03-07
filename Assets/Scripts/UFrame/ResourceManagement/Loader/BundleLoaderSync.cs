@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace UFrame.ResourceManagement
 {
+    /// <summary>
+    /// 同步接口
+    /// </summary>
     public partial class BundleLoader : IResourceLoader
     {
         public  AssetGetter LoadAllAssets(string assetName)

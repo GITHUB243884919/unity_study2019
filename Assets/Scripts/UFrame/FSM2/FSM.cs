@@ -69,6 +69,7 @@ namespace UFrame.FSM
         Dictionary<string, FSMState> states = new Dictionary<string, FSMState>();
         FSMState currState;
         string preStateName;
+        FSMState defaultState;
 
         public void AddState(FSMState state)
         {
@@ -77,10 +78,11 @@ namespace UFrame.FSM
 
         public void SetDefaultState(string stateName)
         {
-            if (currState == null)
-            {
-                currState = states[stateName];
-            }
+            //if (currState == null)
+            //{
+            //    currState = states[stateName];
+            //}
+            defaultState = states[stateName];
         }
 
         public void GotoState(string stateName)
@@ -101,14 +103,16 @@ namespace UFrame.FSM
 
         public void Tick(int deltaTimeMS)
         {
-            if (currState != null)
+            if (currState == null && defaultState != null)
             {
-                currState.Tick(deltaTimeMS);
-                string newState = currState.ChangeState();
-                if (!string.IsNullOrEmpty(newState))
-                {
-                    GotoState(newState);
-                }
+                GotoState(defaultState.stateName);
+            }
+
+            currState.Tick(deltaTimeMS);
+            string newState = currState.ChangeState();
+            if (!string.IsNullOrEmpty(newState))
+            {
+                GotoState(newState);
             }
         }
 

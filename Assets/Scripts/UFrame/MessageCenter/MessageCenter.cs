@@ -91,16 +91,28 @@ namespace UFrame.MessageCenter
     /// </summary>
     public class BroadcastMessageCenter
     {
-        protected Queue<Message> messages = new Queue<Message>();
-        protected LinkedList<BroadcastMessageExecutor> executors = new LinkedList<BroadcastMessageExecutor>();
-        public void Regist(BroadcastMessageExecutor executor)
+        protected Queue<Message> messages = new Queue<Message>();       
+        protected Dictionary<int, LinkedList<BroadcastMessageExecutor>> executors = new Dictionary<int, LinkedList<BroadcastMessageExecutor>>();
+
+        public void Regist(int messageID, BroadcastMessageExecutor executor)
         {
-            executors.AddLast(executor);
+            LinkedList<BroadcastMessageExecutor> linkExecutor = null;
+            if (!executors.TryGetValue(messageID, out linkExecutor))
+            {
+                linkExecutor = new LinkedList<BroadcastMessageExecutor>();
+                executors.Add(messageID, linkExecutor);
+            }
+            linkExecutor.AddLast(executor);
         }
 
-        public void UnRegist(BroadcastMessageExecutor executor)
+        public void UnRegist(int messageID, BroadcastMessageExecutor executor)
         {
-            executors.Remove(executor);
+            LinkedList<BroadcastMessageExecutor> linkExecutor = null;
+            if (!executors.TryGetValue(messageID, out linkExecutor))
+            {
+                return;
+            }
+            linkExecutor.Remove(executor);
         }
 
         public void Send(Message msg)
@@ -118,7 +130,14 @@ namespace UFrame.MessageCenter
                 }
 
                 Message msg = messages.Dequeue();
-                foreach(var executor in executors)
+
+                LinkedList<BroadcastMessageExecutor> linkExecutor = null;
+                if (!executors.TryGetValue(msg.messageID, out linkExecutor))
+                {
+                    throw new System.Exception("没有消息被注册" + msg.messageID);
+                }
+
+                foreach (var executor in linkExecutor)
                 {
                     executor.Execute(msg);
                 }
