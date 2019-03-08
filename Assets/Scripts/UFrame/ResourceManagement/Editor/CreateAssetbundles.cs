@@ -120,8 +120,7 @@ public class CreateAssetBundles
         }
     }
 
-    [MenuItem("UFrame框架/资源管理/发布模式/创建Bundle")]
-    public static void BuildAll()
+    public static void BuildPerpare()
     {
         string fileMapFullPath = Path.Combine(Application.dataPath, UFrameConst.GameResources_Dir);
         fileMapFullPath = Path.Combine(fileMapFullPath, UFrameConst.Asset_Bundle_Txt_Name);
@@ -146,8 +145,41 @@ public class CreateAssetBundles
         var importerFileMap = AssetImporter.GetAtPath(assetBundleTxtPathInAssets);
         importerFileMap.assetBundleName = Path.GetFileNameWithoutExtension(UFrameConst.Asset_Bundle_Txt_Name) + UFrameConst.Bundle_Extension;
 
+        AssetDatabase.Refresh();
+    }
+
+    [MenuItem("UFrame框架/资源管理/发布模式/创建Bundle/StandaloneWindows")]
+    public static void BuildAll_StandaloneWindows()
+    {
+        BuildPerpare();
         string assetBundleDirectory = "Assets/StreamingAssets/" + UFrameConst.Bundle_Root_Dir;
-        BuildPipeline.BuildAssetBundles(assetBundleDirectory, BuildAssetBundleOptions.DeterministicAssetBundle, EditorUserBuildSettings.activeBuildTarget);
+        BuildPipeline.BuildAssetBundles(assetBundleDirectory, BuildAssetBundleOptions.DeterministicAssetBundle, BuildTarget.StandaloneWindows);
+
+        //把Manifest文件加一个后缀，方便下载
+        ModifyManifestFileName();
+
+        AssetDatabase.Refresh();
+    }
+
+    [MenuItem("UFrame框架/资源管理/发布模式/创建Bundle/Android")]
+    public static void BuildAll_Android()
+    {
+        BuildPerpare();
+        string assetBundleDirectory = "Assets/StreamingAssets/" + UFrameConst.Bundle_Root_Dir;
+        BuildPipeline.BuildAssetBundles(assetBundleDirectory, BuildAssetBundleOptions.DeterministicAssetBundle, BuildTarget.Android);
+
+        //把Manifest文件加一个后缀，方便下载
+        ModifyManifestFileName();
+
+        AssetDatabase.Refresh();
+    }
+
+    [MenuItem("UFrame框架/资源管理/发布模式/创建Bundle/IOS")]
+    public static void BuildAll_IOS()
+    {
+        BuildPerpare();
+        string assetBundleDirectory = "Assets/StreamingAssets/" + UFrameConst.Bundle_Root_Dir;
+        BuildPipeline.BuildAssetBundles(assetBundleDirectory, BuildAssetBundleOptions.DeterministicAssetBundle, BuildTarget.iOS);
 
         //把Manifest文件加一个后缀，方便下载
         ModifyManifestFileName();

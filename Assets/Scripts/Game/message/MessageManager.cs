@@ -10,12 +10,9 @@ namespace Game
 {
     public class MessageManager : Singleton<MessageManager>, ISingleton
     {
-        //public DirectMessageCenter gameMessageCenter = new DirectMessageCenter();
-        public BroadcastMessageCenter gameMessageCenter = new BroadcastMessageCenter();
-
+        public ActionMessageCenter gameMessageCenter = new ActionMessageCenter();
         public void Init()
         {
-            //throw new NotImplementedException();
         }
 
         public void Tick()

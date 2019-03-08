@@ -6,5 +6,41 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/GameResources/scenes/actor_view.unity
+    guid: 08148f887cb62bb4ca227c8122826540
+  - enabled: 1
+    path: Assets/GameResources/scenes/CountingNumber.unity
+    guid: 099ade6e9d3052640b58f639ca5b133d
+  - enabled: 1
+    path: Assets/GameResources/scenes/exe_lua_file.unity
+    guid: bceb3c781e4ad1d4183abe31a88650ab
+  - enabled: 1
+    path: Assets/GameResources/scenes/home.unity
+    guid: 5b505dc70bae0a44f902ef529f7d3274
+  - enabled: 1
+    path: Assets/GameResources/scenes/login.unity
+    guid: 688e6c53b1067a14cb8ac22078faa534
+  - enabled: 1
     path: Assets/GameResources/scenes/main.unity
     guid: 994b7687457c19c44a63dc9684e6d3a0
+  - enabled: 1
+    path: Assets/GameResources/scenes/scene_nav2d.unity
+    guid: e408a5d2a26f69a4b867a46b961215dd
+  - enabled: 1
+    path: Assets/GameResources/scenes/TestAB.unity
+    guid: 7bf0f7e90151abb45b621d7439330a01
+  - enabled: 1
+    path: Assets/GameResources/scenes/TestAB_Scene.unity
+    guid: 1062970985e135b49b034467a1703b51
+  - enabled: 1
+    path: Assets/GameResources/scenes/TestExecutor.unity
+    guid: d636d54bb1926d64eb3b034e90c12989
+  - enabled: 1
+    path: Assets/GameResources/scenes/TestFsm.unity
+    guid: 5dc6b5ca53f0de14aaaa9abf93d97318
+  - enabled: 1
+    path: Assets/GameResources/scenes/TestFx.unity
+    guid: 0a84a20d22e6cba41a37faf111e1ea9f
+  - enabled: 1
+    path: Assets/GameResources/scenes/test_ai.unity
+    guid: 75648c24d81662a419097a3c46aaa1fc

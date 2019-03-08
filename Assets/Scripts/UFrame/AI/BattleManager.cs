@@ -22,8 +22,8 @@ namespace GameName.Battle
             GameObject easytouchGo = GameObject.Find("easytouch");
             joy = easytouchGo.GetComponentInChildren<ETCJoystick>();
 
-            LuaManager.GetInstance().Init();
-            LuaManager.GetInstance().luaState.DoFile("init_lua_config");
+            //LuaManager.GetInstance().Init();
+            LuaManager.GetInstance().luaState.DoFile("Game/config/init_lua_config");
             LuaConfigManager.Instance.Init();
             battleMessageCenter = new DirectMessageCenter();
             battleLogic = new Logic.BattleLogic(this);

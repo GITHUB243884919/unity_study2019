@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1594920648
+CRC: 2125692047
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -171,50 +171,53 @@ AssetBundleManifest:
       Name: scenes_testab_scene.unity3d
       Dependencies: {}
     Info_53:
-      Name: scenes_testai.unity3d
-      Dependencies:
-        Dependency_0: prefabs_battle_root.unity3d
-        Dependency_1: prefabs_easytouch.unity3d
-        Dependency_2: prefabs_tank.unity3d
-    Info_54:
       Name: scenes_testexecutor.unity3d
       Dependencies: {}
-    Info_55:
+    Info_54:
       Name: scenes_testfsm.unity3d
       Dependencies: {}
-    Info_56:
+    Info_55:
       Name: scenes_testfx.unity3d
       Dependencies:
         Dependency_0: prefabs_avoidance.unity3d
         Dependency_1: prefabs_tank.unity3d
-    Info_57:
+    Info_56:
       Name: textures_unitylogo_unitylogo.unity3d
       Dependencies: {}
-    Info_58:
+    Info_57:
       Name: textures_unitylogo_unitylogo1.unity3d
       Dependencies: {}
-    Info_59:
+    Info_58:
       Name: textures_unitylogo_unitylogo2.unity3d
       Dependencies: {}
-    Info_60:
+    Info_59:
       Name: asset-bundle.unity3d
       Dependencies: {}
-    Info_61:
+    Info_60:
       Name: textures_border_vertical.unity3d
       Dependencies: {}
-    Info_62:
+    Info_61:
       Name: textures_border_horizontal.unity3d
       Dependencies: {}
-    Info_63:
+    Info_62:
       Name: textures_player.unity3d
       Dependencies: {}
-    Info_64:
+    Info_63:
       Name: textures_wall.unity3d
       Dependencies: {}
-    Info_65:
+    Info_64:
       Name: scenes_scene_nav2d.unity3d
       Dependencies:
         Dependency_0: textures_border_vertical.unity3d
         Dependency_1: textures_border_horizontal.unity3d
         Dependency_2: textures_player.unity3d
         Dependency_3: textures_wall.unity3d
+    Info_65:
+      Name: lua_game_config.unity3d
+      Dependencies: {}
+    Info_66:
+      Name: scenes_test_ai.unity3d
+      Dependencies:
+        Dependency_0: prefabs_battle_root.unity3d
+        Dependency_1: prefabs_easytouch.unity3d
+        Dependency_2: prefabs_tank.unity3d

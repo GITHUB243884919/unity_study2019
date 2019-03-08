@@ -13,6 +13,7 @@ namespace Game
         public Button btnActorView;
         public Button btnExeLuaFile;
         public Button btnNav2D;
+        public Button btnAI;
 
         // Use this for initialization
         void Start()
@@ -21,6 +22,7 @@ namespace Game
             btnActorView.onClick.AddListener(OnClickActorView);
             btnExeLuaFile.onClick.AddListener(OnClickExeLuaFile);
             btnNav2D.onClick.AddListener(OnClickNav2D);
+            btnAI.onClick.AddListener(OnClickAI);
         }
 
         // Update is called once per frame
@@ -38,7 +40,7 @@ namespace Game
         void SendReturn()
         {
             UFrame.MessageCenter.Message msg = new UFrame.MessageCenter.Message();
-            msg.messageID = (int)MessageDefine.GameMsg.Return_Login;
+            msg.messageID = (int)MessageDefine.GameMsg.C2C_Return_Login;
             MessageManager.GetInstance().gameMessageCenter.Send(msg);
         }
 
@@ -55,6 +57,11 @@ namespace Game
         void OnClickNav2D()
         {
             ResHelper.LoadScene("scenes/scene_nav2d");
+        }
+
+        void OnClickAI()
+        {
+            ResHelper.LoadScene("scenes/test_ai");
         }
     }
 }
