@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2125692047
+CRC: 3366203716
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -221,3 +221,9 @@ AssetBundleManifest:
         Dependency_0: prefabs_battle_root.unity3d
         Dependency_1: prefabs_easytouch.unity3d
         Dependency_2: prefabs_tank.unity3d
+    Info_67:
+      Name: lua_game_mono_behaviour.unity3d
+      Dependencies: {}
+    Info_68:
+      Name: scenes_luamono.unity3d
+      Dependencies: {}

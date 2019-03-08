@@ -94,6 +94,7 @@ Game/config/stage_info.lua.bytes,lua_game_config.unity3d
 Game/config/tank_group_info.lua.bytes,lua_game_config.unity3d
 Game/config/tank_info.lua.bytes,lua_game_config.unity3d
 Game/config/test_sheet1.lua.bytes,lua_game_config.unity3d
+Game/mono_behaviour/LuaMonoBehaviour_Test.lua.bytes,lua_game_mono_behaviour.unity3d
 System/Injection/InjectionBridgeInfo.lua.bytes,lua_system_injection.unity3d
 System/Injection/LuaInjectionBus.lua.bytes,lua_system_injection.unity3d
 System/Injection/LuaInjectionStation.lua.bytes,lua_system_injection.unity3d
@@ -130,6 +131,7 @@ scenes/CountingNumber,scenes_CountingNumber.unity3d
 scenes/exe_lua_file,scenes_exe_lua_file.unity3d
 scenes/home,scenes_home.unity3d
 scenes/login,scenes_login.unity3d
+scenes/luamono,scenes_luamono.unity3d
 scenes/main,scenes_main.unity3d
 scenes/scene_nav2d,scenes_scene_nav2d.unity3d
 scenes/TestAB,scenes_TestAB.unity3d

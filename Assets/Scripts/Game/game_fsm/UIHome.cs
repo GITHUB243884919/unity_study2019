@@ -14,6 +14,7 @@ namespace Game
         public Button btnExeLuaFile;
         public Button btnNav2D;
         public Button btnAI;
+        public Button btnLuaMono;
 
         // Use this for initialization
         void Start()
@@ -23,6 +24,7 @@ namespace Game
             btnExeLuaFile.onClick.AddListener(OnClickExeLuaFile);
             btnNav2D.onClick.AddListener(OnClickNav2D);
             btnAI.onClick.AddListener(OnClickAI);
+            btnLuaMono.onClick.AddListener(() => { ResHelper.LoadScene("scenes/luamono"); });
         }
 
         // Update is called once per frame

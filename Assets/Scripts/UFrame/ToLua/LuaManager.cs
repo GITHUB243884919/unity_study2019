@@ -39,6 +39,8 @@ namespace UFrame.ToLua
         public void Release()
         {
             luaState.CheckTop();
+            luaState.LuaGC(LuaGCOptions.LUA_GCCOLLECT);
+
             luaState.Dispose();
             luaState = null;
         }

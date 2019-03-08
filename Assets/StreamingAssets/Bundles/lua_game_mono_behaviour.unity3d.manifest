@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 1063449960
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 066cc9c4fba9e659ff084075c4a4d4ad
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/LuaTemp/Game/mono_behaviour/LuaMonoBehaviour_Test.lua.bytes
+Dependencies: []
