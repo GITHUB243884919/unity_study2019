@@ -151,6 +151,8 @@ public class CreateAssetBundles
     [MenuItem("UFrame框架/资源管理/发布模式/创建Bundle/StandaloneWindows")]
     public static void BuildAll_StandaloneWindows()
     {
+        
+
         BuildPerpare();
         string assetBundleDirectory = "Assets/StreamingAssets/" + UFrameConst.Bundle_Root_Dir;
         BuildPipeline.BuildAssetBundles(assetBundleDirectory, BuildAssetBundleOptions.DeterministicAssetBundle, BuildTarget.StandaloneWindows);
@@ -159,6 +161,8 @@ public class CreateAssetBundles
         ModifyManifestFileName();
 
         AssetDatabase.Refresh();
+
+        EditorUtility.DisplayDialog("", "Assetbundle打包完毕", "确定");
     }
 
     [MenuItem("UFrame框架/资源管理/发布模式/创建Bundle/Android")]
@@ -172,6 +176,8 @@ public class CreateAssetBundles
         ModifyManifestFileName();
 
         AssetDatabase.Refresh();
+
+        EditorUtility.DisplayDialog("", "Assetbundle打包完毕", "确定");
     }
 
     [MenuItem("UFrame框架/资源管理/发布模式/创建Bundle/IOS")]
@@ -185,6 +191,8 @@ public class CreateAssetBundles
         ModifyManifestFileName();
 
         AssetDatabase.Refresh();
+
+        EditorUtility.DisplayDialog("", "Assetbundle打包完毕", "确定");
     }
 
     public static void OnlyMainScene()

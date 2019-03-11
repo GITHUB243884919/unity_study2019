@@ -35,12 +35,12 @@ public class AnimatorTest : MonoBehaviour
     {
         if (animator == null) return;
 
-        //var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         var clipInfo = animator.GetCurrentAnimatorClipInfo(0)[0];
         StoreState(clipInfo.clip.name);
 
 
-        ////PlayFinishedReturnToIdle(stateInfo);
+        PlayFinishedReturnToIdle(stateInfo);
         //PlayFinishedReturnBefore(stateInfo);
     }
 
@@ -83,10 +83,6 @@ public class AnimatorTest : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 播放完毕后回到Idle
-    /// </summary>
-    /// <param name="stateInfo"></param>
     void PlayFinishedReturnBefore(AnimatorStateInfo stateInfo)
     {
         //不设置Has Exit Time 切换会流畅

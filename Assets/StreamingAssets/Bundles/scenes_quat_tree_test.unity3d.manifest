@@ -1,0 +1,50 @@
+ManifestFileVersion: 0
+CRC: 2645123649
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 32c09c2e0bc0406c6981378d6b8affc2
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 68a1ae10c7f96c5edf25a13f8b5d35dd
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 20
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 81
+  Script: {instanceID: 0}
+- Class: 104
+  Script: {instanceID: 0}
+- Class: 108
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4746e8271c479d64784433082c310617, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d6d163b710888be4e96d9ce9f8d9331a, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 124
+  Script: {instanceID: 0}
+- Class: 157
+  Script: {instanceID: 0}
+Assets:
+- Assets/GameResources/scenes/quat_tree_test.unity
+Dependencies: []

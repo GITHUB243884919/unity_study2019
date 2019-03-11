@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 3366203716
+CRC: 2314743236
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -148,7 +148,7 @@ AssetBundleManifest:
       Name: scenes_actor_view.unity3d
       Dependencies:
         Dependency_0: actor_nezhe_nezha.unity3d
-        Dependency_1: actor_nezhe_nezha_anim.unity3d
+        Dependency_1: actor_nezhe_nezha_anim2.unity3d
     Info_46:
       Name: scenes_countingnumber.unity3d
       Dependencies: {}
@@ -226,4 +226,10 @@ AssetBundleManifest:
       Dependencies: {}
     Info_68:
       Name: scenes_luamono.unity3d
+      Dependencies: {}
+    Info_69:
+      Name: actor_nezhe_nezha_anim2.unity3d
+      Dependencies: {}
+    Info_70:
+      Name: scenes_quat_tree_test.unity3d
       Dependencies: {}
