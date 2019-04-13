@@ -51,6 +51,7 @@ namespace Game
         
         public void Awake()
         {
+            Logger.LogWarp.LogError("~~~~~~~~~~~~");
             FSMState stateLogin = new StateLogin("Login", gameFSMMachine);
             gameFSMMachine.AddState(stateLogin);
             gameFSMMachine.SetDefaultState("Login");
