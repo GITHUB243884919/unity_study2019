@@ -18,13 +18,9 @@ namespace Game.Json.Config
             
             newPlayerParse.LoadData ();
 
-            newPlayerParse.LoadData ();
-
         }
         
         
-        public NewPlayerParse newPlayerParse = new NewPlayerParse();
-
         public NewPlayerParse newPlayerParse = new NewPlayerParse();
 
     }

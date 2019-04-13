@@ -90,7 +90,7 @@ def ReadBlackList():
         if not line:
             break
         line = line.replace("\n", "")
-        print("[" + line + "]")
+        #print("[" + line + "]")
         blackList.append(line)
         
     fp.close()
@@ -102,12 +102,16 @@ def main(argv):
     for fileName in os.listdir(xlsDir):
         #if ((fileName.find(".xlsx") >= 0) and fileName.find("~") < 0 and fileName == "ActivityAccount.xlsx"):
         if ((fileName.find(".xlsx") >= 0) and fileName.find("~") < 0):
-            for blackListFileName in blackList:
-                if (blackListFileName != fileName):
-                    print("Begin Parse " + fileName)
-                    GenCode(fileName)
-            print("End parse " + fileName)
-
+            #for blackListFileName in blackList:
+                #if (blackListFileName != fileName):
+                #    print("Begin Parse " + fileName)
+                #    GenCode(fileName)
+                #    print("End parse " + fileName)
+            if fileName not in blackList:
+                print("Begin Parse " + fileName)
+                GenCode(fileName)
+                print("End parse " + fileName)
+                
     
     #for var in apiFiles:
     #    print("api files " + var);        
