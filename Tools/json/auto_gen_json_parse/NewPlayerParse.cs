@@ -6,16 +6,16 @@ using UFrame.Json;
 
 namespace Game.Json.Config
 {
-    public partial class AchievementParse : JsonConfigBase <Achievement>
+    public partial class NewPlayerParse : JsonConfigBase <NewPlayer>
     {
-        protected override void AddPrimaryIndex(Achievement v)
+        protected override void AddPrimaryIndex(NewPlayer v)
         {
             cachePrimary[v.ID] = v;
         }
 
         protected override string GetConfigFileName()
         {
-            return "TableData/" + "Achievement" + ".txt";
+            return "TableData/" + "NewPlayer" + ".txt";
         }
     }
 

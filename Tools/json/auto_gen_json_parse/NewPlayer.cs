@@ -3,7 +3,7 @@
 using UFrame.Json;
 namespace Game.Json.Config
 {
-    public class EnemyAndText
+    public class NewPlayer
     {
         #region field
 
@@ -13,37 +13,130 @@ namespace Game.Json.Config
         public int ID;
 
         /// <summary>
-        /// 类型
-        /// 1：章节对话
-        /// 2：怪物
-        /// 3：BOSS
+        /// 1：有框引导
+        /// 2：无框引导
         /// </summary>
         public int Type;
 
         /// <summary>
-        /// 敌人名称
+        /// 是否是同一系列引导
         /// </summary>
-        public int EnemyName;
+        public int IsSame;
 
         /// <summary>
-        /// 敌人官职
+        /// UI名称
         /// </summary>
-        public int EnemyLv;
+        public string UiName;
 
         /// <summary>
-        /// 显示敌人头像
+        /// 主界面横坐标
         /// </summary>
-        public string EnemyIcon;
+        public float SenceX;
 
         /// <summary>
-        /// 显示的敌人半身像
+        /// 框参数1
         /// </summary>
-        public string EnemyBody;
+        public float ItemX;
 
         /// <summary>
-        /// 敌人说话
+        /// 框参数2
         /// </summary>
-        public int EnemyText;
+        public float ItemY;
+
+        /// <summary>
+        /// 框参数3
+        /// </summary>
+        public int ItemSize1;
+
+        /// <summary>
+        /// 框参数4
+        /// </summary>
+        public int ItemSize2;
+
+        /// <summary>
+        /// 0.0
+        /// </summary>
+        public float TopX;
+
+        /// <summary>
+        /// 0.0
+        /// </summary>
+        public float TopY;
+
+        /// <summary>
+        /// 0.0
+        /// </summary>
+        public int TopSize1;
+
+        /// <summary>
+        /// 0.0
+        /// </summary>
+        public int TopSize2;
+
+        /// <summary>
+        /// 0.0
+        /// </summary>
+        public float BottomX;
+
+        /// <summary>
+        /// 0.0
+        /// </summary>
+        public float BottomY;
+
+        /// <summary>
+        /// 0.0
+        /// </summary>
+        public int BottomSize1;
+
+        /// <summary>
+        /// 0.0
+        /// </summary>
+        public int BottomSize2;
+
+        /// <summary>
+        /// 0.0
+        /// </summary>
+        public float LeftX;
+
+        /// <summary>
+        /// 0.0
+        /// </summary>
+        public float LeftY;
+
+        /// <summary>
+        /// 0.0
+        /// </summary>
+        public int LeftSize1;
+
+        /// <summary>
+        /// 0.0
+        /// </summary>
+        public int LeftSize2;
+
+        /// <summary>
+        /// 0.0
+        /// </summary>
+        public float RightX;
+
+        /// <summary>
+        /// 0.0
+        /// </summary>
+        public float RightY;
+
+        /// <summary>
+        /// 0.0
+        /// </summary>
+        public int RightSize1;
+
+        /// <summary>
+        /// 0.0
+        /// </summary>
+        public int RightSize2;
+
+        /// <summary>
+        /// 底图索引
+        /// </summary>
+        public string PicDes;
 
         /// <summary>
         /// 显示类型：
@@ -159,21 +252,59 @@ namespace Game.Json.Config
         public override string ToString ()
         {
             return 
-            " EnemyAndText:"
+            " NewPlayer:"
     
             +"    ID:"+ID
 
             +"    Type:"+Type
 
-            +"    EnemyName:"+EnemyName
+            +"    IsSame:"+IsSame
 
-            +"    EnemyLv:"+EnemyLv
+            +"    UiName:"+UiName
 
-            +"    EnemyIcon:"+EnemyIcon
+            +"    SenceX:"+SenceX
 
-            +"    EnemyBody:"+EnemyBody
+            +"    ItemX:"+ItemX
 
-            +"    EnemyText:"+EnemyText
+            +"    ItemY:"+ItemY
+
+            +"    ItemSize1:"+ItemSize1
+
+            +"    ItemSize2:"+ItemSize2
+
+            +"    TopX:"+TopX
+
+            +"    TopY:"+TopY
+
+            +"    TopSize1:"+TopSize1
+
+            +"    TopSize2:"+TopSize2
+
+            +"    BottomX:"+BottomX
+
+            +"    BottomY:"+BottomY
+
+            +"    BottomSize1:"+BottomSize1
+
+            +"    BottomSize2:"+BottomSize2
+
+            +"    LeftX:"+LeftX
+
+            +"    LeftY:"+LeftY
+
+            +"    LeftSize1:"+LeftSize1
+
+            +"    LeftSize2:"+LeftSize2
+
+            +"    RightX:"+RightX
+
+            +"    RightY:"+RightY
+
+            +"    RightSize1:"+RightSize1
+
+            +"    RightSize2:"+RightSize2
+
+            +"    PicDes:"+PicDes
 
             +"    DesType1:"+DesType1
 
