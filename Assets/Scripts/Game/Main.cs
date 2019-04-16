@@ -51,12 +51,15 @@ namespace Game
         
         public void Awake()
         {
-            Logger.LogWarp.LogError("~~~~~~~~~~~~");
+            Logger.LogWarp.LogError("GameApp Awake");
+            FSMState stateUpdate = new StateUpdate("Update", gameFSMMachine);
             FSMState stateLogin = new StateLogin("Login", gameFSMMachine);
-            gameFSMMachine.AddState(stateLogin);
-            gameFSMMachine.SetDefaultState("Login");
             FSMState stateHome = new StateHome("Home", gameFSMMachine);
+
+            gameFSMMachine.AddState(stateUpdate);
+            gameFSMMachine.AddState(stateLogin);
             gameFSMMachine.AddState(stateHome);
+            gameFSMMachine.SetDefaultState("Update");
         }
 
         public void LateUpdate()
