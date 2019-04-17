@@ -138,9 +138,41 @@ namespace UFrame.ResourceManagement
             return result;
         }
 
-#endregion
+        #endregion
 
-#region 释放接口
+        #region 版本号
+
+        string GetGameVersion(string rootPath)
+        {
+            string result = "";
+            string bundlePath = UFrameConst.Game_Version_Txt_Name;
+            bundlePath += UFrameConst.Bundle_Extension;
+            bundlePath = Path.Combine(rootPath, bundlePath);
+            if (!File.Exists(bundlePath))
+            {
+                return result;
+            }
+            var bundle = AssetBundle.LoadFromFile(bundlePath);
+            var txt = bundle.LoadAsset<TextAsset>(UFrameConst.Game_Version_Txt_Name);
+            result = txt.text;
+
+            bundle.Unload(true);
+
+            return result;
+        }
+
+        public string GetInnerGameVersion()
+        {
+            return GetGameVersion(innerBundleRootPath);
+        }
+
+        public string GetOutterGameVersion()
+        {
+            return GetGameVersion(outerBundleRootPath);
+        }
+        #endregion
+
+        #region 释放接口
         /// <summary>
         /// 释放接口，释放所有未被引用的资源。
         /// 1.把go中，所有资源Holder可以释放的情况下，移除go（销毁go时会释放，但是释放资源时不会，所以这里要统一处理）

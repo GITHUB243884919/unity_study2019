@@ -14,6 +14,8 @@ namespace UFrame
         public static string Main_Scene_Path = Scene_Dir + "/main.unity";
         public static string Bundle_Extension = ".unity3d";
 
+        public static string Game_Version_Txt_Name = "game-version";
+
         public static string Lua_ConfigerDir = "Game/config";
         public static string Lua_MonoBehaviourDir = "Game/mono_behaviour";
 

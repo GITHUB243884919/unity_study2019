@@ -53,6 +53,8 @@ namespace UFrame.ResourceManagement
 
         }
 
+
+
         string GetAssetPathWithExtend(string assetPath)
         {
             //if (assetPath.EndsWith(".lua"))
@@ -64,6 +66,15 @@ namespace UFrame.ResourceManagement
             return result;
         }
 
+        public string GetInnerGameVersion()
+        {
+            return "-1.-1";
+        }
+
+        public string GetOutterGameVersion()
+        {
+            return "-1.-1";
+        }
 
         //同步
         public  AssetGetter LoadAsset(string assetPath)

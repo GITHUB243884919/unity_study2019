@@ -91,6 +91,16 @@ namespace UFrame.ResourceManagement
             resLoader.LoadScene(scenePath);
         }
 
+        public string GetInnerGameVersion()
+        {
+            return resLoader.GetInnerGameVersion();
+        }
+
+        public string GetOutterGameVersion()
+        {
+            return resLoader.GetOutterGameVersion();
+        }
+
     }
 }
 

@@ -1,18 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-
+﻿using UnityEngine;
 using UFrame.FSM;
-using UFrame.MessageCenter;
-using Game.MessageDefine;
+using UFrame.Update;
+
 namespace Game
 {
     public class StateUpdate : FSMState
     {
         public bool updateSuccess = false;
 
-        bool realDownLoad = false;
+        bool realDownLoad = true;
         public StateUpdate(string stateName, FSMMachine fsmCtr) : base(stateName, fsmCtr)
         {
         }
@@ -27,10 +23,13 @@ namespace Game
                 return;
             }
 
-            updateSuccess = false;
-            var http = new HttpDownLoad();
-            string URL = @"http://127.0.0.1:8080/a.zip";
-            http.DownLoad(URL, Application.streamingAssetsPath, "a.zip", DownLoadCallback);
+            UpdateManager.GetInstance().EnsureGameVersion();
+            updateSuccess = true;
+
+            //updateSuccess = false;
+            //var http = new HttpDownLoad();
+            //string URL = @"http://127.0.0.1:8080/a.txt";
+            //http.DownLoad(URL, Application.streamingAssetsPath, "a.txt", DownLoadCallback);
         }
 
         public override void AddAllConvertCond()

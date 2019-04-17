@@ -20,7 +20,6 @@ public class HttpDownLoad {
     const int ReadWriteTimeOut = 2 * 1000;//超时等待时间
     const int TimeOutWait = 5 * 1000;//超时等待时间
 
-
     /// <summary>
     /// 下载方法(断点续传)
     /// </summary>
@@ -39,39 +38,42 @@ public class HttpDownLoad {
 			{
 				Directory.CreateDirectory(savePath);
 			}
-			//这是要下载的文件名，比如从服务器下载a.zip到D盘，保存的文件名是test
-			string filePath = savePath + "/"+ fileName;
+
 			
-			//使用流操作文件
-			FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write);
-			//获取文件现在的长度
-			long fileLength = fs.Length;
 			//获取下载文件的总长度
 			UnityEngine.Debug.Log(url+" "+fileName);
 			long totalLength = GetLength(url);
-            Debug.LogFormat("<color=red>文件:{0} 已下载{1}M，剩余{2}M</color>",fileName,fileLength/1024/1024,(totalLength- fileLength)/ 1024/1024);			
-			
-			//如果没下载完
-			if(fileLength < totalLength)
+
+            //获取文件现在的长度
+            string filePath = savePath + "/" + fileName;
+            FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write);
+            long fileLength = fs.Length;
+            Logger.LogWarp.LogFormat("文件:{0} 已下载{1}，剩余{2}", fileName, fileLength, (totalLength - fileLength));
+            //如果没下载完
+            if (fileLength < totalLength)
 			{
-				
 				//断点续传核心，设置本地文件流的起始位置
 				fs.Seek(fileLength, SeekOrigin.Begin);
 
 				HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
-                
                 request.ReadWriteTimeout = ReadWriteTimeOut;
                 request.Timeout = TimeOutWait;
 
                 //断点续传核心，设置远程访问文件流的起始位置
                 request.AddRange((int)fileLength);
-
-                Stream  stream = request.GetResponse().GetResponseStream();
+                Stream stream = null;
+                try
+                {
+                    stream = request.GetResponse().GetResponseStream();
+                }
+                catch(Exception ex)
+                {
+                    Logger.LogWarp.LogError(ex.ToString());
+                }
 				byte[] buffer = new byte[1024];
 				//使用流读取内容到buffer中
 				//注意方法返回值代表读取的实际长度,并不是buffer有多大，stream就会读进去多少
 				int length = stream.Read(buffer, 0, buffer.Length);
-                //Debug.LogFormat("<color=red>length:{0}</color>" + length);
                 while (length > 0)
 				{
 					//如果Unity客户端关闭，停止下载
@@ -81,21 +83,19 @@ public class HttpDownLoad {
 					//计算进度
 					fileLength += length;
 					progress = (float)fileLength / (float)totalLength;
-					//UnityEngine.Debug.Log(progress);
 					//类似尾递归
 					length = stream.Read(buffer, 0, buffer.Length);
 
 				}
 				stream.Close();
 				stream.Dispose();
-
             }
             else
 			{
 				progress = 1;
             }
             stopWatch.Stop();
-            Debug.Log("耗时: " + stopWatch.ElapsedMilliseconds);
+            Logger.LogWarp.Log("耗时: " + stopWatch.ElapsedMilliseconds);
             fs.Close();
 			fs.Dispose();
 			//如果下载完毕，执行回调
@@ -103,9 +103,10 @@ public class HttpDownLoad {
 			{
                 isDone = true;
                 if (callBack != null) callBack();
+                Logger.LogWarp.Log(url + " download finished");
                 thread.Abort();
             }
-            UnityEngine.Debug.Log ("download finished");	
+            
 		});
 		//开启子线程
 		thread.IsBackground = true;
@@ -120,14 +121,23 @@ public class HttpDownLoad {
 	/// <returns>The length.</returns>
 	/// <param name="url">URL.</param>
 	long GetLength(string url)
-	{
-		UnityEngine.Debug.Log(url);
-		
-		HttpWebRequest requet = HttpWebRequest.Create(url) as HttpWebRequest;
-		requet.Method = "HEAD";
-		HttpWebResponse response = requet.GetResponse() as HttpWebResponse;
-		return response.ContentLength;
-	}
+	{		
+		HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
+		request.Method = "HEAD";
+        request.ReadWriteTimeout = ReadWriteTimeOut;
+        request.Timeout = TimeOutWait;
+        HttpWebResponse response = null;
+        try
+        {
+            response = request.GetResponse() as HttpWebResponse;
+        }
+        catch(Exception ex)
+        {
+            Logger.LogWarp.LogError(ex.ToString());
+        }
+
+        return response.ContentLength;
+    }
 
 	public void Close()
 	{
