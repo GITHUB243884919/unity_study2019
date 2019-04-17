@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1399971487
+CRC: 2517735847
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 13993cea6d70ff5dc2d92ad87fcb91fa
+    Hash: 9b04ff2d70da070fda9e31694138b164
   TypeTreeHash:
     serializedVersion: 2
     Hash: 1eac008c373d3b9b6e4b286ba1d1f3d5
@@ -60,5 +60,5 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
-- Assets/GameResources/scenes/CountingNumber.unity
+- Assets/GameResources/Scenes/CountingNumber.unity
 Dependencies: []

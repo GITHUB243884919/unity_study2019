@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1118312612
+CRC: 1503062016
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 418925d17af5f7c81b0c47ed50868d32
+    Hash: 52025e4d770ed6e97b291e7bd42e20f4
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ad585dd02dfb5016c0dad519eab8f49
@@ -12,6 +12,5 @@ ClassTypes:
 - Class: 49
   Script: {instanceID: 0}
 Assets:
-- Assets/LuaTemp/Controller/MessageCtrl.lua.bytes
-- Assets/LuaTemp/Controller/PromptCtrl.lua.bytes
+- Assets/GameResources/game-version.txt
 Dependencies: []

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2020853023
+CRC: 4208004090
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9d61ca14ed8761c0bae315a2694adf93
+    Hash: cef8a4b769b5a4a7609beda869936f58
   TypeTreeHash:
     serializedVersion: 2
     Hash: f49f05f36a566d50434f7d9f3fb347da
@@ -26,6 +26,6 @@ ClassTypes:
 Assets:
 - Assets/GameResources/prefabs/mycube-parent.prefab
 Dependencies:
-- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/materials_blue.unity3d
-- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/materials_mymaterial.unity3d
-- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/materials_red.unity3d
+- D:/Fzy/Code/unity_study2019_New/Assets/StreamingAssets/Bundles/materials_red.unity3d
+- D:/Fzy/Code/unity_study2019_New/Assets/StreamingAssets/Bundles/materials_mymaterial.unity3d
+- D:/Fzy/Code/unity_study2019_New/Assets/StreamingAssets/Bundles/materials_blue.unity3d

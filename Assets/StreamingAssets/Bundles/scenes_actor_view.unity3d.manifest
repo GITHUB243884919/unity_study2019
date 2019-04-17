@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1133712229
+CRC: 173886978
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 362a0d868dbc27461e5e257dae187767
+    Hash: 73d8a918a27d62b7df4f0f688fdbddf8
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 6192b0d654ff6dfec40d9e5bbbe0d2a6
+    Hash: 1c6acbb90903bfaeb526232885d5807e
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -61,6 +61,8 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 128
   Script: {instanceID: 0}
+- Class: 136
+  Script: {instanceID: 0}
 - Class: 137
   Script: {instanceID: 0}
 - Class: 157
@@ -74,7 +76,7 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
-- Assets/GameResources/scenes/actor_view.unity
+- Assets/GameResources/Scenes/actor_view.unity
 Dependencies:
-- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/actor_nezhe_nezha.unity3d
-- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/actor_nezhe_nezha_anim2.unity3d
+- D:/Fzy/Code/unity_study2019_New/Assets/StreamingAssets/Bundles/actor_nezhe_nezha.unity3d
+- D:/Fzy/Code/unity_study2019_New/Assets/StreamingAssets/Bundles/actor_nezhe_nezha_anim2.unity3d

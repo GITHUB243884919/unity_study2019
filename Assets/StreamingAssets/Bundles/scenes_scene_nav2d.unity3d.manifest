@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 576929620
+CRC: 3406164867
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9a3c26f8a209a0925271f11729febafc
+    Hash: 1a060322aa89b80a4d09b12435b5c638
   TypeTreeHash:
     serializedVersion: 2
     Hash: e6f5fc72c2aab6d605bf19abe8ce5bbb
@@ -80,9 +80,9 @@ ClassTypes:
 - Class: 238
   Script: {instanceID: 0}
 Assets:
-- Assets/GameResources/scenes/scene_nav2d.unity
+- Assets/GameResources/Scenes/scene_nav2d.unity
 Dependencies:
-- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/textures_border_vertical.unity3d
-- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/textures_border_horizontal.unity3d
-- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/textures_player.unity3d
-- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/textures_wall.unity3d
+- D:/Fzy/Code/unity_study2019_New/Assets/StreamingAssets/Bundles/textures_border_vertical.unity3d
+- D:/Fzy/Code/unity_study2019_New/Assets/StreamingAssets/Bundles/textures_border_horizontal.unity3d
+- D:/Fzy/Code/unity_study2019_New/Assets/StreamingAssets/Bundles/textures_player.unity3d
+- D:/Fzy/Code/unity_study2019_New/Assets/StreamingAssets/Bundles/textures_wall.unity3d

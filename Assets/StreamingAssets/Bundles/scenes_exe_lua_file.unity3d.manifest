@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2438060186
+CRC: 3212920088
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: fbfed8babfdd523cdecf3c5016cfa49b
+    Hash: bd9f81501d0af8d6cb9b67b9f99d8177
   TypeTreeHash:
     serializedVersion: 2
     Hash: 27fd421cc30c7dff2bfe687644a16fa0
@@ -62,5 +62,5 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
-- Assets/GameResources/scenes/exe_lua_file.unity
+- Assets/GameResources/Scenes/exe_lua_file.unity
 Dependencies: []

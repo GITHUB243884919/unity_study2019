@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1388385532
+CRC: 3819595366
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: bb38ac5c5c5b5d337915021134b3587d
+    Hash: 51004558c550d3905b2287d0a5969183
   TypeTreeHash:
     serializedVersion: 2
     Hash: ddc6621c62dd3627d46ff47cb7426bf7
@@ -50,4 +50,4 @@ ClassTypes:
 Assets:
 - Assets/ArtResources/Tanks/Scenes/TanksExample.unity
 Dependencies:
-- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/tanks-albedo.normal-hd
+- D:/Fzy/Code/unity_study2019_New/Assets/StreamingAssets/Bundles/tanks-albedo.normal-hd

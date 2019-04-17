@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2117448385
+CRC: 200598375
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a683492757362f88cf736a94cf8b2c9a
+    Hash: ea2a40383fd2740571e18add4ce9da3b
   TypeTreeHash:
     serializedVersion: 2
     Hash: d503a4bdfb032be462947305c4f5216f
@@ -56,5 +56,5 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
-- Assets/GameResources/scenes/login.unity
+- Assets/GameResources/Scenes/login.unity
 Dependencies: []

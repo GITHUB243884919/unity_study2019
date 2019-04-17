@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1850006572
+CRC: 4063456505
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d18a8bdda3169dee33d0e475038cc2d1
+    Hash: 54b381afc77c631aaa2f33229c4acea4
   TypeTreeHash:
     serializedVersion: 2
     Hash: 096d195eefd8a4957a218dc25571eab8
@@ -74,8 +74,8 @@ ClassTypes:
 - Class: 225
   Script: {instanceID: 0}
 Assets:
-- Assets/GameResources/scenes/test_ai.unity
+- Assets/GameResources/Scenes/test_ai.unity
 Dependencies:
-- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/prefabs_battle_root.unity3d
-- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/prefabs_easytouch.unity3d
-- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/prefabs_tank.unity3d
+- D:/Fzy/Code/unity_study2019_New/Assets/StreamingAssets/Bundles/prefabs_battle_root.unity3d
+- D:/Fzy/Code/unity_study2019_New/Assets/StreamingAssets/Bundles/prefabs_easytouch.unity3d
+- D:/Fzy/Code/unity_study2019_New/Assets/StreamingAssets/Bundles/prefabs_tank.unity3d

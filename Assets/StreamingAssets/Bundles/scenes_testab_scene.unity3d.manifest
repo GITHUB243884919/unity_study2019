@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 605662119
+CRC: 243455688
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: bdf0d8fc81cb9394ca172b5d78772734
+    Hash: bd089ec4be6629a560b7eb9fb2e9c345
   TypeTreeHash:
     serializedVersion: 2
     Hash: a49cd421de5cc0a0eae38293a9623a3f
@@ -32,5 +32,5 @@ ClassTypes:
 - Class: 157
   Script: {instanceID: 0}
 Assets:
-- Assets/GameResources/scenes/TestAB_Scene.unity
+- Assets/GameResources/Scenes/TestAB_Scene.unity
 Dependencies: []

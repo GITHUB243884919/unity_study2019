@@ -110,6 +110,7 @@ slot.lua.bytes,lua.unity3d
 socket.lua.bytes,lua.unity3d
 tolua.lua.bytes,lua.unity3d
 typeof.lua.bytes,lua.unity3d
+game-version,game-version.unity3d
 actor/nezhe/New Avatar Mask,actor_nezhe_New Avatar Mask.unity3d
 actor/nezhe/nezha,actor_nezhe_nezha.unity3d
 actor/nezhe/nezha_anim,actor_nezhe_nezha_anim.unity3d

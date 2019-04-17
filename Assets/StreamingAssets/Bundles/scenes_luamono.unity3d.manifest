@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1458258955
+CRC: 3022553967
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ab20f493ce56ad128e74512e03194a8f
+    Hash: 5c2b308795758546f265e04b987afaac
   TypeTreeHash:
     serializedVersion: 2
     Hash: a0e82b9393788e79fde5e1f3a2afed21
@@ -30,5 +30,5 @@ ClassTypes:
 - Class: 157
   Script: {instanceID: 0}
 Assets:
-- Assets/GameResources/scenes/luamono.unity
+- Assets/GameResources/Scenes/luamono.unity
 Dependencies: []

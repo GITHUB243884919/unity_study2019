@@ -23,7 +23,7 @@ namespace Game
                 return;
             }
 
-            UpdateManager.GetInstance().EnsureGameVersion();
+            //UpdateManager.GetInstance().EnsureGameVersion();
             updateSuccess = true;
 
             //updateSuccess = false;

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2645123649
+CRC: 4046878656
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 32c09c2e0bc0406c6981378d6b8affc2
+    Hash: c232d04640dc17f406ad718e955a3e89
   TypeTreeHash:
     serializedVersion: 2
     Hash: 68a1ae10c7f96c5edf25a13f8b5d35dd
@@ -46,5 +46,5 @@ ClassTypes:
 - Class: 157
   Script: {instanceID: 0}
 Assets:
-- Assets/GameResources/scenes/quat_tree_test.unity
+- Assets/GameResources/Scenes/quat_tree_test.unity
 Dependencies: []

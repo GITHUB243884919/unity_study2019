@@ -1,235 +1,238 @@
 ManifestFileVersion: 0
-CRC: 2314743236
+CRC: 4250458310
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: unitylogo
-      Dependencies: {}
-    Info_1:
-      Name: tanks-scene-bundle
-      Dependencies:
-        Dependency_0: tanks-albedo.normal-hd
-    Info_2:
-      Name: tanks-albedo.desert-hd
-      Dependencies: {}
-    Info_3:
-      Name: tanks-albedo.normal-sd
-      Dependencies: {}
-    Info_4:
-      Name: tanks-albedo.normal-hd
-      Dependencies: {}
-    Info_5:
-      Name: tanks-albedo.desert-sd
-      Dependencies: {}
-    Info_6:
-      Name: banner.english
-      Dependencies: {}
-    Info_7:
-      Name: banner.danish
-      Dependencies: {}
-    Info_8:
-      Name: lua_cjson.unity3d
-      Dependencies: {}
-    Info_9:
-      Name: lua_common.unity3d
-      Dependencies: {}
-    Info_10:
-      Name: lua_controller.unity3d
-      Dependencies: {}
-    Info_11:
-      Name: lua_jit.unity3d
-      Dependencies: {}
-    Info_12:
-      Name: lua_logic.unity3d
-      Dependencies: {}
-    Info_13:
-      Name: lua_lpeg.unity3d
-      Dependencies: {}
-    Info_14:
-      Name: lua_misc.unity3d
-      Dependencies: {}
-    Info_15:
-      Name: lua_protobuf.unity3d
-      Dependencies: {}
-    Info_16:
-      Name: lua_socket.unity3d
-      Dependencies: {}
-    Info_17:
-      Name: lua_system.unity3d
-      Dependencies: {}
-    Info_18:
-      Name: lua_unityengine.unity3d
-      Dependencies: {}
-    Info_19:
-      Name: lua_view.unity3d
-      Dependencies: {}
-    Info_20:
-      Name: lua_3rd_cjson.unity3d
-      Dependencies: {}
-    Info_21:
-      Name: lua_3rd_luabitop.unity3d
-      Dependencies: {}
-    Info_22:
-      Name: lua_3rd_pbc.unity3d
-      Dependencies: {}
-    Info_23:
-      Name: lua_3rd_pblua.unity3d
-      Dependencies: {}
-    Info_24:
-      Name: lua_3rd_sproto.unity3d
-      Dependencies: {}
-    Info_25:
-      Name: lua_system_injection.unity3d
-      Dependencies: {}
-    Info_26:
-      Name: lua_system_reflection.unity3d
-      Dependencies: {}
-    Info_27:
-      Name: lua.unity3d
-      Dependencies: {}
-    Info_28:
-      Name: lua_game.unity3d
-      Dependencies: {}
-    Info_29:
-      Name: actor_nezhe_new avatar mask.unity3d
-      Dependencies: {}
-    Info_30:
-      Name: actor_nezhe_nezha.unity3d
-      Dependencies: {}
-    Info_31:
-      Name: actor_nezhe_nezha_anim.unity3d
-      Dependencies: {}
-    Info_32:
-      Name: materials_blue.unity3d
-      Dependencies: {}
-    Info_33:
-      Name: materials_mymaterial.unity3d
-      Dependencies:
-        Dependency_0: textures_unitylogo_unitylogo.unity3d
-    Info_34:
-      Name: materials_red.unity3d
-      Dependencies: {}
-    Info_35:
-      Name: prefabs_avoidance.unity3d
-      Dependencies: {}
-    Info_36:
-      Name: prefabs_avoidance2.unity3d
-      Dependencies: {}
-    Info_37:
-      Name: prefabs_avoidance3.unity3d
-      Dependencies: {}
-    Info_38:
-      Name: prefabs_battle_root.unity3d
-      Dependencies: {}
-    Info_39:
-      Name: prefabs_cube.unity3d
-      Dependencies: {}
-    Info_40:
-      Name: prefabs_easytouch.unity3d
-      Dependencies: {}
-    Info_41:
-      Name: prefabs_mycube-parent.unity3d
-      Dependencies:
-        Dependency_0: materials_blue.unity3d
-        Dependency_1: materials_mymaterial.unity3d
-        Dependency_2: materials_red.unity3d
-    Info_42:
-      Name: prefabs_mycube.unity3d
-      Dependencies:
-        Dependency_0: materials_mymaterial.unity3d
-    Info_43:
-      Name: prefabs_self_camera.unity3d
-      Dependencies: {}
-    Info_44:
-      Name: prefabs_tank.unity3d
-      Dependencies:
-        Dependency_0: tanks-albedo.normal-hd
-    Info_45:
       Name: scenes_actor_view.unity3d
       Dependencies:
         Dependency_0: actor_nezhe_nezha.unity3d
         Dependency_1: actor_nezhe_nezha_anim2.unity3d
-    Info_46:
+    Info_1:
       Name: scenes_countingnumber.unity3d
       Dependencies: {}
-    Info_47:
-      Name: scenes_exe_lua_file.unity3d
-      Dependencies: {}
-    Info_48:
-      Name: scenes_home.unity3d
-      Dependencies: {}
-    Info_49:
-      Name: scenes_login.unity3d
-      Dependencies: {}
-    Info_50:
-      Name: scenes_main.unity3d
-      Dependencies: {}
-    Info_51:
-      Name: scenes_testab.unity3d
-      Dependencies: {}
-    Info_52:
-      Name: scenes_testab_scene.unity3d
-      Dependencies: {}
-    Info_53:
-      Name: scenes_testexecutor.unity3d
-      Dependencies: {}
-    Info_54:
-      Name: scenes_testfsm.unity3d
-      Dependencies: {}
-    Info_55:
+    Info_2:
       Name: scenes_testfx.unity3d
       Dependencies:
         Dependency_0: prefabs_avoidance.unity3d
         Dependency_1: prefabs_tank.unity3d
-    Info_56:
-      Name: textures_unitylogo_unitylogo.unity3d
+    Info_3:
+      Name: scenes_testab_scene.unity3d
       Dependencies: {}
-    Info_57:
-      Name: textures_unitylogo_unitylogo1.unity3d
+    Info_4:
+      Name: scenes_quat_tree_test.unity3d
       Dependencies: {}
-    Info_58:
-      Name: textures_unitylogo_unitylogo2.unity3d
+    Info_5:
+      Name: scenes_home.unity3d
       Dependencies: {}
-    Info_59:
-      Name: asset-bundle.unity3d
+    Info_6:
+      Name: scenes_luamono.unity3d
       Dependencies: {}
-    Info_60:
-      Name: textures_border_vertical.unity3d
+    Info_7:
+      Name: scenes_testfsm.unity3d
       Dependencies: {}
-    Info_61:
-      Name: textures_border_horizontal.unity3d
+    Info_8:
+      Name: scenes_login.unity3d
       Dependencies: {}
-    Info_62:
-      Name: textures_player.unity3d
+    Info_9:
+      Name: scenes_test_ai.unity3d
+      Dependencies:
+        Dependency_0: prefabs_battle_root.unity3d
+        Dependency_1: prefabs_easytouch.unity3d
+        Dependency_2: prefabs_tank.unity3d
+    Info_10:
+      Name: scenes_testab.unity3d
       Dependencies: {}
-    Info_63:
-      Name: textures_wall.unity3d
+    Info_11:
+      Name: scenes_main.unity3d
       Dependencies: {}
-    Info_64:
+    Info_12:
+      Name: scenes_exe_lua_file.unity3d
+      Dependencies: {}
+    Info_13:
+      Name: scenes_testexecutor.unity3d
+      Dependencies: {}
+    Info_14:
       Name: scenes_scene_nav2d.unity3d
       Dependencies:
         Dependency_0: textures_border_vertical.unity3d
         Dependency_1: textures_border_horizontal.unity3d
         Dependency_2: textures_player.unity3d
         Dependency_3: textures_wall.unity3d
-    Info_65:
+    Info_15:
+      Name: tanks-scene-bundle
+      Dependencies:
+        Dependency_0: tanks-albedo.normal-hd
+    Info_16:
+      Name: tanks-albedo.desert-hd
+      Dependencies: {}
+    Info_17:
+      Name: tanks-albedo.normal-sd
+      Dependencies: {}
+    Info_18:
+      Name: tanks-albedo.normal-hd
+      Dependencies: {}
+    Info_19:
+      Name: tanks-albedo.desert-sd
+      Dependencies: {}
+    Info_20:
+      Name: banner.english
+      Dependencies: {}
+    Info_21:
+      Name: banner.danish
+      Dependencies: {}
+    Info_22:
+      Name: textures_unitylogo_unitylogo1.unity3d
+      Dependencies: {}
+    Info_23:
+      Name: textures_border_vertical.unity3d
+      Dependencies: {}
+    Info_24:
+      Name: textures_border_horizontal.unity3d
+      Dependencies: {}
+    Info_25:
+      Name: unitylogo
+      Dependencies: {}
+    Info_26:
+      Name: textures_unitylogo_unitylogo.unity3d
+      Dependencies: {}
+    Info_27:
+      Name: textures_player.unity3d
+      Dependencies: {}
+    Info_28:
+      Name: textures_wall.unity3d
+      Dependencies: {}
+    Info_29:
+      Name: textures_unitylogo_unitylogo2.unity3d
+      Dependencies: {}
+    Info_30:
+      Name: materials_red.unity3d
+      Dependencies: {}
+    Info_31:
+      Name: prefabs_battle_root.unity3d
+      Dependencies: {}
+    Info_32:
+      Name: prefabs_self_camera.unity3d
+      Dependencies: {}
+    Info_33:
+      Name: prefabs_mycube-parent.unity3d
+      Dependencies:
+        Dependency_0: materials_red.unity3d
+        Dependency_1: materials_mymaterial.unity3d
+        Dependency_2: materials_blue.unity3d
+    Info_34:
+      Name: actor_nezhe_new avatar mask.unity3d
+      Dependencies: {}
+    Info_35:
+      Name: materials_mymaterial.unity3d
+      Dependencies:
+        Dependency_0: textures_unitylogo_unitylogo.unity3d
+    Info_36:
+      Name: prefabs_easytouch.unity3d
+      Dependencies: {}
+    Info_37:
+      Name: actor_nezhe_nezha.unity3d
+      Dependencies: {}
+    Info_38:
+      Name: prefabs_cube.unity3d
+      Dependencies: {}
+    Info_39:
+      Name: prefabs_avoidance3.unity3d
+      Dependencies: {}
+    Info_40:
+      Name: prefabs_avoidance2.unity3d
+      Dependencies: {}
+    Info_41:
+      Name: materials_blue.unity3d
+      Dependencies: {}
+    Info_42:
+      Name: prefabs_avoidance.unity3d
+      Dependencies: {}
+    Info_43:
+      Name: prefabs_tank.unity3d
+      Dependencies:
+        Dependency_0: tanks-albedo.normal-hd
+    Info_44:
+      Name: prefabs_mycube.unity3d
+      Dependencies:
+        Dependency_0: materials_mymaterial.unity3d
+    Info_45:
+      Name: lua_cjson.unity3d
+      Dependencies: {}
+    Info_46:
+      Name: lua_system.unity3d
+      Dependencies: {}
+    Info_47:
+      Name: lua_controller.unity3d
+      Dependencies: {}
+    Info_48:
+      Name: lua_jit.unity3d
+      Dependencies: {}
+    Info_49:
+      Name: lua_unityengine.unity3d
+      Dependencies: {}
+    Info_50:
+      Name: lua_logic.unity3d
+      Dependencies: {}
+    Info_51:
+      Name: lua_3rd_sproto.unity3d
+      Dependencies: {}
+    Info_52:
+      Name: lua_3rd_pbc.unity3d
+      Dependencies: {}
+    Info_53:
+      Name: lua.unity3d
+      Dependencies: {}
+    Info_54:
+      Name: lua_3rd_pblua.unity3d
+      Dependencies: {}
+    Info_55:
+      Name: lua_3rd_cjson.unity3d
+      Dependencies: {}
+    Info_56:
       Name: lua_game_config.unity3d
       Dependencies: {}
-    Info_66:
-      Name: scenes_test_ai.unity3d
-      Dependencies:
-        Dependency_0: prefabs_battle_root.unity3d
-        Dependency_1: prefabs_easytouch.unity3d
-        Dependency_2: prefabs_tank.unity3d
-    Info_67:
+    Info_57:
+      Name: lua_socket.unity3d
+      Dependencies: {}
+    Info_58:
+      Name: lua_protobuf.unity3d
+      Dependencies: {}
+    Info_59:
+      Name: lua_game.unity3d
+      Dependencies: {}
+    Info_60:
+      Name: lua_common.unity3d
+      Dependencies: {}
+    Info_61:
+      Name: lua_3rd_luabitop.unity3d
+      Dependencies: {}
+    Info_62:
+      Name: lua_misc.unity3d
+      Dependencies: {}
+    Info_63:
       Name: lua_game_mono_behaviour.unity3d
       Dependencies: {}
+    Info_64:
+      Name: lua_view.unity3d
+      Dependencies: {}
+    Info_65:
+      Name: asset-bundle.unity3d
+      Dependencies: {}
+    Info_66:
+      Name: lua_system_reflection.unity3d
+      Dependencies: {}
+    Info_67:
+      Name: lua_system_injection.unity3d
+      Dependencies: {}
     Info_68:
-      Name: scenes_luamono.unity3d
+      Name: lua_lpeg.unity3d
       Dependencies: {}
     Info_69:
       Name: actor_nezhe_nezha_anim2.unity3d
       Dependencies: {}
     Info_70:
-      Name: scenes_quat_tree_test.unity3d
+      Name: actor_nezhe_nezha_anim.unity3d
+      Dependencies: {}
+    Info_71:
+      Name: game-version.unity3d
       Dependencies: {}

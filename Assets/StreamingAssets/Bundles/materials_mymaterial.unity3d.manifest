@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 205097061
+CRC: 4231257806
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: fc1a06d533715bc17e2a7e053701621c
+    Hash: ae9095137bae3921fd4786acbebeee0c
   TypeTreeHash:
     serializedVersion: 2
     Hash: 6f165f44e4778b6c9d85e7a145a54cb1
@@ -18,4 +18,4 @@ ClassTypes:
 Assets:
 - Assets/GameResources/materials/mymaterial.mat
 Dependencies:
-- D:/Fzy/Code/UnityStudy_2019/unity_study2019/Assets/StreamingAssets/Bundles/textures_unitylogo_unitylogo.unity3d
+- D:/Fzy/Code/unity_study2019_New/Assets/StreamingAssets/Bundles/textures_unitylogo_unitylogo.unity3d
