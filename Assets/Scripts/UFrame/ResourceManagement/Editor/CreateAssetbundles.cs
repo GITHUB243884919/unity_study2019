@@ -151,11 +151,17 @@ public class CreateAssetBundles
     [MenuItem("UFrame框架/资源管理/发布模式/创建Bundle/StandaloneWindows")]
     public static void BuildAll_StandaloneWindows()
     {
-        
-
         BuildPerpare();
         string assetBundleDirectory = "Assets/StreamingAssets/" + UFrameConst.Bundle_Root_Dir;
-        BuildPipeline.BuildAssetBundles(assetBundleDirectory, BuildAssetBundleOptions.DeterministicAssetBundle, BuildTarget.StandaloneWindows);
+        Logger.LogWarp.Log("MD5 " + UFrame.Util.MD5Util.FileMD5(assetBundleDirectory + "/textures_wall.unity3d"));
+        Hash128 TMPHASH;
+        BuildPipeline.GetHashForAssetBundle(assetBundleDirectory + "/textures_wall.unity3d", out TMPHASH);
+        Logger.LogWarp.Log("Hash " + TMPHASH.ToString());
+        BuildPipeline.BuildAssetBundles(assetBundleDirectory, 
+            BuildAssetBundleOptions.DeterministicAssetBundle|
+            BuildAssetBundleOptions.ChunkBasedCompression,//|
+            //BuildAssetBundleOptions.AppendHashToAssetBundleName, 
+            BuildTarget.StandaloneWindows);
 
         //把Manifest文件加一个后缀，方便下载
         ModifyManifestFileName();
@@ -163,6 +169,22 @@ public class CreateAssetBundles
         AssetDatabase.Refresh();
 
         EditorUtility.DisplayDialog("", "Assetbundle打包完毕", "确定");
+
+        string[] abNames = AssetDatabase.GetAllAssetBundleNames();
+        foreach (var name in abNames)
+        {
+            string path = assetBundleDirectory +  "/" + name;
+            Logger.LogWarp.Log(path);
+            uint crc;
+            BuildPipeline.GetCRCForAssetBundle(path, out crc);
+            Hash128 hash;
+            BuildPipeline.GetHashForAssetBundle(path, out hash);
+            Logger.LogWarp.Log(name + " crc=" + crc.ToCString() + " hash=" + hash.ToString());
+            //Assets/StreamingAssets/Bundles/textures_wall.unity3d
+            //AF764C2AD870D2F66990D27A77FA4CFC
+            //                                                    6f41c42476208ec2f23f11920f51ab0b
+            //[Debug] textures_wall.unity3d crc=1278273026 hash=6f41c42476208ec2f23f11920f51ab0b
+        }
     }
 
     [MenuItem("UFrame框架/资源管理/发布模式/创建Bundle/Android")]
@@ -178,6 +200,13 @@ public class CreateAssetBundles
         AssetDatabase.Refresh();
 
         EditorUtility.DisplayDialog("", "Assetbundle打包完毕", "确定");
+
+        string[] abNames = AssetDatabase.GetAllAssetBundleNames();
+        foreach(var name in abNames)
+        {
+            Logger.LogWarp.Log(name);
+        }
+        
     }
 
     [MenuItem("UFrame框架/资源管理/发布模式/创建Bundle/IOS")]
@@ -193,6 +222,13 @@ public class CreateAssetBundles
         AssetDatabase.Refresh();
 
         EditorUtility.DisplayDialog("", "Assetbundle打包完毕", "确定");
+
+        string[] abNames = AssetDatabase.GetAllAssetBundleNames();
+        foreach (var name in abNames)
+        {
+            //AssetBundleManifest
+            Logger.LogWarp.Log(name);
+        }
     }
 
     public static void OnlyMainScene()
