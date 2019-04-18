@@ -13,7 +13,7 @@ namespace Game
         public override void Enter(string preStateName)
         {
             base.Enter(preStateName);
-#if RES_AB
+#if RES_AB && RES_UPDATE
             UpdateManager.GetInstance().EnsureLocalGameVersionInfomation();
 #endif
 
@@ -44,7 +44,7 @@ namespace Game
 
         bool CouldLogin()
         {
-#if RES_AB
+#if RES_AB && RES_UPDATE
             return UpdateManager.GetInstance().updateFinished;
 #else
             return true;

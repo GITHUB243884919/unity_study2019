@@ -187,14 +187,23 @@ namespace UFrame.Update
         {
             using (WWW www = new WWW(source))
             {
-                yield return www;
-                if (www.error == null && www.isDone)
+                while(!www.isDone)
                 {
-                    File.WriteAllBytes(dest, www.bytes);
-                    if (callback != null)
+                    if(!string.IsNullOrEmpty(www.error))
                     {
-                        callback(dest);
+                        Logger.LogWarp.LogError(www.error);
+                        yield break;
                     }
+                    else
+                    {
+                        yield return www;
+                    }
+                }
+
+                File.WriteAllBytes(dest, www.bytes);
+                if (callback != null)
+                {
+                    callback(dest);
                 }
             }
         }
