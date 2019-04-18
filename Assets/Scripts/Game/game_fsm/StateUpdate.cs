@@ -6,9 +6,6 @@ namespace Game
 {
     public class StateUpdate : FSMState
     {
-        public bool updateSuccess = false;
-
-        bool realDownLoad = true;
         public StateUpdate(string stateName, FSMMachine fsmCtr) : base(stateName, fsmCtr)
         {
         }
@@ -16,22 +13,10 @@ namespace Game
         public override void Enter(string preStateName)
         {
             base.Enter(preStateName);
-
-            if (!realDownLoad)
-            {
-                updateSuccess = true;
-                return;
-            }
-
+#if RES_AB
             UpdateManager.GetInstance().EnsureLocalGameVersionInfomation();
-            UpdateManager.GetInstance().DownLoadServerVersionInfomation();
+#endif
 
-            //updateSuccess = true;
-
-            //updateSuccess = false;
-            //var http = new HttpDownLoad();
-            //string URL = @"http://127.0.0.1:8080/a.txt";
-            //http.DownLoad(URL, Application.streamingAssetsPath, "a.txt", DownLoadCallback);
         }
 
         public override void AddAllConvertCond()
@@ -54,19 +39,18 @@ namespace Game
 
         public override void Leave()
         {
-            updateSuccess = false;
             base.Leave();
         }
 
         bool CouldLogin()
         {
-            return updateSuccess;
+#if RES_AB
+            return UpdateManager.GetInstance().updateFinished;
+#else
+            return true;
+#endif
         }
 
-        void DownLoadCallback()
-        {
-            updateSuccess = true;
-        }
     }
 }
 

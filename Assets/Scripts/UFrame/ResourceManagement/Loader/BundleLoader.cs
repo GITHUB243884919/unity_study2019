@@ -73,8 +73,6 @@ namespace UFrame.ResourceManagement
             innerBundleRootPath = Path.Combine(ApplicationStreamingPath, UFrameConst.Bundle_Root_Dir);
             outerBundleRootPath = Path.Combine(Application.persistentDataPath, UFrameConst.Bundle_Root_Dir);
 
-            //EnsureGameVersion();
-
             Loadmanifest();
             LoadAssetMap();
         }
@@ -143,107 +141,6 @@ namespace UFrame.ResourceManagement
 
         #endregion
 
-        #region 版本号
-        string GetGameVersion(string rootPath)
-        {
-            string result = "";
-            string bundlePath = UFrameConst.Game_Version_Txt_Name;
-            bundlePath += UFrameConst.Bundle_Extension;
-            bundlePath = Path.Combine(rootPath, bundlePath);
-            if (!File.Exists(bundlePath))
-            {
-                return result;
-            }
-            var bundle = AssetBundle.LoadFromFile(bundlePath);
-            var txt = bundle.LoadAsset<TextAsset>(UFrameConst.Game_Version_Txt_Name);
-            result = txt.text;
-
-            bundle.Unload(true);
-
-            return result;
-        }
-
-        public string GetInnerGameVersion()
-        {
-            return GetGameVersion(innerBundleRootPath);
-        }
-
-        public string GetOutterGameVersion()
-        {
-            return GetGameVersion(outerBundleRootPath);
-        }
-        #endregion
-
-        //#region 拷贝配置文件到沙盒
-        //public void EnsureGameVersion()
-        //{
-        //    string innerGameVersion = GetInnerGameVersion();
-        //    Logger.LogWarp.Log("innerGameVersion" + innerGameVersion);
-        //    string outterGameVersion = GetOutterGameVersion();
-        //    Logger.LogWarp.Log("outterGameVersion" + outterGameVersion);
-
-        //    //外部版本号为空（首次安装包），或者内部版本号> 外部版本号（大版本更新）
-        //    if (string.IsNullOrEmpty(outterGameVersion) || UFrame.Update.UpdateManager.ComparerVersion(innerGameVersion, outterGameVersion) >= 0)
-        //    {
-        //        //Copy bundle 配置文件到沙盒
-        //        Logger.LogWarp.Log("Copy version and AB's config to outter dir");
-
-        //        string innerRootPath = Path.Combine(Application.streamingAssetsPath, UFrameConst.Bundle_Root_Dir);
-        //        string outterRootPath = Path.Combine(Application.persistentDataPath, UFrameConst.Bundle_Root_Dir);
-
-        //        if (!Directory.Exists(outterRootPath))
-        //        {
-        //            Directory.CreateDirectory(outterRootPath);
-        //        }
-
-        //        //copy version
-        //        string innerVersionPath = Path.Combine(innerRootPath, UFrameConst.Game_Version_Txt_Name);
-        //        innerVersionPath += UFrameConst.Bundle_Extension;
-        //        string outterVersionPath = Path.Combine(outterRootPath, UFrameConst.Game_Version_Txt_Name);
-        //        outterVersionPath += UFrameConst.Bundle_Extension;
-        //        CopyAssetBundle(innerVersionPath, outterVersionPath);
-
-        //        //copy asset-bundle
-        //        string innerAssetBundlePath = Path.Combine(innerRootPath, Path.GetFileNameWithoutExtension(UFrameConst.Asset_Bundle_Txt_Name));
-        //        innerAssetBundlePath += UFrameConst.Bundle_Extension;
-        //        string outterAssetBundlePath = Path.Combine(outterRootPath, Path.GetFileNameWithoutExtension(UFrameConst.Asset_Bundle_Txt_Name));
-        //        outterAssetBundlePath += UFrameConst.Bundle_Extension;
-        //        CopyAssetBundle(innerAssetBundlePath, outterAssetBundlePath);
-
-        //        //copy manifest
-        //        string innerManifestPath = Path.Combine(innerRootPath, UFrameConst.Bundle_Root_Dir);
-        //        innerManifestPath += UFrameConst.Bundle_Extension;
-        //        string outterManifestPath = Path.Combine(outterRootPath, UFrameConst.Bundle_Root_Dir);
-        //        outterManifestPath += UFrameConst.Bundle_Extension;
-        //        CopyAssetBundle(innerManifestPath, outterManifestPath);
-
-        //        //copy bundle hash
-        //        string innerBundleHashPath = Path.Combine(innerRootPath, Path.GetFileNameWithoutExtension(UFrameConst.Bundle_Hash_Txt_Name));
-        //        innerBundleHashPath += UFrameConst.Bundle_Extension;
-        //        string outterBundleHashPath = Path.Combine(outterRootPath, Path.GetFileNameWithoutExtension(UFrameConst.Bundle_Hash_Txt_Name));
-        //        outterBundleHashPath += UFrameConst.Bundle_Extension;
-        //        CopyAssetBundle(innerBundleHashPath, outterBundleHashPath);
-        //    }
-        //}
-
-        //public void CopyAssetBundle(string source, string dest)
-        //{
-        //    Logger.LogWarp.Log("CopyAssetBundle " + source + " " + dest);
-        //    RunCoroutine.Run(CoCopyAssetBundle(source, dest));
-        //}
-
-        //IEnumerator CoCopyAssetBundle(string source, string dest)
-        //{
-        //    using (WWW www = new WWW(source))
-        //    {
-        //        yield return www;
-        //        if (www.error == null && www.isDone)
-        //        {
-        //            File.WriteAllBytes(dest, www.bytes);
-        //        }
-        //    }
-        //}
-        //#endregion
 
         #region 释放接口
         /// <summary>

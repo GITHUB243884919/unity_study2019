@@ -8,15 +8,16 @@ using System.IO;
 /// 1.unitylogo 没有扩展名
 /// 2.下载不应该断点续传，因为存在同名旧文件
 /// 3.更新执行前应该有界面，有界面就会用资源管理器，如果更新了bundle配置文件，那么资源管理需要重新加载bundle配置文件
-/// 4.打包脚本按window那个写
-/// 5.从包内读取AB文件是携程，写完成拷贝逻辑
+/// *4.打包脚本按window那个写
+/// *5.从包内读取AB文件是携程，写完成拷贝逻辑
+/// *6.资源管理去掉废弃的更新相关接口
+/// 7.增量打包
+/// 8.下载bundle后验证md5
 /// </summary>
 namespace UFrame.Update
 {
     public class UpdateManager : Singleton<UpdateManager>, ISingleton
     {
-        string innerGameVersion;
-        string outterGameVersion;
         string innerBundleRootPath;
         string outerBundleRootPath;
         string serverDownloadUrl;
@@ -34,8 +35,14 @@ namespace UFrame.Update
         string manifestFileName;
         string manifestFileNameTmp;
 
+        bool couldDownLoadServerVersion = false;
         bool couldComparerVersion = false;
         bool coundComparerDetail = false;
+
+        static int Max_Copy_Bundle_Config = 4;
+        int copyBundleConfigNum = 0;
+
+        public bool updateFinished = false;
         public void Init()
         {
             string ApplicationStreamingPath = Application.streamingAssetsPath;
@@ -57,40 +64,13 @@ namespace UFrame.Update
             manifestFileName = UFrameConst.Bundle_Root_Dir + UFrameConst.Bundle_Extension;
             manifestFileNameTmp = manifestFileName + UFrameConst.Download_Extension;
 
+            couldDownLoadServerVersion = false;
             couldComparerVersion = false;
             coundComparerDetail = false;
+            copyBundleConfigNum = 0;
+
+            updateFinished = false;
         }
-
-        //public static string GetInnerGameVersion()
-        //{
-        //    var versionAsset = Resources.Load<TextAsset>(UFrameConst.Game_Version_Txt_Name);
-
-        //    return versionAsset.text;
-        //}
-
-        //public static string GetOutterGameVersion()
-        //{
-        //    string path = Path.Combine(Application.persistentDataPath, UFrameConst.Bundle_Root_Dir);
-
-        //    if (!Directory.Exists(path))
-        //    {
-        //        Directory.CreateDirectory(path);
-        //        return "";
-        //    }
-
-        //    path = Path.Combine(path, UFrameConst.Game_Version_Txt_Name);
-        //    path += ".txt";
-        //    Logger.LogWarp.Log(path);
-
-        //    if (!File.Exists(path))
-        //    {
-        //        return "";
-        //    }
-
-        //    Logger.LogWarp.Log(path);
-
-        //    return File.ReadAllText(path);
-        //}
 
         #region 版本号
         string GetGameVersion(string rootPath)
@@ -197,13 +177,13 @@ namespace UFrame.Update
         #endregion
 
         #region 拷贝AB
-        public void CopyAssetBundle(string source, string dest, System.Action callback = null)
+        public void CopyAssetBundle(string source, string dest, System.Action<string> callback = null)
         {
             Logger.LogWarp.Log("CopyAssetBundle " + source + " " + dest);
             RunCoroutine.Run(CoCopyAssetBundle(source, dest, callback));
         }
 
-        IEnumerator CoCopyAssetBundle(string source, string dest, System.Action callback)
+        IEnumerator CoCopyAssetBundle(string source, string dest, System.Action<string> callback)
         {
             using (WWW www = new WWW(source))
             {
@@ -213,7 +193,7 @@ namespace UFrame.Update
                     File.WriteAllBytes(dest, www.bytes);
                     if (callback != null)
                     {
-                        callback();
+                        callback(dest);
                     }
                 }
             }
@@ -251,39 +231,47 @@ namespace UFrame.Update
                 innerVersionPath += UFrameConst.Bundle_Extension;
                 string outterVersionPath = Path.Combine(outterRootPath, UFrameConst.Game_Version_Txt_Name);
                 outterVersionPath += UFrameConst.Bundle_Extension;
-                CopyAssetBundle(innerVersionPath, outterVersionPath);
+                CopyAssetBundle(innerVersionPath, outterVersionPath, CopyAssetBundleCallback);
 
                 //copy asset-bundle
                 string innerAssetBundlePath = Path.Combine(innerRootPath, Path.GetFileNameWithoutExtension(UFrameConst.Asset_Bundle_Txt_Name));
                 innerAssetBundlePath += UFrameConst.Bundle_Extension;
                 string outterAssetBundlePath = Path.Combine(outterRootPath, Path.GetFileNameWithoutExtension(UFrameConst.Asset_Bundle_Txt_Name));
                 outterAssetBundlePath += UFrameConst.Bundle_Extension;
-                CopyAssetBundle(innerAssetBundlePath, outterAssetBundlePath);
+                CopyAssetBundle(innerAssetBundlePath, outterAssetBundlePath, CopyAssetBundleCallback);
 
                 //copy manifest
                 string innerManifestPath = Path.Combine(innerRootPath, UFrameConst.Bundle_Root_Dir);
                 innerManifestPath += UFrameConst.Bundle_Extension;
                 string outterManifestPath = Path.Combine(outterRootPath, UFrameConst.Bundle_Root_Dir);
                 outterManifestPath += UFrameConst.Bundle_Extension;
-                CopyAssetBundle(innerManifestPath, outterManifestPath);
+                CopyAssetBundle(innerManifestPath, outterManifestPath, CopyAssetBundleCallback);
 
                 //copy bundle hash
                 string innerBundleHashPath = Path.Combine(innerRootPath, Path.GetFileNameWithoutExtension(UFrameConst.Bundle_Hash_Txt_Name));
                 innerBundleHashPath += UFrameConst.Bundle_Extension;
                 string outterBundleHashPath = Path.Combine(outterRootPath, Path.GetFileNameWithoutExtension(UFrameConst.Bundle_Hash_Txt_Name));
                 outterBundleHashPath += UFrameConst.Bundle_Extension;
-                CopyAssetBundle(innerBundleHashPath, outterBundleHashPath);
+                CopyAssetBundle(innerBundleHashPath, outterBundleHashPath, CopyAssetBundleCallback);
+            }
+        }
+
+        void CopyAssetBundleCallback(string name)
+        {
+            copyBundleConfigNum++;
+            if (copyBundleConfigNum >= Max_Copy_Bundle_Config)
+            {
+                this.couldDownLoadServerVersion = true;
             }
         }
 
         public void DownLoadServerVersionInfomation()
         {
-            //var http = new HttpDownLoad();
-            //string URL = @"http://127.0.0.1:8080/a.txt";
-            //http.DownLoad(URL, Application.streamingAssetsPath, "a.txt", DownLoadCallback);
-
-
-
+            if (!couldDownLoadServerVersion)
+            {
+                return;
+            }
+            couldDownLoadServerVersion = false;
             var http = new HttpDownLoad();
             http.DownLoad(this.serverDownloadUrl + versionFileName, localDownLoadRoot, versionFileNameTmp, DownloadVersionCallback);
         }
@@ -317,6 +305,10 @@ namespace UFrame.Update
                 urls.Add(this.serverDownloadUrl + this.bundleHashFileName, bundleHashFileNameTmp);
                 urls.Add(this.serverDownloadUrl + this.manifestFileName, manifestFileNameTmp);
                 http.DownLoads(urls, localDownLoadRoot, DownLoadDetailCallback);
+            }
+            else
+            {
+                updateFinished = true;
             }
         }
 
@@ -362,6 +354,7 @@ namespace UFrame.Update
 
         void DownloadBundleCallback()
         {
+            this.updateFinished = true;
             Logger.LogWarp.Log("all bundle download!");
         }
 
@@ -380,6 +373,7 @@ namespace UFrame.Update
 
         public void Tick()
         {
+            DownLoadServerVersionInfomation();
             ComparerVersion();
             ComparerDetail();
         }

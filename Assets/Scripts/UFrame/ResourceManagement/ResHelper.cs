@@ -60,13 +60,4 @@ public class ResHelper
         return PublicAssetHolderGameObject.GetInstance().Go;
     }
 
-    public static string GetInnerGameVersion()
-    {
-        return ResourceManager.GetInstance().GetInnerGameVersion();
-    }
-
-    public static string GetOutterGameVersion()
-    {
-        return ResourceManager.GetInstance().GetOutterGameVersion();
-    }
 }

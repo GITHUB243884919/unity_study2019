@@ -28,10 +28,6 @@ namespace UFrame.ResourceManagement
         void AddGameObjectAssetHolder(GameObject go, AssetHolder assetHolder);
 
         void LoadScene(string scenePath);
-
-        string GetInnerGameVersion();
-
-        string GetOutterGameVersion();
     }
 }
 
