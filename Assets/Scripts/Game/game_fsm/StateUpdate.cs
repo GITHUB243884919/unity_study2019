@@ -23,8 +23,10 @@ namespace Game
                 return;
             }
 
-            //UpdateManager.GetInstance().EnsureGameVersion();
-            updateSuccess = true;
+            UpdateManager.GetInstance().EnsureLocalGameVersionInfomation();
+            UpdateManager.GetInstance().DownLoadServerVersionInfomation();
+
+            //updateSuccess = true;
 
             //updateSuccess = false;
             //var http = new HttpDownLoad();
@@ -39,6 +41,7 @@ namespace Game
 
         public override void Tick(int deltaTimeMS)
         {
+            UpdateManager.GetInstance().Tick();
         }
 
         protected override void GetEnterParam()

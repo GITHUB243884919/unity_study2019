@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 using System.IO;
 using System.Net;
@@ -115,12 +116,111 @@ public class HttpDownLoad {
     }
 
 
-	/// <summary>
-	/// 获取下载文件的大小
-	/// </summary>
-	/// <returns>The length.</returns>
-	/// <param name="url">URL.</param>
-	long GetLength(string url)
+    public void DownLoads(Dictionary<string, string> urls, /*string url,*/ string savePath, /*string fileName,*/ Action callBack, System.Threading.ThreadPriority threadPriority = System.Threading.ThreadPriority.Normal)
+    {
+        isStop = false;
+        System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
+        //开启子线程下载,使用匿名方法
+        thread = new Thread(delegate ()
+        {
+            stopWatch.Start();
+            //判断保存路径是否存在
+            if (!Directory.Exists(savePath))
+            {
+                Directory.CreateDirectory(savePath);
+            }
+            int idx = 0;
+            foreach(var kv in urls)
+            {
+                //获取下载文件的总长度
+                //UnityEngine.Debug.Log(kv.k + " " + fileName);
+                long totalLength = GetLength(kv.Key);
+
+                //获取文件现在的长度
+                string filePath = savePath + "/" + kv.Value;
+                FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write);
+                long fileLength = fs.Length;
+                Logger.LogWarp.LogFormat("文件:{0} 已下载{1}，剩余{2}", kv.Value, fileLength, (totalLength - fileLength));
+                //如果没下载完
+                if (fileLength < totalLength)
+                {
+                    //断点续传核心，设置本地文件流的起始位置
+                    fs.Seek(fileLength, SeekOrigin.Begin);
+
+                    HttpWebRequest request = HttpWebRequest.Create(kv.Key) as HttpWebRequest;
+                    request.ReadWriteTimeout = ReadWriteTimeOut;
+                    request.Timeout = TimeOutWait;
+
+                    //断点续传核心，设置远程访问文件流的起始位置
+                    request.AddRange((int)fileLength);
+                    Stream stream = null;
+                    try
+                    {
+                        stream = request.GetResponse().GetResponseStream();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.LogWarp.LogError(ex.ToString());
+                    }
+                    byte[] buffer = new byte[1024];
+                    //使用流读取内容到buffer中
+                    //注意方法返回值代表读取的实际长度,并不是buffer有多大，stream就会读进去多少
+                    int length = stream.Read(buffer, 0, buffer.Length);
+                    while (length > 0)
+                    {
+                        //如果Unity客户端关闭，停止下载
+                        if (isStop) break;
+                        //将内容再写入本地文件中
+                        fs.Write(buffer, 0, length);
+                        //计算进度
+                        fileLength += length;
+                        //progress = (float)fileLength / (float)totalLength;
+                        //类似尾递归
+                        length = stream.Read(buffer, 0, buffer.Length);
+
+                    }
+                    stream.Close();
+                    stream.Dispose();
+                    idx++;
+                    progress = (float)idx / (float)urls.Count;
+                    Logger.LogWarp.Log("progress " + progress);
+                }
+                else
+                {
+                    //progress = 1;
+                    idx++;
+                    progress = (float)idx / (float)urls.Count;
+                    Logger.LogWarp.Log("progress " + progress);
+                }
+                stopWatch.Stop();
+                Logger.LogWarp.Log("耗时: " + stopWatch.ElapsedMilliseconds);
+                fs.Close();
+                fs.Dispose();
+                //如果下载完毕，执行回调
+                if (progress >= 1)
+                {
+                    isDone = true;
+                    if (callBack != null) callBack();
+                    Logger.LogWarp.Log(urls.Count + " download finished");
+                    thread.Abort();
+                }
+            }
+        });
+
+
+        //开启子线程
+        thread.IsBackground = true;
+        thread.Priority = threadPriority;
+        thread.Start();
+    }
+
+
+    /// <summary>
+    /// 获取下载文件的大小
+    /// </summary>
+    /// <returns>The length.</returns>
+    /// <param name="url">URL.</param>
+    long GetLength(string url)
 	{		
 		HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
 		request.Method = "HEAD";

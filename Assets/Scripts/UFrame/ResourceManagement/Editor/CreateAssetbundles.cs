@@ -124,7 +124,6 @@ public class CreateAssetBundles
     {
         string fileMapFullPath = Path.Combine(Application.dataPath, UFrameConst.GameResources_Dir);
         fileMapFullPath = Path.Combine(fileMapFullPath, UFrameConst.Asset_Bundle_Txt_Name);
-        //UnityEngine.Debug.LogError(fileMapFullPath);
         StreamWriter sw = new StreamWriter(fileMapFullPath);
 
         //清理buildsetting中的场景，只保留入口场景
@@ -148,43 +147,101 @@ public class CreateAssetBundles
         AssetDatabase.Refresh();
     }
 
+    public static void WriteBundleHash(string assetBundleDirectory)
+    {
+        string bundleHashPath = Path.Combine(Application.dataPath, UFrameConst.GameResources_Dir);
+        bundleHashPath = Path.Combine(bundleHashPath, UFrameConst.Bundle_Hash_Txt_Name);
+        StreamWriter sw = new StreamWriter(bundleHashPath);
+        string swContent = "";
+        string[] abNames = AssetDatabase.GetAllAssetBundleNames();
+        foreach (var name in abNames)
+        {
+            string path = assetBundleDirectory + "/" + name;
+            //Logger.LogWarp.Log(path);
+            //uint crc;
+            //BuildPipeline.GetCRCForAssetBundle(path, out crc);
+            Hash128 hash;
+            BuildPipeline.GetHashForAssetBundle(path, out hash);
+            //Logger.LogWarp.Log(name + " crc=" + crc.ToCString() + " hash=" + hash.ToString());
+            swContent += name + "=" + hash.ToString() + "\r\n";
+            sw.Write(swContent);
+        }
+        sw.Flush();
+        sw.Dispose();
+
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+    }
+
+    public static void BundleHashToBundle(string assetBundleDirectory, BuildAssetBundleOptions assetBundleOptions, BuildTarget targetPlatform)
+    {
+        string assetName = "Assets/" + UFrameConst.GameResources_Dir + "/" + UFrameConst.Bundle_Hash_Txt_Name;
+        string[] assetNames = new string[1];
+        assetNames[0] = assetName;
+
+        string assetBundleName = Path.GetFileNameWithoutExtension(UFrameConst.Bundle_Hash_Txt_Name) + UFrameConst.Bundle_Extension;
+
+        AssetBundleBuild [] buildMap = new AssetBundleBuild[1];
+        buildMap[0].assetBundleName = assetBundleName;
+        buildMap[0].assetNames = assetNames;
+
+        BuildPipeline.BuildAssetBundles(assetBundleDirectory, buildMap, assetBundleOptions, targetPlatform);
+
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+    }
+
     [MenuItem("UFrame框架/资源管理/发布模式/创建Bundle/StandaloneWindows")]
     public static void BuildAll_StandaloneWindows()
     {
         BuildPerpare();
         string assetBundleDirectory = "Assets/StreamingAssets/" + UFrameConst.Bundle_Root_Dir;
-        Logger.LogWarp.Log("MD5 " + UFrame.Util.MD5Util.FileMD5(assetBundleDirectory + "/textures_wall.unity3d"));
-        Hash128 TMPHASH;
-        BuildPipeline.GetHashForAssetBundle(assetBundleDirectory + "/textures_wall.unity3d", out TMPHASH);
-        Logger.LogWarp.Log("Hash " + TMPHASH.ToString());
-        BuildPipeline.BuildAssetBundles(assetBundleDirectory, 
-            BuildAssetBundleOptions.DeterministicAssetBundle|
-            BuildAssetBundleOptions.ChunkBasedCompression,//|
-            //BuildAssetBundleOptions.AppendHashToAssetBundleName, 
-            BuildTarget.StandaloneWindows);
+        BuildAssetBundleOptions assetBundleOptions = BuildAssetBundleOptions.DeterministicAssetBundle |
+            BuildAssetBundleOptions.ChunkBasedCompression;
+        BuildTarget targetPlatform = BuildTarget.StandaloneWindows;
+
+        //BuildPipeline.BuildAssetBundles(assetBundleDirectory, 
+        //    BuildAssetBundleOptions.DeterministicAssetBundle|
+        //    BuildAssetBundleOptions.ChunkBasedCompression,
+        //    BuildTarget.StandaloneWindows);
+
+        BuildPipeline.BuildAssetBundles(assetBundleDirectory,
+            assetBundleOptions, targetPlatform);
+
 
         //把Manifest文件加一个后缀，方便下载
         ModifyManifestFileName();
 
-        AssetDatabase.Refresh();
+        //AssetDatabase.Refresh();
+        WriteBundleHash(assetBundleDirectory);
+
+        BundleHashToBundle(assetBundleDirectory, assetBundleOptions, targetPlatform);
 
         EditorUtility.DisplayDialog("", "Assetbundle打包完毕", "确定");
 
-        string[] abNames = AssetDatabase.GetAllAssetBundleNames();
-        foreach (var name in abNames)
-        {
-            string path = assetBundleDirectory +  "/" + name;
-            Logger.LogWarp.Log(path);
-            uint crc;
-            BuildPipeline.GetCRCForAssetBundle(path, out crc);
-            Hash128 hash;
-            BuildPipeline.GetHashForAssetBundle(path, out hash);
-            Logger.LogWarp.Log(name + " crc=" + crc.ToCString() + " hash=" + hash.ToString());
-            //Assets/StreamingAssets/Bundles/textures_wall.unity3d
-            //AF764C2AD870D2F66990D27A77FA4CFC
-            //                                                    6f41c42476208ec2f23f11920f51ab0b
-            //[Debug] textures_wall.unity3d crc=1278273026 hash=6f41c42476208ec2f23f11920f51ab0b
-        }
+        //string bundleHashPath = Path.Combine(Application.dataPath, UFrameConst.GameResources_Dir);
+        //bundleHashPath = Path.Combine(bundleHashPath, UFrameConst.Bundle_Hash_Txt_Name);
+        //StreamWriter sw = new StreamWriter(bundleHashPath);
+        //string swContent = "";
+        //string[] abNames = AssetDatabase.GetAllAssetBundleNames();
+        //foreach (var name in abNames)
+        //{
+        //    string path = assetBundleDirectory +  "/" + name;
+        //    Logger.LogWarp.Log(path);
+        //    uint crc;
+        //    BuildPipeline.GetCRCForAssetBundle(path, out crc);
+        //    Hash128 hash;
+        //    BuildPipeline.GetHashForAssetBundle(path, out hash);
+        //    Logger.LogWarp.Log(name + " crc=" + crc.ToCString() + " hash=" + hash.ToString());
+        //    //Assets/StreamingAssets/Bundles/textures_wall.unity3d
+        //    //AF764C2AD870D2F66990D27A77FA4CFC
+        //    //                                                    6f41c42476208ec2f23f11920f51ab0b
+        //    //[Debug] textures_wall.unity3d crc=1278273026 hash=6f41c42476208ec2f23f11920f51ab0b
+        //    swContent += name + "=" + hash.ToString() + "\r\n";
+        //    sw.Write(swContent);
+        //}
+        //sw.Flush();
+        //sw.Close();
     }
 
     [MenuItem("UFrame框架/资源管理/发布模式/创建Bundle/Android")]
@@ -337,6 +394,9 @@ public class CreateAssetBundles
         }
         FileInfo fi = new FileInfo(path);
         fi.MoveTo(destPath);
+
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
     }
 
     //[MenuItem("资源管理/bundle命名")]
