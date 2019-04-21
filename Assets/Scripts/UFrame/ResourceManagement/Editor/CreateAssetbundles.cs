@@ -157,13 +157,7 @@ public class CreateAssetBundles
         foreach (var name in abNames)
         {
             string path = assetBundleDirectory + "/" + name;
-            //Logger.LogWarp.Log(path);
-            //uint crc;
-            //BuildPipeline.GetCRCForAssetBundle(path, out crc);
-            Hash128 hash;
-            BuildPipeline.GetHashForAssetBundle(path, out hash);
-            //Logger.LogWarp.Log(name + " crc=" + crc.ToCString() + " hash=" + hash.ToString());
-            swContent += name + "=" + hash.ToString() + "\r\n";
+            swContent += name + "=" + UFrame.Util.MD5Util.FileMD5(path) + "\r\n";
             sw.Write(swContent);
         }
         sw.Flush();
