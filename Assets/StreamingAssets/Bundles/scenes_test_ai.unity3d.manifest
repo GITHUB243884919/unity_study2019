@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 4063456505
+CRC: 2256300108
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 54b381afc77c631aaa2f33229c4acea4
+    Hash: d40894b8c5c3d55e09afc1cafe726b5f
   TypeTreeHash:
     serializedVersion: 2
     Hash: 096d195eefd8a4957a218dc25571eab8
@@ -74,7 +74,7 @@ ClassTypes:
 - Class: 225
   Script: {instanceID: 0}
 Assets:
-- Assets/GameResources/Scenes/test_ai.unity
+- Assets/GameResources/scenes/test_ai.unity
 Dependencies:
 - D:/Fzy/Code/unity_study2019_New/Assets/StreamingAssets/Bundles/prefabs_battle_root.unity3d
 - D:/Fzy/Code/unity_study2019_New/Assets/StreamingAssets/Bundles/prefabs_easytouch.unity3d

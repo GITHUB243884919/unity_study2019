@@ -9,7 +9,7 @@ namespace UFrame.ResourceManagement
         public override void Awake()
         {
             base.Awake();
-            DontDestroyOnLoad(this);
+            //DontDestroyOnLoad(this);
         }
 
         public override void OnDestroy()

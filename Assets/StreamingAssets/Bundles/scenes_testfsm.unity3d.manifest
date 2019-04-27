@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 375823857
+CRC: 1076936588
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 68cf0c560c52c1330691541051f56117
+    Hash: 1322c0b3ad29dbd333ff18d484b323df
   TypeTreeHash:
     serializedVersion: 2
     Hash: a7f0f45e9df17d6a6567b41be92c864c
@@ -32,5 +32,5 @@ ClassTypes:
 - Class: 157
   Script: {instanceID: 0}
 Assets:
-- Assets/GameResources/Scenes/TestFsm.unity
+- Assets/GameResources/scenes/TestFsm.unity
 Dependencies: []

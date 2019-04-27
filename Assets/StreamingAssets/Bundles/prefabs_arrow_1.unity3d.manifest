@@ -1,0 +1,23 @@
+ManifestFileVersion: 0
+CRC: 345332594
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: f401ac977fbf0fdbe15d86b43244494c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: f634a38216357c0f552a5fc5997e3827
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 120
+  Script: {instanceID: 0}
+Assets:
+- Assets/GameResources/prefabs/arrow_1.prefab
+Dependencies:
+- D:/Fzy/Code/unity_study2019_New/Assets/StreamingAssets/Bundles/materials_arrow_1.unity3d

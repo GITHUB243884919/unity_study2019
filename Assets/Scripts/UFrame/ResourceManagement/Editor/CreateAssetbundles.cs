@@ -308,7 +308,7 @@ public class CreateAssetBundles
         string GameResourcePath = "Assets/" + UFrameConst.GameResources_Dir;
         string swContent = "";
         string[] filePaths = Directory.GetFiles(GameResourcePath, "*", SearchOption.AllDirectories);
-        for(int i = 0; i < filePaths.Length; ++i)
+        for (int i = 0; i < filePaths.Length; ++i)
         {
             string filePath = filePaths[i].Replace("\\", "/");
             //".meta 不打包"
@@ -317,14 +317,21 @@ public class CreateAssetBundles
                 continue;
             }
 
-            //Asset_Bundle_Txt_Name不打
-            if (filePath.Contains(UFrameConst.Asset_Bundle_Txt_Name))
+            //Asset_Bundle_Txt_Name, Bundle_Hash_Txt_Name不打
+            if (
+                filePath.Contains(UFrameConst.Asset_Bundle_Txt_Name) ||
+                filePath.Contains(UFrameConst.Bundle_Hash_Txt_Name))
             {
                 continue;
             }
 
-            //navMesh不打包
-            if (filePath.Contains("scene_nav2d/NavMesh"))
+            ////navMesh不打包
+            //if (filePath.Contains("scene_nav2d/NavMesh"))
+            //{
+            //    continue;
+            //}
+            //scenes目录下只打 *.unity文件
+            if(filePath.Contains("/scenes/") && Path.GetExtension(filePath) != ".unity")
             {
                 continue;
             }

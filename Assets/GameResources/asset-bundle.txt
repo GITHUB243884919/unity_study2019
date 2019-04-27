@@ -110,14 +110,17 @@ slot.lua.bytes,lua.unity3d
 socket.lua.bytes,lua.unity3d
 tolua.lua.bytes,lua.unity3d
 typeof.lua.bytes,lua.unity3d
+bundle-hash,bundle-hash.unity3d
 game-version,game-version.unity3d
 actor/nezhe/New Avatar Mask,actor_nezhe_New Avatar Mask.unity3d
 actor/nezhe/nezha,actor_nezhe_nezha.unity3d
 actor/nezhe/nezha_anim,actor_nezhe_nezha_anim.unity3d
 actor/nezhe/nezha_anim2,actor_nezhe_nezha_anim2.unity3d
+materials/arrow_1,materials_arrow_1.unity3d
 materials/blue,materials_blue.unity3d
 materials/mymaterial,materials_mymaterial.unity3d
 materials/red,materials_red.unity3d
+prefabs/arrow_1,prefabs_arrow_1.unity3d
 prefabs/avoidance,prefabs_avoidance.unity3d
 prefabs/avoidance2,prefabs_avoidance2.unity3d
 prefabs/avoidance3,prefabs_avoidance3.unity3d
@@ -143,6 +146,7 @@ scenes/TestExecutor,scenes_TestExecutor.unity3d
 scenes/TestFsm,scenes_TestFsm.unity3d
 scenes/TestFx,scenes_TestFx.unity3d
 scenes/test_ai,scenes_test_ai.unity3d
+textures/arrow_1,textures_arrow_1.unity3d
 textures/border_horizontal,textures_border_horizontal.unity3d
 textures/border_vertical,textures_border_vertical.unity3d
 textures/player,textures_player.unity3d
