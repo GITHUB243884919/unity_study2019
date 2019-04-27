@@ -1,0 +1,20 @@
+ManifestFileVersion: 0
+CRC: 988740527
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: ddb058a9519609222ed4431737ba35d7
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/LuaTemp/UFrame/Utilitys/LuaCommon_Utils.lua.bytes
+- Assets/LuaTemp/UFrame/Utilitys/UI_Utils.lua.bytes
+- Assets/LuaTemp/UFrame/Utilitys/Table_Utils.lua.bytes
+- Assets/LuaTemp/UFrame/Utilitys/LuaLogHelper.lua.bytes
+- Assets/LuaTemp/UFrame/Utilitys/LuaGlobalCheck.lua.bytes
+Dependencies: []

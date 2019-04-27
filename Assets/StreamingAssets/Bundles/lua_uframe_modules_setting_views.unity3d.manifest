@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 3796195482
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 614e359a2a69a725a3da210dc41f8138
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/LuaTemp/UFrame/Modules/Setting/Views/UISettingPanel.lua.bytes
+Dependencies: []

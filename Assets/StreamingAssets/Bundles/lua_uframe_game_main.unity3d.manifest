@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 3861609234
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 84b974307da5994fccab29d473d1feb7
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/LuaTemp/UFrame/Game/Main/NotifyId.lua.bytes
+- Assets/LuaTemp/UFrame/Game/Main/Modules.lua.bytes
+- Assets/LuaTemp/UFrame/Game/Main/ModuleId.lua.bytes
+- Assets/LuaTemp/UFrame/Game/Main/GUICollections.lua.bytes
+Dependencies: []

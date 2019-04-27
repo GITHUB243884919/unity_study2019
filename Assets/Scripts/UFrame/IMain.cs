@@ -24,21 +24,11 @@ namespace UFrame
         protected abstract IGameApp CreateGameApp(); 
 		void Awake ()
         {
-            Application.lowMemory += OnMemoryWarnning;
-
             app = CreateGameApp();
             app.Awake ();
+            Application.lowMemory += app.OnMemoryWarnning;
             DontDestroyOnLoad(this);
 		}
-
-        private void OnMemoryWarnning()
-        {
-#if DEBUG && !PROFILER
-            Debug.LogError("Game Received Low Memory Warning");
-#endif
-
-            //AssetLoaderManager.Instance.ClearUnuse();
-        }
 
         void Start ()
 		{
@@ -55,7 +45,8 @@ namespace UFrame
 
 		void LateUpdate ()
 		{
-			if (app != null)
+            //注意！！！！禁止在这里添加任何代码！！！
+            if (app != null)
 				app.LateUpdate ();
 		}
 

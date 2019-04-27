@@ -7,58 +7,63 @@ namespace UFrame.MessageCenter
     public class ActionMessageCenter
     {
         protected Queue<Message> messages = new Queue<Message>();
-        protected Dictionary<int, HashSet<Action<Message>>> executors =
+        protected Dictionary<int, HashSet<Action<Message>>> executorDic =
             new Dictionary<int, HashSet<Action<Message>>>();
 
         public void Regist(int messageID, Action<Message> executor)
         {
-            HashSet<Action<Message>> linkExecutor = null;
-            if (!executors.TryGetValue(messageID, out linkExecutor))
+            HashSet<Action<Message>> excutors = null;
+            if (!executorDic.TryGetValue(messageID, out excutors))
             {
-                linkExecutor = new HashSet<Action<Message>>();
-                executors.Add(messageID, linkExecutor);
+                excutors = new HashSet<Action<Message>>();
+                executorDic.Add(messageID, excutors);
             }
-            linkExecutor.Add(executor);
+            excutors.Add(executor);
         }
 
         public void UnRegist(int messageID, Action<Message> executor)
         {
-            HashSet<Action<Message>> linkExecutor = null;
-            if (!executors.TryGetValue(messageID, out linkExecutor))
+            HashSet<Action<Message>> excutors = null;
+            if (!executorDic.TryGetValue(messageID, out excutors))
             {
                 return;
             }
-            linkExecutor.Remove(executor);
+            excutors.Remove(executor);
         }
 
-        public void Send(Message msg)
+        public void Send(Message msg, bool immediately = true)
         {
+            if (immediately)
+            {
+                Execute(msg);
+                return;
+            }
+
             messages.Enqueue(msg);
         }
 
         public void Tick()
         {
-            while (true)
+            while (messages.Count > 0)
             {
-                if (messages.Count <= 0)
-                {
-                    return;
-                }
-
                 Message msg = messages.Dequeue();
-
-                HashSet<Action<Message>> linkExecutor = null;
-                if (!executors.TryGetValue(msg.messageID, out linkExecutor))
-                {
-                    throw new System.Exception("没有消息被注册" + msg.messageID);
-                }
-
-                foreach (var executor in linkExecutor)
-                {
-                    executor(msg);
-                }
-                msg.Release();
+                Execute(msg);
             }
+        }
+
+        void Execute(Message msg)
+        {
+            HashSet<Action<Message>> excutors = null;
+            if (!executorDic.TryGetValue(msg.messageID, out excutors))
+            {
+                throw new System.Exception("消息被注册" + msg.messageID);
+            }
+
+            foreach (var executor in excutors)
+            {
+                executor(msg);
+            }
+            msg.Release();
         }
     }
 }

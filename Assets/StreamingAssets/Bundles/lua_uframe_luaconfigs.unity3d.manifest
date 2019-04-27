@@ -1,0 +1,17 @@
+ManifestFileVersion: 0
+CRC: 3000280577
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 3d7ba5a28c14bb6d4c7f775ebe00d8ba
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/LuaTemp/UFrame/LuaConfigs/ResPathConfig.lua.bytes
+- Assets/LuaTemp/UFrame/LuaConfigs/Language.lua.bytes
+Dependencies: []

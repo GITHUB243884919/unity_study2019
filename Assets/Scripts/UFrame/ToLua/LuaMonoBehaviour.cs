@@ -23,6 +23,7 @@ namespace UFrame.ToLua
             ondestroyFunc = gameObject.name + ".OnDestroy";
             LuaFunction func = LuaManager.GetInstance().luaState.GetFunction(awakeFunc);
             func.Call<GameObject>(gameObject);
+            func.Dispose();
 
         }
         // Use this for initialization
@@ -30,6 +31,7 @@ namespace UFrame.ToLua
         {
             LuaFunction func = LuaManager.GetInstance().luaState.GetFunction(startFunc);
             func.Call();
+            func.Dispose();
         }
 
         // Update is called once per frame
@@ -42,6 +44,7 @@ namespace UFrame.ToLua
         {
             LuaFunction func = LuaManager.GetInstance().luaState.GetFunction(ondestroyFunc);
             func.Call();
+            func.Dispose();
         }
     }
 }

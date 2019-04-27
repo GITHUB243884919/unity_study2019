@@ -29,17 +29,22 @@ public class ExeLuaFile : MonoBehaviour
     {
         GUI.Label(new Rect(100, Screen.height / 2 - 100, 600, 400), strLog);
 
+        //DoFile不支持用.代替目录符，Require可以
+        //ok LuaManager.GetInstance().luaState.DoFile("Game/ScriptsFromFile.lua");
+        //not ok LuaManager.GetInstance().luaState.DoFile("Game.ScriptsFromFile.lua");
+        //ok LuaManager.GetInstance().luaState.Require("Game/ScriptsFromFile");
+        //ok UFrameLuaClient.GetMainState().Require("Game.ScriptsFromFile");
         if (GUI.Button(new Rect(50, 50, 120, 45), "DoFile"))
         {
             strLog = "";
             LuaManager.GetInstance().luaState.DoFile("Game/ScriptsFromFile.lua");
-            UFrameLuaClient.GetMainState().DoFile("Game/ScriptsFromFile.lua");
+            //UFrameLuaClient.GetMainState().DoFile("Game.ScriptsFromFile.lua");
         }
         else if (GUI.Button(new Rect(50, 150, 120, 45), "Require"))
         {
             strLog = "";
             //LuaManager.GetInstance().luaState.Require("Game/ScriptsFromFile");
-            UFrameLuaClient.GetMainState().Require("Game/ScriptsFromFile");
+            UFrameLuaClient.GetMainState().Require("Game.ScriptsFromFile");
         }
     }
 
