@@ -145,6 +145,8 @@ public class CreateAssetBundles
         importerFileMap.assetBundleName = Path.GetFileNameWithoutExtension(UFrameConst.Asset_Bundle_Txt_Name) + UFrameConst.Bundle_Extension;
 
         AssetDatabase.Refresh();
+
+
     }
 
     public static void WriteBundleHash(string assetBundleDirectory)
@@ -157,6 +159,11 @@ public class CreateAssetBundles
         foreach (var name in abNames)
         {
             string path = assetBundleDirectory + "/" + name;
+            if (!File.Exists(path))
+            {
+                Logger.LogWarp.Log(name + " " + AssetDatabase.GetAssetPathsFromAssetBundle(name));
+                continue;
+            }
             swContent += name + "=" + UFrame.Util.MD5Util.FileMD5(path) + "\r\n";
             sw.Write(swContent);
         }
@@ -190,12 +197,12 @@ public class CreateAssetBundles
     {
         BuildPerpare();
         string assetBundleDirectory = "Assets/StreamingAssets/" + UFrameConst.Bundle_Root_Dir;
-        BuildAssetBundleOptions assetBundleOptions = BuildAssetBundleOptions.DeterministicAssetBundle |
-            BuildAssetBundleOptions.ChunkBasedCompression;
+        //BuildAssetBundleOptions assetBundleOptions = BuildAssetBundleOptions.DeterministicAssetBundle |
+        //    BuildAssetBundleOptions.ChunkBasedCompression;
+        BuildAssetBundleOptions assetBundleOptions = BuildAssetBundleOptions.ChunkBasedCompression;
         BuildTarget targetPlatform = BuildTarget.StandaloneWindows;
 
-        BuildPipeline.BuildAssetBundles(assetBundleDirectory,
-            assetBundleOptions, targetPlatform);
+        BuildPipeline.BuildAssetBundles(assetBundleDirectory, assetBundleOptions, targetPlatform);
 
 
         //把Manifest文件加一个后缀，方便下载

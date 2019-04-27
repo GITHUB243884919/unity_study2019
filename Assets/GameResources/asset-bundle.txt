@@ -110,7 +110,6 @@ slot.lua.bytes,lua.unity3d
 socket.lua.bytes,lua.unity3d
 tolua.lua.bytes,lua.unity3d
 typeof.lua.bytes,lua.unity3d
-bundle-hash,bundle-hash.unity3d
 game-version,game-version.unity3d
 actor/nezhe/New Avatar Mask,actor_nezhe_New Avatar Mask.unity3d
 actor/nezhe/nezha,actor_nezhe_nezha.unity3d
@@ -153,4 +152,4 @@ textures/player,textures_player.unity3d
 textures/wall,textures_wall.unity3d
 textures/unitylogo/unitylogo,textures_unitylogo_unitylogo.unity3d
 textures/unitylogo/unitylogo1,textures_unitylogo_unitylogo1.unity3d
-textures/unitylogo/unityLogo2,textures_unitylogo_unityLogo2.unity3d
+textures/unitylogo/unitylogo2,textures_unitylogo_unitylogo2.unity3d

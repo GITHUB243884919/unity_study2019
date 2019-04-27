@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1894538313
+CRC: 1562119548
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b19600a5ea56e4935ccd79cab47f6f6b
+    Hash: 82d0125ccacbfd8e42f931464ab82fb5
   TypeTreeHash:
     serializedVersion: 2
     Hash: c73412a662fd4e4f36af34cbdf078b85
@@ -12,5 +12,5 @@ ClassTypes:
 - Class: 28
   Script: {instanceID: 0}
 Assets:
-- Assets/GameResources/textures/unitylogo/unityLogo2.png
+- Assets/GameResources/textures/unitylogo/unitylogo2.png
 Dependencies: []
