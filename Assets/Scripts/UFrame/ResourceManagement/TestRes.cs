@@ -12,7 +12,7 @@ public class TestRes : MonoBehaviour
     {
         ResourceManager.GetInstance().Init();
         #region BundleTest
-        StartCoroutine(TestAll());
+        //StartCoroutine(TestAll());
         //StartCoroutine(TestAll2());
         //StartCoroutine(TestAsync());
         //StartCoroutine(TestAsync2());
@@ -21,7 +21,7 @@ public class TestRes : MonoBehaviour
         #endregion
 
         #region AssetDatabaseTest
-        //TestDatbase();
+        TestDatbase();
         #endregion
 
     }
@@ -181,10 +181,14 @@ public class TestRes : MonoBehaviour
     #region AssetDatabaseTest
     void TestDatbase()
     {
-        GameObjectGetter gogetter = ResourceManager.GetInstance().LoadGameObject("prefabs/cube");
+        GameObjectGetter gogetter = ResHelper.LoadGameObject("prefabs/cube");
         GameObject go = gogetter.Get();
-        AssetGetter assetgetter = ResourceManager.GetInstance().LoadAsset("materials/mymaterial");
+        AssetGetter assetgetter = ResHelper.LoadAsset("materials/mymaterial");
         Material m = assetgetter.Get<Material>(gameObject);
+
+        var getter = ResHelper.LoadGameObject("prefabs/ui/ui_login");
+        getter.Get();
+
     }
     #endregion
 

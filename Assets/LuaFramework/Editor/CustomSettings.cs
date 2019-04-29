@@ -181,6 +181,13 @@ public static class CustomSettings
         _GT(typeof(LuaMessageCenter.Message)),
         _GT(typeof(LuaMessageCenter.MessageTest)),
 
+        _GT(typeof(UFrame.ResourceManagement.AssetGetter)),
+        _GT(typeof(UFrame.ResourceManagement.GameObjectGetter)),
+        _GT(typeof(ResHelper)),
+        //_GT(typeof(UFrame.ResourceManagement.IAssetGetter)),
+
+
+
     };
 
     public static List<Type> dynamicList = new List<Type>()

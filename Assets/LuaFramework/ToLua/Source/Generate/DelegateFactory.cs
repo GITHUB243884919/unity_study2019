@@ -34,6 +34,8 @@ public class DelegateFactory
 		dict.Add(typeof(System.Action<UnityEngine.AsyncOperation>), factory.System_Action_UnityEngine_AsyncOperation);
 		dict.Add(typeof(UnityEngine.RectTransform.ReapplyDrivenProperties), factory.UnityEngine_RectTransform_ReapplyDrivenProperties);
 		dict.Add(typeof(System.Action<NotiData>), factory.System_Action_NotiData);
+		dict.Add(typeof(System.Action<UFrame.ResourceManagement.AssetGetter>), factory.System_Action_UFrame_ResourceManagement_AssetGetter);
+		dict.Add(typeof(System.Action<UFrame.ResourceManagement.GameObjectGetter>), factory.System_Action_UFrame_ResourceManagement_GameObjectGetter);
 
 		DelegateTraits<System.Action>.Init(factory.System_Action);
 		DelegateTraits<UnityEngine.Events.UnityAction>.Init(factory.UnityEngine_Events_UnityAction);
@@ -52,6 +54,8 @@ public class DelegateFactory
 		DelegateTraits<System.Action<UnityEngine.AsyncOperation>>.Init(factory.System_Action_UnityEngine_AsyncOperation);
 		DelegateTraits<UnityEngine.RectTransform.ReapplyDrivenProperties>.Init(factory.UnityEngine_RectTransform_ReapplyDrivenProperties);
 		DelegateTraits<System.Action<NotiData>>.Init(factory.System_Action_NotiData);
+		DelegateTraits<System.Action<UFrame.ResourceManagement.AssetGetter>>.Init(factory.System_Action_UFrame_ResourceManagement_AssetGetter);
+		DelegateTraits<System.Action<UFrame.ResourceManagement.GameObjectGetter>>.Init(factory.System_Action_UFrame_ResourceManagement_GameObjectGetter);
 
 		TypeTraits<System.Action>.Init(factory.Check_System_Action);
 		TypeTraits<UnityEngine.Events.UnityAction>.Init(factory.Check_UnityEngine_Events_UnityAction);
@@ -70,6 +74,8 @@ public class DelegateFactory
 		TypeTraits<System.Action<UnityEngine.AsyncOperation>>.Init(factory.Check_System_Action_UnityEngine_AsyncOperation);
 		TypeTraits<UnityEngine.RectTransform.ReapplyDrivenProperties>.Init(factory.Check_UnityEngine_RectTransform_ReapplyDrivenProperties);
 		TypeTraits<System.Action<NotiData>>.Init(factory.Check_System_Action_NotiData);
+		TypeTraits<System.Action<UFrame.ResourceManagement.AssetGetter>>.Init(factory.Check_System_Action_UFrame_ResourceManagement_AssetGetter);
+		TypeTraits<System.Action<UFrame.ResourceManagement.GameObjectGetter>>.Init(factory.Check_System_Action_UFrame_ResourceManagement_GameObjectGetter);
 
 		StackTraits<System.Action>.Push = factory.Push_System_Action;
 		StackTraits<UnityEngine.Events.UnityAction>.Push = factory.Push_UnityEngine_Events_UnityAction;
@@ -88,6 +94,8 @@ public class DelegateFactory
 		StackTraits<System.Action<UnityEngine.AsyncOperation>>.Push = factory.Push_System_Action_UnityEngine_AsyncOperation;
 		StackTraits<UnityEngine.RectTransform.ReapplyDrivenProperties>.Push = factory.Push_UnityEngine_RectTransform_ReapplyDrivenProperties;
 		StackTraits<System.Action<NotiData>>.Push = factory.Push_System_Action_NotiData;
+		StackTraits<System.Action<UFrame.ResourceManagement.AssetGetter>>.Push = factory.Push_System_Action_UFrame_ResourceManagement_AssetGetter;
+		StackTraits<System.Action<UFrame.ResourceManagement.GameObjectGetter>>.Push = factory.Push_System_Action_UFrame_ResourceManagement_GameObjectGetter;
 	}
     
     public static Delegate CreateDelegate(Type t, LuaFunction func = null)
@@ -1170,6 +1178,120 @@ public class DelegateFactory
 	}
 
 	void Push_System_Action_NotiData(IntPtr L, System.Action<NotiData> o)
+	{
+		ToLua.Push(L, o);
+	}
+
+	class System_Action_UFrame_ResourceManagement_AssetGetter_Event : LuaDelegate
+	{
+		public System_Action_UFrame_ResourceManagement_AssetGetter_Event(LuaFunction func) : base(func) { }
+		public System_Action_UFrame_ResourceManagement_AssetGetter_Event(LuaFunction func, LuaTable self) : base(func, self) { }
+
+		public void Call(UFrame.ResourceManagement.AssetGetter param0)
+		{
+			func.BeginPCall();
+			func.PushObject(param0);
+			func.PCall();
+			func.EndPCall();
+		}
+
+		public void CallWithSelf(UFrame.ResourceManagement.AssetGetter param0)
+		{
+			func.BeginPCall();
+			func.Push(self);
+			func.PushObject(param0);
+			func.PCall();
+			func.EndPCall();
+		}
+	}
+
+	public System.Action<UFrame.ResourceManagement.AssetGetter> System_Action_UFrame_ResourceManagement_AssetGetter(LuaFunction func, LuaTable self, bool flag)
+	{
+		if (func == null)
+		{
+			System.Action<UFrame.ResourceManagement.AssetGetter> fn = delegate(UFrame.ResourceManagement.AssetGetter param0) { };
+			return fn;
+		}
+
+		if(!flag)
+		{
+			System_Action_UFrame_ResourceManagement_AssetGetter_Event target = new System_Action_UFrame_ResourceManagement_AssetGetter_Event(func);
+			System.Action<UFrame.ResourceManagement.AssetGetter> d = target.Call;
+			target.method = d.Method;
+			return d;
+		}
+		else
+		{
+			System_Action_UFrame_ResourceManagement_AssetGetter_Event target = new System_Action_UFrame_ResourceManagement_AssetGetter_Event(func, self);
+			System.Action<UFrame.ResourceManagement.AssetGetter> d = target.CallWithSelf;
+			target.method = d.Method;
+			return d;
+		}
+	}
+
+	bool Check_System_Action_UFrame_ResourceManagement_AssetGetter(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(System.Action<UFrame.ResourceManagement.AssetGetter>), L, pos);
+	}
+
+	void Push_System_Action_UFrame_ResourceManagement_AssetGetter(IntPtr L, System.Action<UFrame.ResourceManagement.AssetGetter> o)
+	{
+		ToLua.Push(L, o);
+	}
+
+	class System_Action_UFrame_ResourceManagement_GameObjectGetter_Event : LuaDelegate
+	{
+		public System_Action_UFrame_ResourceManagement_GameObjectGetter_Event(LuaFunction func) : base(func) { }
+		public System_Action_UFrame_ResourceManagement_GameObjectGetter_Event(LuaFunction func, LuaTable self) : base(func, self) { }
+
+		public void Call(UFrame.ResourceManagement.GameObjectGetter param0)
+		{
+			func.BeginPCall();
+			func.PushObject(param0);
+			func.PCall();
+			func.EndPCall();
+		}
+
+		public void CallWithSelf(UFrame.ResourceManagement.GameObjectGetter param0)
+		{
+			func.BeginPCall();
+			func.Push(self);
+			func.PushObject(param0);
+			func.PCall();
+			func.EndPCall();
+		}
+	}
+
+	public System.Action<UFrame.ResourceManagement.GameObjectGetter> System_Action_UFrame_ResourceManagement_GameObjectGetter(LuaFunction func, LuaTable self, bool flag)
+	{
+		if (func == null)
+		{
+			System.Action<UFrame.ResourceManagement.GameObjectGetter> fn = delegate(UFrame.ResourceManagement.GameObjectGetter param0) { };
+			return fn;
+		}
+
+		if(!flag)
+		{
+			System_Action_UFrame_ResourceManagement_GameObjectGetter_Event target = new System_Action_UFrame_ResourceManagement_GameObjectGetter_Event(func);
+			System.Action<UFrame.ResourceManagement.GameObjectGetter> d = target.Call;
+			target.method = d.Method;
+			return d;
+		}
+		else
+		{
+			System_Action_UFrame_ResourceManagement_GameObjectGetter_Event target = new System_Action_UFrame_ResourceManagement_GameObjectGetter_Event(func, self);
+			System.Action<UFrame.ResourceManagement.GameObjectGetter> d = target.CallWithSelf;
+			target.method = d.Method;
+			return d;
+		}
+	}
+
+	bool Check_System_Action_UFrame_ResourceManagement_GameObjectGetter(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(System.Action<UFrame.ResourceManagement.GameObjectGetter>), L, pos);
+	}
+
+	void Push_System_Action_UFrame_ResourceManagement_GameObjectGetter(IntPtr L, System.Action<UFrame.ResourceManagement.GameObjectGetter> o)
 	{
 		ToLua.Push(L, o);
 	}

@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 175945120
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: e6c360e5ca06a3eec0c5f44aa9eb3de0
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/LuaTemp/UFrame/Game/Main.lua.bytes
+Dependencies: []

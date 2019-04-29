@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 3006929539
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: b594c9a4a955bcfe95281fcfe43a72a6
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/LuaTemp/UFrame/Game/Message/MessageCodeDefine.lua.bytes
+Dependencies: []

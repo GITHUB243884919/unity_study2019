@@ -13,7 +13,7 @@ namespace Game
         public override void Enter(string preStateName)
         {
             base.Enter(preStateName);
-            UFrame.ToLua.UFrameLuaClient.GetInstance().StartMain();
+            
 #if RES_AB && RES_UPDATE
             UpdateManager.GetInstance().EnsureLocalGameVersionInfomation();
 #endif
@@ -40,6 +40,7 @@ namespace Game
 
         public override void Leave()
         {
+            UFrame.ToLua.UFrameLuaClient.GetInstance().StartMain();
             base.Leave();
         }
 

@@ -143,7 +143,8 @@ namespace UFrame.ToLua
 
         public virtual void StartMain()
         {
-            luaState.DoFile("Main.lua");
+            //luaState.DoFile("Main.lua");
+            luaState.DoFile("UFrame/Game/Main.lua");
             levelLoaded = luaState.GetFunction("OnLevelWasLoaded");
             CallMain();
         }

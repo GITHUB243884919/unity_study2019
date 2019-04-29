@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2006871608
+CRC: 2362715836
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8478f3176e0ad3d8004903fc2bb735b0
+    Hash: 2191928438e9831107a0339223db515a
   TypeTreeHash:
     serializedVersion: 2
     Hash: d503a4bdfb032be462947305c4f5216f
@@ -57,4 +57,5 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/GameResources/scenes/login.unity
-Dependencies: []
+Dependencies:
+- D:/Fzy/Code/unity_study2019_New/Assets/StreamingAssets/Bundles/prefabs_ui_ui_login.unity3d

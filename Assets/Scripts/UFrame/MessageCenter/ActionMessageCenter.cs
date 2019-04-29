@@ -56,7 +56,7 @@ namespace UFrame.MessageCenter
             HashSet<Action<Message>> excutors = null;
             if (!executorDic.TryGetValue(msg.messageID, out excutors))
             {
-                throw new System.Exception("消息被注册" + msg.messageID);
+                throw new System.Exception("消息未注册" + msg.messageID);
             }
 
             foreach (var executor in excutors)

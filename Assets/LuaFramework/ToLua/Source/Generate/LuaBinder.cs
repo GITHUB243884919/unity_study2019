@@ -12,6 +12,7 @@ public static class LuaBinder
 		LuaInterface_DebuggerWrap.Register(L);
 		LuaProfilerWrap.Register(L);
 		LuaMessageCenterWrap.Register(L);
+		ResHelperWrap.Register(L);
 		ViewWrap.Register(L);
 		BaseWrap.Register(L);
 		ManagerWrap.Register(L);
@@ -108,6 +109,12 @@ public static class LuaBinder
 		L.RegFunction("VOID_MESSAGE", LuaMessageCenter_VOID_MESSAGE);
 		L.RegFunction("VOID_CB___", LuaMessageCenter_VOID_CB___);
 		L.EndModule();
+		L.BeginModule("UFrame");
+		L.BeginModule("ResourceManagement");
+		UFrame_ResourceManagement_AssetGetterWrap.Register(L);
+		UFrame_ResourceManagement_GameObjectGetterWrap.Register(L);
+		L.EndModule();
+		L.EndModule();
 		L.BeginModule("System");
 		L.RegFunction("Action", System_Action);
 		L.RegFunction("Predicate_int", System_Predicate_int);
@@ -116,6 +123,8 @@ public static class LuaBinder
 		L.RegFunction("Func_int_int", System_Func_int_int);
 		L.RegFunction("Action_UnityEngine_AsyncOperation", System_Action_UnityEngine_AsyncOperation);
 		L.RegFunction("Action_NotiData", System_Action_NotiData);
+		L.RegFunction("Action_UFrame_ResourceManagement_AssetGetter", System_Action_UFrame_ResourceManagement_AssetGetter);
+		L.RegFunction("Action_UFrame_ResourceManagement_GameObjectGetter", System_Action_UFrame_ResourceManagement_GameObjectGetter);
 		L.EndModule();
 		L.EndModule();
 		L.BeginPreLoad();
@@ -584,6 +593,60 @@ public static class LuaBinder
 			{
 				LuaTable self = ToLua.CheckLuaTable(L, 2);
 				Delegate arg1 = DelegateTraits<System.Action<NotiData>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int System_Action_UFrame_ResourceManagement_AssetGetter(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<System.Action<UFrame.ResourceManagement.AssetGetter>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<System.Action<UFrame.ResourceManagement.AssetGetter>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int System_Action_UFrame_ResourceManagement_GameObjectGetter(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<System.Action<UFrame.ResourceManagement.GameObjectGetter>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<System.Action<UFrame.ResourceManagement.GameObjectGetter>>.Create(func, self);
 				ToLua.Push(L, arg1);
 			}
 			return 1;
