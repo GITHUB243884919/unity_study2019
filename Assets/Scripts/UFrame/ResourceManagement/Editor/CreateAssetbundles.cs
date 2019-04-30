@@ -283,9 +283,9 @@ public class CreateAssetBundles
         string luaCopyDir = Path.Combine(Application.dataPath, UFrameConst.Lua_Copy_Dir);
         luaCopyDir = luaCopyDir.Replace("\\", "/");
         CreateDir(luaCopyDir);
-
-        CopyLuaBytesFiles(LuaConst.luaDir, luaCopyDir);
-        CopyLuaBytesFiles(LuaConst.toluaDir, luaCopyDir);
+        
+        CopyLuaBytesFiles(UFrameConst.luaDir, luaCopyDir);
+        CopyLuaBytesFiles(UFrameConst.toluaDir, luaCopyDir);
 
         AssetDatabase.Refresh();
         //到这里，完成lua的copy，以.byte结尾

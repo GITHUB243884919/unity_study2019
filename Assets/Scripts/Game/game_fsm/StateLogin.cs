@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-
-using UFrame.FSM;
-using UFrame.MessageCenter;
+﻿using UFrame.FSM;
 using Game.MessageDefine;
-using UFrame.ToLua;
+using UFrame.ResourceManagement;
+
 namespace Game
 {
     public class StateLogin : FSMState
@@ -47,16 +42,25 @@ namespace Game
             MessageManager.GetInstance().gameMessageCenter.Regist((int)GameMsg.C2S_Login, MessageCallback);
             MessageManager.GetInstance().gameMessageCenter.Regist((int)GameMsg.S2C_Login, MessageCallback);
 
-            //加载Login场景
-            ResHelper.LoadScene(loginScene);
-            //var getter = ResHelper.LoadGameObject("prefabs/ui/ui_login");
-            //getter.Get();
-            var getter = ResHelper.LoadGameObject("prefabs/cube");
-            GameObject go = getter.Get();
-            Logger.LogWarp.Log((go != null) + " " + go.name);
-            Logger.LogWarp.Log("Canvas" + " " + (GameObject.Find("Canvas") != null));
-            //go.transform.SetParent(GameObject.Find("Login_MainCamera").transform, false);
-            //Logger.LogWarp.Log("prefabs/cube");
+            ////加载Login场景
+            //ResHelper.LoadScene(loginScene);
+            ////var getter = ResHelper.LoadGameObject("prefabs/ui/ui_login");
+            ////getter.Get();
+            //var getter = ResHelper.LoadGameObject("prefabs/cube");
+            //GameObject go = getter.Get();
+            //Logger.LogWarp.Log((go != null) + " " + go.name);
+            //Logger.LogWarp.Log("Canvas" + " " + (GameObject.Find("Canvas") != null));
+            ////go.transform.SetParent(GameObject.Find("Login_MainCamera").transform, false);
+            ////Logger.LogWarp.Log("prefabs/cube");
+
+            SceneManagement.GetInstance().LoadScene(loginScene, () =>
+            {
+                var getter = ResHelper.LoadGameObject("prefabs/ui/ui_login");
+                getter.Get();
+
+                getter = ResHelper.LoadGameObject("prefabs/cube");
+                getter.Get();
+            });
 
 
 

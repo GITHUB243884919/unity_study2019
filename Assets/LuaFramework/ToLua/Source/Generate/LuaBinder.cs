@@ -101,7 +101,6 @@ public static class LuaBinder
 		LuaFramework_TimerManagerWrap.Register(L);
 		LuaFramework_ThreadManagerWrap.Register(L);
 		LuaFramework_NetworkManagerWrap.Register(L);
-		LuaFramework_ResourceManagerWrap.Register(L);
 		L.EndModule();
 		L.BeginModule("LuaMessageCenter");
 		LuaMessageCenter_MessageWrap.Register(L);

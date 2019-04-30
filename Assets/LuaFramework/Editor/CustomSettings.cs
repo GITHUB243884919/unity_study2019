@@ -174,7 +174,7 @@ public static class CustomSettings
         _GT(typeof(TimerManager)),
         _GT(typeof(ThreadManager)),
         _GT(typeof(NetworkManager)),
-        _GT(typeof(ResourceManager)),	
+        //_GT(typeof(ResourceManager)),	
         
         //custom
         _GT(typeof(LuaMessageCenter)),

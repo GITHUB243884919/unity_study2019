@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using UFrame;
+﻿using UFrame;
 using UFrame.FSM;
-using UFrame.MessageCenter;
 
 namespace Game
 {

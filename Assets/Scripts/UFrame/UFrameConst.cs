@@ -5,6 +5,9 @@ namespace UFrame
 {
     public class UFrameConst
     {
+        public static string luaDir = Application.dataPath + "/LuaFramework/Lua";                //lua逻辑代码目录
+        public static string toluaDir = Application.dataPath + "/LuaFramework/ToLua/Lua";        //tolua lua文件目录
+
         public static string Bundle_Root_Dir = "Bundles";
         public static string Lua_Copy_Dir = "LuaTemp";
         public static string Lua_Bundle_Dir = Bundle_Root_Dir + "/lua";
