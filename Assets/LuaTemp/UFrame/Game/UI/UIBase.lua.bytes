@@ -35,10 +35,12 @@ function UIBase:Create()
     end
     --self.Panel = UTL.LuaCommon.InstantiateGoById(self.ResId, Common_Utils.GetUIRootObj())
     print(self.ResPath)
-    --local getter  = ResHelper.LoadGameObject(self.ResPath)
-    --self.Panel = getter:Get()
-    --self.PanelName = self.Panel.name
-    --self.Layer = self.Panel.layer
+    local getter  = ResHelper.LoadGameObject(self.ResPath)
+    self.Panel = getter:Get()
+    print("UIBASE Create " , UIManager.Instance():GetUIRoot())
+    self.Panel.transform:SetParent(UIManager.Instance():GetUIRoot(), false)
+    self.PanelName = self.Panel.name
+    self.Layer = self.Panel.layer
     ---- 如果参与UI排序
     --if self.sortEnable then
     --    self.sorterTag = self.Panel:AddSingleComponent(typeof(SorterTag))
@@ -52,34 +54,34 @@ function UIBase:Create()
     --if self.isShowUIBlur then
     --    UIManager.Instance():ShowUIBlur(self)
     --end
-    --self:AttachListener(self.Panel)
-    --self:OnCreate()
-    --self:RegisterEvent()
-    --self:OnShow(self:IsVisible())
-end
-
---对外调用，用于创建UI，不走ResId加载，直接由现有gameObject创建
-function UIBase:CreateWithGo(gameObejct)
-    self.Panel = gameObejct
-    self.PanelName = self.Panel.name
-    self.Layer = self.Panel.layer
-    if self.sortEnable then
-        self.sorterTag = self.Panel:AddSingleComponent(typeof(SorterTag))
-        self.uiCanvas = self.Panel:AddSingleComponent(typeof(UnityEngine.Canvas))
-        self.Panel:AddSingleComponent(typeof(UnityEngine.GraphicRaycaster))
-        self.uiCanvas.overrideSorting = true
-        self.Panel:AddSingleComponent(typeof(ParticleOrderAutoSorter))
-        UIManager.Instance():GetUISorterMgr():AddPanel(self)
-    end
-    self.isExist = true
-    if self.isShowUIBlur then
-        UIManager.Instance():ShowUIBlur(self)
-    end
     self:AttachListener(self.Panel)
     self:OnCreate()
     self:RegisterEvent()
     self:OnShow(self:IsVisible())
 end
+
+----对外调用，用于创建UI，不走ResId加载，直接由现有gameObject创建
+--function UIBase:CreateWithGo(gameObejct)
+--    self.Panel = gameObejct
+--    self.PanelName = self.Panel.name
+--    self.Layer = self.Panel.layer
+--    if self.sortEnable then
+--        self.sorterTag = self.Panel:AddSingleComponent(typeof(SorterTag))
+--        self.uiCanvas = self.Panel:AddSingleComponent(typeof(UnityEngine.Canvas))
+--        self.Panel:AddSingleComponent(typeof(UnityEngine.GraphicRaycaster))
+--        self.uiCanvas.overrideSorting = true
+--        self.Panel:AddSingleComponent(typeof(ParticleOrderAutoSorter))
+--        UIManager.Instance():GetUISorterMgr():AddPanel(self)
+--    end
+--    self.isExist = true
+--    if self.isShowUIBlur then
+--        UIManager.Instance():ShowUIBlur(self)
+--    end
+--    self:AttachListener(self.Panel)
+--    self:OnCreate()
+--    self:RegisterEvent()
+--    self:OnShow(self:IsVisible())
+--end
 
 -- override UI面板创建结束后调用，可以在这里获取gameObject和component等操作
 function UIBase:OnCreate()
@@ -287,9 +289,9 @@ function UIBase:onBoolValueChange(obj, isSelect)
 end
 
 function UIBase:onEvent(eventName)
-    if eventName == "onClick" then
-        UIManager.Instance():NotifyDisappear(self.PanelName)
-    end
+    --if eventName == "onClick" then
+    --    UIManager.Instance():NotifyDisappear(self.PanelName)
+    --end
 end
 
 function UIBase:onFloatValueChange(obj, value)

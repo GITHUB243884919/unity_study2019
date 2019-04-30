@@ -75,10 +75,12 @@ end
 require("UFrame/Game/Message/MessageCodeDefine")
 require("UFrame.Common.Common_Function")
 require("UFrame.Game.UI.RegistAllUI")
+SceneManagement = UFrame.ResourceManagement.SceneManagement
+
 local function Init()
-    define("Class",require("UFrame.Core.middleclass"))
+    define("Class", require("UFrame.Core.middleclass"))
     --define("LuaLogHelper",require("UFrame.Utilitys.LuaLogHelper"))
-    define("EventManager",require("UFrame.Game.Manager.EventManager"))
+    define("EventManager", require("UFrame.Game.Manager.EventManager"))
     define("UINameDefine", require("UFrame.Game.UI.UINameDefine"))
     define("UIManager", require("UFrame.Game.Manager.UIManager"))
     RegistAllUI()

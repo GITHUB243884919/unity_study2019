@@ -46,6 +46,7 @@ public static class CustomSettings
         _DT(typeof(System.Func<int, int>)),
         _DT(typeof(LuaMessageCenter.VOID_MESSAGE)),
         _DT(typeof(LuaMessageCenter.VOID_CB___)),
+        _DT(typeof(System.Action<UFrame.MessageCenter.Message>)),
     };
 
     //在这里添加你要导出注册到lua的类型列表
@@ -174,9 +175,12 @@ public static class CustomSettings
         _GT(typeof(TimerManager)),
         _GT(typeof(ThreadManager)),
         _GT(typeof(NetworkManager)),
+        //why error? fanzhengyong
         //_GT(typeof(ResourceManager)),	
         
         //custom
+
+        //UFrame
         _GT(typeof(LuaMessageCenter)),
         _GT(typeof(LuaMessageCenter.Message)),
         _GT(typeof(LuaMessageCenter.MessageTest)),
@@ -184,10 +188,15 @@ public static class CustomSettings
         _GT(typeof(UFrame.ResourceManagement.AssetGetter)),
         _GT(typeof(UFrame.ResourceManagement.GameObjectGetter)),
         _GT(typeof(ResHelper)),
-        //_GT(typeof(UFrame.ResourceManagement.IAssetGetter)),
+        _GT(typeof(UFrame.ResourceManagement.SceneManagement)),
 
+        _GT(typeof(OtherEventListenner)),
+        _GT(typeof(UGUIDragEventListenner)),
+        _GT(typeof(UGUIEventListener)),
+        _GT(typeof(UGUIMsgHandler)),
 
-
+        _GT(typeof(Game.MessageManager)),
+        _GT(typeof(UFrame.MessageCenter.Message)),
     };
 
     public static List<Type> dynamicList = new List<Type>()

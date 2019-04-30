@@ -1,68 +1,39 @@
 ﻿using UFrame.FSM;
 using Game.MessageDefine;
 using UFrame.ResourceManagement;
+using UFrame.ToLua;
 
 namespace Game
 {
     public class StateLogin : FSMState
     {
         public bool loginSuccess = false;
-        //StateLoginMessageExecutor msgExe;
-        string loginScene;
+        int GameLogic_LoginSuccessed;
+        LuaInterface.LuaTable luaMsgTable;
         public StateLogin(string stateName, FSMMachine fsmCtr) : base(stateName, fsmCtr)
         {
         }
 
         public override void Enter(string preStateName)
         {
-            
+            Logger.LogWarp.Log("StateLogin Enter");
             base.Enter(preStateName);
-            //UFrameLuaClient.GetMainState().DoFile("UFrame/Game/GameState/StateLogin.lua");
-            //var luaFunEnter = UFrameLuaClient.GetMainState().GetFunction("StateLogin.Enter");
-            //if (luaFunEnter != null)
-            //{
-            //    Logger.LogWarp.Log("call luaFunEnter");
-            //    luaFunEnter.Call();
-            //    luaFunEnter.Dispose();
-            //    luaFunEnter = null;
-            //}
-
-            //var luaMsgTable = UFrameLuaClient.GetMainState().GetTable("MessageCode");
-            //Logger.LogWarp.Log("msg " + (int)(double)(luaMsgTable["GameLogic_Enter_Login"]) + " " + luaMsgTable["GameLogic_Enter_Login"].ToString());
-            //Logger.LogWarp.Log("msg " + (int)(double)(luaMsgTable["UIMsg_Open_Login"]));
-            //luaMsgTable.Dispose();
-            //luaMsgTable = null;
-
-
-
-
 
             loginSuccess = false;
-            Logger.LogWarp.Log("StateLogin Enter");
-            MessageManager.GetInstance().gameMessageCenter.Regist((int)GameMsg.C2S_Login, MessageCallback);
-            MessageManager.GetInstance().gameMessageCenter.Regist((int)GameMsg.S2C_Login, MessageCallback);
-
-            ////加载Login场景
-            //ResHelper.LoadScene(loginScene);
-            ////var getter = ResHelper.LoadGameObject("prefabs/ui/ui_login");
-            ////getter.Get();
-            //var getter = ResHelper.LoadGameObject("prefabs/cube");
-            //GameObject go = getter.Get();
-            //Logger.LogWarp.Log((go != null) + " " + go.name);
-            //Logger.LogWarp.Log("Canvas" + " " + (GameObject.Find("Canvas") != null));
-            ////go.transform.SetParent(GameObject.Find("Login_MainCamera").transform, false);
-            ////Logger.LogWarp.Log("prefabs/cube");
-
-            SceneManagement.GetInstance().LoadScene(loginScene, () =>
+            
+            UFrameLuaClient.GetMainState().DoFile("UFrame/Game/GameState/StateLogin.lua");
+            var luaFunEnter = UFrameLuaClient.GetMainState().GetFunction("StateLogin.Enter");
+            if (luaFunEnter != null)
             {
-                var getter = ResHelper.LoadGameObject("prefabs/ui/ui_login");
-                getter.Get();
+                Logger.LogWarp.Log("call luaFunEnter");
+                luaFunEnter.Call();
+                luaFunEnter.Dispose();
+                luaFunEnter = null;
+            }
 
-                getter = ResHelper.LoadGameObject("prefabs/cube");
-                getter.Get();
-            });
-
-
+            luaMsgTable = UFrameLuaClient.GetMainState().GetTable("MessageCode");
+            GameLogic_LoginSuccessed = (int)(double)(luaMsgTable["GameLogic_LoginSuccessed"]);
+            MessageManager.GetInstance().gameMessageCenter.Regist(GameLogic_LoginSuccessed, MessageCallback);
 
         }
 
@@ -77,7 +48,7 @@ namespace Game
 
         protected override void GetEnterParam()
         {
-            loginScene = "scenes/login";
+
         }
 
         protected override void GetLeaveParam()
@@ -86,10 +57,9 @@ namespace Game
 
         public override void Leave()
         {
-            MessageManager.GetInstance().gameMessageCenter.UnRegist((int)GameMsg.C2S_Login, MessageCallback);
-            MessageManager.GetInstance().gameMessageCenter.UnRegist((int)GameMsg.S2C_Login, MessageCallback);
-            
-            loginSuccess = false;
+            MessageManager.GetInstance().gameMessageCenter.UnRegist(GameLogic_LoginSuccessed, MessageCallback);
+            luaMsgTable.Dispose();
+            luaMsgTable = null;
             base.Leave();
         }
 
@@ -100,9 +70,9 @@ namespace Game
 
         public void MessageCallback(UFrame.MessageCenter.Message msg)
         {
-            //Debug.LogError("Execute " + msg.messageID);
-            if (msg.messageID == (int)GameMsg.C2S_Login)
+            if (msg.messageID == GameLogic_LoginSuccessed)
             {
+                Logger.LogWarp.Log("msg.messageID == GameLogic_LoginSuccessed");
                 loginSuccess = true;
             }
         }

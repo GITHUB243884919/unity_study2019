@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2362715836
+CRC: 641797601
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 2191928438e9831107a0339223db515a
+    Hash: 1cad5dc2a65d0622f4cca4431feb07ad
   TypeTreeHash:
     serializedVersion: 2
-    Hash: d503a4bdfb032be462947305c4f5216f
+    Hash: d7a9aaf0aaa62ca656f555e0e11d7bb3
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -15,47 +15,14 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 20
   Script: {instanceID: 0}
-- Class: 21
-  Script: {instanceID: 0}
 - Class: 28
-  Script: {instanceID: 0}
-- Class: 48
   Script: {instanceID: 0}
 - Class: 104
   Script: {instanceID: 0}
-- Class: 114
-  Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-- Class: 114
-  Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-- Class: 114
-  Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-- Class: 114
-  Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-- Class: 114
-  Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-- Class: 114
-  Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-- Class: 114
-  Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: b4aaaac636e9dff42b740ffd6a4fc635, type: 3}
-- Class: 115
-  Script: {instanceID: 0}
 - Class: 124
-  Script: {instanceID: 0}
-- Class: 128
   Script: {instanceID: 0}
 - Class: 157
   Script: {instanceID: 0}
-- Class: 213
-  Script: {instanceID: 0}
-- Class: 222
-  Script: {instanceID: 0}
-- Class: 223
-  Script: {instanceID: 0}
-- Class: 224
-  Script: {instanceID: 0}
 Assets:
 - Assets/GameResources/scenes/login.unity
-Dependencies:
-- D:/Fzy/Code/unity_study2019_New/Assets/StreamingAssets/Bundles/prefabs_ui_ui_login.unity3d
+Dependencies: []

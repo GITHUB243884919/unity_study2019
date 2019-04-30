@@ -36,6 +36,7 @@ namespace Game
             MessageDefine.GameMsg_C2S_Login msgLogin = new MessageDefine.GameMsg_C2S_Login();
             msgLogin.userName = "AAAA";
             msgLogin.password = "0000";
+            
             MessageManager.GetInstance().gameMessageCenter.Send(msgLogin);
         }
 

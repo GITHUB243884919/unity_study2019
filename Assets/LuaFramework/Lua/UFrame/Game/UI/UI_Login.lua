@@ -30,8 +30,11 @@ end
 
 function UI_Login:onClick(obj)
     if obj.name == "Button" then
-        --UIManager.Instance():Open(ECEnumType.UIEnum.DebugPanel)
         print("Button Click")
+        local  msg = UFrame.MessageCenter.Message.New()
+        msg.messageID = MessageCode.GameLogic_LoginSuccessed
+        Game.MessageManager.GetInstance():Send(msg)
+        self:Destroy()
     end
 end
 

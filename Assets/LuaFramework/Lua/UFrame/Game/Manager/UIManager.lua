@@ -18,6 +18,7 @@ function UIManager:initialize()
     self.uiSorter = UISorter.Create(1, 3800)
 
     self.uiPanels = {}
+    self.uiRoot = nil
     -- 注册事件
     self:RegisterEvent()
 end
@@ -25,12 +26,17 @@ end
 function UIManager.Instance()
     if nil == UIManager._instance then
         UIManager._instance = UIManager:new()
+        UIManager._instance.uiRoot = UnityEngine.GameObject.Find("game_root/ui_root").transform
     end
     return UIManager._instance
 end
 
 function UIManager:RegisterUI(k, v)
     self.uiPanels[k] = v
+end
+
+function UIManager:GetUIRoot()
+    return self.uiRoot
 end
 
 -- 注册事件
