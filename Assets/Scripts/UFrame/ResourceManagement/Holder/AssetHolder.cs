@@ -24,6 +24,11 @@ namespace UFrame.ResourceManagement
             return asset as T;
         }
 
+        public object Get()
+        {
+            return asset;
+        }
+
         public object GetAll()
         {
             return asset;

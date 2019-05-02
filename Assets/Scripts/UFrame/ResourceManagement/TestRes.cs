@@ -182,9 +182,16 @@ public class TestRes : MonoBehaviour
     void TestDatbase()
     {
         GameObjectGetter gogetter = ResHelper.LoadGameObject("prefabs/cube");
-        GameObject go = gogetter.Get();
+        GameObject cubeGo = gogetter.Get();
+        AssetGetter assetgetterBlue = ResHelper.LoadAsset("materials/blue");
+        Material mBlue = assetgetterBlue.Get(cubeGo) as Material;
+        cubeGo.GetComponent<Renderer>().material = mBlue;
+
+
         AssetGetter assetgetter = ResHelper.LoadAsset("materials/mymaterial");
         Material m = assetgetter.Get<Material>(gameObject);
+
+
 
         var getter = ResHelper.LoadGameObject("prefabs/ui/ui_login");
         getter.Get();

@@ -8,6 +8,7 @@ public class UFrame_ResourceManagement_AssetGetterWrap
 	{
 		L.BeginClass(typeof(UFrame.ResourceManagement.AssetGetter), typeof(System.Object));
 		L.RegFunction("SetAssetHolder", SetAssetHolder);
+		L.RegFunction("Get", Get);
 		L.RegFunction("GetAll", GetAll);
 		L.RegFunction("New", _CreateUFrame_ResourceManagement_AssetGetter);
 		L.RegFunction("__tostring", ToLua.op_ToString);
@@ -48,6 +49,24 @@ public class UFrame_ResourceManagement_AssetGetterWrap
 			UFrame.ResourceManagement.AssetHolder arg0 = (UFrame.ResourceManagement.AssetHolder)ToLua.CheckObject<UFrame.ResourceManagement.AssetHolder>(L, 2);
 			obj.SetAssetHolder(arg0);
 			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int Get(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			UFrame.ResourceManagement.AssetGetter obj = (UFrame.ResourceManagement.AssetGetter)ToLua.CheckObject<UFrame.ResourceManagement.AssetGetter>(L, 1);
+			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckObject(L, 2, typeof(UnityEngine.GameObject));
+			UnityEngine.Object o = obj.Get(arg0);
+			ToLua.Push(L, o);
+			return 1;
 		}
 		catch (Exception e)
 		{

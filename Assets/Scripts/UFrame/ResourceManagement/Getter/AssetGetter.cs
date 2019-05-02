@@ -20,6 +20,17 @@ namespace UFrame.ResourceManagement
             return t;
         }
 
+        public Object Get(GameObject go)
+        {
+            object obj = assetHolder.Get();
+            Object Obj = obj as UnityEngine.Object;
+
+            //System.Activator.CreateInstance(type);
+            ResourceManager.GetInstance().AddGameObjectAssetHolder(go, assetHolder);
+            return Obj;
+        }
+
+
         public object GetAll(GameObject go)
         {
             object obj = assetHolder.GetAll();
