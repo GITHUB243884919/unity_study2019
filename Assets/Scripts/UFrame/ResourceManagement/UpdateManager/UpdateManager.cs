@@ -7,12 +7,12 @@ using UFrame.Http;
 /// <summary>
 /// todo
 /// *1.unitylogo 没有扩展名
-/// 2.下载不应该断点续传，因为存在同名旧文件
+/// *2.下载不应该断点续传，因为存在同名旧文件
 /// 3.更新执行前应该有界面，有界面就会用资源管理器，如果更新了bundle配置文件，那么资源管理需要重新加载bundle配置文件
 /// *4.打包脚本按window那个写
 /// *5.从包内读取AB文件是携程，写完成拷贝逻辑
 /// *6.资源管理去掉废弃的更新相关接口
-/// 7.增量打包
+/// *7.增量打包
 /// 8.下载bundle后验证md5
 /// </summary>
 namespace UFrame.ResourceManagement
