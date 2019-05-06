@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UFrame.FSM;
-using UFrame.Update;
+using UFrame.ResourceManagement;
 
 namespace Game
 {

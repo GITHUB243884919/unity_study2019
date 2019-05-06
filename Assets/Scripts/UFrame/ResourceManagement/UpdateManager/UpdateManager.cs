@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UFrame.Common;
 using UnityEngine;
 using System.IO;
+using UFrame.Http;
 /// <summary>
 /// todo
-/// 1.unitylogo 没有扩展名
+/// *1.unitylogo 没有扩展名
 /// 2.下载不应该断点续传，因为存在同名旧文件
 /// 3.更新执行前应该有界面，有界面就会用资源管理器，如果更新了bundle配置文件，那么资源管理需要重新加载bundle配置文件
 /// *4.打包脚本按window那个写
@@ -14,7 +15,7 @@ using System.IO;
 /// 7.增量打包
 /// 8.下载bundle后验证md5
 /// </summary>
-namespace UFrame.Update
+namespace UFrame.ResourceManagement
 {
     public class UpdateManager : Singleton<UpdateManager>, ISingleton
     {
@@ -222,7 +223,7 @@ namespace UFrame.Update
             Logger.LogWarp.Log("outterGameVersion" + outterGameVersion);
 
             //外部版本号为空（首次安装包），或者内部版本号> 外部版本号（大版本更新）
-            if (string.IsNullOrEmpty(outterGameVersion) || UFrame.Update.UpdateManager.ComparerVersion(innerGameVersion, outterGameVersion) >= 0)
+            if (string.IsNullOrEmpty(outterGameVersion) || UpdateManager.ComparerVersion(innerGameVersion, outterGameVersion) >= 0)
             {
                 //Copy bundle 配置文件到沙盒
                 Logger.LogWarp.Log("Copy version and AB's config to outter dir");
@@ -282,7 +283,7 @@ namespace UFrame.Update
             }
             couldDownLoadServerVersion = false;
             var http = new HttpDownLoad();
-            http.DownLoad(this.serverDownloadUrl + versionFileName, localDownLoadRoot, versionFileNameTmp, DownloadVersionCallback);
+            http.DownLoad(this.serverDownloadUrl + versionFileName, localDownLoadRoot, versionFileNameTmp, true, DownloadVersionCallback);
         }
 
         
@@ -313,7 +314,7 @@ namespace UFrame.Update
                 urls.Add(this.serverDownloadUrl + this.assetbundleFileName, assetbundleFileNameTmp);
                 urls.Add(this.serverDownloadUrl + this.bundleHashFileName, bundleHashFileNameTmp);
                 urls.Add(this.serverDownloadUrl + this.manifestFileName, manifestFileNameTmp);
-                http.DownLoads(urls, localDownLoadRoot, DownLoadDetailCallback);
+                http.DownLoads(urls, localDownLoadRoot, true, DownLoadDetailCallback);
             }
             else
             {
@@ -358,7 +359,7 @@ namespace UFrame.Update
             }
 
             var http = new HttpDownLoad();
-            http.DownLoads(urls, localDownLoadRoot, DownloadBundleCallback);
+            http.DownLoads(urls, localDownLoadRoot, true, DownloadBundleCallback);
         }
 
         void DownloadBundleCallback()
