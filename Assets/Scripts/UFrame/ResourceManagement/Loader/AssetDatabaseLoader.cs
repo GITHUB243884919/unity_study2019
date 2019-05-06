@@ -101,9 +101,7 @@ namespace UFrame.ResourceManagement
                 {
                     continue;
                 }
-                //Debug.LogError(files[i]);
-                //Debug.LogError(Application.dataPath.Replace('\\', '/'));
-                Debug.LogError(files[i].Substring(files[i].Replace('\\', '/').LastIndexOf("/")));
+                Logger.LogWarp.Log(files[i].Substring(files[i].Replace('\\', '/').LastIndexOf("/")));
 
                 var o = AssetDatabase.LoadAssetAtPath<Object>("Assets/" + loadPath + files[i].Substring(files[i].Replace('\\', '/').LastIndexOf("/")));
                 objs.Add(o);

@@ -25,6 +25,17 @@ namespace UFrame.ResourceManagement
     /// 一个bundle下的资源不能同名
     /// 所有的资源目录，名称只能小写，用下划线分隔，安卓和ios大小写敏感，容易在PC上没事，换到移动平台出问题
     /// 
+    /// 
+    /// bug 
+    ///     *同一prefab，先后调用异步加载接口出错
+    /// todo
+    ///     更新资源时取消断点续传
+    ///     图集加载
+    ///     场景释放
+    ///     场景异步加载
+    ///     文本，或是 scriptable之类的问题
+    ///     打包粒度划分
+    ///     利用git或者svn自动识别打出的是大版本还是小版本
     /// </summary>
     public partial class BundleLoader : IResourceLoader
     {
@@ -39,7 +50,7 @@ namespace UFrame.ResourceManagement
         Dictionary<string, string> assetMap = new Dictionary<string, string>();
 
         /// <summary>
-        /// 资源名称对应AssetHolder
+        /// 资源名称对应AssetHolder， AssetHolder记录了GameObject对资源的引用计数
         /// </summary>
         Dictionary<string, AssetHolder> nameAssetHolders = new Dictionary<string, AssetHolder>();
 
@@ -49,7 +60,7 @@ namespace UFrame.ResourceManagement
         Dictionary<GameObject, HashSet<AssetHolder>> goAssetHolders = new Dictionary<GameObject, HashSet<AssetHolder>>();
 
         /// <summary>
-        /// Bundle名称对应BundleHolder
+        /// Bundle名称对应BundleHolder, BundleHolder中记录了资源对bundle的引用计数
         /// </summary>
         Dictionary<string, BundleHolder> bundleHolders = new Dictionary<string, BundleHolder>();
 
@@ -174,7 +185,7 @@ namespace UFrame.ResourceManagement
             for (int i = 0, iMax = unUseGameObject.Count; i < iMax; ++i)
             {
                 goAssetHolders[unUseGameObject[i]].Clear();
-                Debug.LogError("remove" + unUseGameObject[i].name);
+                Logger.LogWarp.Log("remove" + unUseGameObject[i].name);
                 goAssetHolders.Remove(unUseGameObject[i]);
             }
 

@@ -17,13 +17,16 @@ namespace UFrame.ResourceManagement
         public void LoadScene(string scenePath, System.Action callback)
         {
             loadFinished = false;
+
             ResHelper.LoadScene(scenePath);
             SceneManager.sceneLoaded += (a, b) =>
             {
                 loadFinished = true;
             };
-
-            RunCoroutine.Run(CoLoadFinished(callback));
+            if (callback != null)
+            {
+                RunCoroutine.Run(CoLoadFinished(callback));
+            }
         }
 
         IEnumerator CoLoadFinished(System.Action callback)

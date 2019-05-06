@@ -45,15 +45,19 @@ namespace UFrame.ResourceManagement
         void LoadAssetAsync<T>(string assetName, E_LoadAsset eloadAsset, System.Action<T> callback)
             where T : IAssetGetter, new()
         {
-
             T getter;
             string bundleName = GetBundleName(assetName);
             if (LoadAssetFromNameAssetHolder(assetName, bundleName, out getter))
             {
-                callback(getter);
+                if (callback != null)
+                {
+                    callback(getter);
+                }
+                return;
             }
 
             BundleAsyncRequest bundleRequest = new BundleAsyncRequest(assetName, eloadAsset);
+            Logger.LogWarp.Log(assetName + " request " + bundleRequest.currRequestID);
             bundleAsyncs.Enqueue(bundleRequest);
             RunCoroutine.Run(CoBundleAsyncRequest<T>(bundleRequest, callback));
         }
@@ -63,11 +67,24 @@ namespace UFrame.ResourceManagement
         {
             while (bundleRequest.currRequestID != bundleAsyncs.Peek().currRequestID)
             {
+                Logger.LogWarp.Log(bundleRequest.currRequestID + " != " + bundleAsyncs.Peek().currRequestID + " waiting...");
                 yield return null;
             }
 
+            //等待完bundleRequest再次检查有没有被加载过。防止同一资源加载出错
+            Logger.LogWarp.Log(bundleRequest.currRequestID + " wait finished!");
             string bundleName = GetBundleName(bundleRequest.assetName);
-            Debug.LogError("[" + bundleName + "] [" + bundleRequest.assetName + "]");
+            T getter;
+            if (LoadAssetFromNameAssetHolder(bundleRequest.assetName, bundleName, out getter))
+            {
+                if (callback != null)
+                {
+                    callback(getter);
+                }
+                bundleAsyncs.Dequeue();
+                yield break;
+            }
+
             yield return (CoLoadBundleAsync<T>(bundleRequest.assetName, bundleName, bundleRequest.eLoadAsset, callback));
         }
 
@@ -116,7 +133,6 @@ namespace UFrame.ResourceManagement
                 //没加载过的
                 AssetBundle dependBundle = null;
                 bundlePath = GetBundlePath(dependencies[i]);
-                //bundleRequest = AssetBundle.LoadFromFileAsync(Path.Combine(bundleRootPath, dependencies[i]));
                 bundleRequest = AssetBundle.LoadFromFileAsync(bundlePath);
                 while(!bundleRequest.isDone)
                 {
@@ -126,7 +142,6 @@ namespace UFrame.ResourceManagement
                 dependBundleHolder = new BundleHolder(dependBundle);
                 dependBundleHolder.AddRefence(assetName);
                 //存bundleHolder
-                //Debug.LogError(Time.realtimeSinceStartup + " " + dependencies[i] + " " + assetName);
                 bundleHolders.Add(dependencies[i], dependBundleHolder);
             }
 
@@ -142,7 +157,6 @@ namespace UFrame.ResourceManagement
                 case E_LoadAsset.LoadSingle:
                     int index = assetName.LastIndexOf("/");
                     string assetNameInBundle = assetName.Substring(index + 1);
-                    Debug.LogError(assetName + " " + assetNameInBundle);
                     assetRequest = assetBundle.LoadAssetAsync(assetNameInBundle);
                     break;
                 case E_LoadAsset.LoadAll:
@@ -169,9 +183,16 @@ namespace UFrame.ResourceManagement
             T getter = new T();
             getter.SetAssetHolder(assetHolder);
             nameAssetHolders.Add(assetName, assetHolder);
-
+#if UNITY_EDITOR
+            var request = bundleAsyncs.Dequeue();
+            Logger.LogWarp.Log(request.assetName + " " + request.currRequestID + " Dequeue");
+#else
             bundleAsyncs.Dequeue();
-            callback(getter);
+#endif
+            if (callback != null)
+            {
+                callback(getter);
+            }
             
         }
 
