@@ -579,7 +579,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     1: ASYNC_MODE;RES_AB
     4: ASYNC_MODE
-    7: AB;LOGMODE;RES_AB;LOG
+    7: GMODE;RES_AB1;LOGB;LOG
   platformArchitecture:
     iOS: 0
   scriptingBackend:
