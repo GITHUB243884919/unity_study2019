@@ -55,6 +55,11 @@ public class ResHelper
         ResourceManager.GetInstance().LoadScene(scenePath);
     }
 
+    public static Sprite LoadSprite(string path, GameObject go)
+    {
+        return ResourceManager.GetInstance().LoadSprite(path, go);
+    }
+
     public static GameObject GetPubAssetGetterGo()
     {
         return PublicAssetHolderGameObject.GetInstance().Go;

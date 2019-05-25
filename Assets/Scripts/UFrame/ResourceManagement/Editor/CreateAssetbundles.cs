@@ -6,6 +6,7 @@ using UFrame;
 
 public class CreateAssetBundles
 {
+    static List<string> groupBundleLst = new List<string>();
     static void BuildLuaBundle(StreamWriter sw, string subDir, string sourceDir)
     {
         string[] files = Directory.GetFiles(sourceDir + subDir, "*.bytes");
@@ -192,14 +193,39 @@ public class CreateAssetBundles
         AssetDatabase.Refresh();
     }
 
+    static void InitGroupBundleConfig()
+    {
+        var abCfg = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/AB_Config/group_bundle.txt").text;
+        //Debug.Log(abCfg);
+        string[] group_bundles = abCfg.Split(new char[] { ',' }, System.StringSplitOptions.RemoveEmptyEntries);
+        groupBundleLst.AddRange(group_bundles);
+    }
+
+    static bool IsContainsGroupBundle(string path)
+    {
+        for(int i = 0; i < groupBundleLst.Count; i++)
+        {
+            if (path.Contains(groupBundleLst[i]))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     [MenuItem("UFrame框架/资源管理/发布模式/创建Bundle/StandaloneWindows")]
     public static void BuildAll_StandaloneWindows()
     {
+        InitGroupBundleConfig();
         BuildPerpare();
         string assetBundleDirectory = "Assets/StreamingAssets/" + UFrameConst.Bundle_Root_Dir;
         //BuildAssetBundleOptions assetBundleOptions = BuildAssetBundleOptions.DeterministicAssetBundle |
-        //    BuildAssetBundleOptions.ChunkBasedCompression;
-        BuildAssetBundleOptions assetBundleOptions = BuildAssetBundleOptions.ChunkBasedCompression;
+        //    BuildAssetBundleOptions.ChunkBasedCompression |
+        //    BuildAssetBundleOptions.DisableWriteTypeTree;
+        BuildAssetBundleOptions assetBundleOptions = BuildAssetBundleOptions.DeterministicAssetBundle |
+            BuildAssetBundleOptions.ChunkBasedCompression;
+
         BuildTarget targetPlatform = BuildTarget.StandaloneWindows;
 
         BuildPipeline.BuildAssetBundles(assetBundleDirectory, assetBundleOptions, targetPlatform);
@@ -218,10 +244,12 @@ public class CreateAssetBundles
     [MenuItem("UFrame框架/资源管理/发布模式/创建Bundle/Android")]
     public static void BuildAll_Android()
     {
+        InitGroupBundleConfig();
         BuildPerpare();
         string assetBundleDirectory = "Assets/StreamingAssets/" + UFrameConst.Bundle_Root_Dir;
         BuildAssetBundleOptions assetBundleOptions = BuildAssetBundleOptions.DeterministicAssetBundle |
-            BuildAssetBundleOptions.ChunkBasedCompression;
+            BuildAssetBundleOptions.ChunkBasedCompression |
+            BuildAssetBundleOptions.DisableWriteTypeTree;
         BuildTarget targetPlatform = BuildTarget.Android;
 
         BuildPipeline.BuildAssetBundles(assetBundleDirectory,
@@ -241,12 +269,14 @@ public class CreateAssetBundles
     [MenuItem("UFrame框架/资源管理/发布模式/创建Bundle/IOS")]
     public static void BuildAll_IOS()
     {
+        InitGroupBundleConfig();
         BuildPerpare();
         string assetBundleDirectory = "Assets/StreamingAssets/" + UFrameConst.Bundle_Root_Dir;
         BuildAssetBundleOptions assetBundleOptions = BuildAssetBundleOptions.DeterministicAssetBundle |
-            BuildAssetBundleOptions.ChunkBasedCompression;
-        BuildTarget targetPlatform = BuildTarget.iOS;
+            BuildAssetBundleOptions.ChunkBasedCompression |
+            BuildAssetBundleOptions.DisableWriteTypeTree;
 
+        BuildTarget targetPlatform = BuildTarget.iOS;
         BuildPipeline.BuildAssetBundles(assetBundleDirectory,
             assetBundleOptions, targetPlatform);
 
@@ -332,29 +362,46 @@ public class CreateAssetBundles
                 continue;
             }
 
-            ////navMesh不打包
-            //if (filePath.Contains("scene_nav2d/NavMesh"))
-            //{
-            //    continue;
-            //}
             //scenes目录下只打 *.unity文件
             if(filePath.Contains("/scenes/") && Path.GetExtension(filePath) != ".unity")
             {
                 continue;
             }
 
-            string bundleName = filePath.Substring(GameResourcePath.Length + 1);
-            bundleName = bundleName.Replace("/", "_");
-            bundleName = Path.GetFileNameWithoutExtension(bundleName);
-            bundleName += UFrameConst.Bundle_Extension;
+            //if (!IsContainsGroupBundle(filePath))
+            {
+                string bundleName = filePath.Substring(GameResourcePath.Length + 1);
+                if (IsContainsGroupBundle(filePath))
+                {
+                    bundleName = bundleName.Substring(0, bundleName.LastIndexOf("/"));
+                }
+                bundleName = bundleName.Replace("/", "_");
+                bundleName = Path.GetFileNameWithoutExtension(bundleName);
+                bundleName += UFrameConst.Bundle_Extension;
 
-            string bundlePath = filePath.Substring(GameResourcePath.Length + 1);
-            int lastSplitIndex = bundlePath.LastIndexOf('.');
-            bundlePath = bundlePath.Substring(0, lastSplitIndex);
-            swContent += (bundlePath + "," + bundleName + "\r\n");
-            //Debug.LogError(swContent + filePath);
-            var importer = AssetImporter.GetAtPath(filePath);
-            importer.assetBundleName = bundleName;
+                string bundlePath = filePath.Substring(GameResourcePath.Length + 1);
+                int lastSplitIndex = bundlePath.LastIndexOf('.');
+                bundlePath = bundlePath.Substring(0, lastSplitIndex);
+                swContent += (bundlePath + "," + bundleName + "\r\n");
+                var importer = AssetImporter.GetAtPath(filePath);
+                importer.assetBundleName = bundleName;
+            }
+            //else
+            //{
+            //    string bundleName = filePath.Substring(GameResourcePath.Length + 1);
+            //    bundleName = bundleName.Substring(0, bundleName.LastIndexOf("/"));
+            //    bundleName = bundleName.Replace("/", "_");
+            //    bundleName = Path.GetFileNameWithoutExtension(bundleName);
+            //    bundleName += UFrameConst.Bundle_Extension;
+
+            //    string bundlePath = filePath.Substring(GameResourcePath.Length + 1);
+            //    int lastSplitIndex = bundlePath.LastIndexOf('.');
+            //    bundlePath = bundlePath.Substring(0, lastSplitIndex);
+            //    swContent += (bundlePath + "," + bundleName + "\r\n");
+            //    var importer = AssetImporter.GetAtPath(filePath);
+            //    importer.assetBundleName = bundleName;
+            //}
+
         }
 
         sw.Write(swContent);

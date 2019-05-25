@@ -91,6 +91,14 @@ namespace UFrame.ResourceManagement
             resLoader.LoadScene(scenePath);
         }
 
+        public Sprite LoadSprite(string path, GameObject go)
+        {
+            var getter = resLoader.LoadAsset(path);
+            var tex = getter.Get(go) as Texture2D;
+            Sprite sp = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f));
+            return sp;
+        }
+
     }
 }
 

@@ -7,7 +7,7 @@ namespace UFrame.ResourceManagement
 {
     public class TerrainSlicing : Editor
     {
-        public static string terrainDataSavePath = "Assets/ArtResources/terrainslicing";
+        public static string terrainDataSavePath = "Assets/GameResources/terrainslicing_data";
         public static string terrainGoSavePath = "Assets/GameResources/terrainslicing";
         public static string terrainName = "";
         //分割大小
